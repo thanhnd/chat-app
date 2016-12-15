@@ -15,7 +15,12 @@
         completions."
     </string>
     <string name="title_activity_signin">SigninActivity</string>
-    <string name="hint_email">Email</string>
+    <string name="sign_in_label_email">EMAIL</string>
+    <string name="sign_in_hint_email">Input your email</string>
+    <string name="sign_in_label_phone">PHONE NUMBER</string>
+    <string name="sign_in_hint_phone">Input your phone number</string>
+    <string name="sign_in_label_password">PASSWORD</string>
+    <string name="sign_in_hint_password">Input your password</string>
     <string name="hint_verify_email">Input the verification code</string>
     <string name="hint_country">Country/Region</string>
     <string name="hint_phone">Input your phone number</string>
@@ -30,4 +35,6 @@
     <string name="request_send_code"><u>Can\'t receive code?</u></string>
     <string name="register_with_your_email">Register with your email</string>
     <string name="agree_to_terms_policies"><![CDATA[By registering, you agree to our Terms & Policies.]]></string>
+    <string name="sign_in_mobile">Mobile</string>
+    <string name="sign_in_email">Email</string>
 </resources>

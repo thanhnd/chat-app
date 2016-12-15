@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
@@ -14,61 +14,125 @@
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
+        <RadioGroup
+            android:id="@+id/rg_login_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rd_login_by_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/sign_in_type_selector_bg"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="@string/sign_in_mobile"
+                android:textColor="@color/sign_in_type_selector_color" />
+
+            <RadioButton
+                android:id="@+id/rd_login_by_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/sign_in_type_selector_bg"
+                android:button="@null"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="@string/sign_in_email"
+                android:textColor="@color/sign_in_type_selector_color" />
+        </RadioGroup>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:orientation="vertical">
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_email"
+
+            <LinearLayout
+                android:id="@+id/v_input_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
                 android:layout_marginLeft="35dp"
-                android:layout_marginRight="35dp">
+                android:layout_marginRight="35dp"
+                android:layout_marginTop="35dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_in_label_phone" />
+
+                <EditText
+                    android:id="@+id/edt_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/sign_in_hint_phone"
+                    android:imeOptions="actionNext"
+                    android:inputType="phone"
+                    android:maxLines="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/v_input_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                android:layout_marginTop="35dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_in_label_email" />
 
                 <EditText
                     android:id="@+id/edt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_email"
-                    android:imeOptions="actionGo"
-                    app:errorEnabled="true"
-                    android:maxLines="1"
-                    android:inputType="textEmailAddress" />
+                    android:hint="@string/sign_in_hint_email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1" />
+            </LinearLayout>
 
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_password"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="35dp"
                 android:layout_marginLeft="35dp"
-                android:layout_marginRight="35dp">
+                android:layout_marginRight="35dp"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_in_label_password" />
 
                 <EditText
                     android:id="@+id/edt_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_password"
+                    android:hint="@string/sign_in_hint_password"
                     android:imeOptions="actionDone"
-                    app:errorEnabled="true"
-                    android:maxLines="1"
-                    android:inputType="textPassword" />
-
-            </android.support.design.widget.TextInputLayout>
-
+                    android:inputType="textPassword"
+                    android:maxLines="1" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btn_login"
+                style="@style/Button.Submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@id/view_bottom"
                 android:padding="22dp"
-                android:text="Login"
-                style="@style/Button.Submit" />
+                android:text="Login" />
         </LinearLayout>
 
         <RelativeLayout
@@ -78,22 +142,22 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btn_to_register"
+                android:id="@+id/btn_go_to_register"
                 style="@style/TextAppearance.Small.UnderLine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="0dp"
                 android:gravity="left|center_vertical"
+                android:paddingLeft="0dp"
                 android:text="@string/create_account" />
 
             <Button
+                android:id="@+id/btn_forgot_password"
                 style="@style/TextAppearance.Small.UnderLine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingRight="0dp"
-                android:gravity="right|center_vertical"
                 android:layout_alignParentRight="true"
-                android:id="@+id/btn_forgot_password"
+                android:gravity="right|center_vertical"
+                android:paddingRight="0dp"
                 android:text="@string/forgot_password" />
         </RelativeLayout>
 

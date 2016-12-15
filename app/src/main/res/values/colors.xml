@@ -3,10 +3,14 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-i
+
     <!-- Common -->
     <color name="white">#ffffffff</color>
-    <color name="black">#ff000000</color>
+    <color name="semi_white">#77ffffff</color>
+    <color name="black">#0c0c0d</color>
     <color name="body">#7e6d4a</color>
+    <color name="purge">#c36baa</color>
+    <color name="edit_text_color">@color/purge</color>
+    <color name="edit_text_hint_color">@color/purge</color>
 
 </resources>
