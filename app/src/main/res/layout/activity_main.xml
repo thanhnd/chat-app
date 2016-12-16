@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity">
+    tools:context=".mvp.MainActivity">
 
     <LinearLayout
         android:id="@+id/view_bottom"
@@ -31,20 +31,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical|left"
+            android:minWidth="0dp"
             android:paddingLeft="0dp"
             android:paddingRight="0dp"
-            android:minWidth="0dp"
             android:text="@string/login_here" />
     </LinearLayout>
 
     <Button
         android:id="@+id/btn_go_to_register"
+        style="@style/Button.Submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/view_bottom"
         android:layout_marginLeft="27dp"
         android:layout_marginRight="27dp"
-        style="@style/Button.Submit"
         android:padding="22dp"
         android:text="JOIN US" />
 

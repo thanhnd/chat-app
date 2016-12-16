@@ -7,7 +7,7 @@
     android:background="@drawable/bg"
     android:gravity="bottom"
     android:orientation="vertical"
-    tools:context=".RegisterByEmailActivity">
+    tools:context=".mvp.RegisterByEmailActivity">
 
 
     <LinearLayout
@@ -44,12 +44,12 @@
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="35dp"
                 android:layout_marginLeft="35dp"
                 android:layout_marginRight="35dp"
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_marginTop="20dp">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -77,19 +77,19 @@
 
     </LinearLayout>
     <TextView
+        style="@style/TextAppearance.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:textColor="@color/white"
         android:layout_marginBottom="30dp"
-        style="@style/TextAppearance.Small"
-        android:text="@string/agree_to_terms_policies"/>
+        android:text="@string/agree_to_terms_policies"
+        android:textColor="@color/white" />
 
     <RelativeLayout
         android:id="@+id/view_bottom"
+        style="@style/TextAppearance.Small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextAppearance.Small"
         android:layout_alignParentBottom="true"
         android:background="#1c232d"
         android:orientation="horizontal">

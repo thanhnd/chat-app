@@ -11,16 +11,17 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-    <string name="title_activity_signin">SigninActivity</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+
+    <!--    Login    -->
+    <string name="identify_or_password_error_incorrect">Thông tin đăng nhập không chính xác. Xin hay kiểm tra lại.</string>
     <string name="sign_in_label_email">EMAIL</string>
     <string name="sign_in_hint_email">Input your email</string>
     <string name="sign_in_label_phone">PHONE NUMBER</string>
     <string name="sign_in_hint_phone">Input your phone number</string>
     <string name="sign_in_label_password">PASSWORD</string>
     <string name="sign_in_hint_password">Input your password</string>
+
     <string name="hint_verify_email">Input the verification code</string>
     <string name="hint_country">Country/Region</string>
     <string name="hint_phone">Input your phone number</string>
@@ -37,4 +38,15 @@
     <string name="agree_to_terms_policies"><![CDATA[By registering, you agree to our Terms & Policies.]]></string>
     <string name="sign_in_mobile">Mobile</string>
     <string name="sign_in_email">Email</string>
+
+
+    <!--    Dialog    -->
+    <string name="dialog_confirm_title">Xác nhận</string>
+    <string name="dialog_confirm_ok">ĐỒNG Ý</string>
+    <string name="dialog_confirm_cancel">HỦY BỎ</string>
+    <string name="general_error_title">Thông báo lỗi</string>
+    <string name="general_warning_title">Thông báo</string>
+    <string name="general_error_message">Có lỗi xảy ra vui lòng thử lại sau.</string>
+    <string name="general_technical_error_message">Hiện tại không thể thực hiện chức năng này. Vui lòng thử lại sau.</string>
+    <string name="loading">Đang tải&#8230;</string>
 </resources>

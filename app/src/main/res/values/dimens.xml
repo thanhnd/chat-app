@@ -1,5 +1,42 @@
 <resources>
+    <dimen name="scm_text_tiny">10sp</dimen>
+    <dimen name="scm_text_smaller">12sp</dimen>
+    <dimen name="scm_text_small">14sp</dimen>
+    <dimen name="scm_text_medium">16sp</dimen>
+    <dimen name="scm_text_big">18sp</dimen>
+    <dimen name="scm_text_large">20sp</dimen>
+    <dimen name="scm_text_huge">28sp</dimen>
+
+    <dimen name="scm_row_secondary_height">40dp</dimen>
+
+    <dimen name="scm_padding_sep">2dp</dimen>
+    <dimen name="scm_padding_small">3dp</dimen>
+    <dimen name="scm_padding">6dp</dimen>
+    <dimen name="scm_padding_medium">10dp</dimen>
+    <dimen name="scm_padding_large">12dp</dimen>
+    <dimen name="scm_padding_xlarge">16dp</dimen>
+    <dimen name="scm_form_padding">12dp</dimen>
+    <dimen name="scm_padding_hor">14dp</dimen>
+    <dimen name="scm_padding_hor_comp">7dp</dimen>
+    <dimen name="scm_padding_ver">5dp</dimen>
+    <dimen name="scm_separator_item">1dp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="list_item_thumbnail">48dp</dimen>
+    <dimen name="list_item_vertical_margin">4dp</dimen>
+    <dimen name="list_item_space">4dp</dimen>
+
+    <dimen name="detail_backdrop_height">256dp</dimen>
+    <dimen name="card_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="regular_offset">16dp</dimen>
+
+    <dimen name="padding_default_normal">12dp</dimen>
+    <dimen name="padding_default_large">16dp</dimen>
 </resources>

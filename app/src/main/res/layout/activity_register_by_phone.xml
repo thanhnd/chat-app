@@ -7,7 +7,7 @@
     android:background="@drawable/bg"
     android:gravity="bottom"
     android:orientation="vertical"
-    tools:context=".RegisterByPhoneActivity">
+    tools:context=".mvp.RegisterByPhoneActivity">
 
 
     <LinearLayout

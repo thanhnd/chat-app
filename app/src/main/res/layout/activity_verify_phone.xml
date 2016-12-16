@@ -7,7 +7,7 @@
     android:background="@drawable/bg"
     android:gravity="bottom"
     android:orientation="vertical"
-    tools:context=".VerifyPhoneActivity">
+    tools:context=".mvp.VerifyPhoneActivity">
 
 
     <LinearLayout
@@ -66,9 +66,9 @@
         android:textColor="@color/white" />
     <RelativeLayout
         android:id="@+id/view_bottom"
+        style="@style/TextAppearance.Small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/TextAppearance.Small"
         android:layout_alignParentBottom="true"
         android:background="#1c232d"
         android:orientation="horizontal">

@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.chatapp">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -14,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".mvp.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,22 +27,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SigninActivity"
+            android:name=".mvp.signin.SignInActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".RegisterByEmailActivity"
+            android:name=".mvp.RegisterByEmailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".RegisterByPhoneActivity"
+            android:name=".mvp.RegisterByPhoneActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".VerifyEmailActivity"
+            android:name=".mvp.VerifyEmailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".VerifyPhoneActivity"
+            android:name=".mvp.VerifyPhoneActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MyProfileActivity"/>
+        <activity android:name=".mvp.MyProfileActivity" />
     </application>
 
 </manifest>
