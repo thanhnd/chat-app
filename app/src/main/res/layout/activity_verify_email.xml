@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
     android:gravity="bottom"
     android:orientation="vertical"
-    tools:context=".mvp.VerifyEmailActivity">
+    tools:context=".mvp.verifyemail.VerifyEmailActivity">
 
 
     <LinearLayout
@@ -17,13 +16,32 @@
         android:orientation="vertical"
         android:padding="22dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="@string/msg_sent_verify_email_code"
+            tools:text="Please enter the 6-Digit code sent to" />
+
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/purge"
+            android:text="@string/verify_email_code_label"
+            tools:text="sienna@app.com"
+            android:layout_marginBottom="12dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:orientation="vertical">
 
-            <android.support.design.widget.TextInputLayout
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="35dp"
@@ -31,16 +49,19 @@
                 android:layout_marginRight="35dp"
                 android:layout_marginTop="35dp">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/verify_email_code_label" />
                 <EditText
                     android:id="@+id/edt_code"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/verify_email_hint"
+                    android:hint="@string/verify_email_code_hint"
                     android:imeOptions="actionDone"
-                    android:maxLines="1"
-                    app:errorEnabled="true" />
+                    android:maxLines="1" />
 
-            </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
 
 
             <Button
@@ -48,29 +69,18 @@
                 style="@style/Button.Submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@id/view_bottom"
-                android:padding="22dp"
-                android:text="@string/submit" />
+                android:text="@string/verify_email_submit" />
         </LinearLayout>
 
 
     </LinearLayout>
 
-    <TextView
-        style="@style/TextAppearance.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="30dp"
-        android:text="@string/agree_to_terms_policies"
-        android:textColor="@color/white" />
     <RelativeLayout
         android:id="@+id/view_bottom"
         style="@style/TextAppearance.Small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#1c232d"
+        android:background="#330033"
         android:orientation="horizontal">
         <Button
             android:id="@+id/btn_request_send_code"

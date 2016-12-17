@@ -8,8 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.chatapp.R;
-import com.chatapp.mvp.VerifyEmailActivity;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.verifyemail.VerifyEmailActivity;
 import com.chatapp.service.models.request.RegisterRequest;
 import com.chatapp.utils.DialogUtils;
 
@@ -72,22 +72,26 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
         String password = edtPassword.getText().toString();
         request.setPassword(password);
         if(isRegisterByEmail) {
-            String email = edtEmail.getText().toString();
+            email = edtEmail.getText().toString();
             request.setEmail(email);
         } else {
-            String code = edtCountryCode.getText().toString();
-            String phone = edtPhone.getText().toString();
+            countryCode = edtCountryCode.getText().toString();
+            phone = edtPhone.getText().toString();
             request.setCountry(1);
             request.setMobile(phone);
         }
-        present.submitRegisterFrom(request);
+        present.submitRegisterForm(request);
     }
 
     @Override
     public void onRegisterSuccess() {
-        Intent intent = new Intent(this, VerifyEmailActivity.class);
-        intent.putExtra(VerifyEmailActivity.EXTRA_EMAIL, email);
-        startActivity(intent);
+        if (isRegisterByEmail) {
+            Intent intent = new Intent(this, VerifyEmailActivity.class);
+            intent.putExtra(VerifyEmailActivity.EXTRA_EMAIL, email);
+            startActivity(intent);
+        } else {
+
+        }
     }
 
     @Override

@@ -24,7 +24,7 @@ public class RegisterPresenterImpl implements RegisterPresent {
     }
 
     @Override
-    public void submitRegisterFrom(RegisterRequest request) {
+    public void submitRegisterForm(RegisterRequest request) {
         if (registerView.get() != null) {
             registerView.get().showProgress();
         }

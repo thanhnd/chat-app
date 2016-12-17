@@ -35,7 +35,7 @@
                     android:id="@+id/edt_code"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/verify_email_hint"
+                    android:hint="@string/verify_phone_code_hint"
                     android:imeOptions="actionDone"
                     android:maxLines="1"
                     app:errorEnabled="true" />

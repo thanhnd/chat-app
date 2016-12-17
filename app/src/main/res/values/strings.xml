@@ -21,16 +21,18 @@
     <string name="sign_in_phone_hint">Input your phone number</string>
     <string name="sign_in_password_label">PASSWORD</string>
     <string name="sign_in_password_hint">Input your password</string>
+    <string name="sign_in_mobile">Mobile</string>
+    <string name="sign_in_email">Email</string>
 
     <!--    Register    -->
     <string name="register_email_label">EMAIL</string>
+    <string name="register_email_hint">Please input your email</string>
     <string name="register_country_code_label">COUNTRY CODE</string>
-    <string name="verify_email_hint">Input the verification code</string>
     <string name="register_country_hint">Input your country code</string>
     <string name="register_phone_hint">Input your phone number</string>
     <string name="register_phone_label">PHONE</string>
-    <string name="register_password_label">Input your password</string>
-    <string name="register_password_hint">Password</string>
+    <string name="register_password_label">PASSWORD</string>
+    <string name="register_password_hint">Input your password</string>
     <string name="forgot_password"><u>Forgot password</u></string>
     <string name="create_account"><u>Create Account</u></string>
     <string name="login_to_create_account"><u>Create Account</u></string>
@@ -39,10 +41,19 @@
     <string name="login_here"> <u>Login here</u></string>
     <string name="register_with_your_phone"><![CDATA[<u>Register with your phone</u>]]></string>
     <string name="register_with_your_email"><![CDATA[<u>Register with your email</u>]]></string>
-    <string name="request_send_code"><u>Can\'t receive code?</u></string>
     <string name="agree_to_terms_policies"><![CDATA[<font color=#a85e91>By registering, you agree to our</font> <u>Terms of use & Policies</u>.]]></string>
-    <string name="sign_in_mobile">Mobile</string>
-    <string name="sign_in_email">Email</string>
+
+
+    <!--    Verify by email    -->
+    <string name="verify_email_code_label">VERIFICATION CODE</string>
+    <string name="verify_email_code_hint">Input the verification code</string>
+    <string name="verify_email_submit">OK</string>
+    <string name="request_send_code"><u>Resend code?</u></string>
+
+    <!--    Verify by phone    -->
+    <string name="verify_phone_code_label">VERIFICATION CODE</string>
+    <string name="verify_phone_code_hint">Input the verification code</string>
+
 
     <!--    Dialog    -->
     <string name="dialog_confirm_title">Confirm</string>
@@ -53,6 +64,7 @@
     <string name="general_error_message">An error occurs. Please try again later.</string>
     <string name="general_technical_error_message">Cannot process at this time. Please try again later.</string>
     <string name="loading">Loading&#8230;</string>
+    <string name="msg_sent_verify_email_code">Please enter the 6-Digit code sent to</string>
 
 
 </resources>

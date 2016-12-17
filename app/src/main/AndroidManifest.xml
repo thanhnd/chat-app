@@ -33,7 +33,7 @@
             android:name=".mvp.register.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".mvp.VerifyEmailActivity"
+            android:name=".mvp.verifyemail.VerifyEmailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".mvp.VerifyPhoneActivity"
