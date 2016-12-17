@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import com.chatapp.R;
-import com.chatapp.mvp.RegisterActivity;
+import com.chatapp.mvp.register.RegisterActivity;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.service.models.request.SignInRequest;
 import com.chatapp.utils.DialogUtils;

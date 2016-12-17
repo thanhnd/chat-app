@@ -27,7 +27,7 @@ public class SignInPresenterImpl implements SignInPresenter {
         if (loginView.get() != null) {
             loginView.get().showProgress();
         }
-        signInInteractor.login(new SignInRequest(), new ApiCallback<SignInModel>() {
+        signInInteractor.login(request, new ApiCallback<SignInModel>() {
             @Override
             public void onSuccess(SignInModel response) {
                 if (loginView.get() != null) {

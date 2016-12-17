@@ -6,7 +6,7 @@
     android:background="@drawable/bg"
     android:gravity="bottom"
     android:orientation="vertical"
-    tools:context=".mvp.RegisterActivity">
+    tools:context=".mvp.register.RegisterActivity">
 
 
     <LinearLayout
@@ -129,7 +129,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/btn_create_account"
+                android:id="@+id/btn_submit"
                 style="@style/Button.Submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

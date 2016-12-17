@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.chatapp.R;
+import com.chatapp.mvp.register.RegisterActivity;
 import com.chatapp.mvp.signin.SignInActivity;
 
 import butterknife.Bind;
