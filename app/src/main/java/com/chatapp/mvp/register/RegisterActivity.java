@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
-import com.chatapp.mvp.verifyemail.VerifyEmailActivity;
+import com.chatapp.mvp.verify.VerifyActivity;
 import com.chatapp.service.models.request.RegisterRequest;
 import com.chatapp.utils.DialogUtils;
 
@@ -85,14 +85,14 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
 
     @Override
     public void onRegisterSuccess() {
+        Intent intent = new Intent(this, VerifyActivity.class);
+        intent.putExtra(VerifyActivity.EXTRA_PASSWORD, password);
         if (isRegisterByEmail) {
-            Intent intent = new Intent(this, VerifyEmailActivity.class);
-            intent.putExtra(VerifyEmailActivity.EXTRA_EMAIL, email);
-            intent.putExtra(VerifyEmailActivity.EXTRA_PASSWORD, password);
-            startActivity(intent);
+            intent.putExtra(VerifyActivity.EXTRA_EMAIL, email);
         } else {
-
+            intent.putExtra(VerifyActivity.EXTRA_PHONE, phone);
         }
+        startActivity(intent);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.chatapp.mvp.verifyemail;
+package com.chatapp.mvp.verify;
 
 import android.text.TextUtils;
 
@@ -18,13 +18,13 @@ import retrofit2.Response;
  * Created by thanhnguyen on 12/17/16.
  */
 
-public class VerifyEmailPresentImpl implements VerifyEmailPresent {
+public class VerifyPresentImpl implements VerifyPresent {
     private WeakReference<VerifyEmailView> view;
-    private VerifyEmailInteractor interactor;
+    private VerifyInteractor interactor;
 
-    public VerifyEmailPresentImpl(VerifyEmailView view) {
+    public VerifyPresentImpl(VerifyEmailView view) {
         this.view = new WeakReference<>(view);
-        this.interactor = new VerifyEmailInteractorImpl();
+        this.interactor = new VerifyInteractorImpl();
     }
     @Override
     public void submitVerifyForm(String token, VerifyEmailRequest request) {

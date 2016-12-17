@@ -67,6 +67,8 @@
     <string name="msg_sent_verify_email_code">Please enter the 6-Digit code sent to</string>
     <string name="error_cannot_login">Cannot get user info</string>
     <string name="dialog_close">Close</string>
+    <string name="msg_sent_verify_phone_code">We\'ve send a verification code by SMS to the phone number %s</string>
+    <string name="msg_input_verify_phone_code">To complete the process, enter the 6 digit code</string>
 
 
 </resources>

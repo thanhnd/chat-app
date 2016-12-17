@@ -1,8 +1,9 @@
-package com.chatapp.mvp.verifyemail;
+package com.chatapp.mvp.verify;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,36 +14,57 @@ import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.request.VerifyEmailRequest;
 import com.chatapp.service.models.response.LogInModel;
+import com.chatapp.utils.AccountUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class VerifyEmailActivity extends BaseActivity implements VerifyEmailView {
+public class VerifyActivity extends BaseActivity implements VerifyEmailView {
 
     public static final String EXTRA_EMAIL = "extra_email";
+    public static final String EXTRA_PHONE = "extra_phone";
     public static final String EXTRA_PASSWORD = "extra_password";
+    @Bind(R.id.v_verify_email)
+    View vVerifyEmail;
+    @Bind(R.id.v_verify_phone)
+    View vVerifyPhone;
     @Bind(R.id.tv_email)
     TextView tvEmail;
+    @Bind(R.id.tv_sent_code_to_phone)
+    TextView tvSentCodeToPhone;
     @Bind(R.id.edt_code)
     EditText edtCode;
     @Bind(R.id.btn_submit)
     Button btnSubmit;
 
-    private VerifyEmailPresent present;
-    private String email, password;
+    private VerifyPresent present;
+    private String email, phone, password;
+    private boolean isRegisterByEmail = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_email);
         ButterKnife.bind(this);
-        present = new VerifyEmailPresentImpl(this);
+        present = new VerifyPresentImpl(this);
         Intent intent = getIntent();
         email = intent.getStringExtra(EXTRA_EMAIL);
+        phone = intent.getStringExtra(EXTRA_PHONE);
         password = intent.getStringExtra(EXTRA_PASSWORD);
         if (!TextUtils.isEmpty(email)) {
             tvEmail.setText(email);
+            isRegisterByEmail = true;
+            vVerifyEmail.setVisibility(View.VISIBLE);
+            vVerifyPhone.setVisibility(View.GONE);
+        } else if (!TextUtils.isEmpty(phone)) {
+            tvSentCodeToPhone.setText(getString(R.string.msg_sent_verify_phone_code,
+                    AccountUtils.getHiddenPhone(phone)));
+            isRegisterByEmail = false;
+            vVerifyEmail.setVisibility(View.GONE);
+            vVerifyPhone.setVisibility(View.VISIBLE);
+        } else {
+            finish();
         }
     }
 
@@ -51,10 +73,16 @@ public class VerifyEmailActivity extends BaseActivity implements VerifyEmailView
         //Auto login first
         login();
     }
+
     private void login() {
         LogInRequest logInRequest = new LogInRequest();
-        logInRequest.setEmail(email);
         logInRequest.setPassword(password);
+        if (isRegisterByEmail) {
+            logInRequest.setEmail(email);
+        } else {
+            logInRequest.setMobile(phone);
+            logInRequest.setEmail("");
+        }
 
         present.requestLogin(logInRequest);
     }
@@ -66,7 +94,7 @@ public class VerifyEmailActivity extends BaseActivity implements VerifyEmailView
 
     @Override
     public void onVerifySuccess() {
-        startActivity(new Intent(VerifyEmailActivity.this, MyProfileActivity.class));
+        startActivity(new Intent(VerifyActivity.this, MyProfileActivity.class));
     }
 
     @Override

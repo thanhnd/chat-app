@@ -1,4 +1,4 @@
-package com.chatapp.mvp.verifyemail;
+package com.chatapp.mvp.verify;
 
 
 import com.chatapp.service.ApiCallback;
@@ -14,7 +14,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VerifyEmailInteractorImpl implements VerifyEmailInteractor {
+public class VerifyInteractorImpl implements VerifyInteractor {
 
     @Override
     public void login(LogInRequest request, final ApiCallback<ResponseModel<LogInModel>> apiCallback) {

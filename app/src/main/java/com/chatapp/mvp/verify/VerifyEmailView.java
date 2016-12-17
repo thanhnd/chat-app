@@ -1,4 +1,4 @@
-package com.chatapp.mvp.verifyemail;
+package com.chatapp.mvp.verify;
 
 import com.chatapp.mvp.base.BaseView;
 import com.chatapp.service.models.response.LogInModel;
