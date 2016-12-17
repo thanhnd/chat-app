@@ -6,14 +6,16 @@
     android:background="@drawable/bg"
     android:gravity="bottom"
     android:orientation="vertical"
-    tools:context=".mvp.RegisterByEmailActivity">
+    tools:context=".mvp.RegisterActivity">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="22dp">
+        android:paddingLeft="@dimen/padding_default_large"
+        android:paddingRight="@dimen/padding_default_large"
+        android:paddingTop="@dimen/padding_default_large">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,6 +24,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/v_register_by_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="35dp"
@@ -32,7 +35,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/sign_out_email_label" />
+                    android:text="@string/register_email_label" />
 
                 <EditText
                     android:id="@+id/edt_email"
@@ -46,6 +49,62 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/v_register_by_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginRight="35dp"
+                    android:layout_marginTop="35dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/register_country_code_label" />
+
+                    <EditText
+                        android:id="@+id/edt_country"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/register_country_hint"
+                        android:imeOptions="actionNext"
+                        android:maxLines="1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginRight="35dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/register_phone_label" />
+
+                    <EditText
+                        android:id="@+id/edt_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/register_phone_hint"
+                        android:imeOptions="actionNext"
+                        android:inputType="phone"
+                        android:maxLines="1" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="35dp"
@@ -53,18 +112,20 @@
                 android:layout_marginRight="35dp"
                 android:layout_marginTop="20dp"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/sign_in_password_label"/>
+                    android:text="@string/sign_in_password_label" />
+
                 <EditText
                     android:id="@+id/edt_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/sign_out_password_hint"
+                    android:hint="@string/register_password_hint"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
-                    android:maxLines="1"/>
+                    android:maxLines="1" />
             </LinearLayout>
 
             <Button
@@ -72,7 +133,6 @@
                 style="@style/Button.Submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="22dp"
                 android:text="@string/register_by_email_create_account"
                 android:textAllCaps="false" />
         </LinearLayout>
@@ -86,7 +146,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="25dp"
         android:background="@null"
         android:textAllCaps="false"
         android:textColor="@color/white" />
@@ -97,13 +157,13 @@
         android:layout_height="wrap_content"
         android:background="#330033"
         android:orientation="horizontal">
+
         <Button
-            android:id="@+id/btn_to_create_account_by_phone"
+            android:id="@+id/btn_switch_register_type"
             style="@style/TextAppearance.Small.UnderLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/register_with_your_phone" />
+            android:layout_centerInParent="true" />
 
 
     </RelativeLayout>

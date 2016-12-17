@@ -22,27 +22,27 @@
     <string name="sign_in_password_label">PASSWORD</string>
     <string name="sign_in_password_hint">Input your password</string>
 
-    <!--    Sign out    -->
-    <string name="sign_out_email_label">EMAIL</string>
-    <string name="sign_out_country_code_label">COUNTRY CODE</string>
+    <!--    Register    -->
+    <string name="register_email_label">EMAIL</string>
+    <string name="register_country_code_label">COUNTRY CODE</string>
     <string name="verify_email_hint">Input the verification code</string>
-    <string name="sign_out_country_hint">Input your country code</string>
-    <string name="sign_out_phone_hint">Input your phone number</string>
-    <string name="sign_out_phone_label">PHONE</string>
-    <string name="sign_out_password_hint">Password</string>
+    <string name="register_country_hint">Input your country code</string>
+    <string name="register_phone_hint">Input your phone number</string>
+    <string name="register_phone_label">PHONE</string>
+    <string name="register_password_label">Input your password</string>
+    <string name="register_password_hint">Password</string>
     <string name="forgot_password"><u>Forgot password</u></string>
     <string name="create_account"><u>Create Account</u></string>
     <string name="login_to_create_account"><u>Create Account</u></string>
     <string name="register_by_email_create_account">Create Account</string>
     <string name="submit">Complete</string>
     <string name="login_here"> <u>Login here</u></string>
-    <string name="register_with_your_phone"><u>Register with your phone</u></string>
+    <string name="register_with_your_phone"><![CDATA[<u>Register with your phone</u>]]></string>
+    <string name="register_with_your_email"><![CDATA[<u>Register with your email</u>]]></string>
     <string name="request_send_code"><u>Can\'t receive code?</u></string>
-    <string name="register_with_your_email">Register with your email</string>
-    <string name="agree_to_terms_policies"><![CDATA[<font color=#a85e91>By registering, you agree to our</font> <u>Terms & Policies</u>.]]></string>
+    <string name="agree_to_terms_policies"><![CDATA[<font color=#a85e91>By registering, you agree to our</font> <u>Terms of use & Policies</u>.]]></string>
     <string name="sign_in_mobile">Mobile</string>
     <string name="sign_in_email">Email</string>
-
 
     <!--    Dialog    -->
     <string name="dialog_confirm_title">Xác nhận</string>

@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivityForResult(new Intent(this, SignInActivity.class), RC_SIGNIN);
                 break;
             case R.id.btn_go_to_register:
-                startActivityForResult(new Intent(this, RegisterByEmailActivity.class), RC_REGISTER_BY_EMAIL);
+                startActivityForResult(new Intent(this, RegisterActivity.class), RC_REGISTER_BY_EMAIL);
                 break;
             default:
                 break;

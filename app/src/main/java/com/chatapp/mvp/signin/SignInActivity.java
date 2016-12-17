@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import com.chatapp.R;
-import com.chatapp.mvp.RegisterByEmailActivity;
+import com.chatapp.mvp.RegisterActivity;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.service.models.request.SignInRequest;
 import com.chatapp.utils.DialogUtils;
@@ -78,7 +78,7 @@ public class SignInActivity extends BaseActivity implements SignInView {
 
     @OnClick(R.id.btn_go_to_register)
     public void clickGotoRegister(Button btnGotoRegister) {
-        startActivityForResult(new Intent(SignInActivity.this, RegisterByEmailActivity.class), RC_TO_REGISTER);
+        startActivityForResult(new Intent(SignInActivity.this, RegisterActivity.class), RC_TO_REGISTER);
     }
 
     @Override
