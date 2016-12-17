@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.chatapp.service.ApiCallback;
 import com.chatapp.service.models.request.SignInRequest;
+import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.SignInModel;
 
 import java.lang.ref.WeakReference;
@@ -27,9 +28,9 @@ public class SignInPresenterImpl implements SignInPresenter {
         if (loginView.get() != null) {
             loginView.get().showProgress();
         }
-        signInInteractor.login(request, new ApiCallback<SignInModel>() {
+        signInInteractor.login(request, new ApiCallback<ResponseModel<SignInModel>>() {
             @Override
-            public void onSuccess(SignInModel response) {
+            public void onSuccess(ResponseModel<SignInModel> response) {
                 if (loginView.get() != null) {
                     loginView.get().hideProgress();
                     loginView.get().onSignInSuccess();
@@ -37,16 +38,16 @@ public class SignInPresenterImpl implements SignInPresenter {
             }
 
             @Override
-            public void onFail(Response<SignInModel> response) {
+            public void onFail(Response<ResponseModel<SignInModel>> response) {
                 if (loginView.get() != null) {
                     loginView.get().hideProgress();
 
                     // Get data response from server
-                    SignInModel loginInfo = response.body();
+                    ResponseModel<SignInModel> responseModel = response.body();
 
                     // Show error message from server if there is
-                    if (loginInfo != null && !TextUtils.isEmpty(loginInfo.getResponseMsg())) {
-                        loginView.get().showErrorDialog(loginInfo.getResponseMsg());
+                    if (responseModel != null && !TextUtils.isEmpty(responseModel.getResponseMsg())) {
+                        loginView.get().showErrorDialog(responseModel.getResponseMsg());
                     } else {
                         loginView.get().onSignInError();
                     }
@@ -54,7 +55,7 @@ public class SignInPresenterImpl implements SignInPresenter {
             }
 
             @Override
-            public void onFail(Call<SignInModel> call, Throwable throwable) {
+            public void onFail(Call<ResponseModel<SignInModel>> call, Throwable throwable) {
                 if (loginView != null) {
                     loginView.get().showErrorDialog();
                     loginView.get().hideProgress();

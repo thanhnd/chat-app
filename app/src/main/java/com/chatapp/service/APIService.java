@@ -4,6 +4,7 @@ import com.chatapp.Config;
 import com.chatapp.service.models.request.RegisterRequest;
 import com.chatapp.service.models.request.SignInRequest;
 import com.chatapp.service.models.response.RegisterModel;
+import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.SignInModel;
 
 import retrofit2.Call;
@@ -24,10 +25,10 @@ public interface ApiService {
             .build();
 
     @Headers("Content-Type: application/json")
-    @POST("/api/sign_in")
-    Call<SignInModel> signIn(@Body SignInRequest request);
+    @POST("/api/user/login")
+    Call<ResponseModel<SignInModel>> signIn(@Body SignInRequest request);
 
     @Headers("Content-Type: application/json")
-    @POST("/api/register")
-    Call<RegisterModel> register(@Body RegisterRequest request);
+    @POST("/api/user/register")
+    Call<ResponseModel<RegisterModel>> register(@Body RegisterRequest request);
 }

@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by thanhnguyen on 12/17/16.
  */
 
-public class BaseResponse {
+public class ResponseModel<T> {
     public static final int RESPONSE_CD_SUCCESS = 0;
     public static final int RESPONSE_CD_ERROR = 1;
     @SerializedName("response_cd")
@@ -18,7 +18,7 @@ public class BaseResponse {
     private String responseMsg;
     @SerializedName("result_set")
     @Expose
-    private Object resultSet;
+    private T resultSet;
 
     public int getResponseCd() {
         return responseCd;
@@ -36,11 +36,11 @@ public class BaseResponse {
         this.responseMsg = responseMsg;
     }
 
-    public Object getResultSet() {
+    public T getResultSet() {
         return resultSet;
     }
 
-    public void setResultSet(Object resultSet) {
+    public void setResultSet(T resultSet) {
         this.resultSet = resultSet;
     }
 

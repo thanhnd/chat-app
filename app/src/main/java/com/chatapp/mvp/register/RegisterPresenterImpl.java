@@ -5,8 +5,8 @@ import android.text.TextUtils;
 
 import com.chatapp.service.ApiCallback;
 import com.chatapp.service.models.request.RegisterRequest;
-import com.chatapp.service.models.response.BaseResponse;
 import com.chatapp.service.models.response.RegisterModel;
+import com.chatapp.service.models.response.ResponseModel;
 
 import java.lang.ref.WeakReference;
 
@@ -28,9 +28,9 @@ public class RegisterPresenterImpl implements RegisterPresent {
         if (registerView.get() != null) {
             registerView.get().showProgress();
         }
-        registerInteractor.register(request, new ApiCallback<RegisterModel>() {
+        registerInteractor.register(request, new ApiCallback<ResponseModel<RegisterModel>>() {
             @Override
-            public void onSuccess(RegisterModel response) {
+            public void onSuccess(ResponseModel<RegisterModel> response) {
                 if (registerView.get() != null) {
                     registerView.get().hideProgress();
                     registerView.get().onRegisterSuccess();
@@ -38,16 +38,16 @@ public class RegisterPresenterImpl implements RegisterPresent {
             }
 
             @Override
-            public void onFail(Response<RegisterModel> response) {
+            public void onFail(Response<ResponseModel<RegisterModel>> response) {
                 if (registerView.get() != null) {
                     registerView.get().hideProgress();
 
                     // Get data response from server
-                    BaseResponse baseResponse = response.body();
+                    ResponseModel responseModel = response.body();
 
                     // Show error message from server if there is
-                    if (baseResponse != null && !TextUtils.isEmpty(baseResponse.getResponseMsg())) {
-                        registerView.get().showErrorDialog(baseResponse.getResponseMsg());
+                    if (responseModel != null && !TextUtils.isEmpty(responseModel.getResponseMsg())) {
+                        registerView.get().showErrorDialog(responseModel.getResponseMsg());
                     } else {
                         registerView.get().onRegisterError();
                     }
@@ -55,7 +55,7 @@ public class RegisterPresenterImpl implements RegisterPresent {
             }
 
             @Override
-            public void onFail(Call<RegisterModel> call, Throwable throwable) {
+            public void onFail(Call<ResponseModel<RegisterModel>> call, Throwable throwable) {
                 if (registerView != null) {
                     registerView.get().showErrorDialog();
                     registerView.get().hideProgress();
