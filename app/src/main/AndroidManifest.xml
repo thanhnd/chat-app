@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".mvp.signin.SignInActivity"
+            android:name=".mvp.login.LogInActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".mvp.register.RegisterActivity"

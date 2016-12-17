@@ -1,4 +1,4 @@
-package com.chatapp.mvp.signin;
+package com.chatapp.mvp.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,14 +10,14 @@ import android.widget.RadioGroup;
 import com.chatapp.R;
 import com.chatapp.mvp.register.RegisterActivity;
 import com.chatapp.mvp.base.BaseActivity;
-import com.chatapp.service.models.request.SignInRequest;
+import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.utils.DialogUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SignInActivity extends BaseActivity implements SignInView {
+public class LogInActivity extends BaseActivity implements LogInView {
 
     private static final int RC_TO_REGISTER = 1;
 
@@ -35,7 +35,7 @@ public class SignInActivity extends BaseActivity implements SignInView {
     EditText edtPassword;
 
     private boolean isLoginWithPhone = true;
-    private SignInPresenter presenter;
+    private LogInPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +58,12 @@ public class SignInActivity extends BaseActivity implements SignInView {
             }
         });
 
-        presenter = new SignInPresenterImpl(this);
+        presenter = new LogInPresenterImpl(this);
     }
 
     @OnClick(R.id.btn_login)
     public void clickLogin(Button btnLogin) {
-        SignInRequest request = new SignInRequest();
+        LogInRequest request = new LogInRequest();
         String password = edtPassword.getText().toString();
         request.setPassword(password);
         if (isLoginWithPhone) {
@@ -78,7 +78,7 @@ public class SignInActivity extends BaseActivity implements SignInView {
 
     @OnClick(R.id.btn_go_to_register)
     public void clickGotoRegister(Button btnGotoRegister) {
-        startActivityForResult(new Intent(SignInActivity.this, RegisterActivity.class), RC_TO_REGISTER);
+        startActivityForResult(new Intent(LogInActivity.this, RegisterActivity.class), RC_TO_REGISTER);
     }
 
     @Override

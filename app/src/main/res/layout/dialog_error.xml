@@ -29,7 +29,7 @@
         android:gravity="center"
         android:maxWidth="300dp"
         android:minWidth="240dp"
-        android:text="Bạn vui lòng thử lại vào lúc khác"
+        android:text="@string/general_error_message"
         android:textColor="#333"
         android:textSize="17sp" />
 
@@ -42,7 +42,7 @@
         android:gravity="center"
         android:paddingBottom="14dp"
         android:paddingTop="14dp"
-        android:text="Đóng"
+        android:text="@string/dialog_close"
         android:textAllCaps="true"
         android:textColor="@color/colorPrimary"
         android:textSize="17sp" />

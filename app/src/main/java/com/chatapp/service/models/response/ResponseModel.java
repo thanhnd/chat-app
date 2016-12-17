@@ -10,6 +10,7 @@ import com.google.gson.annotations.SerializedName;
 public class ResponseModel<T> {
     public static final int RESPONSE_CD_SUCCESS = 0;
     public static final int RESPONSE_CD_ERROR = 1;
+    public static final int RESPONSE_CD_NOT_ACTIVE = 5;
     @SerializedName("response_cd")
     @Expose
     private int responseCd;

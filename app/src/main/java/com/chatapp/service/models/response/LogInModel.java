@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by thanhnguyen on 12/17/16.
  */
 
-public class SignInModel {
+public class LogInModel {
     @SerializedName("token")
     @Expose
     private String token;

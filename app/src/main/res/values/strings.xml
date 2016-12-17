@@ -65,6 +65,8 @@
     <string name="general_technical_error_message">Cannot process at this time. Please try again later.</string>
     <string name="loading">Loading&#8230;</string>
     <string name="msg_sent_verify_email_code">Please enter the 6-Digit code sent to</string>
+    <string name="error_cannot_login">Cannot get user info</string>
+    <string name="dialog_close">Close</string>
 
 
 </resources>

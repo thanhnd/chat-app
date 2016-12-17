@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.chatapp.R;
+import com.chatapp.mvp.login.LogInActivity;
 import com.chatapp.mvp.register.RegisterActivity;
-import com.chatapp.mvp.signin.SignInActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login_here:
-                startActivityForResult(new Intent(this, SignInActivity.class), RC_SIGNIN);
+                startActivityForResult(new Intent(this, LogInActivity.class), RC_SIGNIN);
                 break;
             case R.id.btn_go_to_register:
                 startActivityForResult(new Intent(this, RegisterActivity.class), RC_REGISTER_BY_EMAIL);

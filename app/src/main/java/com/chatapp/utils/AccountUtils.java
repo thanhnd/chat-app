@@ -3,7 +3,7 @@ package com.chatapp.utils;
 import android.support.annotation.NonNull;
 
 import com.chatapp.MyApplication;
-import com.chatapp.service.models.response.SignInModel;
+import com.chatapp.service.models.response.LogInModel;
 
 import static com.chatapp.utils.CacheUtil.getSharedPreferences;
 
@@ -15,40 +15,40 @@ import static com.chatapp.utils.CacheUtil.getSharedPreferences;
 public class AccountUtils {
     private static final String SIGN_IN_MODEL = "sign_in_model";
 
-    static private SignInModel signInModel;
+    static private LogInModel logInModel;
 
 
-    public static SignInModel getSignInModel() {
-        return signInModel;
+    public static LogInModel getLogInModel() {
+        return logInModel;
     }
 
-    public static void setSignInModel(SignInModel loginInfo) {
+    public static void setLogInModel(LogInModel loginInfo) {
         cacheSignInModel(loginInfo);
-        AccountUtils.signInModel = loginInfo;
+        AccountUtils.logInModel = loginInfo;
     }
 
     public static boolean isLoggedIn() {
-        if (signInModel == null) {
-            signInModel = getCacheSignInModel();
+        if (logInModel == null) {
+            logInModel = getCacheSignInModel();
         }
-        return (signInModel != null);
+        return (logInModel != null);
     }
 
     public static void logOut() {
-        signInModel = null;
+        logInModel = null;
         getSharedPreferences(MyApplication.getInstance()).edit()
                 .putString(SIGN_IN_MODEL, "").apply();
     }
 
-    private static void cacheSignInModel(@NonNull SignInModel loginInfo) {
+    private static void cacheSignInModel(@NonNull LogInModel loginInfo) {
         getSharedPreferences(MyApplication.getInstance()).edit()
-                .putString(SIGN_IN_MODEL, ParserUtil.toJson(loginInfo, SignInModel.class)).apply();
+                .putString(SIGN_IN_MODEL, ParserUtil.toJson(loginInfo, LogInModel.class)).apply();
     }
 
 
-    private static SignInModel getCacheSignInModel() {
+    private static LogInModel getCacheSignInModel() {
         String str = getSharedPreferences(MyApplication.getInstance())
                 .getString(SIGN_IN_MODEL, "");
-        return ParserUtil.fromJson(str, SignInModel.class);
+        return ParserUtil.fromJson(str, LogInModel.class);
     }
 }

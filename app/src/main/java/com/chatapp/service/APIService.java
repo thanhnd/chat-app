@@ -1,16 +1,19 @@
 package com.chatapp.service;
 
 import com.chatapp.Config;
+import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.request.RegisterRequest;
-import com.chatapp.service.models.request.SignInRequest;
+import com.chatapp.service.models.request.VerifyEmailRequest;
+import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.RegisterModel;
 import com.chatapp.service.models.response.ResponseModel;
-import com.chatapp.service.models.response.SignInModel;
+import com.chatapp.service.models.response.VerifyModel;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
@@ -26,9 +29,13 @@ public interface ApiService {
 
     @Headers("Content-Type: application/json")
     @POST("/api/user/login")
-    Call<ResponseModel<SignInModel>> signIn(@Body SignInRequest request);
+    Call<ResponseModel<LogInModel>> signIn(@Body LogInRequest request);
 
     @Headers("Content-Type: application/json")
     @POST("/api/user/register")
     Call<ResponseModel<RegisterModel>> register(@Body RegisterRequest request);
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/user/verifyCode")
+    Call<ResponseModel<VerifyModel>> verifyCode(@Header("Authorization") String authorization, @Body VerifyEmailRequest request);
 }

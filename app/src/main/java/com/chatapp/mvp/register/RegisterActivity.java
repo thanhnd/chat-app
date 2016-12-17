@@ -39,7 +39,7 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
 
     private RegisterPresent present;
     boolean isRegisterByEmail = true;
-    String email, phone, countryCode;
+    String email, phone, countryCode, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,7 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
     @OnClick(R.id.btn_submit)
     public void submitRegisterSubmit() {
         RegisterRequest request = new RegisterRequest();
-        String password = edtPassword.getText().toString();
+        password = edtPassword.getText().toString();
         request.setPassword(password);
         if(isRegisterByEmail) {
             email = edtEmail.getText().toString();
@@ -88,6 +88,7 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
         if (isRegisterByEmail) {
             Intent intent = new Intent(this, VerifyEmailActivity.class);
             intent.putExtra(VerifyEmailActivity.EXTRA_EMAIL, email);
+            intent.putExtra(VerifyEmailActivity.EXTRA_PASSWORD, password);
             startActivity(intent);
         } else {
 
