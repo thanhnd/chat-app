@@ -8,8 +8,9 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import com.chatapp.R;
-import com.chatapp.mvp.register.RegisterActivity;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.register.RegisterActivity;
+import com.chatapp.mvp.verify.VerifyActivity;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.utils.DialogUtils;
 
@@ -34,8 +35,9 @@ public class LogInActivity extends BaseActivity implements LogInView {
     @Bind(R.id.edt_password)
     EditText edtPassword;
 
-    private boolean isLoginWithPhone = true;
     private LogInPresenter presenter;
+    private boolean isLoginWithPhone = true;
+    String phone, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +69,10 @@ public class LogInActivity extends BaseActivity implements LogInView {
         String password = edtPassword.getText().toString();
         request.setPassword(password);
         if (isLoginWithPhone) {
-            String phone = edtPhone.getText().toString();
+            phone = edtPhone.getText().toString();
             request.setMobile(phone);
         } else {
-            String email = edtEmail.getText().toString();
+            email = edtEmail.getText().toString();
             request.setEmail(email);
         }
         presenter.login(request);
@@ -82,12 +84,23 @@ public class LogInActivity extends BaseActivity implements LogInView {
     }
 
     @Override
-    public void onSignInSuccess() {
+    public void onLogInSuccess() {
 
     }
 
     @Override
-    public void onSignInError() {
+    public void onNotVerify() {
+        Intent intent = new Intent(this, VerifyActivity.class);
+        if (isLoginWithPhone) {
+            intent.putExtra(VerifyActivity.EXTRA_PHONE, phone);
+        } else {
+            intent.putExtra(VerifyActivity.EXTRA_EMAIL, email);
+        }
+        startActivity(intent);
+    }
+
+    @Override
+    public void onLogInError() {
         DialogUtils.showGeneralErrorAlert(this, getString(R.string.identify_or_password_error_incorrect));
     }
 }

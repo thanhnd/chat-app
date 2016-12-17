@@ -10,7 +10,7 @@ import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.VerifyModel;
 
 public interface VerifyInteractor {
-    void verify(String authorization, VerifyEmailRequest request,
+    void verify(VerifyEmailRequest request,
                ApiCallback<ResponseModel<VerifyModel>> loginCallback);
     void login(LogInRequest request,
                 ApiCallback<ResponseModel<LogInModel>> loginCallback);

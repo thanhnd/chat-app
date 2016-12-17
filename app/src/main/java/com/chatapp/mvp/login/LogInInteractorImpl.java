@@ -4,9 +4,8 @@ package com.chatapp.mvp.login;
 import com.chatapp.service.ApiCallback;
 import com.chatapp.service.ApiService;
 import com.chatapp.service.models.request.LogInRequest;
-import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.LogInModel;
-import com.chatapp.utils.AccountUtils;
+import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.utils.Log;
 
 import retrofit2.Call;
@@ -27,8 +26,7 @@ public class LogInInteractorImpl implements LogInInteractor {
                 ResponseModel<LogInModel> responseModel = response.body();
                 if (loginCallback != null) {
                     if (response.isSuccessful() && responseModel != null
-                            && responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_SUCCESS) {
-                        AccountUtils.setLogInModel(responseModel.getResultSet());
+                            && responseModel.getResponseCd() != ResponseModel.RESPONSE_CD_ERROR) {
                         loginCallback.onSuccess(responseModel);
                     } else {
                         loginCallback.onFail(response);

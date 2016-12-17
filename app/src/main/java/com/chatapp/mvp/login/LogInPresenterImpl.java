@@ -7,6 +7,7 @@ import com.chatapp.service.ApiCallback;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.LogInModel;
+import com.chatapp.utils.AccountUtils;
 
 import java.lang.ref.WeakReference;
 
@@ -33,8 +34,11 @@ public class LogInPresenterImpl implements LogInPresenter {
             public void onSuccess(ResponseModel<LogInModel> responseModel) {
                 if (loginView.get() != null) {
                     loginView.get().hideProgress();
-                    if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_NOT_ACTIVE) {
-                        loginView.get().onSignInSuccess();
+                    AccountUtils.setLogInModel(responseModel.getResultSet());
+                    if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_SUCCESS) {
+                        loginView.get().onLogInSuccess();
+                    } else if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_NOT_ACTIVE) {
+                        loginView.get().onLogInSuccess();
                     }
                 }
             }
@@ -51,7 +55,7 @@ public class LogInPresenterImpl implements LogInPresenter {
                     if (responseModel != null && !TextUtils.isEmpty(responseModel.getResponseMsg())) {
                         loginView.get().showErrorDialog(responseModel.getResponseMsg());
                     } else {
-                        loginView.get().onSignInError();
+                        loginView.get().onLogInError();
                     }
                 }
             }

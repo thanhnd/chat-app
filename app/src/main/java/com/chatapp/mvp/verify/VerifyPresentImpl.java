@@ -8,6 +8,7 @@ import com.chatapp.service.models.request.VerifyEmailRequest;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.VerifyModel;
+import com.chatapp.utils.AccountUtils;
 
 import java.lang.ref.WeakReference;
 
@@ -19,16 +20,19 @@ import retrofit2.Response;
  */
 
 public class VerifyPresentImpl implements VerifyPresent {
-    private WeakReference<VerifyEmailView> view;
+    private WeakReference<VerifyView> view;
     private VerifyInteractor interactor;
 
-    public VerifyPresentImpl(VerifyEmailView view) {
+    public VerifyPresentImpl(VerifyView view) {
         this.view = new WeakReference<>(view);
         this.interactor = new VerifyInteractorImpl();
     }
     @Override
-    public void submitVerifyForm(String token, VerifyEmailRequest request) {
-        interactor.verify(token, request, new ApiCallback<ResponseModel<VerifyModel>>() {
+    public void submitVerifyForm(VerifyEmailRequest request) {
+        if (view.get() != null) {
+            view.get().showProgress();
+        }
+        interactor.verify(request, new ApiCallback<ResponseModel<VerifyModel>>() {
             @Override
             public void onSuccess(ResponseModel<VerifyModel> response) {
                 if (view.get() != null) {
@@ -70,10 +74,12 @@ public class VerifyPresentImpl implements VerifyPresent {
         }
         interactor.login(request, new ApiCallback<ResponseModel<LogInModel>>() {
             @Override
-            public void onSuccess(ResponseModel<LogInModel> response) {
+            public void onSuccess(ResponseModel<LogInModel> responseModel) {
                 if (view.get() != null) {
-                    view.get().onLoginSuccess(response.getResultSet());
+                    view.get().hideProgress();
+                    view.get().onLoginSuccess(responseModel.getResultSet());
                 }
+                AccountUtils.setLogInModel(responseModel.getResultSet());
             }
 
             @Override

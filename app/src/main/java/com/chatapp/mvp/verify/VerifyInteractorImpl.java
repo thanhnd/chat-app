@@ -8,6 +8,7 @@ import com.chatapp.service.models.request.VerifyEmailRequest;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.VerifyModel;
+import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.Log;
 
 import retrofit2.Call;
@@ -47,7 +48,12 @@ public class VerifyInteractorImpl implements VerifyInteractor {
     }
 
     @Override
-    public void verify(String authorization, VerifyEmailRequest request, final ApiCallback<ResponseModel<VerifyModel>> apiCallback) {
+    public void verify(VerifyEmailRequest request, final ApiCallback<ResponseModel<VerifyModel>> apiCallback) {
+        LogInModel logInModel = AccountUtils.getLogInModel();
+        if (logInModel == null) {
+            return;
+        }
+        String authorization = logInModel.getToken();
         ApiService service = ApiService.retrofit.create(ApiService.class);
         Call<ResponseModel<VerifyModel>> call = service.verifyCode(authorization, request);
         call.enqueue(new Callback<ResponseModel<VerifyModel>>() {

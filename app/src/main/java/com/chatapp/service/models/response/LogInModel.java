@@ -3,11 +3,13 @@ package com.chatapp.service.models.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by thanhnguyen on 12/17/16.
  */
 
-public class LogInModel {
+public class LogInModel implements Serializable {
     @SerializedName("token")
     @Expose
     private String token;

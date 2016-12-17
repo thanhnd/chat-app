@@ -8,11 +8,9 @@ import android.content.SharedPreferences;
  */
 
 public class CacheUtil {
-    public static final String PREFS_NAME = "san_van_tai";
+    public static final String PREFS_NAME = "chat_app";
 
     public static SharedPreferences getSharedPreferences(Context context) {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
     }
-
-
 }

@@ -20,7 +20,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class VerifyActivity extends BaseActivity implements VerifyEmailView {
+public class VerifyActivity extends BaseActivity implements VerifyView {
 
     public static final String EXTRA_EMAIL = "extra_email";
     public static final String EXTRA_PHONE = "extra_phone";
@@ -70,8 +70,13 @@ public class VerifyActivity extends BaseActivity implements VerifyEmailView {
 
     @OnClick(R.id.btn_submit)
     public void clickSubmit() {
-        //Auto login first
-        login();
+        LogInModel logInModel = AccountUtils.getLogInModel();
+        if (logInModel != null && !TextUtils.isEmpty(logInModel.getToken())) {
+            submitVerifyCode();
+        } else if (!TextUtils.isEmpty(password)) {
+            //Auto login first
+            login();
+        }
     }
 
     private void login() {
@@ -104,14 +109,17 @@ public class VerifyActivity extends BaseActivity implements VerifyEmailView {
 
     @Override
     public void onLoginSuccess(LogInModel logInModel) {
+        submitVerifyCode();
+    }
 
-        String token = logInModel.getToken();
+    private void submitVerifyCode() {
         //Submit Verify code
         String code = edtCode.getText().toString();
         VerifyEmailRequest request = new VerifyEmailRequest();
         request.setCode(code);
-        present.submitVerifyForm(token, request);
+        present.submitVerifyForm(request);
     }
+
 
     @Override
     public void onLoginError() {

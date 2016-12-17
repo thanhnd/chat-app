@@ -23,8 +23,8 @@ public class AccountUtils {
     }
 
     public static void setLogInModel(LogInModel loginInfo) {
-        cacheSignInModel(loginInfo);
         AccountUtils.logInModel = loginInfo;
+        cacheSignInModel(loginInfo);
     }
 
     public static boolean isLoggedIn() {
