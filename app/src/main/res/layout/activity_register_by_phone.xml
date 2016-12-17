@@ -23,43 +23,51 @@
             android:background="@color/white"
             android:orientation="vertical">
 
-            <android.support.design.widget.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="35dp"
                 android:layout_marginRight="35dp"
-                android:layout_marginTop="35dp">
+                android:layout_marginTop="35dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_out_country_code_label"/>
 
                 <EditText
                     android:id="@+id/edt_country"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_country"
+                    android:hint="@string/sign_out_country_hint"
                     android:imeOptions="actionNext"
-                    android:maxLines="1"
-                    app:errorEnabled="true" />
+                    android:maxLines="1" />
 
-            </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_marginBottom="35dp"
                 android:layout_marginLeft="35dp"
                 android:layout_marginRight="35dp"
                 android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_out_phone_label"/>
 
                 <EditText
                     android:id="@+id/edt_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_phone"
+                    android:hint="@string/sign_out_phone_hint"
                     android:imeOptions="actionDone"
                     android:inputType="phone"
-                    android:maxLines="1"
-                    app:errorEnabled="true" />
+                    android:maxLines="1"/>
 
-            </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btn_create_account"
@@ -74,13 +82,15 @@
 
     </LinearLayout>
 
-    <TextView
+    <Button
+        android:id="@+id/btn_link_to_agree_terms_policies"
         style="@style/TextAppearance.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="30dp"
-        android:text="@string/agree_to_terms_policies"
+        android:background="@null"
+        android:textAllCaps="false"
         android:textColor="@color/white" />
 
     <RelativeLayout

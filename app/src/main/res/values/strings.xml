@@ -13,19 +13,23 @@
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
 
-    <!--    Login    -->
+    <!--    Sign in    -->
     <string name="identify_or_password_error_incorrect">Thông tin đăng nhập không chính xác. Xin hay kiểm tra lại.</string>
-    <string name="sign_in_label_email">EMAIL</string>
-    <string name="sign_in_hint_email">Input your email</string>
-    <string name="sign_in_label_phone">PHONE NUMBER</string>
-    <string name="sign_in_hint_phone">Input your phone number</string>
-    <string name="sign_in_label_password">PASSWORD</string>
-    <string name="sign_in_hint_password">Input your password</string>
+    <string name="sign_in_email_label">EMAIL</string>
+    <string name="sign_in_email_hint">Input your email</string>
+    <string name="sign_in_phone_label">PHONE NUMBER</string>
+    <string name="sign_in_phone_hint">Input your phone number</string>
+    <string name="sign_in_password_label">PASSWORD</string>
+    <string name="sign_in_password_hint">Input your password</string>
 
-    <string name="hint_verify_email">Input the verification code</string>
-    <string name="hint_country">Country/Region</string>
-    <string name="hint_phone">Input your phone number</string>
-    <string name="hint_password">Password</string>
+    <!--    Sign out    -->
+    <string name="sign_out_email_label">EMAIL</string>
+    <string name="sign_out_country_code_label">COUNTRY CODE</string>
+    <string name="verify_email_hint">Input the verification code</string>
+    <string name="sign_out_country_hint">Input your country code</string>
+    <string name="sign_out_phone_hint">Input your phone number</string>
+    <string name="sign_out_phone_label">PHONE</string>
+    <string name="sign_out_password_hint">Password</string>
     <string name="forgot_password"><u>Forgot password</u></string>
     <string name="create_account"><u>Create Account</u></string>
     <string name="login_to_create_account"><u>Create Account</u></string>
@@ -49,5 +53,6 @@
     <string name="general_error_message">Có lỗi xảy ra vui lòng thử lại sau.</string>
     <string name="general_technical_error_message">Hiện tại không thể thực hiện chức năng này. Vui lòng thử lại sau.</string>
     <string name="loading">Đang tải&#8230;</string>
-    <string name="register_label_email">EMAIL</string>
+
+
 </resources>

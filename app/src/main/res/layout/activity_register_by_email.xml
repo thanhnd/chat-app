@@ -32,13 +32,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/register_label_email" />
+                    android:text="@string/sign_out_email_label" />
 
                 <EditText
                     android:id="@+id/edt_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/sign_in_hint_email"
+                    android:hint="@string/sign_in_email_hint"
                     android:imeOptions="actionGo"
                     android:inputType="textEmailAddress"
                     android:maxLines="1" />
@@ -56,12 +56,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/sign_in_label_password"/>
+                    android:text="@string/sign_in_password_label"/>
                 <EditText
                     android:id="@+id/edt_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_password"
+                    android:hint="@string/sign_out_password_hint"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
                     android:maxLines="1"/>

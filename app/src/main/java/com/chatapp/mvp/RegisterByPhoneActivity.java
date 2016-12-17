@@ -3,6 +3,7 @@ package com.chatapp.mvp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +27,8 @@ public class RegisterByPhoneActivity extends AppCompatActivity implements View.O
     Button btnCreateAccount;
     @Bind(R.id.btn_to_create_account_by_email)
     Button btnGoToCreateAccountByEmail;
+    @Bind(R.id.btn_link_to_agree_terms_policies)
+    Button btnLinkToAgreeTermAndPolicies;
 
 
     @Override
@@ -36,6 +39,7 @@ public class RegisterByPhoneActivity extends AppCompatActivity implements View.O
 
         btnCreateAccount.setOnClickListener(this);
         btnGoToCreateAccountByEmail.setOnClickListener(this);
+        btnLinkToAgreeTermAndPolicies.setText(Html.fromHtml(getString(R.string.agree_to_terms_policies)));
     }
 
     @Override
