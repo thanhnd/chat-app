@@ -45,14 +45,14 @@
     <string name="sign_in_email">Email</string>
 
     <!--    Dialog    -->
-    <string name="dialog_confirm_title">Xác nhận</string>
-    <string name="dialog_confirm_ok">ĐỒNG Ý</string>
-    <string name="dialog_confirm_cancel">HỦY BỎ</string>
-    <string name="general_error_title">Thông báo lỗi</string>
-    <string name="general_warning_title">Thông báo</string>
-    <string name="general_error_message">Có lỗi xảy ra vui lòng thử lại sau.</string>
-    <string name="general_technical_error_message">Hiện tại không thể thực hiện chức năng này. Vui lòng thử lại sau.</string>
-    <string name="loading">Đang tải&#8230;</string>
+    <string name="dialog_confirm_title">Confirm</string>
+    <string name="dialog_confirm_ok">AGREE</string>
+    <string name="dialog_confirm_cancel">CANCEL</string>
+    <string name="general_error_title">Error Message</string>
+    <string name="general_warning_title">Warning</string>
+    <string name="general_error_message">An error occurs. Please try again later.</string>
+    <string name="general_technical_error_message">Cannot process at this time. Please try again later.</string>
+    <string name="loading">Loading&#8230;</string>
 
 
 </resources>

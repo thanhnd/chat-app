@@ -1,5 +1,6 @@
 package com.chatapp.mvp.register;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.chatapp.R;
+import com.chatapp.mvp.VerifyEmailActivity;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.service.models.request.RegisterRequest;
 import com.chatapp.utils.DialogUtils;
@@ -35,8 +37,9 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
     @Bind(R.id.v_register_by_phone)
     View vRegisterByPhone;
 
-    boolean isRegisterByEmail = true;
     private RegisterPresent present;
+    boolean isRegisterByEmail = true;
+    String email, phone, countryCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +85,9 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
 
     @Override
     public void onRegisterSuccess() {
-
+        Intent intent = new Intent(this, VerifyEmailActivity.class);
+        intent.putExtra(VerifyEmailActivity.EXTRA_EMAIL, email);
+        startActivity(intent);
     }
 
     @Override

@@ -14,11 +14,12 @@ import butterknife.ButterKnife;
 
 public class VerifyEmailActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public static final String EXTRA_EMAIL = "extra_email";
     @Bind(R.id.edt_code)
     EditText edtCode;
-
     @Bind(R.id.btn_submit)
     Button btnSubmit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
