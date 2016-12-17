@@ -32,10 +32,10 @@
     <string name="register_by_email_create_account">Create Account</string>
     <string name="submit">Complete</string>
     <string name="login_here"> <u>Login here</u></string>
-    <string name="register_with_your_phone">Register with your phone</string>
+    <string name="register_with_your_phone"><u>Register with your phone</u></string>
     <string name="request_send_code"><u>Can\'t receive code?</u></string>
     <string name="register_with_your_email">Register with your email</string>
-    <string name="agree_to_terms_policies"><![CDATA[By registering, you agree to our Terms & Policies.]]></string>
+    <string name="agree_to_terms_policies"><![CDATA[<font color=#a85e91>By registering, you agree to our</font> <u>Terms & Policies</u>.]]></string>
     <string name="sign_in_mobile">Mobile</string>
     <string name="sign_in_email">Email</string>
 
@@ -49,4 +49,5 @@
     <string name="general_error_message">Có lỗi xảy ra vui lòng thử lại sau.</string>
     <string name="general_technical_error_message">Hiện tại không thể thực hiện chức năng này. Vui lòng thử lại sau.</string>
     <string name="loading">Đang tải&#8230;</string>
+    <string name="register_label_email">EMAIL</string>
 </resources>
