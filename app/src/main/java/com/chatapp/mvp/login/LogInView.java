@@ -7,4 +7,5 @@ public interface LogInView extends BaseView {
     void onLogInSuccess();
     void onNotVerify();
     void onLogInError();
+    void onNotConfirm();
 }

@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import com.chatapp.R;
+import com.chatapp.mvp.MyProfileActivity;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.register.RegisterActivity;
 import com.chatapp.mvp.verify.VerifyActivity;
@@ -42,7 +43,7 @@ public class LogInActivity extends BaseActivity implements LogInView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signin);
+        setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
         rgLoginType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -96,7 +97,13 @@ public class LogInActivity extends BaseActivity implements LogInView {
         } else {
             intent.putExtra(VerifyActivity.EXTRA_EMAIL, email);
         }
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    public void onNotConfirm() {
+        startActivity(new Intent(this, MyProfileActivity.class));
     }
 
     @Override

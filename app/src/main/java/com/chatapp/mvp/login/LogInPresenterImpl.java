@@ -38,8 +38,11 @@ public class LogInPresenterImpl implements LogInPresenter {
                     if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_SUCCESS) {
                         loginView.get().onLogInSuccess();
                     } else if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_NOT_ACTIVE) {
-                        loginView.get().onLogInSuccess();
+                        loginView.get().onNotVerify();
+                    } else if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_NOT_CONFIRM) {
+                        loginView.get().onNotConfirm();
                     }
+
                 }
             }
 
