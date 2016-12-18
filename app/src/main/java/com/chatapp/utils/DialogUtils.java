@@ -1,12 +1,14 @@
 package com.chatapp.utils;
 
 import android.animation.AnimatorSet;
+import android.app.DatePickerDialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 import com.chatapp.R;
 import com.chatapp.views.fragments.AlertDialogFragment;
 import com.chatapp.views.fragments.ConfirmDialogFragment;
+import com.chatapp.views.fragments.DatePickerDialogFragment;
 import com.chatapp.views.fragments.ProgressDialogFragment;
 import com.chatapp.views.fragments.RetainedDialogFragment;
 
@@ -141,6 +143,14 @@ public class DialogUtils {
         ConfirmDialogFragment
                 .instantiate(title, message, lblOk, confirmListener)
                 .show(activity.getSupportFragmentManager(), DialogUtils.class.getName() + ":confirm");
+    }
+
+    public static void showDatePickerDialog(final FragmentActivity activity,
+                                            DatePickerDialog.OnDateSetListener onDateSetListener) {
+        if (activity == null || activity.isFinishing()) return;
+        DatePickerDialogFragment
+                .instantiate(onDateSetListener)
+                .show(activity.getSupportFragmentManager(), DialogUtils.class.getName() + ":date_picker");
     }
 
 }

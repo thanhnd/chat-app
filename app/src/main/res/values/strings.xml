@@ -74,9 +74,9 @@
     <string name="profile_display_name_hint">Enter your display name</string>
     <string name="profile_day_of_birth_label">DATE OF BIRTH</string>
     <string name="profile_display_name_label">DISPLAY NAME</string>
-    <string name="profile_day_of_birth_hint">Please input your date of birth</string>
+    <string name="profile_day_of_birth_hint">Input your date of birth</string>
     <string name="profile_height_and_weight_label">HEIGHT AND WEIGHT</string>
-    <string name="profile_height_and_weight_hint">Please input your height and weight</string>
+    <string name="profile_height_and_weight_hint">Input your height and weight</string>
     <string name="profile_unit_system_label">UNIT SYSTEM</string>
     <string name="update_profile_btn_complete">Complete</string>
     <string name="update_profile_unit_type_type_cm_kg">cm/kg</string>

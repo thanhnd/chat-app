@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mvp.MyProfileActivity">
+    tools:context=".mvp.updatebasicprofile.UpdateBasicProfileActivity">
 
     <LinearLayout
         android:id="@+id/activity_main"
@@ -57,8 +57,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-                    android:orientation="horizontal">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:id="@+id/v_date_of_birth">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -71,15 +72,21 @@
                             android:layout_height="wrap_content"
                             android:text="@string/profile_day_of_birth_label" />
 
-                        <EditText
-                            android:id="@+id/edt_date_of_birth"
+                        <TextView
+                            android:id="@+id/tv_dob"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
-                            android:editable="false"
+                            android:duplicateParentState="true"
+                            style="@style/App_EditTextStyle"
                             android:hint="@string/profile_day_of_birth_hint"
                             tools:text="11 Nov 1999" />
                     </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_navigate_right" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -106,7 +113,7 @@
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/rg_unit_type_cm_kg"
+                        android:id="@+id/rb_unit_type_cm_kg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/update_profile_type_selector_bg"
@@ -117,10 +124,10 @@
                         android:textColor="@color/update_profile_unit_type_selector_color" />
 
                     <RadioButton
-                        android:layout_marginLeft="7dp"
-                        android:id="@+id/rg_unit_type_ft_lb"
+                        android:id="@+id/rb_unit_type_ft_lb"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
                         android:background="@drawable/update_profile_type_selector_bg"
                         android:button="@null"
                         android:gravity="center"
@@ -128,41 +135,52 @@
                         android:textColor="@color/update_profile_unit_type_selector_color" />
 
                 </RadioGroup>
-
-
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
 
             <LinearLayout
+                android:id="@+id/v_height_and_weight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
-                android:orientation="vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="match_parent"
-
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                    android:text="@string/profile_height_and_weight_label" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/profile_height_and_weight_label" />
 
-                <EditText
-                    android:id="@+id/edt_height_and_weight"
-                    android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/tv_height_and_weight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        style="@style/App_EditTextStyle"
+                        android:hint="@string/profile_height_and_weight_hint"
+                        tools:text="173 ft/ 61 lb" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:editable="false"
-                    android:hint="@string/profile_day_of_birth_hint"
-                    tools:text="173 ft/ 61 lb" />
-
+                    android:src="@drawable/ic_navigate_right" />
             </LinearLayout>
+
 
             <include layout="@layout/layout_horizontal_divider" />
 
             <Button
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_submit"
                 style="@style/Button.Submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

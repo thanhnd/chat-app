@@ -8,6 +8,6 @@ import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.LogInModel;
 
 public interface LogInInteractor {
-    void login(LogInRequest logInRequest,
-               ApiCallback<ResponseModel<LogInModel>> loginCallback);
+    void login(LogInRequest request,
+               ApiCallback<ResponseModel<LogInModel>> callback);
 }

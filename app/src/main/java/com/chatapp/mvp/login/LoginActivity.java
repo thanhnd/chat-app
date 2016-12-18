@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import com.chatapp.R;
-import com.chatapp.mvp.MyProfileActivity;
+import com.chatapp.mvp.updatebasicprofile.UpdateBasicProfileActivity;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.register.RegisterActivity;
 import com.chatapp.mvp.verify.VerifyActivity;
@@ -103,7 +103,7 @@ public class LogInActivity extends BaseActivity implements LogInView {
 
     @Override
     public void onNotConfirm() {
-        startActivity(new Intent(this, MyProfileActivity.class));
+        startActivity(new Intent(this, UpdateBasicProfileActivity.class));
     }
 
     @Override

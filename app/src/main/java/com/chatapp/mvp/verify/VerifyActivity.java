@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.chatapp.R;
-import com.chatapp.mvp.MyProfileActivity;
+import com.chatapp.mvp.updatebasicprofile.UpdateBasicProfileActivity;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.request.VerifyEmailRequest;
@@ -99,7 +99,7 @@ public class VerifyActivity extends BaseActivity implements VerifyView {
 
     @Override
     public void onVerifySuccess() {
-        startActivity(new Intent(VerifyActivity.this, MyProfileActivity.class));
+        startActivity(new Intent(VerifyActivity.this, UpdateBasicProfileActivity.class));
     }
 
     @Override
