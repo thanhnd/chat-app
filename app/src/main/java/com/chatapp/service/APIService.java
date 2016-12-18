@@ -1,6 +1,7 @@
 package com.chatapp.service;
 
 import com.chatapp.Config;
+import com.chatapp.service.models.request.BasicProfileRequest;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.request.RegisterRequest;
 import com.chatapp.service.models.request.VerifyEmailRequest;
@@ -38,4 +39,8 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("/api/user/verifyCode")
     Call<ResponseModel<VerifyModel>> verifyCode(@Header("Authorization") String authorization, @Body VerifyEmailRequest request);
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/profile/updateBasic")
+    Call<ResponseModel<Object>> updateBasicProfile(@Header("Authorization") String authorization, @Body BasicProfileRequest request);
 }

@@ -8,6 +8,7 @@
     <color name="transparent">#00000000</color>
     <color name="white">#ffffffff</color>
     <color name="semi_white">#77ffffff</color>
+    <color name="gray">#b2b2b2</color>
     <color name="black">#0c0c0d</color>
     <color name="body">#7e6d4a</color>
     <color name="purge">#c258ae</color>

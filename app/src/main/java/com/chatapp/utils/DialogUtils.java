@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 
 import com.chatapp.R;
 import com.chatapp.views.fragments.AlertDialogFragment;
+import com.chatapp.views.fragments.ChooseHeightAndWeightDialogFragment;
 import com.chatapp.views.fragments.ConfirmDialogFragment;
 import com.chatapp.views.fragments.DatePickerDialogFragment;
 import com.chatapp.views.fragments.ProgressDialogFragment;
@@ -150,6 +151,15 @@ public class DialogUtils {
         if (activity == null || activity.isFinishing()) return;
         DatePickerDialogFragment
                 .instantiate(onDateSetListener)
+                .show(activity.getSupportFragmentManager(), DialogUtils.class.getName() + ":date_picker");
+    }
+
+    public static void showChooseHeightAndWeightDialog(final FragmentActivity activity,
+                                                       int height, int weight,
+                                                       ChooseHeightAndWeightDialogFragment.OnHeightAndWeightSetListener onHeightAndWeightSetListener) {
+        if (activity == null || activity.isFinishing()) return;
+        ChooseHeightAndWeightDialogFragment
+                .instantiate(height, weight, onHeightAndWeightSetListener)
                 .show(activity.getSupportFragmentManager(), DialogUtils.class.getName() + ":date_picker");
     }
 

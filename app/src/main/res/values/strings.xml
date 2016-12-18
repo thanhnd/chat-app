@@ -57,7 +57,7 @@
 
     <!--    Dialog    -->
     <string name="dialog_confirm_title">Confirm</string>
-    <string name="dialog_confirm_ok">AGREE</string>
+    <string name="dialog_confirm_ok">CONFIRM</string>
     <string name="dialog_confirm_cancel">CANCEL</string>
     <string name="general_error_title">Error Message</string>
     <string name="general_warning_title">Warning</string>
@@ -81,6 +81,7 @@
     <string name="update_profile_btn_complete">Complete</string>
     <string name="update_profile_unit_type_type_cm_kg">cm/kg</string>
     <string name="update_profile_unit_type_ft_lb">ft/lb</string>
+    <string name="dialog_title_choose_height_and_weight">Height(cm) / Weight(kg)</string>
 
 
 </resources>

@@ -2,15 +2,16 @@ package com.chatapp.mvp.updatebasicprofile;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.chatapp.R;
+import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.service.models.request.BasicProfileRequest;
 import com.chatapp.utils.DialogUtils;
+import com.chatapp.views.fragments.ChooseHeightAndWeightDialogFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -19,8 +20,11 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class UpdateBasicProfileActivity extends AppCompatActivity implements UpdateBasicProfileView {
+public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBasicProfileView {
 
+
+    private static final int UNIT_TYPE_CM_KG = 0;
+    private static final int UNIT_TYPE_FT_LB = 1;
     @Bind(R.id.edt_display_name)
     EditText edtDisplayName;
 
@@ -35,7 +39,7 @@ public class UpdateBasicProfileActivity extends AppCompatActivity implements Upd
 
     private UpdateBasicProfilePresenter presenter;
     private long timestampDob;
-    private int unitType = 0;
+    private int unitType = UNIT_TYPE_CM_KG, height, weight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +47,12 @@ public class UpdateBasicProfileActivity extends AppCompatActivity implements Upd
         setContentView(R.layout.activity_update_basic_profile);
         ButterKnife.bind(this);
 
-        presenter = new UpdateBasicProfilePresenterImpl();
+        presenter = new UpdateBasicProfilePresenterImpl(this);
         rgUnitType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                unitType = (i == R.id.rb_unit_type_cm_kg) ? 0 : 1;
+                unitType = (i == R.id.rb_unit_type_cm_kg) ? UNIT_TYPE_CM_KG : UNIT_TYPE_FT_LB;
+                displayHeightAndWeight();
             }
         });
     }
@@ -58,6 +63,11 @@ public class UpdateBasicProfileActivity extends AppCompatActivity implements Upd
         String displayName = edtDisplayName.getText().toString();
         request.setDisplayName(displayName);
         request.setBirthday(timestampDob);
+        request.setUnitSystem(unitType);
+        request.setHeight(height);
+        request.setWeight(weight);
+
+        presenter.submit(request);
     }
 
     @OnClick(R.id.v_date_of_birth)
@@ -78,7 +88,23 @@ public class UpdateBasicProfileActivity extends AppCompatActivity implements Upd
 
     @OnClick(R.id.v_height_and_weight)
     void clickChooseHeightAndWeight() {
+        DialogUtils.showChooseHeightAndWeightDialog(this, height, weight,
+                new ChooseHeightAndWeightDialogFragment.OnHeightAndWeightSetListener() {
+            @Override
+            public void onHeightAndWeightSet(int h, int w) {
+                height = h;
+                weight = w;
+                displayHeightAndWeight();
+            }
+        });
+    }
 
+    private void displayHeightAndWeight() {
+        if (height > 0 || weight > 0) {
+            tvHeightAndWeight.setText(
+                    String.format(unitType == UNIT_TYPE_CM_KG ?
+                            "%d cm / %d kg" : "%d ft / %d lb", height, weight));
+        }
     }
 
     @Override
