@@ -14,6 +14,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -43,4 +44,8 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("/api/profile/updateBasic")
     Call<ResponseModel<Object>> updateBasicProfile(@Header("Authorization") String authorization, @Body BasicProfileRequest request);
+
+    @Headers("Content-Type: application/json")
+    @GET("/api/user/getVerifyCode")
+    Call<ResponseModel<Object>> getVerifyCode(@Header("Authorization") String authorization);
 }

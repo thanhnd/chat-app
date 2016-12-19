@@ -10,7 +10,9 @@ import android.widget.EditText;
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.verify.VerifyActivity;
+import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.request.RegisterRequest;
+import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.utils.DialogUtils;
 
 import butterknife.Bind;
@@ -85,8 +87,36 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
 
     @Override
     public void onRegisterSuccess() {
+        LogInRequest logInRequest = new LogInRequest();
+        logInRequest.setPassword(password);
+        if (isRegisterByEmail) {
+            logInRequest.setEmail(email);
+        } else {
+            logInRequest.setMobile(phone);
+            logInRequest.setEmail("");
+        }
+
+        present.requestLogin(logInRequest);
+    }
+
+    @Override
+    public void onRegisterError() {
+        DialogUtils.showGeneralErrorAlert(this, getString(R.string.general_error_message));
+    }
+
+    @Override
+    public void onLoginSuccess(LogInModel logInModel) {
+        present.getVerifyCode();
+    }
+
+    @Override
+    public void onLoginError() {
+
+    }
+
+    @Override
+    public void onGetVerifyCodeSuccess() {
         Intent intent = new Intent(this, VerifyActivity.class);
-        intent.putExtra(VerifyActivity.EXTRA_PASSWORD, password);
         if (isRegisterByEmail) {
             intent.putExtra(VerifyActivity.EXTRA_EMAIL, email);
         } else {
@@ -96,7 +126,7 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
     }
 
     @Override
-    public void onRegisterError() {
-        DialogUtils.showGeneralErrorAlert(this, getString(R.string.general_error_message));
+    public void onGetVerifyCodeFail() {
+
     }
 }

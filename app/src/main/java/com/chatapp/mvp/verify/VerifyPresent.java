@@ -1,6 +1,5 @@
 package com.chatapp.mvp.verify;
 
-import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.request.VerifyEmailRequest;
 
 /**
@@ -8,6 +7,4 @@ import com.chatapp.service.models.request.VerifyEmailRequest;
  */
 public interface VerifyPresent {
     void submitVerifyForm(VerifyEmailRequest request);
-    void requestLogin(LogInRequest request);
-
 }

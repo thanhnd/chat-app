@@ -3,12 +3,9 @@ package com.chatapp.mvp.verify;
 import android.text.TextUtils;
 
 import com.chatapp.service.ApiCallback;
-import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.request.VerifyEmailRequest;
-import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.VerifyModel;
-import com.chatapp.utils.AccountUtils;
 
 import java.lang.ref.WeakReference;
 
@@ -53,7 +50,7 @@ public class VerifyPresentImpl implements VerifyPresent {
                     if (responseModel != null && !TextUtils.isEmpty(responseModel.getResponseMsg())) {
                         view.get().showErrorDialog(responseModel.getResponseMsg());
                     } else {
-                        view.get().onLoginError();
+                        view.get().onVerifyError();
                     }
                 }
             }
@@ -63,47 +60,6 @@ public class VerifyPresentImpl implements VerifyPresent {
                 if (view != null) {
                     view.get().showErrorDialog();
                     view.get().hideProgress();
-                }
-            }
-        });
-    }
-
-    public void requestLogin(LogInRequest request) {
-        if (view.get() != null) {
-            view.get().showProgress();
-        }
-        interactor.login(request, new ApiCallback<ResponseModel<LogInModel>>() {
-            @Override
-            public void onSuccess(ResponseModel<LogInModel> responseModel) {
-                if (view.get() != null) {
-                    view.get().hideProgress();
-                    view.get().onLoginSuccess(responseModel.getResultSet());
-                }
-                AccountUtils.setLogInModel(responseModel.getResultSet());
-            }
-
-            @Override
-            public void onFail(Response<ResponseModel<LogInModel>> response) {
-                if (view.get() != null) {
-                    view.get().hideProgress();
-
-                    // Get data response from server
-                    ResponseModel responseModel = response.body();
-
-                    // Show error message from server if there is
-                    if (responseModel != null && !TextUtils.isEmpty(responseModel.getResponseMsg())) {
-                        view.get().showErrorDialog(responseModel.getResponseMsg());
-                    } else {
-                        view.get().showErrorDialog();
-                    }
-                }
-            }
-
-            @Override
-            public void onFail(Call<ResponseModel<LogInModel>> call, Throwable throwable) {
-                if (view != null) {
-                    view.get().hideProgress();
-                    view.get().showErrorDialog();
                 }
             }
         });

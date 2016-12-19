@@ -9,9 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.chatapp.R;
-import com.chatapp.mvp.updatebasicprofile.UpdateBasicProfileActivity;
 import com.chatapp.mvp.base.BaseActivity;
-import com.chatapp.service.models.request.LogInRequest;
+import com.chatapp.mvp.updatebasicprofile.UpdateBasicProfileActivity;
 import com.chatapp.service.models.request.VerifyEmailRequest;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.utils.AccountUtils;
@@ -24,7 +23,6 @@ public class VerifyActivity extends BaseActivity implements VerifyView {
 
     public static final String EXTRA_EMAIL = "extra_email";
     public static final String EXTRA_PHONE = "extra_phone";
-    public static final String EXTRA_PASSWORD = "extra_password";
     @Bind(R.id.v_verify_email)
     View vVerifyEmail;
     @Bind(R.id.v_verify_phone)
@@ -39,8 +37,7 @@ public class VerifyActivity extends BaseActivity implements VerifyView {
     Button btnSubmit;
 
     private VerifyPresent present;
-    private String email, phone, password;
-    private boolean isRegisterByEmail = true;
+    private String email, phone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +48,13 @@ public class VerifyActivity extends BaseActivity implements VerifyView {
         Intent intent = getIntent();
         email = intent.getStringExtra(EXTRA_EMAIL);
         phone = intent.getStringExtra(EXTRA_PHONE);
-        password = intent.getStringExtra(EXTRA_PASSWORD);
         if (!TextUtils.isEmpty(email)) {
             tvEmail.setText(email);
-            isRegisterByEmail = true;
             vVerifyEmail.setVisibility(View.VISIBLE);
             vVerifyPhone.setVisibility(View.GONE);
         } else if (!TextUtils.isEmpty(phone)) {
             tvSentCodeToPhone.setText(getString(R.string.msg_sent_verify_phone_code,
                     AccountUtils.getHiddenPhone(phone)));
-            isRegisterByEmail = false;
             vVerifyEmail.setVisibility(View.GONE);
             vVerifyPhone.setVisibility(View.VISIBLE);
         } else {
@@ -73,23 +67,7 @@ public class VerifyActivity extends BaseActivity implements VerifyView {
         LogInModel logInModel = AccountUtils.getLogInModel();
         if (logInModel != null && !TextUtils.isEmpty(logInModel.getToken())) {
             submitVerifyCode();
-        } else if (!TextUtils.isEmpty(password)) {
-            //Auto login first
-            login();
         }
-    }
-
-    private void login() {
-        LogInRequest logInRequest = new LogInRequest();
-        logInRequest.setPassword(password);
-        if (isRegisterByEmail) {
-            logInRequest.setEmail(email);
-        } else {
-            logInRequest.setMobile(phone);
-            logInRequest.setEmail("");
-        }
-
-        present.requestLogin(logInRequest);
     }
 
     @OnClick(R.id.btn_request_send_code)
@@ -107,22 +85,11 @@ public class VerifyActivity extends BaseActivity implements VerifyView {
 
     }
 
-    @Override
-    public void onLoginSuccess(LogInModel logInModel) {
-        submitVerifyCode();
-    }
-
     private void submitVerifyCode() {
         //Submit Verify code
         String code = edtCode.getText().toString();
         VerifyEmailRequest request = new VerifyEmailRequest();
         request.setCode(code);
         present.submitVerifyForm(request);
-    }
-
-
-    @Override
-    public void onLoginError() {
-
     }
 }

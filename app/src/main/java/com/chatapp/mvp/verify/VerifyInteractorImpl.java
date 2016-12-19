@@ -3,7 +3,6 @@ package com.chatapp.mvp.verify;
 
 import com.chatapp.service.ApiCallback;
 import com.chatapp.service.ApiService;
-import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.request.VerifyEmailRequest;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.ResponseModel;
@@ -16,36 +15,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class VerifyInteractorImpl implements VerifyInteractor {
-
-    @Override
-    public void login(LogInRequest request, final ApiCallback<ResponseModel<LogInModel>> apiCallback) {
-        ApiService service = ApiService.retrofit.create(ApiService.class);
-        Call<ResponseModel<LogInModel>> call = service.signIn(request);
-        call.enqueue(new Callback<ResponseModel<LogInModel>>() {
-            @Override
-            public void onResponse(Call<ResponseModel<LogInModel>> call, Response<ResponseModel<LogInModel>> response) {
-                Log.d(response.raw().toString());
-                ResponseModel<LogInModel> responseModel = response.body();
-                if (apiCallback != null) {
-                    if (response.isSuccessful() && responseModel != null
-                            && responseModel.getResponseCd() != ResponseModel.RESPONSE_CD_ERROR) {
-                        apiCallback.onSuccess(responseModel);
-
-                    } else {
-                        apiCallback.onFail(response);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseModel<LogInModel>> call, Throwable t) {
-                if (apiCallback != null) {
-                    apiCallback.onFail(call, t);
-                }
-                Log.e(t);
-            }
-        });
-    }
 
     @Override
     public void verify(VerifyEmailRequest request, final ApiCallback<ResponseModel<VerifyModel>> apiCallback) {
