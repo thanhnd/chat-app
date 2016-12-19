@@ -106,7 +106,13 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
 
     @Override
     public void onLoginSuccess(LogInModel logInModel) {
-        present.getVerifyCode();
+        Intent intent = new Intent(this, VerifyActivity.class);
+        if (isRegisterByEmail) {
+            intent.putExtra(VerifyActivity.EXTRA_EMAIL, email);
+        } else {
+            intent.putExtra(VerifyActivity.EXTRA_PHONE, phone);
+        }
+        startActivity(intent);
     }
 
     @Override
@@ -116,13 +122,7 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
 
     @Override
     public void onGetVerifyCodeSuccess() {
-        Intent intent = new Intent(this, VerifyActivity.class);
-        if (isRegisterByEmail) {
-            intent.putExtra(VerifyActivity.EXTRA_EMAIL, email);
-        } else {
-            intent.putExtra(VerifyActivity.EXTRA_PHONE, phone);
-        }
-        startActivity(intent);
+
     }
 
     @Override
