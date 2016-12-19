@@ -35,12 +35,12 @@ public class LogInPresenterImpl implements LogInPresenter {
                 if (loginView.get() != null) {
                     loginView.get().hideProgress();
                     AccountUtils.setLogInModel(responseModel.getResultSet());
-                    if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_SUCCESS) {
-                        loginView.get().onLogInSuccess();
-                    } else if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_NOT_ACTIVE) {
+                    if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_NOT_ACTIVE) {
                         loginView.get().onNotVerify();
                     } else if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_NOT_CONFIRM) {
                         loginView.get().onNotConfirm();
+                    } else if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_SUCCESS) {
+                        loginView.get().onLogInSuccess();
                     }
 
                 }

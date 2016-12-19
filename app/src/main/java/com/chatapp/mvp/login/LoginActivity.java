@@ -8,9 +8,10 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import com.chatapp.R;
-import com.chatapp.mvp.updatebasicprofile.UpdateBasicProfileActivity;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.home.HomeActivity;
 import com.chatapp.mvp.register.RegisterActivity;
+import com.chatapp.mvp.updatebasicprofile.UpdateBasicProfileActivity;
 import com.chatapp.mvp.verify.VerifyActivity;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.utils.DialogUtils;
@@ -86,7 +87,10 @@ public class LogInActivity extends BaseActivity implements LogInView {
 
     @Override
     public void onLogInSuccess() {
-
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -103,7 +107,10 @@ public class LogInActivity extends BaseActivity implements LogInView {
 
     @Override
     public void onNotConfirm() {
-        startActivity(new Intent(this, UpdateBasicProfileActivity.class));
+        Intent intent = new Intent(this, UpdateBasicProfileActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 
     @Override

@@ -17,10 +17,10 @@ public class BasicProfileRequest {
     private long birthday;
     @SerializedName("weight")
     @Expose
-    private float weight;
+    private  int weight;
     @SerializedName("height")
     @Expose
-    private float height;
+    private int height;
     @SerializedName("unit_system")
     @Expose
     private int unitSystem;
@@ -41,19 +41,19 @@ public class BasicProfileRequest {
         this.birthday = birthday;
     }
 
-    public float getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(Integer weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
-    public float getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(float height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 

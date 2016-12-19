@@ -1,6 +1,7 @@
 package com.chatapp.mvp.updatebasicprofile;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.home.HomeActivity;
 import com.chatapp.service.models.request.BasicProfileRequest;
 import com.chatapp.utils.DialogUtils;
 import com.chatapp.views.fragments.ChooseHeightAndWeightDialogFragment;
@@ -109,7 +111,10 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
 
     @Override
     public void onUpdateBasicProfileSuccess() {
-
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 
     @Override

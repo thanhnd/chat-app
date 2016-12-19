@@ -37,6 +37,7 @@
             android:name=".mvp.verify.VerifyActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".mvp.updatebasicprofile.UpdateBasicProfileActivity" />
+        <activity android:name=".mvp.home.HomeActivity" />
     </application>
 
 </manifest>
