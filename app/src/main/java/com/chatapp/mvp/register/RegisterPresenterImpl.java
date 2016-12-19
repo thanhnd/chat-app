@@ -72,6 +72,7 @@ public class RegisterPresenterImpl implements RegisterPresent {
         if (view.get() != null) {
             view.get().showProgress();
         }
+
         interactor.login(request, new ApiCallback<ResponseModel<LogInModel>>() {
             @Override
             public void onSuccess(ResponseModel<LogInModel> responseModel) {
