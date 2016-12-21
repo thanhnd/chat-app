@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * Message Handler class that supports buffering up of messages when the
- * activity is paused i.e. in the background.
+ * activity is paused i.e. in the bg.
  *
  * @see http://stackoverflow.com/questions/8040280/how-to-handle-handler-messages-when-activity-fragment-is-paused/8122789#8122789
  */

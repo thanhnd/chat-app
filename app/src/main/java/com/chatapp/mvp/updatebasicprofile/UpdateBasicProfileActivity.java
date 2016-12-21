@@ -17,6 +17,7 @@ import com.chatapp.views.fragments.ChooseHeightAndWeightDialogFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -104,7 +105,7 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
     private void displayHeightAndWeight() {
         if (height > 0 || weight > 0) {
             tvHeightAndWeight.setText(
-                    String.format(unitType == UNIT_TYPE_CM_KG ?
+                    String.format(Locale.getDefault(), unitType == UNIT_TYPE_CM_KG ?
                             "%d cm / %d kg" : "%d ft / %d lb", height, weight));
         }
     }

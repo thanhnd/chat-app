@@ -1,7 +1,9 @@
-package com.chatapp.mvp;
+package com.chatapp.mvp.onboarding;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +15,7 @@ import com.chatapp.mvp.register.RegisterActivity;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class OnboardingActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int RC_SIGNIN = 1;
     private static final int RC_REGISTER_BY_EMAIL = 2;
@@ -26,11 +28,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_onboarding);
         ButterKnife.bind(this);
 
         btnLoginHere.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
+
+        Fragment fragment = Fragment.instantiate(this, OnboardingFragment.class.getName());
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -46,4 +53,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+
 }
