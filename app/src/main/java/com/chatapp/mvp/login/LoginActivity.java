@@ -101,7 +101,6 @@ public class LogInActivity extends BaseActivity implements LogInView {
         } else {
             intent.putExtra(VerifyActivity.EXTRA_EMAIL, email);
         }
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
