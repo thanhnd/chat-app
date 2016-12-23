@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_item_nearyou"
+        icon="@drawable/ic_tab_nearyou"
+        title="@string/tab_near_you" />
+    <tab
+        id="@+id/tab_item_chat"
+        icon="@drawable/ic_tab_chat"
+        title="@string/tab_chat" />
+    <tab
+        id="@+id/tab_item_friends"
+        icon="@drawable/ic_tab_friend"
+        title="@string/tab_friends" />
+    <tab
+        id="@+id/tab_item_favorites"
+        icon="@drawable/ic_tab_favorite"
+        title="@string/tab_favorites" />
+</tabs>

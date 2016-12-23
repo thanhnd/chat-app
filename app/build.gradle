@@ -41,7 +41,7 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'me.relex:circleindicator:1.2.2@aar'
-    compile 'com.roughike:bottom-bar:1.2.1'
+    compile 'com.roughike:bottom-bar:2.0.2'
 
     testCompile 'junit:junit:4.12'
 }

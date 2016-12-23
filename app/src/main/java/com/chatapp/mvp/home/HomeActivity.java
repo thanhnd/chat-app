@@ -10,7 +10,7 @@ import android.support.v7.widget.Toolbar;
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
 import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnMenuTabSelectedListener;
+import com.roughike.bottombar.OnTabReselectListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -42,11 +42,12 @@ public class HomeActivity extends BaseActivity {
         }
 
         // Init bottom bar
-        BottomBar bottomBar = BottomBar.attach(this, savedInstanceState);
-        bottomBar.setItemsFromMenu(R.menu.menu_home, new OnMenuTabSelectedListener() {
+//        BottomBar bottomBar = BottomBar.attach(this, savedInstanceState);
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
+        bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
             @Override
-            public void onMenuItemSelected(@IdRes int menuItemId) {
-                switch (menuItemId) {
+            public void onTabReSelected(@IdRes int tabId) {
+                switch (tabId) {
                     case R.id.tab_item_nearyou:
                         Snackbar.make(coordinatorLayout, "Recent Item Selected", Snackbar.LENGTH_LONG).show();
                         break;
