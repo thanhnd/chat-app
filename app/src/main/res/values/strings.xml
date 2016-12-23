@@ -82,6 +82,10 @@
     <string name="update_profile_unit_type_type_cm_kg">cm/kg</string>
     <string name="update_profile_unit_type_ft_lb">ft/lb</string>
     <string name="dialog_title_choose_height_and_weight">Height(cm) / Weight(kg)</string>
+    <string name="tab_near_you">NEAR YOU</string>
+    <string name="tab_chat">CHAT</string>
+    <string name="tab_friends">FRIENDS</string>
+    <string name="tab_favorites">FAVORITES</string>
 
 
 </resources>
