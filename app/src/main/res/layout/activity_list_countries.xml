@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg"
+    android:orientation="vertical"
+    android:padding="@dimen/scm_screen_padding">
+
+    <android.support.v7.widget.SearchView
+        android:id="@+id/sv_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:queryHint="@string/list_country_hint_search"
+        app:defaultQueryHint="@string/list_country_hint_search"
+        android:iconifiedByDefault="true"
+        android:background="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/cannot_find_country"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <ListView
+        android:id="@+id/lv_countries"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/scm_padding_large"
+        android:layout_weight="1"
+        android:divider="#7a4368"
+        android:dividerHeight="0.5dp" />
+
+
+</LinearLayout>

@@ -40,6 +40,8 @@
         <activity
             android:name=".mvp.home.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".mvp.listcountries.ListCountriesActivity" />
     </application>
 
 </manifest>

@@ -6,9 +6,11 @@ import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.listcountries.ListCountriesActivity;
 import com.chatapp.mvp.verify.VerifyActivity;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.request.RegisterRequest;
@@ -21,12 +23,14 @@ import butterknife.OnClick;
 
 public class RegisterActivity extends BaseActivity implements RegisterView {
 
+    private static final int RC_GET_COUNTRY_CODE = 1;
+
     @Bind(R.id.edt_email)
     EditText edtEmail;
     @Bind(R.id.edt_phone)
     EditText edtPhone;
     @Bind(R.id.edt_country)
-    EditText edtCountryCode;
+    TextView edtCountryCode;
     @Bind(R.id.edt_password)
     EditText edtPassword;
 
@@ -83,6 +87,11 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
             request.setMobile(phone);
         }
         present.submitRegisterForm(request);
+    }
+    @OnClick(R.id.edt_country)
+    public void clickCountryCode() {
+        Intent intent = new Intent(this, ListCountriesActivity.class);
+        startActivityForResult(intent, RC_GET_COUNTRY_CODE);
     }
 
     @Override

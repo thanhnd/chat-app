@@ -15,6 +15,7 @@
     <dimen name="scm_padding_medium">10dp</dimen>
     <dimen name="scm_padding_large">12dp</dimen>
     <dimen name="scm_padding_xlarge">16dp</dimen>
+    <dimen name="scm_screen_padding">12dp</dimen>
     <dimen name="scm_form_padding">12dp</dimen>
     <dimen name="scm_padding_hor">14dp</dimen>
     <dimen name="scm_padding_hor_comp">7dp</dimen>

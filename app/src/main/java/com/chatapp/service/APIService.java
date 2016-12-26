@@ -5,10 +5,13 @@ import com.chatapp.service.models.request.BasicProfileRequest;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.request.RegisterRequest;
 import com.chatapp.service.models.request.VerifyEmailRequest;
+import com.chatapp.service.models.response.CountryModel;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.RegisterModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.VerifyModel;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -30,7 +33,7 @@ public interface ApiService {
             .build();
 
     @Headers("Content-Type: application/json")
-    @POST("/api/user/login")
+    @POST("/api/user/getListCountries")
     Call<ResponseModel<LogInModel>> signIn(@Body LogInRequest request);
 
     @Headers("Content-Type: application/json")
@@ -48,4 +51,9 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @GET("/api/user/getVerifyCode")
     Call<ResponseModel<Object>> getVerifyCode(@Header("Authorization") String authorization);
+
+    @Headers("Content-Type: application/json")
+    @GET("/api/common/listCoutry")
+    Call<ResponseModel<List<CountryModel>>> listCountries();
+
 }
