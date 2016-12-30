@@ -1,5 +1,6 @@
 package com.chatapp.mvp.listcountries;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.view.View;
@@ -16,9 +17,11 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 
 public class ListCountriesActivity extends BaseActivity implements ListCountriesView {
 
+    public static final String SELECTED_COUNTRY = "SELECTED_COUNTRY";
     private ListCountriesPresenter presenter;
 
     @Bind(R.id.tv_empty)
@@ -54,6 +57,13 @@ public class ListCountriesActivity extends BaseActivity implements ListCountries
             }
         });
 
+//        lvCountries.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//            }
+//        });
+
         //filter
         svFilter.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -75,6 +85,16 @@ public class ListCountriesActivity extends BaseActivity implements ListCountries
             }
         });
     }
+
+    @OnItemClick(R.id.lv_countries)
+    void clickCountry(int position) {
+        CountryModel countryModel = adapter.getItem(position);
+        Intent intent = new Intent();
+        intent.putExtra(SELECTED_COUNTRY, countryModel);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
 
 
     @Override

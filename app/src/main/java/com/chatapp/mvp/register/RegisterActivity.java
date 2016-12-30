@@ -14,8 +14,11 @@ import com.chatapp.mvp.listcountries.ListCountriesActivity;
 import com.chatapp.mvp.verify.VerifyActivity;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.request.RegisterRequest;
+import com.chatapp.service.models.response.CountryModel;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.utils.DialogUtils;
+
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -46,6 +49,7 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
     private RegisterPresent present;
     boolean isRegisterByEmail = true;
     String email, phone, countryCode, password;
+    private CountryModel selectedCountry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +87,7 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
         } else {
             countryCode = edtCountryCode.getText().toString();
             phone = edtPhone.getText().toString();
-            request.setCountry(1);
+            request.setCountry(selectedCountry.getCountryId());
             request.setMobile(phone);
         }
         present.submitRegisterForm(request);
@@ -137,5 +141,16 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
     @Override
     public void onGetVerifyCodeFail() {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == RC_GET_COUNTRY_CODE) {
+                selectedCountry = (CountryModel) data.getSerializableExtra(ListCountriesActivity.SELECTED_COUNTRY);
+                edtCountryCode.setText(String.format(Locale.getDefault(), "%s | %s",
+                        selectedCountry.getPhonecode(), selectedCountry.getName()));
+            }
+        }
     }
 }
