@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.chatapp.R;
 import com.chatapp.service.models.response.CountryModel;
-import com.chatapp.utils.SringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,6 @@ public class ListCountriesAdapter extends BaseAdapter implements Filterable {
     private OnFilterResultChange onFilterResultChange;
 
     public ListCountriesAdapter(Context context) {
-        filteredData = new ArrayList<>();
         this.context = context;
         mFilter = new ItemFilter();
     }
@@ -39,8 +37,14 @@ public class ListCountriesAdapter extends BaseAdapter implements Filterable {
 
     public void setCountries(List<CountryModel> listCountries) {
         this.countries = listCountries;
-        this.filteredData.clear();
-        this.filteredData.addAll(listCountries);
+        if (filteredData != null && !filteredData.isEmpty()) {
+            filteredData.clear();
+            filteredData.addAll(listCountries);
+        } else {
+            filteredData = new ArrayList<>(listCountries);
+        }
+
+
         notifyDataSetChanged();
     }
 
@@ -87,7 +91,7 @@ public class ListCountriesAdapter extends BaseAdapter implements Filterable {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
 
-            String filterString = SringUtil.toASCII(constraint.toString().toLowerCase());
+            String filterString = constraint.toString().trim().toLowerCase();
 
             FilterResults results = new FilterResults();
 
@@ -100,7 +104,7 @@ public class ListCountriesAdapter extends BaseAdapter implements Filterable {
             for (int i = 0; i < count; i++) {
                 country = countries.get(i);
                 filterableString = country.getName();
-                if (SringUtil.toASCII(filterableString.toLowerCase()).contains(filterString)) {
+                if (filterableString.toLowerCase().contains(filterString)) {
                     nlist.add(country);
                 }
             }

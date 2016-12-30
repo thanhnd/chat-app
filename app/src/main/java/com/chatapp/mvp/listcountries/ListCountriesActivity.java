@@ -2,8 +2,10 @@ package com.chatapp.mvp.listcountries;
 
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
@@ -19,6 +21,8 @@ public class ListCountriesActivity extends BaseActivity implements ListCountries
 
     private ListCountriesPresenter presenter;
 
+    @Bind(R.id.tv_empty)
+    TextView tvEmpty;
     @Bind(R.id.lv_countries)
     ListView lvCountries;
     @Bind(R.id.sv_filter)
@@ -61,6 +65,13 @@ public class ListCountriesActivity extends BaseActivity implements ListCountries
             public boolean onQueryTextChange(String s) {
                 adapter.getFilter().filter(s);
                 return false;
+            }
+        });
+
+        adapter.setOnFilterResultChange(new ListCountriesAdapter.OnFilterResultChange() {
+            @Override
+            public void onChanged(List<CountryModel> newResult) {
+                tvEmpty.setVisibility(newResult.isEmpty() ? View.VISIBLE : View.GONE);
             }
         });
     }
