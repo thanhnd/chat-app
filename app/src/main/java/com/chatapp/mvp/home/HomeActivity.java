@@ -20,8 +20,11 @@ public class HomeActivity extends BaseActivity {
     @Bind(R.id.main_tool_bar)
     Toolbar toolbar;
 
-    @Bind(R.id.activity_main)
+    @Bind(R.id.activity_home)
     CoordinatorLayout coordinatorLayout;
+
+    @Bind(R.id.bottomBar)
+    BottomBar bottomBar;
 
 
     @Override
@@ -41,9 +44,6 @@ public class HomeActivity extends BaseActivity {
             actionBar.setElevation(0);
         }
 
-        // Init bottom bar
-//        BottomBar bottomBar = BottomBar.attach(this, savedInstanceState);
-        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottomBar);
         bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
             @Override
             public void onTabReSelected(@IdRes int tabId) {
@@ -63,5 +63,14 @@ public class HomeActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // Necessary to restore the BottomBar's state, otherwise we would
+        // lose the current tab on orientation change.
+        bottomBar.onSaveInstanceState();
     }
 }

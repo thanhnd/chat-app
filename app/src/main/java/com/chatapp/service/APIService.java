@@ -33,7 +33,7 @@ public interface ApiService {
             .build();
 
     @Headers("Content-Type: application/json")
-    @POST("/api/user/getListCountries")
+    @POST("/api/user/login")
     Call<ResponseModel<LogInModel>> signIn(@Body LogInRequest request);
 
     @Headers("Content-Type: application/json")
