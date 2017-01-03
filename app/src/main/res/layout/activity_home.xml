@@ -49,13 +49,13 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:id="@+id/v_content">
-            <TextView
-                style="@style/TextAppearance.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_centerInParent="true"
-                android:layout_weight="1"
-                android:text="Home page's under construction!" />
+            <!--<TextView-->
+                <!--style="@style/TextAppearance.Small"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="Home page's under construction!" />-->
         </FrameLayout>
 
 

@@ -3,7 +3,8 @@ package com.chatapp.mvp.home;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 
@@ -11,6 +12,7 @@ import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabReselectListener;
+import com.roughike.bottombar.OnTabSelectListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -44,25 +46,59 @@ public class HomeActivity extends BaseActivity {
             actionBar.setElevation(0);
         }
 
+        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                switch (tabId) {
+                    case R.id.tab_item_nearyou:
+                        switchFragment(Fragment.instantiate(HomeActivity.this,
+                                ListNearbyFragment.class.getName()));
+                        break;
+                    case R.id.tab_item_chat:
+                        switchFragment(Fragment.instantiate(HomeActivity.this,
+                                ListChatFragment.class.getName()));
+                        break;
+                    case R.id.tab_item_friends:
+                        switchFragment(Fragment.instantiate(HomeActivity.this,
+                                LisFriendsFragment.class.getName()));
+                        break;
+                    case R.id.tab_item_favorites:
+                        switchFragment(Fragment.instantiate(HomeActivity.this,
+                                ListFavoritesFragment.class.getName()));
+                        break;
+                }
+            }
+        });
+
         bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
             @Override
             public void onTabReSelected(@IdRes int tabId) {
                 switch (tabId) {
                     case R.id.tab_item_nearyou:
-                        Snackbar.make(coordinatorLayout, "Recent Item Selected", Snackbar.LENGTH_LONG).show();
+                        switchFragment(Fragment.instantiate(HomeActivity.this,
+                                ListNearbyFragment.class.getName()));
                         break;
                     case R.id.tab_item_chat:
-                        Snackbar.make(coordinatorLayout, "Favorite Item Selected", Snackbar.LENGTH_LONG).show();
+                        switchFragment(Fragment.instantiate(HomeActivity.this,
+                                ListChatFragment.class.getName()));
                         break;
                     case R.id.tab_item_friends:
-                        Snackbar.make(coordinatorLayout, "Location Item Selected", Snackbar.LENGTH_LONG).show();
+                        switchFragment(Fragment.instantiate(HomeActivity.this,
+                                LisFriendsFragment.class.getName()));
                         break;
                     case R.id.tab_item_favorites:
-                        Snackbar.make(coordinatorLayout, "Location Item Selected", Snackbar.LENGTH_LONG).show();
+                        switchFragment(Fragment.instantiate(HomeActivity.this,
+                                ListFavoritesFragment.class.getName()));
                         break;
                 }
             }
         });
+    }
+
+    private void switchFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.v_content, fragment);
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
     @Override
