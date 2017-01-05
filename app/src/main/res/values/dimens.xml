@@ -31,7 +31,7 @@
 
     <dimen name="list_item_thumbnail">48dp</dimen>
     <dimen name="list_item_vertical_margin">4dp</dimen>
-    <dimen name="list_item_space">4dp</dimen>
+    <dimen name="list_item_space">10dp</dimen>
 
     <dimen name="detail_backdrop_height">256dp</dimen>
     <dimen name="card_margin">16dp</dimen>

@@ -2,10 +2,12 @@ package com.chatapp.service;
 
 import com.chatapp.Config;
 import com.chatapp.service.models.request.BasicProfileRequest;
+import com.chatapp.service.models.request.ListNearbyRequest;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.request.RegisterRequest;
 import com.chatapp.service.models.request.VerifyEmailRequest;
 import com.chatapp.service.models.response.CountryModel;
+import com.chatapp.service.models.response.ListNearByModel;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.RegisterModel;
 import com.chatapp.service.models.response.ResponseModel;
@@ -55,5 +57,9 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @GET("/api/common/listCoutry")
     Call<ResponseModel<List<CountryModel>>> listCountries();
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/profile/listNearBy")
+    Call<ResponseModel<ListNearByModel>> listNearby(@Header("Authorization") String authorization, @Body ListNearbyRequest request);
 
 }

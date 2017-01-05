@@ -59,7 +59,7 @@ public class RegisterInteractorImpl implements RegisterInteractor {
                 if (callback != null) {
                     if (response.isSuccessful() && responseModel != null
                             && responseModel.getResponseCd() == RegisterModel.RESPONSE_CD_SUCCESS) {
-                        callback.onSuccess(responseModel.getResultSet());
+                        callback.onSuccess(responseModel);
                     } else {
                         callback.onFail(response);
                     }
