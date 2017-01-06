@@ -20,14 +20,14 @@ import butterknife.ButterKnife;
  * Created by thanhnguyen on 1/3/17.
  */
 
-public class ListNearbyFragment extends BaseFragment implements ListNearby.View{
+public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.View{
 
     @Bind(R.id.rv_list_nearby)
     RecyclerView rvNearby;
 
     private ListNearbyAdapter adapter;
 
-    private ListNearby.Present present;
+    private ListNearbyMvp.Present present;
 
     @Nullable
     @Override

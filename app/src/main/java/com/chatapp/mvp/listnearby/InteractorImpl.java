@@ -17,7 +17,7 @@ import retrofit2.Response;
 /**
  * Created by thanhnguyen on 1/6/17.
  */
-public class InteractorImpl implements ListNearby.Interactor {
+public class InteractorImpl implements ListNearbyMvp.Interactor {
     @Override
     public void getListNearBy(ListNearbyRequest request, final ApiCallback<ResponseModel<ListNearByModel>> callback) {
         LogInModel logInModel = AccountUtils.getLogInModel();

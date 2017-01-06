@@ -14,12 +14,12 @@ import retrofit2.Response;
  * Created by thanhnguyen on 1/6/17.
  */
 
-public class PresentImpl implements ListNearby.Present {
+public class PresentImpl implements ListNearbyMvp.Present {
 
-    private WeakReference<ListNearby.View> view;
-    private ListNearby.Interactor interactor;
+    private WeakReference<ListNearbyMvp.View> view;
+    private ListNearbyMvp.Interactor interactor;
 
-    public PresentImpl(ListNearby.View view) {
+    public PresentImpl(ListNearbyMvp.View view) {
         this.view = new WeakReference<>(view);
         this.interactor = new InteractorImpl();
 

@@ -57,13 +57,6 @@ public class ListCountriesActivity extends BaseActivity implements ListCountries
             }
         });
 
-//        lvCountries.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//
-//            }
-//        });
-
         //filter
         svFilter.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
