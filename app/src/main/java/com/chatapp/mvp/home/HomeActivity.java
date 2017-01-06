@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.listfavorites.ListFavoritesFragment;
 import com.chatapp.mvp.listnearby.ListNearbyFragment;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -69,30 +70,6 @@ public class HomeActivity extends BaseActivity {
                 }
             }
         });
-
-//        bottomBar.setOnTabReselectListener(new OnTabReselectListener() {
-//            @Override
-//            public void onTabReSelected(@IdRes int tabId) {
-//                switch (tabId) {
-//                    case R.id.tab_item_nearyou:
-//                        switchFragment(Fragment.instantiate(HomeActivity.this,
-//                                ListNearbyFragment.class.getName()));
-//                        break;
-//                    case R.id.tab_item_chat:
-//                        switchFragment(Fragment.instantiate(HomeActivity.this,
-//                                ListChatFragment.class.getName()));
-//                        break;
-//                    case R.id.tab_item_friends:
-//                        switchFragment(Fragment.instantiate(HomeActivity.this,
-//                                LisFriendsFragment.class.getName()));
-//                        break;
-//                    case R.id.tab_item_favorites:
-//                        switchFragment(Fragment.instantiate(HomeActivity.this,
-//                                ListFavoritesFragment.class.getName()));
-//                        break;
-//                }
-//            }
-//        });
     }
 
     private void switchFragment(Fragment fragment) {

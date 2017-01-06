@@ -79,7 +79,7 @@ public class UserModel {
         this.isFavourite = isFavourite;
     }
 
-    public boolean isIsOnline() {
+    public boolean isOnline() {
         return isOnline;
     }
 

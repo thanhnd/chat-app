@@ -11,6 +11,7 @@ import com.chatapp.service.models.response.ListNearByModel;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.RegisterModel;
 import com.chatapp.service.models.response.ResponseModel;
+import com.chatapp.service.models.response.UserModel;
 import com.chatapp.service.models.response.VerifyModel;
 
 import java.util.List;
@@ -61,5 +62,9 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("/api/profile/listNearBy")
     Call<ResponseModel<ListNearByModel>> listNearby(@Header("Authorization") String authorization, @Body ListNearbyRequest request);
+
+    @Headers("Content-Type: application/json")
+    @GET("/api/profile/listFavourite")
+    Call<ResponseModel<List<UserModel>>> listFavorites(@Header("Authorization") String authorization);
 
 }
