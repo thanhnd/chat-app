@@ -69,6 +69,6 @@ public interface ApiService {
 
     @Headers("Content-Type: application/json")
     @GET("/api/profile/listFavourite")
-    Call<ResponseModel<List<UserModel>>> search(@Header("Authorization") String authorization, String keyword);
+    Call<ResponseModel<List<UserModel>>> search(@Header("Authorization") String authorization);
 
 }

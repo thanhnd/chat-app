@@ -13,14 +13,14 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class SearchPresenterImpl implements SearchUserMvp.Presenter {
+public class SearchUserPresenterImpl implements SearchUserMvp.Presenter {
 
     private WeakReference<SearchUserMvp.View> view;
     private SearchUserMvp.Interactor interactor;
 
-    public SearchPresenterImpl(SearchUserMvp.View listCountriesView) {
+    public SearchUserPresenterImpl(SearchUserMvp.View listCountriesView) {
         this.view = new WeakReference<>(listCountriesView);
-        this.interactor = new SearchInteractorImpl();
+        this.interactor = new SearchUserInteractorImpl();
     }
 
     @Override

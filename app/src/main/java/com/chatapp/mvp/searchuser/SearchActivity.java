@@ -3,6 +3,7 @@ package com.chatapp.mvp.searchuser;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.EditText;
@@ -30,7 +31,7 @@ public class SearchActivity extends BaseActivity implements SearchUserMvp.View {
     @Bind(R.id.edt_keyword)
     EditText edtKeyword;
 
-    ListSearchAdapter adapter;
+    ListSearchUserAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +39,10 @@ public class SearchActivity extends BaseActivity implements SearchUserMvp.View {
         setContentView(R.layout.activity_seach_users);
         ButterKnife.bind(this);
 
-        adapter = new ListSearchAdapter(this);
+        adapter = new ListSearchUserAdapter(this);
         lvUsers.setAdapter(adapter);
 
-        presenter = new SearchPresenterImpl(this);
+        presenter = new SearchUserPresenterImpl(this);
 
         lvUsers.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -78,6 +79,11 @@ public class SearchActivity extends BaseActivity implements SearchUserMvp.View {
 
     @Override
     public void onSearchSuccess(List<UserModel> resultSet) {
+        if (resultSet != null && !resultSet.isEmpty()) {
+            adapter.addUsers(resultSet);
+        }
 
+        lvUsers.setVisibility(!adapter.isEmpty() ? View.VISIBLE : View.GONE);
+        tvEmpty.setVisibility(adapter.isEmpty() ? View.VISIBLE : View.GONE);
     }
 }

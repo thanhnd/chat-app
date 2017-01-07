@@ -62,7 +62,7 @@ public class ListCountriesAdapter extends BaseAdapter implements Filterable {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.layout_item_list_country, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_list_country, parent, false);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {

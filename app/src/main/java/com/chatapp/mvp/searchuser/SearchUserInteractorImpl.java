@@ -15,7 +15,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SearchInteractorImpl implements SearchUserMvp.Interactor {
+public class SearchUserInteractorImpl implements SearchUserMvp.Interactor {
 
     @Override
     public void searchUser(String keyword, final ApiCallback<ResponseModel<List<UserModel>>> callback) {
@@ -25,7 +25,7 @@ public class SearchInteractorImpl implements SearchUserMvp.Interactor {
         }
         String authorization = logInModel.getToken();
         ApiService service = ApiService.retrofit.create(ApiService.class);
-        Call<ResponseModel<List<UserModel>>> call = service.search(authorization, keyword);
+        Call<ResponseModel<List<UserModel>>> call = service.search(authorization);
         call.enqueue(new Callback<ResponseModel<List<UserModel>>>() {
             @Override
             public void onResponse(Call<ResponseModel<List<UserModel>>> call, Response<ResponseModel<List<UserModel>>> response) {
