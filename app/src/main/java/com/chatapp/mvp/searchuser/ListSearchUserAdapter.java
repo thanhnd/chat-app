@@ -1,82 +1,82 @@
 package com.chatapp.mvp.searchuser;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chatapp.R;
 import com.chatapp.service.models.response.UserModel;
+import com.chatapp.utils.CircleTransform;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListSearchUserAdapter extends BaseAdapter {
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+public class ListSearchUserAdapter extends RecyclerView.Adapter<ListSearchUserAdapter.ViewHolder> {
     private List<UserModel> users;
     private Context context;
 
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        // each data item is just a string in this case
+        @Bind(R.id.tv_name) TextView tvName;
+        @Bind(R.id.tv_online_status) TextView tvOnlineStatus;
+        @Bind(R.id.tv_location) TextView tvLocation;
+        @Bind(R.id.iv_avatar) ImageView ivAvatar;
+
+        public ViewHolder(View v) {
+            super(v);
+            ButterKnife.bind(this, v);
+        }
+    }
+
     public ListSearchUserAdapter(Context context) {
-        this.context = context;
         users = new ArrayList<>();
+        this.context = context;
     }
 
     @Override
-    public int getCount() {
-        if (users != null) {
-            return users.size();
-        }
-        return 0;
+    public ListSearchUserAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                              int viewType) {
+        // create a new view
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_search_user, parent, false);
+        // set the view's size, margins, paddings and layout parameters
+        ListSearchUserAdapter.ViewHolder vh = new ListSearchUserAdapter.ViewHolder(v);
+        return vh;
     }
 
-    public void addUsers(@NonNull List<UserModel> listUsers) {
-        users.addAll(listUsers);
+    // Replace the contents of a view (invoked by the layout manager)
+    @Override
+    public void onBindViewHolder(ListSearchUserAdapter.ViewHolder holder, int position) {
+        UserModel userModel = users.get(position);
+        String name = TextUtils.isEmpty(userModel.getDisplayName()) ? "No name" : userModel.getDisplayName();
+        holder.tvName.setText(name);
+        holder.tvOnlineStatus.setText(userModel.isOnline() ? "Online" : "Offline");
+        holder.tvOnlineStatus.setEnabled(userModel.isOnline());
+        Picasso.with(context)
+                .load(userModel.getAvatar())
+                .error(R.drawable.img_user_avatar)
+                .placeholder(R.drawable.img_user_avatar)
+                .transform(new CircleTransform())
+                .into(holder.ivAvatar);
+
+    }
+
+    // Return the size of your dataset (invoked by the layout manager)
+    @Override
+    public int getItemCount() {
+        return users.size();
+    }
+
+    public void setUsers(List<UserModel> userModels) {
+        users = userModels;
         notifyDataSetChanged();
-    }
-
-    public void setUsers(@NonNull List<UserModel> listUsers) {
-        users = listUsers;
-        notifyDataSetChanged();
-    }
-
-    @Override
-    public UserModel getItem(int position) {
-        return users.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(context)
-                    .inflate(R.layout.item_list_search_user, parent, false);
-            viewHolder = new ViewHolder(convertView);
-            convertView.setTag(viewHolder);
-        } else {
-            viewHolder = (ViewHolder) convertView.getTag();
-        }
-        UserModel userModel = getItem(position);
-
-        viewHolder.tvName.setText(!TextUtils.isEmpty(userModel.getDisplayName()) ?
-                userModel.getDisplayName() : "No name");
-        return convertView;
-    }
-
-    private class ViewHolder {
-        TextView tvName;
-        TextView tvCode;
-
-        public ViewHolder(View itemView) {
-            tvName = (TextView) itemView.findViewById(R.id.tv_name);
-            tvCode = (TextView) itemView.findViewById(R.id.tv_code);
-        }
     }
 }

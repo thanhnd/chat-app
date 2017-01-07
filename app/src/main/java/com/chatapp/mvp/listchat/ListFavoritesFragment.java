@@ -45,7 +45,6 @@ public class ListFavoritesFragment extends BaseFragment implements ListFavorites
         rvNearby.setAdapter(adapter);
         presenter = new PresenterImpl(this);
 
-
         presenter.getListFavorites();
 
         return view;
