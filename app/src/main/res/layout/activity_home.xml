@@ -52,13 +52,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
-            <!--<TextView-->
-            <!--style="@style/TextAppearance.Small"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="Home page's under construction!" />-->
         </FrameLayout>
 
 
@@ -70,11 +63,11 @@
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/bottomBar"
         android:layout_marginBottom="30dp"
-        android:backgroundTint="@color/purge"
         android:src="@drawable/ic_filter"
         android:tint="@color/white"
         app:backgroundTint="@color/purge"
