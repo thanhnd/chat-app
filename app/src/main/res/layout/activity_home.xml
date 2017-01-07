@@ -27,6 +27,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
+                    android:id="@+id/ib_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -35,6 +36,7 @@
                     android:src="@drawable/ic_toolbar_search" />
 
                 <ImageButton
+                    android:id="@+id/ib_add_friend"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

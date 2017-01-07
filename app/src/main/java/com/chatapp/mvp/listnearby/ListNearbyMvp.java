@@ -9,7 +9,7 @@ import com.chatapp.service.models.response.ResponseModel;
 /**
  * Created by thanhnguyen on 12/17/16.
  */
-public interface ListNearby {
+public interface ListNearbyMvp {
 
     interface Present {
         void getListNearBy();

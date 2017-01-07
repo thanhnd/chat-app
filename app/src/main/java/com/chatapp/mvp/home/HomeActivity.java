@@ -1,5 +1,6 @@
 package com.chatapp.mvp.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.CoordinatorLayout;
@@ -12,11 +13,13 @@ import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.listfavorites.ListFavoritesFragment;
 import com.chatapp.mvp.listnearby.ListNearbyFragment;
+import com.chatapp.mvp.searchuser.SearchActivity;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class HomeActivity extends BaseActivity {
 
@@ -76,6 +79,12 @@ public class HomeActivity extends BaseActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.v_content, fragment);
         fragmentTransaction.commitAllowingStateLoss();
+    }
+
+    @OnClick(R.id.ib_search)
+    public void clickSearch() {
+        Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
     }
 
     @Override

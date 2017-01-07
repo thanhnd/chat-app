@@ -87,6 +87,7 @@
     <string name="tab_friends">FRIENDS</string>
     <string name="tab_favorites">FAVORITES</string>
     <string name="cannot_find_country">Cannot find country</string>
+    <string name="cannot_find_user">Cannot find user</string>
     <string name="list_country_hint_search">Search</string>
 
 
