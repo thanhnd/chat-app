@@ -28,4 +28,6 @@ public interface BaseView {
     void showErrorDialog(String message);
 
     void showDialog(String title, String message);
+
+    void onTokenExpired();
 }

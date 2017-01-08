@@ -1,7 +1,7 @@
 package com.chatapp.mvp.listnearby;
 
-import com.chatapp.service.ApiCallback;
 import com.chatapp.service.ApiService;
+import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.request.ListNearbyRequest;
 import com.chatapp.service.models.response.ListNearByModel;
 import com.chatapp.service.models.response.LogInModel;
@@ -19,7 +19,7 @@ import retrofit2.Response;
  */
 public class InteractorImpl implements ListNearbyMvp.Interactor {
     @Override
-    public void getListNearBy(ListNearbyRequest request, final ApiCallback<ResponseModel<ListNearByModel>> callback) {
+    public void getListNearBy(final ListNearbyRequest request, final AuthorizeApiCallback<ResponseModel<ListNearByModel>> callback) {
         LogInModel logInModel = AccountUtils.getLogInModel();
         if (logInModel == null) {
             return;
@@ -30,14 +30,18 @@ public class InteractorImpl implements ListNearbyMvp.Interactor {
         call.enqueue(new Callback<ResponseModel<ListNearByModel>>() {
             @Override
             public void onResponse(Call<ResponseModel<ListNearByModel>> call, Response<ResponseModel<ListNearByModel>> response) {
+                Log.i(response.raw().toString());
                 ResponseModel<ListNearByModel> responseModel = response.body();
                 if (callback != null) {
-                    if (response.isSuccessful() && responseModel != null
-                            && responseModel.getResponseCd() == RegisterModel.RESPONSE_CD_SUCCESS) {
-                        callback.onSuccess(responseModel);
-                    } else {
-                        callback.onFail(response);
+                    if (response.isSuccessful() && responseModel != null) {
+                        if (responseModel.getResponseCd() == RegisterModel.RESPONSE_CD_SUCCESS) {
+                            callback.onSuccess(responseModel);
+                            return;
+                        } else if (responseModel.isTokenExpired()){
+                            callback.onTokenExpired();
+                        }
                     }
+                    callback.onFail(response);
                 }
             }
 

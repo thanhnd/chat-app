@@ -1,6 +1,6 @@
 package com.chatapp.mvp.listnearby;
 
-import com.chatapp.service.ApiCallback;
+import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.request.ListNearbyRequest;
 import com.chatapp.service.models.response.ListNearByModel;
 import com.chatapp.service.models.response.ResponseModel;
@@ -30,7 +30,7 @@ public class PresentImpl implements ListNearbyMvp.Present {
         request.setLongitude(0);
         request.setLatitude(20);
         request.setPage(0);
-        interactor.getListNearBy(request, new ApiCallback<ResponseModel<ListNearByModel>>() {
+        interactor.getListNearBy(request, new AuthorizeApiCallback<ResponseModel<ListNearByModel>>() {
             @Override
             public void onSuccess(ResponseModel<ListNearByModel> response) {
                 if (view.get() != null) {
@@ -46,6 +46,13 @@ public class PresentImpl implements ListNearbyMvp.Present {
             @Override
             public void onFail(Call<ResponseModel<ListNearByModel>> call, Throwable throwable) {
 
+            }
+
+            @Override
+            public void onTokenExpired() {
+                if (view.get() != null) {
+                    view.get().onTokenExpired();
+                }
             }
         });
     }

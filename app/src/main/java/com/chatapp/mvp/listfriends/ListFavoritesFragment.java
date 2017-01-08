@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
  * Created by thanhnguyen on 1/3/17.
  */
 
-public class ListFavoritesFragment extends BaseFragment implements ListFavorites.View{
+public class ListFavoritesFragment extends BaseFragment implements ListFavorites.View {
 
     @Bind(R.id.rv_list_nearby)
     RecyclerView rvNearby;

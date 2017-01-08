@@ -46,4 +46,7 @@ public class ResponseModel<T> {
         this.resultSet = resultSet;
     }
 
+    public boolean isTokenExpired() {
+        return "Account Expired".equals(responseMsg);
+    }
 }

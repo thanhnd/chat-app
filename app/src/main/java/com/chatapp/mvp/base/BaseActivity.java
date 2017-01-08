@@ -82,4 +82,9 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
                 onTimeSetListener, hour, minute, false);
         timePickerDialog.show();
     }
+
+    @Override
+    public void onTokenExpired() {
+
+    }
 }
