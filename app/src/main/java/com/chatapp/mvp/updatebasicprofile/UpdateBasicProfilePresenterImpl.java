@@ -14,11 +14,11 @@ import retrofit2.Response;
 /**
  * Created by thanhnguyen on 12/19/16.
  */
-public class UpdateBasicProfilePresenterImpl implements UpdateBasicProfilePresenter {
-    private WeakReference<UpdateBasicProfileView> view;
-    private UpdateBasicProfileInteractor interactor;
+public class UpdateBasicProfilePresenterImpl implements UpdateBasicProfileMvp.UpdateBasicProfilePresenter {
+    private WeakReference<UpdateBasicProfileMvp.UpdateBasicProfileView> view;
+    private UpdateBasicProfileMvp.UpdateBasicProfileInteractor interactor;
 
-    public UpdateBasicProfilePresenterImpl(UpdateBasicProfileView view) {
+    public UpdateBasicProfilePresenterImpl(UpdateBasicProfileMvp.UpdateBasicProfileView view) {
         this.view = new WeakReference<>(view);
         this.interactor = new UpdateBasicProfileInteractorImpl();
     }

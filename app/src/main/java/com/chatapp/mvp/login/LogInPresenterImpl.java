@@ -14,12 +14,12 @@ import java.lang.ref.WeakReference;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class LogInPresenterImpl implements LogInPresenter {
+public class LogInPresenterImpl implements LoginMvp.LogInPresenter {
 
-    private WeakReference<LogInView> loginView;
-    private LogInInteractor logInInteractor;
+    private WeakReference<LoginMvp.LogInView> loginView;
+    private LoginMvp.LogInInteractor logInInteractor;
 
-    public LogInPresenterImpl(LogInView logInView) {
+    public LogInPresenterImpl(LoginMvp.LogInView logInView) {
         this.loginView = new WeakReference<>(logInView);
         this.logInInteractor = new LogInInteractorImpl();
     }

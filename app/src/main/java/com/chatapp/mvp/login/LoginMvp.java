@@ -1,0 +1,29 @@
+package com.chatapp.mvp.login;
+
+import com.chatapp.mvp.base.BaseView;
+import com.chatapp.service.ApiCallback;
+import com.chatapp.service.models.request.LogInRequest;
+import com.chatapp.service.models.response.LogInModel;
+import com.chatapp.service.models.response.ResponseModel;
+
+/**
+ * Created by thanhnguyen on 1/8/17.
+ */
+
+public interface LoginMvp {
+    interface LogInInteractor {
+        void login(LogInRequest request,
+                   ApiCallback<ResponseModel<LogInModel>> callback);
+    }
+
+    interface LogInView extends BaseView {
+        void onLogInSuccess();
+        void onNotVerify();
+        void onLogInError();
+        void onNotConfirm();
+    }
+
+    interface LogInPresenter {
+        void login(LogInRequest request);
+    }
+}

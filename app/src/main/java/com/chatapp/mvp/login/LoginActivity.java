@@ -20,7 +20,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LogInActivity extends BaseActivity implements LogInView {
+public class LogInActivity extends BaseActivity implements LoginMvp.LogInView {
 
     private static final int RC_TO_REGISTER = 1;
 
@@ -37,7 +37,7 @@ public class LogInActivity extends BaseActivity implements LogInView {
     @Bind(R.id.edt_password)
     EditText edtPassword;
 
-    private LogInPresenter presenter;
+    private LoginMvp.LogInPresenter presenter;
     private boolean isLoginWithPhone = true;
     String phone, email;
 

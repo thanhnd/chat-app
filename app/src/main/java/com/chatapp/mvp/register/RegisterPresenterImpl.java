@@ -16,12 +16,12 @@ import java.lang.ref.WeakReference;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class RegisterPresenterImpl implements RegisterPresent {
+public class RegisterPresenterImpl implements RegisterMvp.RegisterPresent {
 
-    private WeakReference<RegisterView> view;
-    private RegisterInteractor interactor;
+    private WeakReference<RegisterMvp.RegisterView> view;
+    private RegisterMvp.RegisterInteractor interactor;
 
-    public RegisterPresenterImpl(RegisterView view) {
+    public RegisterPresenterImpl(RegisterMvp.RegisterView view) {
         this.view = new WeakReference<>(view);
         this.interactor = new RegisterInteractorImpl();
     }

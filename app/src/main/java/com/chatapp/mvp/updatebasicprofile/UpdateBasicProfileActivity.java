@@ -23,7 +23,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBasicProfileView {
+public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBasicProfileMvp.UpdateBasicProfileView {
 
 
     private static final int UNIT_TYPE_CM_KG = 0;
@@ -40,7 +40,7 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
     @Bind(R.id.rg_unit_type)
     RadioGroup rgUnitType;
 
-    private UpdateBasicProfilePresenter presenter;
+    private UpdateBasicProfileMvp.UpdateBasicProfilePresenter presenter;
     private long timestampDob;
     private int unitType = UNIT_TYPE_CM_KG, height, weight;
 

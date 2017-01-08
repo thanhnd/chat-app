@@ -12,7 +12,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LogInInteractorImpl implements LogInInteractor {
+public class LogInInteractorImpl implements LoginMvp.LogInInteractor {
 
     @Override
     public void login(LogInRequest logInRequest, final ApiCallback<ResponseModel<LogInModel>> loginCallback) {

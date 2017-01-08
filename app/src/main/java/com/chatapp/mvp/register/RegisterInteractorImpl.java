@@ -15,7 +15,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterInteractorImpl implements RegisterInteractor {
+public class RegisterInteractorImpl implements RegisterMvp.RegisterInteractor {
 
     @Override
     public void login(LogInRequest request, final ApiCallback<ResponseModel<LogInModel>> apiCallback) {

@@ -14,7 +14,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class VerifyInteractorImpl implements VerifyInteractor {
+public class VerifyInteractorImpl implements VerifyMvp.VerifyInteractor {
 
     @Override
     public void verify(VerifyEmailRequest request, final ApiCallback<ResponseModel<VerifyModel>> apiCallback) {

@@ -24,7 +24,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RegisterActivity extends BaseActivity implements RegisterView {
+public class RegisterActivity extends BaseActivity implements RegisterMvp.RegisterView {
 
     private static final int RC_GET_COUNTRY_CODE = 1;
 
@@ -46,7 +46,7 @@ public class RegisterActivity extends BaseActivity implements RegisterView {
     @Bind(R.id.v_register_by_phone)
     View vRegisterByPhone;
 
-    private RegisterPresent present;
+    private RegisterMvp.RegisterPresent present;
     boolean isRegisterByEmail = true;
     String email, phone, countryCode, password;
     private CountryModel selectedCountry;

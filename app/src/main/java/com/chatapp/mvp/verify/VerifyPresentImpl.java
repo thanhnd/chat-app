@@ -16,11 +16,11 @@ import retrofit2.Response;
  * Created by thanhnguyen on 12/17/16.
  */
 
-public class VerifyPresentImpl implements VerifyPresent {
-    private WeakReference<VerifyView> view;
-    private VerifyInteractor interactor;
+public class VerifyPresentImpl implements VerifyMvp.VerifyPresent {
+    private WeakReference<VerifyMvp.VerifyView> view;
+    private VerifyMvp.VerifyInteractor interactor;
 
-    public VerifyPresentImpl(VerifyView view) {
+    public VerifyPresentImpl(VerifyMvp.VerifyView view) {
         this.view = new WeakReference<>(view);
         this.interactor = new VerifyInteractorImpl();
     }

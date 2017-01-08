@@ -16,7 +16,7 @@ import retrofit2.Response;
  * Created by thanhnguyen on 12/19/16.
  */
 
-public class UpdateBasicProfileInteractorImpl implements UpdateBasicProfileInteractor {
+public class UpdateBasicProfileInteractorImpl implements UpdateBasicProfileMvp.UpdateBasicProfileInteractor {
     @Override
     public void submit(BasicProfileRequest request, final ApiCallback<ResponseModel<Object>> apiCallback) {
         LogInModel logInModel = AccountUtils.getLogInModel();

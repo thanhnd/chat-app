@@ -19,7 +19,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class VerifyActivity extends BaseActivity implements VerifyView {
+public class VerifyActivity extends BaseActivity implements VerifyMvp.VerifyView {
 
     public static final String EXTRA_EMAIL = "extra_email";
     public static final String EXTRA_PHONE = "extra_phone";
@@ -36,7 +36,7 @@ public class VerifyActivity extends BaseActivity implements VerifyView {
     @Bind(R.id.btn_submit)
     Button btnSubmit;
 
-    private VerifyPresent present;
+    private VerifyMvp.VerifyPresent present;
     private String email, phone;
 
     @Override
