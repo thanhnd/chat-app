@@ -19,10 +19,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 
-public class ListCountriesActivity extends BaseActivity implements ListCountriesView {
+public class ListCountriesActivity extends BaseActivity implements ListCountriesMvp.ListCountriesView {
 
     public static final String SELECTED_COUNTRY = "SELECTED_COUNTRY";
-    private ListCountriesPresenter presenter;
+    private ListCountriesMvp.ListCountriesPresenter presenter;
 
     @Bind(R.id.tv_empty)
     TextView tvEmpty;

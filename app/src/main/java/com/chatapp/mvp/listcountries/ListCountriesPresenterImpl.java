@@ -13,12 +13,12 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class ListCountriesPresenterImpl implements ListCountriesPresenter {
+public class ListCountriesPresenterImpl implements ListCountriesMvp.ListCountriesPresenter {
 
-    private WeakReference<ListCountriesView> view;
-    private ListCountriesInteractor interactor;
+    private WeakReference<ListCountriesMvp.ListCountriesView> view;
+    private ListCountriesMvp.ListCountriesInteractor interactor;
 
-    public ListCountriesPresenterImpl(ListCountriesView listCountriesView) {
+    public ListCountriesPresenterImpl(ListCountriesMvp.ListCountriesView listCountriesView) {
         this.view = new WeakReference<>(listCountriesView);
         this.interactor = new ListCountriesInteractorImpl();
     }

@@ -13,7 +13,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListCountriesInteractorImpl implements ListCountriesInteractor {
+public class ListCountriesInteractorImpl implements ListCountriesMvp.ListCountriesInteractor {
 
     @Override
     public void listCountries(final ApiCallback<ResponseModel<List<CountryModel>>> callback) {
