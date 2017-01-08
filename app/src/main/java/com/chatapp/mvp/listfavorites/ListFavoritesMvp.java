@@ -1,4 +1,4 @@
-package com.chatapp.mvp.listfriends;
+package com.chatapp.mvp.listfavorites;
 
 import com.chatapp.mvp.base.BaseView;
 import com.chatapp.service.ApiCallback;
@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by thanhnguyen on 12/17/16.
  */
-public interface ListFavorites {
+public interface ListFavoritesMvp {
 
     interface Present {
         void getListFavorites();

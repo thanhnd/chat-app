@@ -15,23 +15,23 @@ import retrofit2.Response;
  * Created by thanhnguyen on 1/6/17.
  */
 
-public class PresentImpl implements ListFavorites.Present {
+public class PresentImpl implements ListFriendsMvp.Present {
 
-    private WeakReference<ListFavorites.View> view;
-    private ListFavorites.Interactor interactor;
+    private WeakReference<ListFriendsMvp.View> view;
+    private ListFriendsMvp.Interactor interactor;
 
-    public PresentImpl(ListFavorites.View view) {
+    public PresentImpl(ListFriendsMvp.View view) {
         this.view = new WeakReference<>(view);
         this.interactor = new InteractorImpl();
 
     }
     @Override
-    public void getListFavorites() {
-        interactor.getListFavorites(new ApiCallback<ResponseModel<List<UserModel>>>() {
+    public void getListFriends() {
+        interactor.getListFriends(new ApiCallback<ResponseModel<List<UserModel>>>() {
             @Override
             public void onSuccess(ResponseModel<List<UserModel>> response) {
                 if (view.get() != null) {
-                    view.get().onGetListFavoritesSuccess(response.getResultSet());
+                    view.get().onGetListFriendsSuccess(response.getResultSet());
                 }
             }
 

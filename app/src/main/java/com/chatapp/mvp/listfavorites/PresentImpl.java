@@ -15,12 +15,12 @@ import retrofit2.Response;
  * Created by thanhnguyen on 1/6/17.
  */
 
-public class PresentImpl implements ListFavorites.Present {
+public class PresentImpl implements ListFavoritesMvp.Present {
 
-    private WeakReference<ListFavorites.View> view;
-    private ListFavorites.Interactor interactor;
+    private WeakReference<ListFavoritesMvp.View> view;
+    private ListFavoritesMvp.Interactor interactor;
 
-    public PresentImpl(ListFavorites.View view) {
+    public PresentImpl(ListFavoritesMvp.View view) {
         this.view = new WeakReference<>(view);
         this.interactor = new InteractorImpl();
 

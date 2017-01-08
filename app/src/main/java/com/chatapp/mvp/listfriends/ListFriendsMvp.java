@@ -1,4 +1,4 @@
-package com.chatapp.mvp.listfavorites;
+package com.chatapp.mvp.listfriends;
 
 import com.chatapp.mvp.base.BaseView;
 import com.chatapp.service.ApiCallback;
@@ -10,18 +10,18 @@ import java.util.List;
 /**
  * Created by thanhnguyen on 12/17/16.
  */
-public interface ListFavorites {
+public interface ListFriendsMvp {
 
     interface Present {
-        void getListFavorites();
+        void getListFriends();
     }
 
     interface Interactor {
-        void getListFavorites(ApiCallback<ResponseModel<List<UserModel>>> callback);
+        void getListFriends(ApiCallback<ResponseModel<List<UserModel>>> callback);
     }
 
     interface View extends BaseView {
-        void onGetListFavoritesSuccess(List<UserModel> resultSet);
+        void onGetListFriendsSuccess(List<UserModel> resultSet);
     }
 
 

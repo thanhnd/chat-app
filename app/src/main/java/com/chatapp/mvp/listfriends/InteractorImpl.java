@@ -18,9 +18,9 @@ import retrofit2.Response;
 /**
  * Created by thanhnguyen on 1/6/17.
  */
-public class InteractorImpl implements ListFavorites.Interactor {
+public class InteractorImpl implements ListFriendsMvp.Interactor {
     @Override
-    public void getListFavorites(final ApiCallback<ResponseModel<List<UserModel>>> callback) {
+    public void getListFriends(final ApiCallback<ResponseModel<List<UserModel>>> callback) {
         LogInModel logInModel = AccountUtils.getLogInModel();
         if (logInModel == null) {
             return;

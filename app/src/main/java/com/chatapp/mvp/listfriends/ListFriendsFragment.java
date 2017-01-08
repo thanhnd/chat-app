@@ -22,14 +22,14 @@ import butterknife.ButterKnife;
  * Created by thanhnguyen on 1/3/17.
  */
 
-public class ListFavoritesFragment extends BaseFragment implements ListFavorites.View {
+public class ListFriendsFragment extends BaseFragment implements ListFriendsMvp.View {
 
     @Bind(R.id.rv_list_nearby)
     RecyclerView rvNearby;
 
-    private ListFavoritesAdapter adapter;
+    private ListFriendsAdapter adapter;
 
-    private ListFavorites.Present present;
+    private ListFriendsMvp.Present present;
 
     @Nullable
     @Override
@@ -41,18 +41,18 @@ public class ListFavoritesFragment extends BaseFragment implements ListFavorites
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
         rvNearby.setLayoutManager(layoutManager);
         rvNearby.addItemDecoration(new ItemOffsetDecoration(getContext(), R.dimen.list_item_space));
-        adapter = new ListFavoritesAdapter(getContext());
+        adapter = new ListFriendsAdapter(getContext());
         rvNearby.setAdapter(adapter);
         present = new PresentImpl(this);
 
 
-        present.getListFavorites();
+        present.getListFriends();
 
         return view;
     }
 
     @Override
-    public void onGetListFavoritesSuccess(List<UserModel> resultSet) {
+    public void onGetListFriendsSuccess(List<UserModel> resultSet) {
         adapter.add(resultSet);
     }
 

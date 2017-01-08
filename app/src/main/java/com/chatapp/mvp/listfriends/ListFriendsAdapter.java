@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
  * Created by thanhnguyen on 1/6/17.
  */
 
-public class ListFavoritesAdapter extends RecyclerView.Adapter<ListFavoritesAdapter.ViewHolder> {
+public class ListFriendsAdapter extends RecyclerView.Adapter<ListFriendsAdapter.ViewHolder> {
     private ArrayList<UserModel> mDataset;
     private Context context;
 
@@ -40,14 +40,14 @@ public class ListFavoritesAdapter extends RecyclerView.Adapter<ListFavoritesAdap
         }
     }
 
-    public ListFavoritesAdapter(Context context) {
+    public ListFriendsAdapter(Context context) {
         mDataset = new ArrayList<>();
         this.context = context;
     }
 
     @Override
-    public ListFavoritesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                              int viewType) {
+    public ListFriendsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                            int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_favorites, parent, false);
         // set the view's size, margins, paddings and layout parameters
