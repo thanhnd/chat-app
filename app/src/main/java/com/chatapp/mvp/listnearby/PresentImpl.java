@@ -3,6 +3,7 @@ package com.chatapp.mvp.listnearby;
 import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.request.ListNearbyRequest;
 import com.chatapp.service.models.response.ListNearByModel;
+import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.ResponseModel;
 
 import java.lang.ref.WeakReference;
@@ -45,6 +46,35 @@ public class PresentImpl implements ListNearbyMvp.Present {
 
             @Override
             public void onFail(Call<ResponseModel<ListNearByModel>> call, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onTokenExpired() {
+                if (view.get() != null) {
+                    view.get().onTokenExpired();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getMyProfile() {
+        interactor.getMyProfile(new AuthorizeApiCallback<ResponseModel<MyProfileModel>>() {
+            @Override
+            public void onSuccess(ResponseModel<MyProfileModel> response) {
+                if (view.get() != null) {
+                    view.get().onGetMyProfileSuccess(response.getResultSet());
+                }
+            }
+
+            @Override
+            public void onFail(Response<ResponseModel<MyProfileModel>> response) {
+
+            }
+
+            @Override
+            public void onFail(Call<ResponseModel<MyProfileModel>> call, Throwable throwable) {
 
             }
 

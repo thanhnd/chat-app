@@ -9,6 +9,7 @@ import com.chatapp.service.models.request.VerifyEmailRequest;
 import com.chatapp.service.models.response.CountryModel;
 import com.chatapp.service.models.response.ListNearByModel;
 import com.chatapp.service.models.response.LogInModel;
+import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.RegisterModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserModel;
@@ -70,5 +71,9 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @GET("/api/profile/listFavourite")
     Call<ResponseModel<List<UserModel>>> search(@Header("Authorization") String authorization);
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/profile/myProfile")
+    Call<ResponseModel<MyProfileModel>> getMyProfile(@Header("Authorization") String authorization);
 
 }
