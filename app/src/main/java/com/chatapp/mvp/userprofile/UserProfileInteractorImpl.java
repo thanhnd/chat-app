@@ -1,6 +1,57 @@
 package com.chatapp.mvp.userprofile;
 
 
+import com.chatapp.service.ApiService;
+import com.chatapp.service.AuthorizeApiCallback;
+import com.chatapp.service.models.response.LogInModel;
+import com.chatapp.service.models.response.RegisterModel;
+import com.chatapp.service.models.response.ResponseModel;
+import com.chatapp.service.models.response.UserProfileModel;
+import com.chatapp.utils.AccountUtils;
+import com.chatapp.utils.Log;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class UserProfileInteractorImpl implements UserProfileMvp.UserProfileInteractor {
 
+    @Override
+    public void getUserProfile(String userId, final AuthorizeApiCallback<ResponseModel<UserProfileModel>> callback) {
+        LogInModel logInModel = AccountUtils.getLogInModel();
+        if (logInModel == null) {
+            return;
+        }
+        String authorization = logInModel.getToken();
+
+        ApiService service = ApiService.retrofit.create(ApiService.class);
+        Call<ResponseModel<UserProfileModel>> call = service.getUserProfile(authorization, userId);
+        call.enqueue(new Callback<ResponseModel<UserProfileModel>>() {
+            @Override
+            public void onResponse(Call<ResponseModel<UserProfileModel>> call, Response<ResponseModel<UserProfileModel>> response) {
+                Log.i(response.raw().toString());
+                ResponseModel<UserProfileModel> responseModel = response.body();
+                if (callback != null) {
+                    if (response.isSuccessful() && responseModel != null) {
+                        if (responseModel.getResponseCd() == RegisterModel.RESPONSE_CD_SUCCESS) {
+                            callback.onSuccess(responseModel);
+                            return;
+                        } else if (responseModel.isTokenExpired()){
+                            callback.onTokenExpired();
+                            return;
+                        }
+                    }
+                    callback.onFail(response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel<UserProfileModel>> call, Throwable t) {
+                if (callback != null) {
+                    callback.onFail(call, t);
+                }
+                Log.e(t);
+            }
+        });
+    }
 }

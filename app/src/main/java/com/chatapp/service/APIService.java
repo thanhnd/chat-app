@@ -13,6 +13,7 @@ import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.RegisterModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserModel;
+import com.chatapp.service.models.response.UserProfileModel;
 import com.chatapp.service.models.response.VerifyModel;
 
 import java.util.List;
@@ -25,6 +26,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 /**
  * Created by thanhnguyen on 12/17/16.
@@ -75,5 +77,9 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("/api/profile/myProfile")
     Call<ResponseModel<MyProfileModel>> getMyProfile(@Header("Authorization") String authorization);
+
+    @Headers("Content-Type: application/json")
+    @GET("/api/profile/userProfile/{userId}")
+    Call<ResponseModel<UserProfileModel>> getUserProfile(@Header("Authorization") String authorization, @Path("userId") String userId);
 
 }

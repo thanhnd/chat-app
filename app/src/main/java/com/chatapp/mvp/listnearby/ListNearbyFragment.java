@@ -87,6 +87,7 @@ public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.Vi
     @Override
     public void navigateToUserProfile(UserModel userModel) {
         Intent intent = new Intent(getContext(), UserProfileActivity.class);
+        intent.putExtra(UserProfileActivity.EXTRA_USER_MODEL, userModel);
         startActivity(intent);
     }
 }

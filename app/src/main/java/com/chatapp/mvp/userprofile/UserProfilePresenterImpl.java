@@ -1,7 +1,14 @@
 
 package com.chatapp.mvp.userprofile;
 
+import com.chatapp.service.AuthorizeApiCallback;
+import com.chatapp.service.models.response.ResponseModel;
+import com.chatapp.service.models.response.UserProfileModel;
+
 import java.lang.ref.WeakReference;
+
+import retrofit2.Call;
+import retrofit2.Response;
 
 public class UserProfilePresenterImpl implements UserProfileMvp.UserProfilePresent {
 
@@ -13,4 +20,32 @@ public class UserProfilePresenterImpl implements UserProfileMvp.UserProfilePrese
         this.interactor = new UserProfileInteractorImpl();
     }
 
+    @Override
+    public void getUserProfile(String userId) {
+        interactor.getUserProfile(userId, new AuthorizeApiCallback<ResponseModel<UserProfileModel>>() {
+            @Override
+            public void onSuccess(ResponseModel<UserProfileModel> response) {
+                if (view.get() != null) {
+                    view.get().onGetUserProfileSuccess(response.getResultSet());
+                }
+            }
+
+            @Override
+            public void onFail(Response<ResponseModel<UserProfileModel>> response) {
+
+            }
+
+            @Override
+            public void onFail(Call<ResponseModel<UserProfileModel>> call, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onTokenExpired() {
+                if (view.get() != null) {
+                    view.get().onTokenExpired();
+                }
+            }
+        });
+    }
 }

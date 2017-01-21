@@ -15,7 +15,6 @@ public interface ListNearbyMvp {
 
     interface Present {
         void getListNearBy();
-
         void getMyProfile();
     }
 

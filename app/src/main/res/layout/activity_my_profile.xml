@@ -21,7 +21,7 @@
             app:expandedTitleMarginBottom="42dp"
             app:expandedTitleTextAppearance="@style/CollapsingTextAppearance.Inverse"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:title="@string/flexible_title">
+            app:title="@string/no_name">
 
             <ImageView
                 android:layout_width="fill_parent"

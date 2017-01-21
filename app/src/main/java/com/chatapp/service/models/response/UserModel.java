@@ -3,11 +3,13 @@ package com.chatapp.service.models.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by thanhnguyen on 1/6/17.
  */
 
-public class UserModel {
+public class UserModel implements Serializable {
 
     @SerializedName("user_id")
     @Expose
