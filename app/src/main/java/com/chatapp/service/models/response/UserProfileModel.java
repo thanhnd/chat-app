@@ -197,6 +197,10 @@ public class UserProfileModel {
         this.linkin = linkin;
     }
 
+    public int getAge() {
+        Long time= (System.currentTimeMillis() - birthday) / 1000;
+        return Math.round(time) / 31536000;
+    }
 }
 
 

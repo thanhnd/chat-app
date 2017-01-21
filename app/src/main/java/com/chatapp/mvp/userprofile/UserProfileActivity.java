@@ -95,7 +95,7 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
             collapsingToolbarLayout.setTitle(userProfileModel.getDisplayName());
         }
 
-        tvAge.setText(String.valueOf(userProfileModel.getBirthday()));
+        tvAge.setText(String.valueOf(userProfileModel.getAge()));
         tvHeightAndWeight.setText(String.format("%s / %s", userProfileModel.getHeight(), userProfileModel.getWeight()));
         tvEthnicity.setText(String.valueOf(userProfileModel.getEthinicityId()));
         tvBodyType.setText(String.valueOf(userProfileModel.getBodyTypeId()));
