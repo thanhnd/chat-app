@@ -27,15 +27,25 @@ import butterknife.ButterKnife;
 public class ListFavoritesAdapter extends RecyclerView.Adapter<ListFavoritesAdapter.ViewHolder> {
     private ArrayList<UserModel> mDataset;
     private Context context;
+    private OnUserProfileItemClick onUserProfileItemClick;
+
+    public OnUserProfileItemClick getOnUserProfileItemClick() {
+        return onUserProfileItemClick;
+    }
+
+    public void setOnUserProfileItemClick(OnUserProfileItemClick onUserProfileItemClick) {
+        this.onUserProfileItemClick = onUserProfileItemClick;
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
+        View vItem;
         @Bind(R.id.tv_name) TextView tvName;
         @Bind(R.id.tv_online_status) TextView tvOnlineStatus;
         @Bind(R.id.iv_avatar) ImageView ivAvatar;
 
         public ViewHolder(View v) {
             super(v);
+            vItem = v;
             ButterKnife.bind(this, v);
         }
     }
@@ -58,7 +68,7 @@ public class ListFavoritesAdapter extends RecyclerView.Adapter<ListFavoritesAdap
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        UserModel userModel = mDataset.get(position);
+        final UserModel userModel = mDataset.get(position);
         String name = TextUtils.isEmpty(userModel.getDisplayName()) ? "No name" : userModel.getDisplayName();
         holder.tvName.setText(name);
         holder.tvOnlineStatus.setText(userModel.isOnline() ? "Online" : "Offline");
@@ -69,6 +79,14 @@ public class ListFavoritesAdapter extends RecyclerView.Adapter<ListFavoritesAdap
                 .placeholder(R.drawable.img_user_avatar)
                 .transform(new CircleTransform())
                 .into(holder.ivAvatar);
+        holder.vItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onUserProfileItemClick != null) {
+                    onUserProfileItemClick.onItemClick(userModel);
+                }
+            }
+        });
 
     }
 
@@ -83,4 +101,9 @@ public class ListFavoritesAdapter extends RecyclerView.Adapter<ListFavoritesAdap
         mDataset.addAll(userModels);
         notifyItemInserted(position);
     }
+
+    public interface OnUserProfileItemClick {
+        void onItemClick(UserModel userModel);
+    }
+
 }

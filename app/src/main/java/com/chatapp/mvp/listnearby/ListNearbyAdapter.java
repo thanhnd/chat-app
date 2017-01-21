@@ -33,14 +33,14 @@ public class ListNearbyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private ArrayList<UserModel> mDataset;
     private Context context;
     private OnMyProfileItemClick onMyProfileItemClick;
-    private OnNearbyProfileItemClick onNearbyProfileItemClick;
+    private OnUserProfileItemClick onUserProfileItemClick;
 
     public void setOnMyProfileItemClick(OnMyProfileItemClick onMyProfileItemClick) {
         this.onMyProfileItemClick = onMyProfileItemClick;
     }
 
-    public void setOnNearbyProfileItemClick(OnNearbyProfileItemClick onNearbyProfileItemClick) {
-        this.onNearbyProfileItemClick = onNearbyProfileItemClick;
+    public void setOnUserProfileItemClick(OnUserProfileItemClick onUserProfileItemClick) {
+        this.onUserProfileItemClick = onUserProfileItemClick;
     }
 
     public class OtherUserViewHolder extends RecyclerView.ViewHolder {
@@ -128,8 +128,8 @@ public class ListNearbyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             otherUserViewHolder.vItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (onNearbyProfileItemClick != null) {
-                        onNearbyProfileItemClick.onItemClick(userModel);
+                    if (onUserProfileItemClick != null) {
+                        onUserProfileItemClick.onItemClick(userModel);
                     }
                 }
             });
@@ -162,7 +162,7 @@ public class ListNearbyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         void onItemClick();
     }
 
-    public interface OnNearbyProfileItemClick {
+    public interface OnUserProfileItemClick {
         void onItemClick(UserModel userModel);
     }
 }

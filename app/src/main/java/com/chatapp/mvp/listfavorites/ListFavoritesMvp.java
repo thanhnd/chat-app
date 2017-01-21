@@ -22,7 +22,7 @@ public interface ListFavoritesMvp {
 
     interface View extends BaseView {
         void onGetListFavoritesSuccess(List<UserModel> resultSet);
+        void navigateToUserProfile(UserModel userModel);
     }
-
 
 }

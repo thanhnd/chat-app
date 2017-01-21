@@ -1,5 +1,6 @@
 package com.chatapp.mvp.listfavorites;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseFragment;
+import com.chatapp.mvp.userprofile.UserProfileActivity;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.utils.ItemOffsetDecoration;
 
@@ -42,9 +44,14 @@ public class ListFavoritesFragment extends BaseFragment implements ListFavorites
         rvNearby.setLayoutManager(layoutManager);
         rvNearby.addItemDecoration(new ItemOffsetDecoration(getContext(), R.dimen.list_item_space));
         adapter = new ListFavoritesAdapter(getContext());
+        adapter.setOnUserProfileItemClick(new ListFavoritesAdapter.OnUserProfileItemClick() {
+            @Override
+            public void onItemClick(UserModel userModel) {
+                navigateToUserProfile(userModel);
+            }
+        });
         rvNearby.setAdapter(adapter);
         present = new PresentImpl(this);
-
 
         present.getListFavorites();
 
@@ -54,6 +61,13 @@ public class ListFavoritesFragment extends BaseFragment implements ListFavorites
     @Override
     public void onGetListFavoritesSuccess(List<UserModel> resultSet) {
         adapter.add(resultSet);
+    }
+
+    @Override
+    public void navigateToUserProfile(UserModel userModel) {
+        Intent intent = new Intent(getContext(), UserProfileActivity.class);
+        intent.putExtra(UserProfileActivity.EXTRA_USER_MODEL, userModel);
+        startActivity(intent);
     }
 
 }

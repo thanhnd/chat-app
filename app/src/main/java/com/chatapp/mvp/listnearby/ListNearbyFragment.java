@@ -52,7 +52,7 @@ public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.Vi
                 navigateToMyProfile();
             }
         });
-        adapter.setOnNearbyProfileItemClick(new ListNearbyAdapter.OnNearbyProfileItemClick() {
+        adapter.setOnUserProfileItemClick(new ListNearbyAdapter.OnUserProfileItemClick() {
             @Override
             public void onItemClick(UserModel userModel) {
                 navigateToUserProfile(userModel);
