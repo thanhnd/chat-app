@@ -43,6 +43,10 @@
 
         <activity android:name=".mvp.listcountries.ListCountriesActivity" />
         <activity android:name=".mvp.searchuser.SearchActivity" />
+        <activity android:name=".mvp.myprofile.MyProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".mvp.userprofile.UserProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

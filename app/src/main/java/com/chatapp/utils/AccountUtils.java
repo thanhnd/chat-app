@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.chatapp.MyApplication;
 import com.chatapp.service.models.response.LogInModel;
+import com.chatapp.service.models.response.MyProfileModel;
 
 import static com.chatapp.utils.CacheUtil.getSharedPreferences;
 
@@ -16,6 +17,7 @@ public class AccountUtils {
     private static final String SIGN_IN_MODEL = "sign_in_model";
 
     static private LogInModel logInModel;
+    private static MyProfileModel myProfileModel;
 
 
     public static LogInModel getLogInModel() {
@@ -68,5 +70,13 @@ public class AccountUtils {
 
         return builder.toString();
 
+    }
+
+    public static void setMyProfileModel(MyProfileModel myProfileModel) {
+        AccountUtils.myProfileModel = myProfileModel;
+    }
+
+    public static MyProfileModel getMyProfileModel() {
+        return myProfileModel;
     }
 }

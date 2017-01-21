@@ -32,26 +32,39 @@ public class ListNearbyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     private MyProfileModel myProfileModel;
     private ArrayList<UserModel> mDataset;
     private Context context;
+    private OnMyProfileItemClick onMyProfileItemClick;
+    private OnNearbyProfileItemClick onNearbyProfileItemClick;
+
+    public void setOnMyProfileItemClick(OnMyProfileItemClick onMyProfileItemClick) {
+        this.onMyProfileItemClick = onMyProfileItemClick;
+    }
+
+    public void setOnNearbyProfileItemClick(OnNearbyProfileItemClick onNearbyProfileItemClick) {
+        this.onNearbyProfileItemClick = onNearbyProfileItemClick;
+    }
 
     public class OtherUserViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         @Bind(R.id.tv_name) TextView tvName;
         @Bind(R.id.tv_distance) TextView tvDistance;
         @Bind(R.id.iv_avatar) ImageView ivAvatar;
+        View vItem;
 
         public OtherUserViewHolder(View v) {
             super(v);
+            vItem = v;
             ButterKnife.bind(this, v);
         }
     }
 
-    public class MyProfileViewHolder extends RecyclerView.ViewHolder {
+    public static class MyProfileViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         @Bind(R.id.tv_name) TextView tvName;
         @Bind(R.id.iv_avatar) ImageView ivAvatar;
-
+        View vItem;
         public MyProfileViewHolder(View v) {
             super(v);
+            this.vItem = v;
             ButterKnife.bind(this, v);
         }
     }
@@ -78,7 +91,7 @@ public class ListNearbyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
         final int itemType = getItemViewType(position);
         if (itemType == ITEM_VIEW_TYPE_MY_PROFILE) {
@@ -92,9 +105,17 @@ public class ListNearbyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     .placeholder(R.drawable.img_user_avatar)
                     .transform(new CircleTransform())
                     .into(myProfileViewHolder.ivAvatar);
+            myProfileViewHolder.vItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onMyProfileItemClick != null) {
+                        onMyProfileItemClick.onItemClick();
+                    }
+                }
+            });
         } else {
             OtherUserViewHolder otherUserViewHolder = (OtherUserViewHolder)holder;
-            UserModel userModel = mDataset.get(myProfileModel == null ?  position : position - 1);
+            final UserModel userModel = mDataset.get(myProfileModel == null ?  position : position - 1);
             String name = TextUtils.isEmpty(userModel.getDisplayName()) ? "No name" : userModel.getDisplayName();
             otherUserViewHolder.tvName.setText(name);
             otherUserViewHolder.tvDistance.setText(String.format(Locale.getDefault(), "%d feet away", userModel.getFeetAway()));
@@ -104,6 +125,14 @@ public class ListNearbyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                     .placeholder(R.drawable.img_user_avatar)
                     .transform(new CircleTransform())
                     .into(otherUserViewHolder.ivAvatar);
+            otherUserViewHolder.vItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (onNearbyProfileItemClick != null) {
+                        onNearbyProfileItemClick.onItemClick(userModel);
+                    }
+                }
+            });
         }
     }
 
@@ -127,5 +156,13 @@ public class ListNearbyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void setMyProfileModel(MyProfileModel myProfileModel) {
         this.myProfileModel = myProfileModel;
         notifyItemInserted(0);
+    }
+
+    public interface OnMyProfileItemClick {
+        void onItemClick();
+    }
+
+    public interface OnNearbyProfileItemClick {
+        void onItemClick(UserModel userModel);
     }
 }

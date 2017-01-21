@@ -44,4 +44,18 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowIsFloating">false</item>
     </style>
+
+    <style name="CollapsingTextAppearance" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title"/>
+    <style name="CollapsingTextAppearance.Inverse" >
+        <item name="android:textSize">30sp</item>
+    </style>
+    <style name="ToolBarWithNavigationBack">
+        <item name="navigationIcon">@drawable/ic_back</item>
+    </style>
+
+    <style name="online_status">
+        <item name="android:drawablePadding">4dp</item>
+        <item name="android:drawableLeft">@drawable/online_status</item>
+        <item name="android:textColor">@color/online_status_color</item>
+    </style>
 </resources>
