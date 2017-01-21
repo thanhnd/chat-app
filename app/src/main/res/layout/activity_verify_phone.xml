@@ -7,7 +7,7 @@
     android:background="@drawable/bg"
     android:gravity="bottom"
     android:orientation="vertical"
-    tools:context=".mvp.VerifyPhoneActivity">
+    tools:context=".mvp.verify.VerifyActivity">
 
 
     <LinearLayout
