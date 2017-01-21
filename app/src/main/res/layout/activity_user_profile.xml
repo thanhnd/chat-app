@@ -41,12 +41,22 @@
             <TextView
                 android:id="@+id/tv_online_status"
                 style="@style/online_status"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="32dp"
                 android:text="Online" />
+
+            <ImageView
+                android:id="@+id/iv_favorite_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="10dp"
+                android:background="@null"
+                android:src="@drawable/ic_tab_favorite" />
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
@@ -86,6 +96,7 @@
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -109,6 +120,7 @@
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -132,6 +144,7 @@
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -155,6 +168,7 @@
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -220,26 +234,11 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    />
+                    android:layout_weight="1" />
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="300dp"
-        android:layout_marginRight="20dp"
-        android:elevation="8dp"
-        android:src="@drawable/ic_adb_edit"
-        android:tint="@color/white"
-        app:backgroundTint="@color/purge"
-        app:layout_anchor="@id/tv_online_status"
-        app:layout_anchorGravity="right"
-        tools:ignore="RtlHardcoded" />
 </android.support.design.widget.CoordinatorLayout>

@@ -48,4 +48,33 @@ public class UserProfilePresenterImpl implements UserProfileMvp.UserProfilePrese
             }
         });
     }
+
+    @Override
+    public void addUserFavorite(String userId) {
+        interactor.addUserFavorite(userId, new AuthorizeApiCallback<ResponseModel<Object>>() {
+            @Override
+            public void onSuccess(ResponseModel<Object> response) {
+                if (view.get() != null) {
+                    view.get().onAddUserFavoriteSuccess();
+                }
+            }
+
+            @Override
+            public void onFail(Response<ResponseModel<Object>> response) {
+
+            }
+
+            @Override
+            public void onFail(Call<ResponseModel<Object>> call, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onTokenExpired() {
+                if (view.get() != null) {
+                    view.get().onTokenExpired();
+                }
+            }
+        });
+    }
 }

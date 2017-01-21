@@ -10,6 +10,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chatapp.R;
@@ -21,6 +22,7 @@ import com.chatapp.utils.AccountUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class UserProfileActivity extends BaseActivity implements UserProfileMvp.UserProfileView,
         AppBarLayout.OnOffsetChangedListener{
@@ -28,8 +30,8 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
     public static final String EXTRA_USER_MODEL = "extra_user_model";
 
     private static final int PERCENTAGE_TO_SHOW_IMAGE = 20;
-    @Bind(R.id.fab_edit)
-    View mFab;
+    @Bind(R.id.iv_favorite_status)
+    ImageView ivFavoriteStatus;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.appbar)
@@ -109,7 +111,7 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
         if (currentScrollPercentage >= PERCENTAGE_TO_SHOW_IMAGE) {
             if (!mIsImageHidden) {
                 mIsImageHidden = true;
-                ViewCompat.animate(mFab).scaleY(0).scaleX(0).start();
+                ViewCompat.animate(ivFavoriteStatus).scaleY(0).scaleX(0).start();
                 tvOnlineStatus.setVisibility(View.GONE);
             }
         }
@@ -117,7 +119,7 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
         if (currentScrollPercentage < PERCENTAGE_TO_SHOW_IMAGE) {
             if (mIsImageHidden) {
                 mIsImageHidden = false;
-                ViewCompat.animate(mFab).scaleY(1).scaleX(1).start();
+                ViewCompat.animate(ivFavoriteStatus).scaleY(1).scaleX(1).start();
                 tvOnlineStatus.setVisibility(View.VISIBLE);
             }
         }
@@ -126,5 +128,15 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
     @Override
     public void onGetUserProfileSuccess(UserProfileModel userProfileModel) {
         displayUserProfileDetails(userProfileModel);
+    }
+
+    @OnClick(R.id.iv_favorite_status)
+    void onClickFavorite() {
+        present.addUserFavorite(userModel.getUserId());
+    }
+
+    @Override
+    public void onAddUserFavoriteSuccess() {
+        ivFavoriteStatus.setImageResource(R.drawable.ic_status_favorite_yes);
     }
 }

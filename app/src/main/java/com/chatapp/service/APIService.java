@@ -5,6 +5,7 @@ import com.chatapp.service.models.request.BasicProfileRequest;
 import com.chatapp.service.models.request.ListNearbyRequest;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.request.RegisterRequest;
+import com.chatapp.service.models.request.UserRequest;
 import com.chatapp.service.models.request.VerifyEmailRequest;
 import com.chatapp.service.models.response.CountryModel;
 import com.chatapp.service.models.response.ListNearByModel;
@@ -81,5 +82,9 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @GET("/api/profile/userProfile/{userId}")
     Call<ResponseModel<UserProfileModel>> getUserProfile(@Header("Authorization") String authorization, @Path("userId") String userId);
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/profile/addFavourite")
+    Call<ResponseModel<Object>> addUserFavorite(@Header("Authorization") String authorization, @Body UserRequest request);
 
 }
