@@ -12,6 +12,8 @@ import com.chatapp.R;
 import com.chatapp.mvp.home.HomeActivity;
 import com.chatapp.mvp.login.LogInActivity;
 import com.chatapp.mvp.register.RegisterActivity;
+import com.chatapp.mvp.updatebasicprofile.UpdateBasicProfileActivity;
+import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.utils.AccountUtils;
 
 import butterknife.Bind;
@@ -32,10 +34,18 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
 
         if (AccountUtils.isLoggedIn()) {
-            Intent intent = new Intent(this, HomeActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
+            LogInModel logInModel = AccountUtils.getLogInModel();
+            if (logInModel.isConfirm()) {
+                Intent intent = new Intent(this, HomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            } else if (logInModel.isVerified()) {
+                startActivity(new Intent(OnboardingActivity.this, UpdateBasicProfileActivity.class));
+            } else if (logInModel.isNotVerify()) {
+                startActivity(new Intent(OnboardingActivity.this, UpdateBasicProfileActivity.class));
+            }
+
             return;
         }
         setContentView(R.layout.activity_onboarding);

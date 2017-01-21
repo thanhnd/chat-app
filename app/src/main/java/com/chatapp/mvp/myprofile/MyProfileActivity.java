@@ -75,7 +75,7 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
         userModel = AccountUtils.getMyProfileModel();
         if (userModel != null) {
             collapsingToolbarLayout.setTitle(userModel.getDisplayName());
-            tvAge.setText(String.valueOf(userModel.getBirthday()));
+            tvAge.setText(String.valueOf(userModel.getAge()));
             tvHeightAndWeight.setText(String.format("%s / %s", userModel.getHeight(), userModel.getWeight()));
             tvEthnicity.setText(String.valueOf(userModel.getEthinicityId()));
             tvBodyType.setText(String.valueOf(userModel.getBodyTypeId()));

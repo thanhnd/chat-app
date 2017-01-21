@@ -82,6 +82,9 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
         myProfileModel = AccountUtils.getMyProfileModel();
         userModel = (UserModel) intent.getSerializableExtra(EXTRA_USER_MODEL);
 
+        ivFavoriteStatus.setImageResource(userModel.isFavourite() ?
+                R.drawable.ic_status_favorite_yes : R.drawable.ic_tab_favorite);
+
         tvOnlineStatus.setText("Online");
         tvOnlineStatus.setEnabled(true);
         present.getUserProfile(userModel.getUserId());

@@ -73,7 +73,7 @@ public class UserModel implements Serializable {
         this.isFriend = isFriend;
     }
 
-    public boolean isIsFavourite() {
+    public boolean isFavourite() {
         return isFavourite;
     }
 
