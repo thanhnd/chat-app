@@ -13,6 +13,7 @@ import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -24,6 +25,7 @@ import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.service.models.response.UserProfileModel;
 import com.chatapp.utils.AccountUtils;
+import com.chatapp.views.UserProfilePropertyView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -45,18 +47,19 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
     AppBarLayout appBarLayout;
     @Bind(R.id.tv_online_status)
     TextView tvOnlineStatus;
-    @Bind(R.id.tv_age)
-    TextView tvAge;
-    @Bind(R.id.tv_height_and_weight)
-    TextView tvHeightAndWeight;
-    @Bind(R.id.tv_ethnicity)
-    TextView tvEthnicity;
-    @Bind(R.id.tv_body_type)
-    TextView tvBodyType;
-    @Bind(R.id.tv_my_tribes)
-    TextView tvMyTribes;
-    @Bind(R.id.tv_relationship_status)
-    TextView tvRelationshipStatus;
+
+//    @Bind(R.id.tv_age)
+//    TextView tvAge;
+//    @Bind(R.id.tv_height_and_weight)
+//    TextView tvHeightAndWeight;
+//    @Bind(R.id.tv_ethnicity)
+//    TextView tvEthnicity;
+//    @Bind(R.id.tv_body_type)
+//    TextView tvBodyType;
+//    @Bind(R.id.tv_my_tribes)
+//    TextView tvMyTribes;
+//    @Bind(R.id.tv_relationship_status)
+//    TextView tvRelationshipStatus;
 
     @Bind(R.id.ib_chat)
     ImageButton ibChat;
@@ -66,7 +69,11 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
     ImageButton ibVideo;
 
     @Bind(R.id.v_profile)
-    View vProfile;
+    ViewGroup vProfile;
+
+    @Bind(R.id.v_profile_properties)
+    ViewGroup vProfileProperties;
+
     @Bind(R.id.v_add_friend)
     View vAddFriend;
     @Bind(R.id.v_action)
@@ -142,12 +149,43 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
             collapsingToolbarLayout.setTitle(userProfileModel.getDisplayName());
         }
 
-        tvAge.setText(String.valueOf(userProfileModel.getAge()));
-        tvHeightAndWeight.setText(String.format("%s / %s", userProfileModel.getHeight(), userProfileModel.getWeight()));
-        tvEthnicity.setText(String.valueOf(userProfileModel.getEthinicityId()));
-        tvBodyType.setText(String.valueOf(userProfileModel.getBodyTypeId()));
-        tvMyTribes.setText(String.valueOf(userProfileModel.getMyTribesId()));
-        tvRelationshipStatus.setText(String.valueOf(userProfileModel.getRelationshipStatusId()));
+        if (userProfileModel.getAge() > 0) {
+            UserProfilePropertyView view = new UserProfilePropertyView(this);
+            view.update(getString(R.string.age), String.valueOf(userProfileModel.getAge()));
+            vProfileProperties.addView(view);
+        }
+
+        if (userProfileModel.getHeight() > 0 && userProfileModel.getWeight() > 0) {
+            UserProfilePropertyView view = new UserProfilePropertyView(this);
+            view.update(getString(R.string.height_and_weight),
+                    String.format("%s / %s", userProfileModel.getHeight(), userProfileModel.getWeight()));
+            vProfileProperties.addView(view);
+        }
+
+        if (!TextUtils.isEmpty(userProfileModel.getEthinicityId())) {
+            UserProfilePropertyView view = new UserProfilePropertyView(this);
+            view.update(getString(R.string.ethnicity), userProfileModel.getEthinicityId());
+            vProfileProperties.addView(view);
+        }
+
+        if (!TextUtils.isEmpty(userProfileModel.getBodyTypeId())) {
+            UserProfilePropertyView view = new UserProfilePropertyView(this);
+            view.update(getString(R.string.body_type), userProfileModel.getBodyTypeId());
+            vProfileProperties.addView(view);
+        }
+
+        if (!TextUtils.isEmpty(userProfileModel.getMyTribesId())) {
+            UserProfilePropertyView view = new UserProfilePropertyView(this);
+            view.update(getString(R.string.my_tribes), userProfileModel.getMyTribesId());
+            vProfileProperties.addView(view);
+        }
+
+        if (!TextUtils.isEmpty(userProfileModel.getRelationshipStatusId())) {
+            UserProfilePropertyView view = new UserProfilePropertyView(this);
+            view.update(getString(R.string.relationship_status), userProfileModel.getRelationshipStatusId());
+            vProfileProperties.addView(view);
+        }
+
     }
 
     @Override

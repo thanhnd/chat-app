@@ -48,16 +48,16 @@
                 android:text="Online" />
 
             <ImageView
-                android:scaleType="center"
                 android:id="@+id/iv_favorite_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right"
                 android:layout_marginBottom="20dp"
                 android:layout_marginRight="10dp"
-                android:minWidth="42dp"
-                android:minHeight="42dp"
                 android:background="@null"
+                android:minHeight="42dp"
+                android:minWidth="42dp"
+                android:scaleType="center"
                 android:src="@drawable/ic_tab_favorite" />
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
@@ -76,155 +76,19 @@
                 android:id="@+id/v_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:orientation="vertical"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:background="@color/white"
                 tools:visibility="gone">
 
                 <LinearLayout
+                    android:id="@+id/v_profile_properties"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
-                    <TextView
-                        style="@style/form_label"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingBottom="20dp"
-                        android:paddingTop="20dp"
-                        android:text="@string/age" />
-
-                    <TextView
-                        android:id="@+id/tv_age"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        tools:text="20" />
                 </LinearLayout>
-
-                <include layout="@layout/layout_horizontal_divider" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/form_label"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingBottom="20dp"
-                        android:paddingTop="20dp"
-                        android:text="@string/height_and_weight" />
-
-                    <TextView
-                        android:id="@+id/tv_height_and_weight"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        tools:text="173 cm / 61 kg" />
-                </LinearLayout>
-
-                <include layout="@layout/layout_horizontal_divider" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/form_label"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingBottom="20dp"
-                        android:paddingTop="20dp"
-                        android:text="@string/ethnicity" />
-
-                    <TextView
-                        android:id="@+id/tv_ethnicity"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        tools:text="South Asian" />
-                </LinearLayout>
-
-                <include layout="@layout/layout_horizontal_divider" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/form_label"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingBottom="20dp"
-                        android:paddingTop="20dp"
-                        android:text="@string/body_type" />
-
-                    <TextView
-                        android:id="@+id/tv_body_type"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        tools:text="Average" />
-                </LinearLayout>
-
-                <include layout="@layout/layout_horizontal_divider" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/form_label"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingBottom="20dp"
-                        android:paddingTop="20dp"
-                        android:text="@string/my_tribes" />
-
-                    <TextView
-                        android:id="@+id/tv_my_tribes"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        tools:text="Bear" />
-                </LinearLayout>
-
-                <include layout="@layout/layout_horizontal_divider" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/form_label"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingBottom="20dp"
-                        android:paddingTop="20dp"
-                        android:text="@string/relationship_status" />
-
-                    <TextView
-                        android:id="@+id/tv_relationship_status"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        tools:text="Committed" />
-                </LinearLayout>
-
-                <include layout="@layout/layout_horizontal_divider" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -254,9 +118,9 @@
                 android:id="@+id/v_add_friend"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:padding="20dp"
-                android:visibility="gone"
-                android:orientation="vertical">
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -270,10 +134,10 @@
                         android:text="@string/write_your_greeting" />
 
                     <EditText
-                        android:hint="Please enter your greeting."
                         android:id="@+id/edt_greeting"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:hint="Please enter your greeting." />
 
                     <TextView
                         android:id="@+id/tv_limit_greeting"
