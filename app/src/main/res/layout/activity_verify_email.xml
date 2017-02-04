@@ -61,7 +61,7 @@
                 android:layout_marginBottom="12dp"
                 android:gravity="center"
                 android:text="@string/verify_email_code_label"
-                android:textColor="@color/purge"
+                android:textColor="@color/light_purge"
                 tools:text="sienna@app.com" />
         </LinearLayout>
 

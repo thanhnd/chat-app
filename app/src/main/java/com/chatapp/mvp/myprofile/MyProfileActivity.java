@@ -1,5 +1,6 @@
 package com.chatapp.mvp.myprofile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -11,17 +12,21 @@ import android.widget.TextView;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.updateprofile.UpdateProfileActivity;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.utils.AccountUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyProfileView, AppBarLayout.OnOffsetChangedListener {
 
     private static final int PERCENTAGE_TO_SHOW_IMAGE = 20;
+    private static final int RC_UPDATE_PROFILE = 1;
+
     @Bind(R.id.fab_edit)
-    View mFab;
+    View mFabEdit;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.appbar)
@@ -95,7 +100,7 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
         if (currentScrollPercentage >= PERCENTAGE_TO_SHOW_IMAGE) {
             if (!mIsImageHidden) {
                 mIsImageHidden = true;
-                ViewCompat.animate(mFab).scaleY(0).scaleX(0).start();
+                ViewCompat.animate(mFabEdit).scaleY(0).scaleX(0).start();
                 tvOnlineStatus.setVisibility(View.GONE);
             }
         }
@@ -103,9 +108,15 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
         if (currentScrollPercentage < PERCENTAGE_TO_SHOW_IMAGE) {
             if (mIsImageHidden) {
                 mIsImageHidden = false;
-                ViewCompat.animate(mFab).scaleY(1).scaleX(1).start();
+                ViewCompat.animate(mFabEdit).scaleY(1).scaleX(1).start();
                 tvOnlineStatus.setVisibility(View.VISIBLE);
             }
         }
+    }
+
+    @OnClick(R.id.fab_edit)
+    public void onClickEditFab() {
+        Intent intent = new Intent(this, UpdateProfileActivity.class);
+        startActivityForResult(intent, RC_UPDATE_PROFILE);
     }
 }

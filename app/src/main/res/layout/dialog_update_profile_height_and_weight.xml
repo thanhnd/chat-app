@@ -18,7 +18,7 @@
             android:layout_gravity="center"
             android:padding="10dp"
             android:text="@string/dialog_title_choose_height_and_weight"
-            android:textColor="@color/purge"
+            android:textColor="@color/light_purge"
             android:textSize="17sp" />
 
         <LinearLayout
@@ -69,7 +69,7 @@
                 android:padding="10dp"
                 android:text="@string/dialog_confirm_ok"
                 android:textAllCaps="true"
-                android:textColor="@color/purge"
+                android:textColor="@color/light_purge"
                 android:textSize="17sp" />
         </LinearLayout>
     </LinearLayout>

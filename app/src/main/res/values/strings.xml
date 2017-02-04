@@ -91,5 +91,29 @@
     <string name="list_country_hint_search">Search</string>
     <string name="no_name">No Name</string>
 
+    <string name="age">age</string>
+    <string name="display_name">display name</string>
+    <string name="height_and_weight">height and weight</string>
+    <string name="ethnicity">ethnicity</string>
+    <string name="body_type">body type</string>
+    <string name="my_tribes">my tribes</string>
+    <string name="relationship_status">relationship status</string>
+    <string name="city">city</string>
+    <string name="state_province">state/province</string>
+    <string name="country_region">country/region</string>
+    <string name="link_your_networks">Link Your Networks</string>
+    <string name="link_your_networks_description">You can always access archived conversations later</string>
+    <string name="facebook">facebook</string>
+    <string name="facebook_hint">Enter your facebook username</string>
+    <string name="google">google+</string>
+    <string name="google_hint">Enter your Google+ handler</string>
+    <string name="twitter">twitter</string>
+    <string name="twitter_hint">Enter your Twitter handler</string>
+    <string name="instagram">instagram</string>
+    <string name="instagram_hint">Enter your Instagram username</string>
+    <string name="linkedin">linkedin</string>
+    <string name="linkedin_hint">Enter your LinkedIn username</string>
+    <string name="save_changes">Save Changes</string>
+
 
 </resources>

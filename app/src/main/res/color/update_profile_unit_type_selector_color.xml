@@ -5,5 +5,5 @@
       android:color="@color/white"/>
   <item
       android:state_checked="false"
-      android:color="@color/purge"/>
+      android:color="@color/light_purge"/>
 </selector>

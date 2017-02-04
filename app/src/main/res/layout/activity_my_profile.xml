@@ -238,7 +238,7 @@
         android:elevation="8dp"
         android:src="@drawable/ic_adb_edit"
         android:tint="@color/white"
-        app:backgroundTint="@color/purge"
+        app:backgroundTint="@color/light_purge"
         app:layout_anchor="@id/tv_online_status"
         app:layout_anchorGravity="right"
         tools:ignore="RtlHardcoded" />

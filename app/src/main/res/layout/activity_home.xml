@@ -70,7 +70,7 @@
         android:layout_marginBottom="30dp"
         android:src="@drawable/ic_filter"
         android:tint="@color/white"
-        app:backgroundTint="@color/purge"
+        app:backgroundTint="@color/light_purge"
         app:layout_anchor="@id/v_content"
         app:layout_anchorGravity="bottom|right|end" />
 

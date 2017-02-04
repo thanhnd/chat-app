@@ -47,6 +47,7 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".mvp.userprofile.UserProfileActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".mvp.updateprofile.UpdateProfileActivity" />
     </application>
 
 </manifest>

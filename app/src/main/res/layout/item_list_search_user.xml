@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="4dp"
             android:gravity="center"
-            android:textColor="@color/purge"
+            android:textColor="@color/light_purge"
             android:textSize="10sp" />
 
     </LinearLayout>
