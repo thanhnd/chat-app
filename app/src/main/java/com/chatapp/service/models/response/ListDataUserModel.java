@@ -9,7 +9,7 @@ import java.util.List;
  * Created by thanhnguyen on 1/6/17.
  */
 
-public class ListNearByModel {
+public class ListDataUserModel {
     @SerializedName("total_page")
     @Expose
     private int totalPage;

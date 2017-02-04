@@ -3,7 +3,7 @@ package com.chatapp.mvp.listnearby;
 import com.chatapp.mvp.base.BaseView;
 import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.request.ListNearbyRequest;
-import com.chatapp.service.models.response.ListNearByModel;
+import com.chatapp.service.models.response.ListDataUserModel;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserModel;
@@ -19,12 +19,12 @@ public interface ListNearbyMvp {
     }
 
     interface Interactor {
-        void getListNearBy(ListNearbyRequest request, AuthorizeApiCallback<ResponseModel<ListNearByModel>> callback);
+        void getListNearBy(ListNearbyRequest request, AuthorizeApiCallback<ResponseModel<ListDataUserModel>> callback);
         void getMyProfile(AuthorizeApiCallback<ResponseModel<MyProfileModel>> callback);
     }
 
     interface View extends BaseView {
-        void onGetListNearbySuccess(ListNearByModel resultSet);
+        void onGetListNearbySuccess(ListDataUserModel resultSet);
         void onGetMyProfileSuccess(MyProfileModel myProfileModel);
         void navigateToMyProfile();
         void navigateToUserProfile(UserModel userModel);

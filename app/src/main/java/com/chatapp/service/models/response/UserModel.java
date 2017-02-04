@@ -11,6 +11,11 @@ import java.io.Serializable;
 
 public class UserModel implements Serializable {
 
+    private static final int IS_FAVORITE = 1;
+    private static final int FRIEND_STATUS_NOT_FRIEND = 0;
+    private static final int FRIEND_STATUS_HAS_REQUESTED = 1;
+    private static final int FRIEND_STATUS_IS_FRIEND = 2;
+    private static final int IS_ONLINE = 1;
     @SerializedName("user_id")
     @Expose
     private String userId;
@@ -25,13 +30,17 @@ public class UserModel implements Serializable {
     private int feetAway;
     @SerializedName("is_friend")
     @Expose
-    private boolean isFriend;
+    private int isFriend;
     @SerializedName("is_favourite")
     @Expose
-    private boolean isFavourite;
+    private int isFavourite;
     @SerializedName("is_online")
     @Expose
-    private boolean isOnline;
+    private int isOnline;
+
+    @SerializedName("noted")
+    @Expose
+    private String noted;
 
     public String getUserId() {
         return userId;
@@ -66,27 +75,37 @@ public class UserModel implements Serializable {
     }
 
     public boolean isFriend() {
-        return isFriend;
+        return isFriend == FRIEND_STATUS_IS_FRIEND;
+    }
+    public boolean isRequestedFriend() {
+        return isFriend == FRIEND_STATUS_HAS_REQUESTED;
     }
 
-    public void setIsFriend(boolean isFriend) {
+    public void setIsFriend(int isFriend) {
         this.isFriend = isFriend;
     }
 
     public boolean isFavourite() {
-        return isFavourite;
+        return isFavourite == IS_FAVORITE;
     }
 
-    public void setIsFavourite(boolean isFavourite) {
+    public void setIsFavourite(int isFavourite) {
         this.isFavourite = isFavourite;
     }
 
     public boolean isOnline() {
-        return isOnline;
+        return isOnline == IS_ONLINE;
     }
 
-    public void setIsOnline(boolean isOnline) {
+    public void setIsOnline(int isOnline) {
         this.isOnline = isOnline;
     }
 
+    public String getNoted() {
+        return noted;
+    }
+
+    public void setNoted(String noted) {
+        this.noted = noted;
+    }
 }

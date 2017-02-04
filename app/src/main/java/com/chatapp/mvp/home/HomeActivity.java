@@ -13,6 +13,7 @@ import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.listfavorites.ListFavoritesFragment;
 import com.chatapp.mvp.listnearby.ListNearbyFragment;
+import com.chatapp.mvp.listrecommendedfriends.ListRecommendedFriendsActivity;
 import com.chatapp.mvp.searchuser.SearchActivity;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -84,6 +85,12 @@ public class HomeActivity extends BaseActivity {
     @OnClick(R.id.ib_search)
     public void clickSearch() {
         Intent intent = new Intent(this, SearchActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.ib_add_friend)
+    public void clickAddFriends() {
+        Intent intent = new Intent(this, ListRecommendedFriendsActivity.class);
         startActivity(intent);
     }
 

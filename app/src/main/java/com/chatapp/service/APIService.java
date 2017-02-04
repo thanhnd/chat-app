@@ -8,7 +8,7 @@ import com.chatapp.service.models.request.RegisterRequest;
 import com.chatapp.service.models.request.UserRequest;
 import com.chatapp.service.models.request.VerifyEmailRequest;
 import com.chatapp.service.models.response.CountryModel;
-import com.chatapp.service.models.response.ListNearByModel;
+import com.chatapp.service.models.response.ListDataUserModel;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.RegisterModel;
@@ -65,7 +65,7 @@ public interface ApiService {
 
     @Headers("Content-Type: application/json")
     @POST("/api/profile/listNearBy")
-    Call<ResponseModel<ListNearByModel>> listNearby(@Header("Authorization") String authorization, @Body ListNearbyRequest request);
+    Call<ResponseModel<ListDataUserModel>> listNearby(@Header("Authorization") String authorization, @Body ListNearbyRequest request);
 
     @Headers("Content-Type: application/json")
     @GET("/api/profile/listFavourite")
@@ -90,5 +90,13 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("/api/profile/addFriend")
     Call<ResponseModel<Object>> requestAddFriend(@Header("Authorization") String authorization, @Body UserRequest request);
+
+    @Headers("Content-Type: application/json")
+    @GET("/api/profile/listRecommendFriend")
+    Call<ResponseModel<List<UserModel>>> listRecommendedFriends(@Header("Authorization") String authorization);
+
+    @Headers("Content-Type: application/json")
+    @POST   ("/api/profile/acceptFriend")
+    Call<ResponseModel<Object>> acceptFriendRequest(@Header("Authorization") String authorization, @Body UserRequest request);
 
 }
