@@ -5,6 +5,7 @@ import com.chatapp.service.models.request.ListNearbyRequest;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserModel;
+import com.chatapp.utils.AccountUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -29,8 +30,11 @@ public class PresentImpl implements ListNearbyMvp.Present {
     @Override
     public void getListNearBy() {
         ListNearbyRequest request = new ListNearbyRequest();
-        request.setLongitude(106.628424);
-        request.setLatitude(10.806144);
+        if (AccountUtils.getLongitude() != null && AccountUtils.getLongitude() != null) {
+            request.setLongitude(AccountUtils.getLongitude());
+            request.setLatitude(AccountUtils.getLatitude());
+        }
+
         interactor.getListNearBy(request, new AuthorizeApiCallback<ResponseModel<List<UserModel>>>() {
             @Override
             public void onSuccess(ResponseModel<List<UserModel>> response) {

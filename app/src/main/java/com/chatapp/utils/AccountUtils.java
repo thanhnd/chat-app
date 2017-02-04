@@ -19,6 +19,8 @@ public class AccountUtils {
     static private LogInModel logInModel;
     private static MyProfileModel myProfileModel;
 
+    static private Double longitude;
+    static private Double latitude;
 
     public static LogInModel getLogInModel() {
         return logInModel;
@@ -78,5 +80,21 @@ public class AccountUtils {
 
     public static MyProfileModel getMyProfileModel() {
         return myProfileModel;
+    }
+
+    public static Double getLongitude() {
+        return longitude;
+    }
+
+    public static void setLongitude(Double longitude) {
+        AccountUtils.longitude = longitude;
+    }
+
+    public static Double getLatitude() {
+        return latitude;
+    }
+
+    public static void setLatitude(Double latitude) {
+        AccountUtils.latitude = latitude;
     }
 }

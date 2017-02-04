@@ -25,6 +25,7 @@ import com.chatapp.mvp.listfriends.ListFriendsFragment;
 import com.chatapp.mvp.listnearby.ListNearbyFragment;
 import com.chatapp.mvp.listrecommendedfriends.ListRecommendedFriendsActivity;
 import com.chatapp.mvp.searchuser.SearchActivity;
+import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.Log;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -188,6 +189,10 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
         if (mLastLocation != null) {
+
+            AccountUtils.setLatitude(mLastLocation.getLatitude());
+            AccountUtils.setLongitude(mLastLocation.getLongitude());
+
             Log.d("Latitude:" + mLastLocation.getLatitude() + ", Longitude:" + mLastLocation.getLongitude());
 
             present.updateLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude());

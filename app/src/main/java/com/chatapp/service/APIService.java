@@ -104,7 +104,7 @@ public interface ApiService {
     Call<ResponseModel<Object>> acceptFriendRequest(@Header("Authorization") String authorization, @Body UserRequest request);
 
     @Headers("Content-Type: application/json")
-    @POST("/api/profile/updateLonLat")
+    @POST("/api/user/updateLonLat")
     Call<ResponseModel<Object>> updateLonLat(@Header("Authorization") String authorization, @Body Map request);
 
 }
