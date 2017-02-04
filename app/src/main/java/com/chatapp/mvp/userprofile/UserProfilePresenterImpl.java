@@ -77,4 +77,37 @@ public class UserProfilePresenterImpl implements UserProfileMvp.UserProfilePrese
             }
         });
     }
+
+    @Override
+    public void requestAddFriend(String userId, String noted) {
+        interactor.requestAddFriend(userId, noted, new AuthorizeApiCallback<ResponseModel<Object>>() {
+            @Override
+            public void onSuccess(ResponseModel<Object> response) {
+                if (view.get() != null) {
+                    view.get().onRequestAddFriendSuccess();
+                }
+            }
+
+            @Override
+            public void onFail(Response<ResponseModel<Object>> response) {
+                if (view.get() != null) {
+                    view.get().onRequestAddFriendFail();
+                }
+            }
+
+            @Override
+            public void onFail(Call<ResponseModel<Object>> call, Throwable throwable) {
+                if (view.get() != null) {
+                    view.get().onRequestAddFriendFail();
+                }
+            }
+
+            @Override
+            public void onTokenExpired() {
+                if (view.get() != null) {
+                    view.get().onTokenExpired();
+                }
+            }
+        });
+    }
 }

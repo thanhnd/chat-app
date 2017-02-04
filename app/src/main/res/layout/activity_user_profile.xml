@@ -48,12 +48,15 @@
                 android:text="Online" />
 
             <ImageView
+                android:scaleType="center"
                 android:id="@+id/iv_favorite_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right"
                 android:layout_marginBottom="20dp"
                 android:layout_marginRight="10dp"
+                android:minWidth="42dp"
+                android:minHeight="42dp"
                 android:background="@null"
                 android:src="@drawable/ic_tab_favorite" />
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -267,7 +270,6 @@
                         android:text="@string/write_your_greeting" />
 
                     <EditText
-                        style="@style/App_EditTextStyle"
                         android:hint="Please enter your greeting."
                         android:id="@+id/edt_greeting"
                         android:layout_width="match_parent"

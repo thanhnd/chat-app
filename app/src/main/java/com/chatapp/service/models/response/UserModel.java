@@ -65,7 +65,7 @@ public class UserModel implements Serializable {
         this.feetAway = feetAway;
     }
 
-    public boolean isIsFriend() {
+    public boolean isFriend() {
         return isFriend;
     }
 

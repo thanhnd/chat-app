@@ -185,11 +185,6 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
         present.addUserFavorite(userModel.getUserId());
     }
 
-    @OnClick(R.id.ib_chat)
-    void onClickChat() {
-        showAddFriendView();
-    }
-
     @Override
     public void onBackPressed() {
         if (isShowAddFriend) {
@@ -214,15 +209,53 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
         vAction.setVisibility(View.VISIBLE);
     }
 
+    @OnClick(R.id.ib_chat)
+    void onClickChat() {
+        if (!userModel.isFriend()) {
+            showAddFriendView();
+
+        }
+    }
+
     @OnClick(R.id.ib_call)
     void onClickCall() {
+        if (!userModel.isFriend()) {
+            showAddFriendView();
+
+        }
     }
 
     @OnClick(R.id.ib_video)
     void onClickVideo() {
+        if (!userModel.isFriend()) {
+            showAddFriendView();
+        }
     }
+
+    @OnClick(R.id.btn_add_friend)
+    void onClickAddFriend() {
+        if (!userModel.isFriend()) {
+            String strGreeting = edtGreeting.getText().toString();
+            strGreeting = strGreeting.trim();
+            if (!TextUtils.isEmpty(strGreeting)) {
+                present.requestAddFriend(userModel.getUserId(), strGreeting);
+            }
+        }
+    }
+
     @Override
     public void onAddUserFavoriteSuccess() {
         ivFavoriteStatus.setImageResource(R.drawable.ic_status_favorite_yes);
+    }
+
+    @Override
+    public void onRequestAddFriendSuccess() {
+        showDialog("Friend request", "Friend request sent. Awaiting response");
+        onBackPressed();
+    }
+
+    @Override
+    public void onRequestAddFriendFail() {
+
     }
 }

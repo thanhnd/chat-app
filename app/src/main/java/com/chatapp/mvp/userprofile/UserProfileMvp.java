@@ -11,17 +11,31 @@ import com.chatapp.service.models.response.UserProfileModel;
 
 public interface UserProfileMvp {
     interface UserProfileInteractor {
+
         void getUserProfile(String userId, AuthorizeApiCallback<ResponseModel<UserProfileModel>> callback);
+
         void addUserFavorite(String userId, AuthorizeApiCallback<ResponseModel<Object>> callback);
+
+        void requestAddFriend(String userId, String noted, AuthorizeApiCallback<ResponseModel<Object>> callback);
     }
 
     interface UserProfilePresent {
+
         void getUserProfile(String userId);
+
         void addUserFavorite(String userId);
+
+        void requestAddFriend(String userId, String noted);
     }
 
     interface UserProfileView extends BaseView {
+
         void onGetUserProfileSuccess(UserProfileModel userProfileModel);
+
         void onAddUserFavoriteSuccess();
+
+        void onRequestAddFriendSuccess();
+
+        void onRequestAddFriendFail();
     }
 }

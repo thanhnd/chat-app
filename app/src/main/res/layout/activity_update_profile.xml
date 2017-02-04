@@ -77,7 +77,7 @@
 
                 <TextView
                     android:id="@+id/tv_age"
-                    style="@style/App_EditTextStyle.NoBackground"
+                    style="@style/App_EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="20" />
@@ -99,7 +99,7 @@
 
                 <TextView
                     android:id="@+id/tv_height_and_weight"
-                    style="@style/App_EditTextStyle.NoBackground"
+                    style="@style/App_EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="173 / 61" />
@@ -121,7 +121,7 @@
 
                 <TextView
                     android:id="@+id/tv_ethnicity"
-                    style="@style/App_EditTextStyle.NoBackground"
+                    style="@style/App_EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="South Asian" />
@@ -143,7 +143,7 @@
 
                 <TextView
                     android:id="@+id/tv_body_type"
-                    style="@style/App_EditTextStyle.NoBackground"
+                    style="@style/App_EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="Average" />
@@ -165,7 +165,7 @@
 
                 <TextView
                     android:id="@+id/tv_my_tribes"
-                    style="@style/App_EditTextStyle.NoBackground"
+                    style="@style/App_EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="Bear" />
@@ -187,7 +187,7 @@
 
                 <TextView
                     android:id="@+id/tv_relationship_status"
-                    style="@style/App_EditTextStyle.NoBackground"
+                    style="@style/App_EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="Committed" />
@@ -209,7 +209,7 @@
 
                 <TextView
                     android:id="@+id/edt_city"
-                    style="@style/App_EditTextStyle.NoBackground"
+                    style="@style/App_EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="Ho Chi Minh city" />
@@ -231,7 +231,7 @@
 
                 <TextView
                     android:id="@+id/tv_country_region"
-                    style="@style/App_EditTextStyle.NoBackground"
+                    style="@style/App_EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="USA" />

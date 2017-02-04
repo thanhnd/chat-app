@@ -12,8 +12,16 @@ public class UserRequest {
     @Expose
     private String userId;
 
+    @SerializedName("noted")
+    @Expose
+    private String noted;
+
     public UserRequest(String userId) {
         this.userId = userId;
+    }
+    public UserRequest(String userId, String noted) {
+        this.userId = userId;
+        this.noted = noted;
     }
 
     public String getUserId() {
