@@ -14,9 +14,6 @@ public class ListNearbyRequest {
     @SerializedName("latitude")
     @Expose
     private double latitude;
-    @SerializedName("page")
-    @Expose
-    private int page;
 
     public double getLongitude() {
         return longitude;
@@ -34,11 +31,4 @@ public class ListNearbyRequest {
         this.latitude = latitude;
     }
 
-    public int getPage() {
-        return page;
-    }
-
-    public void setPage(int page) {
-        this.page = page;
-    }
 }

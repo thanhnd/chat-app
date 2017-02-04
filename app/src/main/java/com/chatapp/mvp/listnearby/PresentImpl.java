@@ -2,11 +2,12 @@ package com.chatapp.mvp.listnearby;
 
 import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.request.ListNearbyRequest;
-import com.chatapp.service.models.response.ListDataUserModel;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.ResponseModel;
+import com.chatapp.service.models.response.UserModel;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -28,24 +29,23 @@ public class PresentImpl implements ListNearbyMvp.Present {
     @Override
     public void getListNearBy() {
         ListNearbyRequest request = new ListNearbyRequest();
-        request.setLongitude(0);
-        request.setLatitude(20);
-        request.setPage(0);
-        interactor.getListNearBy(request, new AuthorizeApiCallback<ResponseModel<ListDataUserModel>>() {
+        request.setLongitude(106.628424);
+        request.setLatitude(10.806144);
+        interactor.getListNearBy(request, new AuthorizeApiCallback<ResponseModel<List<UserModel>>>() {
             @Override
-            public void onSuccess(ResponseModel<ListDataUserModel> response) {
+            public void onSuccess(ResponseModel<List<UserModel>> response) {
                 if (view.get() != null) {
                     view.get().onGetListNearbySuccess(response.getResultSet());
                 }
             }
 
             @Override
-            public void onFail(Response<ResponseModel<ListDataUserModel>> response) {
+            public void onFail(Response<ResponseModel<List<UserModel>>> response) {
 
             }
 
             @Override
-            public void onFail(Call<ResponseModel<ListDataUserModel>> call, Throwable throwable) {
+            public void onFail(Call<ResponseModel<List<UserModel>>> call, Throwable throwable) {
 
             }
 

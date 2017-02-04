@@ -8,7 +8,6 @@ import com.chatapp.service.models.request.RegisterRequest;
 import com.chatapp.service.models.request.UserRequest;
 import com.chatapp.service.models.request.VerifyEmailRequest;
 import com.chatapp.service.models.response.CountryModel;
-import com.chatapp.service.models.response.ListDataUserModel;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.RegisterModel;
@@ -65,7 +64,7 @@ public interface ApiService {
 
     @Headers("Content-Type: application/json")
     @POST("/api/profile/listNearBy")
-    Call<ResponseModel<ListDataUserModel>> listNearby(@Header("Authorization") String authorization, @Body ListNearbyRequest request);
+    Call<ResponseModel<List<UserModel>>> listNearby(@Header("Authorization") String authorization, @Body ListNearbyRequest request);
 
     @Headers("Content-Type: application/json")
     @GET("/api/profile/listFavourite")

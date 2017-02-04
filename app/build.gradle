@@ -44,6 +44,6 @@ dependencies {
     compile 'me.relex:circleindicator:1.2.2@aar'
     compile 'com.roughike:bottom-bar:2.0.2'
     compile 'com.squareup.picasso:picasso:2.5.2'
-
+    compile 'com.google.android.gms:play-services:10.0.1'
     testCompile 'junit:junit:4.12'
 }

@@ -13,11 +13,12 @@ import com.chatapp.R;
 import com.chatapp.mvp.base.BaseFragment;
 import com.chatapp.mvp.myprofile.MyProfileActivity;
 import com.chatapp.mvp.userprofile.UserProfileActivity;
-import com.chatapp.service.models.response.ListDataUserModel;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.ItemOffsetDecoration;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -68,8 +69,8 @@ public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.Vi
     }
 
     @Override
-    public void onGetListNearbySuccess(ListDataUserModel resultSet) {
-        adapter.add(resultSet.getUserModels());
+    public void onGetListNearbySuccess(List<UserModel> userModels) {
+        adapter.add(userModels);
     }
 
     @Override

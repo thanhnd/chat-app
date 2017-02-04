@@ -3,13 +3,15 @@ package com.chatapp.mvp.listnearby;
 import com.chatapp.service.ApiService;
 import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.request.ListNearbyRequest;
-import com.chatapp.service.models.response.ListDataUserModel;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.RegisterModel;
 import com.chatapp.service.models.response.ResponseModel;
+import com.chatapp.service.models.response.UserModel;
 import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.Log;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,19 +22,19 @@ import retrofit2.Response;
  */
 public class InteractorImpl implements ListNearbyMvp.Interactor {
     @Override
-    public void getListNearBy(final ListNearbyRequest request, final AuthorizeApiCallback<ResponseModel<ListDataUserModel>> callback) {
+    public void getListNearBy(final ListNearbyRequest request, final AuthorizeApiCallback<ResponseModel<List<UserModel>>> callback) {
         LogInModel logInModel = AccountUtils.getLogInModel();
         if (logInModel == null) {
             return;
         }
         String authorization = logInModel.getToken();
         ApiService service = ApiService.retrofit.create(ApiService.class);
-        Call<ResponseModel<ListDataUserModel>> call = service.listNearby(authorization, request);
-        call.enqueue(new Callback<ResponseModel<ListDataUserModel>>() {
+        Call<ResponseModel<List<UserModel>>> call = service.listNearby(authorization, request);
+        call.enqueue(new Callback<ResponseModel<List<UserModel>>>() {
             @Override
-            public void onResponse(Call<ResponseModel<ListDataUserModel>> call, Response<ResponseModel<ListDataUserModel>> response) {
+            public void onResponse(Call<ResponseModel<List<UserModel>>> call, Response<ResponseModel<List<UserModel>>> response) {
                 Log.i(response.raw().toString());
-                ResponseModel<ListDataUserModel> responseModel = response.body();
+                ResponseModel<List<UserModel>> responseModel = response.body();
                 if (callback != null) {
                     if (response.isSuccessful() && responseModel != null) {
                         if (responseModel.getResponseCd() == RegisterModel.RESPONSE_CD_SUCCESS) {
@@ -47,7 +49,7 @@ public class InteractorImpl implements ListNearbyMvp.Interactor {
             }
 
             @Override
-            public void onFailure(Call<ResponseModel<ListDataUserModel>> call, Throwable t) {
+            public void onFailure(Call<ResponseModel<List<UserModel>>> call, Throwable t) {
                 if (callback != null) {
                     callback.onFail(call, t);
                 }

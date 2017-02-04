@@ -1,13 +1,22 @@
 package com.chatapp.mvp.home;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
@@ -16,6 +25,10 @@ import com.chatapp.mvp.listfriends.ListFriendsFragment;
 import com.chatapp.mvp.listnearby.ListNearbyFragment;
 import com.chatapp.mvp.listrecommendedfriends.ListRecommendedFriendsActivity;
 import com.chatapp.mvp.searchuser.SearchActivity;
+import com.chatapp.utils.Log;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -23,8 +36,9 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class HomeActivity extends BaseActivity {
+public class HomeActivity extends BaseActivity implements LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
+    private static final int PERMISSION_ACCESS_COARSE_LOCATION = 100;
     @Bind(R.id.main_tool_bar)
     Toolbar toolbar;
 
@@ -33,6 +47,8 @@ public class HomeActivity extends BaseActivity {
 
     @Bind(R.id.bottomBar)
     BottomBar bottomBar;
+
+    private GoogleApiClient mGoogleApiClient;
 
 
     @Override
@@ -75,6 +91,22 @@ public class HomeActivity extends BaseActivity {
                 }
             }
         });
+
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                    PERMISSION_ACCESS_COARSE_LOCATION);
+        }
+
+
     }
 
     private void switchFragment(Fragment fragment) {
@@ -102,5 +134,84 @@ public class HomeActivity extends BaseActivity {
         // Necessary to restore the BottomBar's state, otherwise we would
         // lose the current tab on orientation change.
         bottomBar.onSaveInstanceState();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_ACCESS_COARSE_LOCATION:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (mGoogleApiClient == null) {
+                        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                                .addConnectionCallbacks(this)
+                                .addOnConnectionFailedListener(this)
+                                .addApi(LocationServices.API)
+                                .build();
+                    }
+                } else {
+                    Toast.makeText(this, "Need your location!", Toast.LENGTH_SHORT).show();
+                }
+
+                break;
+        }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        Log.w("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+        Log.w("Latitude disable");
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+        Log.w("Latitude enable");
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        Log.w("Latitude status: " + status);
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (mLastLocation != null) {
+            Log.w("Latitude:" + mLastLocation.getLatitude() + ", Longitude:" + mLastLocation.getLongitude());
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    protected void onStart() {
+        mGoogleApiClient.connect();
+        super.onStart();
+    }
+
+    protected void onStop() {
+        mGoogleApiClient.disconnect();
+        super.onStop();
     }
 }
