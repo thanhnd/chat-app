@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
 
 public class ListFavoritesFragment extends BaseFragment implements ListFavorites.View{
 
-    @Bind(R.id.rv_list_nearby)
+    @Bind(R.id.rv_list_users)
     RecyclerView rvNearby;
 
     private ListFavoritesAdapter adapter;

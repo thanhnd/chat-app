@@ -97,6 +97,10 @@ public class UserModel implements Serializable {
         return isOnline == IS_ONLINE;
     }
 
+    public String getOnlineStatus() {
+        return isOnline()? "Online" : "Offline";
+    }
+
     public void setIsOnline(int isOnline) {
         this.isOnline = isOnline;
     }

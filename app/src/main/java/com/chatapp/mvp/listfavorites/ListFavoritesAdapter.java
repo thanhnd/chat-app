@@ -29,10 +29,6 @@ public class ListFavoritesAdapter extends RecyclerView.Adapter<ListFavoritesAdap
     private Context context;
     private OnUserProfileItemClick onUserProfileItemClick;
 
-    public OnUserProfileItemClick getOnUserProfileItemClick() {
-        return onUserProfileItemClick;
-    }
-
     public void setOnUserProfileItemClick(OnUserProfileItemClick onUserProfileItemClick) {
         this.onUserProfileItemClick = onUserProfileItemClick;
     }
@@ -71,7 +67,7 @@ public class ListFavoritesAdapter extends RecyclerView.Adapter<ListFavoritesAdap
         final UserModel userModel = mDataset.get(position);
         String name = TextUtils.isEmpty(userModel.getDisplayName()) ? "No name" : userModel.getDisplayName();
         holder.tvName.setText(name);
-        holder.tvOnlineStatus.setText(userModel.isOnline() ? "Online" : "Offline");
+        holder.tvOnlineStatus.setText(userModel.getOnlineStatus());
         holder.tvOnlineStatus.setEnabled(userModel.isOnline());
         Picasso.with(context)
                 .load(userModel.getAvatar())

@@ -26,8 +26,8 @@ import butterknife.ButterKnife;
 
 public class ListFavoritesFragment extends BaseFragment implements ListFavoritesMvp.View{
 
-    @Bind(R.id.rv_list_nearby)
-    RecyclerView rvNearby;
+    @Bind(R.id.rv_list_users)
+    RecyclerView recyclerView;
 
     private ListFavoritesAdapter adapter;
 
@@ -36,13 +36,13 @@ public class ListFavoritesFragment extends BaseFragment implements ListFavorites
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list_nearby, container, false);
+        View view = inflater.inflate(R.layout.fragment_list_favorites, container, false);
 
         ButterKnife.bind(this, view);
-        rvNearby.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
-        rvNearby.setLayoutManager(layoutManager);
-        rvNearby.addItemDecoration(new ItemOffsetDecoration(getContext(), R.dimen.list_item_space));
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new ItemOffsetDecoration(getContext(), R.dimen.list_item_space));
         adapter = new ListFavoritesAdapter(getContext());
         adapter.setOnUserProfileItemClick(new ListFavoritesAdapter.OnUserProfileItemClick() {
             @Override
@@ -50,7 +50,7 @@ public class ListFavoritesFragment extends BaseFragment implements ListFavorites
                 navigateToUserProfile(userModel);
             }
         });
-        rvNearby.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
         present = new PresentImpl(this);
 
         present.getListFavorites();

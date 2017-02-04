@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.listfavorites.ListFavoritesFragment;
+import com.chatapp.mvp.listfriends.ListFriendsFragment;
 import com.chatapp.mvp.listnearby.ListNearbyFragment;
 import com.chatapp.mvp.listrecommendedfriends.ListRecommendedFriendsActivity;
 import com.chatapp.mvp.searchuser.SearchActivity;
@@ -65,7 +66,7 @@ public class HomeActivity extends BaseActivity {
                         break;
                     case R.id.tab_item_friends:
                         switchFragment(Fragment.instantiate(HomeActivity.this,
-                                LisFriendsFragment.class.getName()));
+                                ListFriendsFragment.class.getName()));
                         break;
                     case R.id.tab_item_favorites:
                         switchFragment(Fragment.instantiate(HomeActivity.this,

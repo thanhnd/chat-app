@@ -27,7 +27,7 @@ public class InteractorImpl implements ListFriendsMvp.Interactor {
         }
         String authorization = logInModel.getToken();
         ApiService service = ApiService.retrofit.create(ApiService.class);
-        Call<ResponseModel<List<UserModel>>> call = service.listFavorites(authorization);
+        Call<ResponseModel<List<UserModel>>> call = service.listFriends(authorization);
         call.enqueue(new Callback<ResponseModel<List<UserModel>>>() {
             @Override
             public void onResponse(Call<ResponseModel<List<UserModel>>> call, Response<ResponseModel<List<UserModel>>> response) {

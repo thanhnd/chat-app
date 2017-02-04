@@ -1,5 +1,6 @@
 package com.chatapp.mvp.listfriends;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseFragment;
+import com.chatapp.mvp.userprofile.UserProfileActivity;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.utils.ItemOffsetDecoration;
 
@@ -24,8 +26,8 @@ import butterknife.ButterKnife;
 
 public class ListFriendsFragment extends BaseFragment implements ListFriendsMvp.View {
 
-    @Bind(R.id.rv_list_nearby)
-    RecyclerView rvNearby;
+    @Bind(R.id.rv_list_users)
+    RecyclerView recyclerView;
 
     private ListFriendsAdapter adapter;
 
@@ -34,17 +36,22 @@ public class ListFriendsFragment extends BaseFragment implements ListFriendsMvp.
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list_nearby, container, false);
+        View view = inflater.inflate(R.layout.fragment_list_friends, container, false);
 
         ButterKnife.bind(this, view);
-        rvNearby.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
-        rvNearby.setLayoutManager(layoutManager);
-        rvNearby.addItemDecoration(new ItemOffsetDecoration(getContext(), R.dimen.list_item_space));
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new ItemOffsetDecoration(getContext(), R.dimen.list_item_space));
         adapter = new ListFriendsAdapter(getContext());
-        rvNearby.setAdapter(adapter);
+        adapter.setOnUserProfileItemClick(new ListFriendsAdapter.OnUserProfileItemClick() {
+            @Override
+            public void onItemClick(UserModel userModel) {
+                navigateToUserProfile(userModel);
+            }
+        });
+        recyclerView.setAdapter(adapter);
         present = new PresentImpl(this);
-
 
         present.getListFriends();
 
@@ -56,4 +63,10 @@ public class ListFriendsFragment extends BaseFragment implements ListFriendsMvp.
         adapter.add(resultSet);
     }
 
+    @Override
+    public void navigateToUserProfile(UserModel userModel) {
+        Intent intent = new Intent(getContext(), UserProfileActivity.class);
+        intent.putExtra(UserProfileActivity.EXTRA_USER_MODEL, userModel);
+        startActivity(intent);
+    }
 }

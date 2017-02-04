@@ -22,7 +22,7 @@ public interface ListFriendsMvp {
 
     interface View extends BaseView {
         void onGetListFriendsSuccess(List<UserModel> resultSet);
+
+        void navigateToUserProfile(UserModel userModel);
     }
-
-
 }

@@ -28,8 +28,8 @@ import butterknife.ButterKnife;
 
 public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.View {
 
-    @Bind(R.id.rv_list_nearby)
-    RecyclerView rvNearby;
+    @Bind(R.id.rv_list_users)
+    RecyclerView recyclerView;
 
     private ListNearbyAdapter adapter;
     private ListNearbyMvp.Present present;
@@ -41,10 +41,10 @@ public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.Vi
         View view = inflater.inflate(R.layout.fragment_list_nearby, container, false);
 
         ButterKnife.bind(this, view);
-        rvNearby.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
-        rvNearby.setLayoutManager(layoutManager);
-        rvNearby.addItemDecoration(new ItemOffsetDecoration(getContext(), R.dimen.list_item_space));
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.addItemDecoration(new ItemOffsetDecoration(getContext(), R.dimen.list_item_space));
         adapter = new ListNearbyAdapter(getContext());
         adapter.setOnMyProfileItemClick(new ListNearbyAdapter.OnMyProfileItemClick() {
             @Override
@@ -58,7 +58,7 @@ public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.Vi
                 navigateToUserProfile(userModel);
             }
         });
-        rvNearby.setAdapter(adapter);
+        recyclerView.setAdapter(adapter);
 
         present = new PresentImpl(this);
         present.getListNearBy();
