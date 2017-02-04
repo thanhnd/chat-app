@@ -114,6 +114,9 @@
     <string name="linkedin">linkedin</string>
     <string name="linkedin_hint">Enter your LinkedIn username</string>
     <string name="save_changes">Save Changes</string>
+    <string name="add_friend">Add Friend</string>
+    <string name="write_your_greeting">Write your greeting</string>
+    <string name="find_me_on">find me on</string>
 
 
 </resources>

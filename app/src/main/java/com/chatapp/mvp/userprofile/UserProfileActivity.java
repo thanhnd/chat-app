@@ -8,8 +8,13 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +28,8 @@ import com.chatapp.utils.AccountUtils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+import static com.chatapp.Config.LIMIT_ADD_FRIEND_GREETING_CHARACTER;
 
 public class UserProfileActivity extends BaseActivity implements UserProfileMvp.UserProfileView,
         AppBarLayout.OnOffsetChangedListener{
@@ -51,6 +58,25 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
     @Bind(R.id.tv_relationship_status)
     TextView tvRelationshipStatus;
 
+    @Bind(R.id.ib_chat)
+    ImageButton ibChat;
+    @Bind(R.id.ib_call)
+    ImageButton ibCall;
+    @Bind(R.id.ib_video)
+    ImageButton ibVideo;
+
+    @Bind(R.id.v_profile)
+    View vProfile;
+    @Bind(R.id.v_add_friend)
+    View vAddFriend;
+    @Bind(R.id.v_action)
+    View vAction;
+
+    @Bind(R.id.edt_greeting)
+    EditText edtGreeting;
+
+    @Bind(R.id.tv_limit_greeting)
+    TextView tvLimitGreeting;
 
     @Bind(R.id.collapsingToolbarLayout)
     CollapsingToolbarLayout collapsingToolbarLayout;
@@ -60,6 +86,7 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
     private MyProfileModel myProfileModel;
     private UserModel userModel;
     private UserProfileMvp.UserProfilePresent present;
+    private boolean isShowAddFriend;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,12 +96,6 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
 
         present = new UserProfilePresenterImpl(this);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
         setSupportActionBar(toolbar);
         appBarLayout.addOnOffsetChangedListener(this);
 
@@ -82,8 +103,34 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
         myProfileModel = AccountUtils.getMyProfileModel();
         userModel = (UserModel) intent.getSerializableExtra(EXTRA_USER_MODEL);
 
+
         ivFavoriteStatus.setImageResource(userModel.isFavourite() ?
                 R.drawable.ic_status_favorite_yes : R.drawable.ic_tab_favorite);
+
+        tvLimitGreeting.setText("0/" + LIMIT_ADD_FRIEND_GREETING_CHARACTER);
+        edtGreeting.setFilters(new InputFilter[] {new InputFilter.LengthFilter(LIMIT_ADD_FRIEND_GREETING_CHARACTER)});
+        edtGreeting.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int character = s.length();
+
+                if (character > LIMIT_ADD_FRIEND_GREETING_CHARACTER)
+                    return;
+
+                if (character <= LIMIT_ADD_FRIEND_GREETING_CHARACTER)
+                    tvLimitGreeting.setText(s.length() + "/" + LIMIT_ADD_FRIEND_GREETING_CHARACTER);
+            }
+        });
 
         tvOnlineStatus.setText("Online");
         tvOnlineStatus.setEnabled(true);
@@ -138,6 +185,42 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
         present.addUserFavorite(userModel.getUserId());
     }
 
+    @OnClick(R.id.ib_chat)
+    void onClickChat() {
+        showAddFriendView();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isShowAddFriend) {
+            showProfileView();
+        } else {
+            super.onBackPressed();
+        }
+
+    }
+
+    private void showAddFriendView() {
+        isShowAddFriend = true;
+        vAddFriend.setVisibility(View.VISIBLE);
+        vProfile.setVisibility(View.GONE);
+        vAction.setVisibility(View.GONE);
+    }
+
+    private void showProfileView() {
+        isShowAddFriend = false;
+        vAddFriend.setVisibility(View.GONE);
+        vProfile.setVisibility(View.VISIBLE);
+        vAction.setVisibility(View.VISIBLE);
+    }
+
+    @OnClick(R.id.ib_call)
+    void onClickCall() {
+    }
+
+    @OnClick(R.id.ib_video)
+    void onClickVideo() {
+    }
     @Override
     public void onAddUserFavoriteSuccess() {
         ivFavoriteStatus.setImageResource(R.drawable.ic_status_favorite_yes);
