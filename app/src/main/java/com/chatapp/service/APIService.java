@@ -17,6 +17,7 @@ import com.chatapp.service.models.response.UserProfileModel;
 import com.chatapp.service.models.response.VerifyModel;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -99,7 +100,11 @@ public interface ApiService {
     Call<ResponseModel<List<UserModel>>> listRecommendedFriends(@Header("Authorization") String authorization);
 
     @Headers("Content-Type: application/json")
-    @POST   ("/api/profile/acceptFriend")
+    @POST("/api/profile/acceptFriend")
     Call<ResponseModel<Object>> acceptFriendRequest(@Header("Authorization") String authorization, @Body UserRequest request);
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/profile/updateLonLat")
+    Call<ResponseModel<Object>> updateLonLat(@Header("Authorization") String authorization, @Body Map request);
 
 }

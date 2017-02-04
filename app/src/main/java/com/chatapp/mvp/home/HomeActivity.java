@@ -36,7 +36,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class HomeActivity extends BaseActivity implements LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class HomeActivity extends BaseActivity implements HomeMvp.View,
+        LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private static final int PERMISSION_ACCESS_COARSE_LOCATION = 100;
     @Bind(R.id.main_tool_bar)
@@ -48,8 +49,9 @@ public class HomeActivity extends BaseActivity implements LocationListener, Goog
     @Bind(R.id.bottomBar)
     BottomBar bottomBar;
 
-    private GoogleApiClient mGoogleApiClient;
+    HomeMvp.Present present;
 
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,8 @@ public class HomeActivity extends BaseActivity implements LocationListener, Goog
         setContentView(R.layout.activity_home);
 
         ButterKnife.bind(this);
+
+        present = new PresentImpl(this);
 
         // Init toolbar
         setSupportActionBar(toolbar);
@@ -158,40 +162,36 @@ public class HomeActivity extends BaseActivity implements LocationListener, Goog
 
     @Override
     public void onLocationChanged(Location location) {
-        Log.w("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
+        Log.d("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-        Log.w("Latitude disable");
+        Log.d("Latitude disable");
     }
 
     @Override
     public void onProviderEnabled(String provider) {
-        Log.w("Latitude enable");
+        Log.d("Latitude enable");
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-        Log.w("Latitude status: " + status);
+        Log.d("Latitude status: " + status);
     }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
         if (mLastLocation != null) {
-            Log.w("Latitude:" + mLastLocation.getLatitude() + ", Longitude:" + mLastLocation.getLongitude());
+            Log.d("Latitude:" + mLastLocation.getLatitude() + ", Longitude:" + mLastLocation.getLongitude());
+
+            present.updateLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+
         }
     }
 
