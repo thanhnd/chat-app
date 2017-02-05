@@ -1,10 +1,9 @@
 package com.chatapp.mvp.home;
 
-import com.chatapp.service.ApiServiceHelper;
 import com.chatapp.service.ApiService;
+import com.chatapp.service.ApiServiceHelper;
 import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.response.LogInModel;
-import com.chatapp.service.models.response.RegisterModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.Log;
@@ -39,7 +38,7 @@ public class InteractorImpl implements HomeMvp.Interactor {
                 Log.d(response.raw().toString());
                 if (callback != null) {
                     if (response.isSuccessful() && responseModel != null
-                            && responseModel.getResponseCd() == RegisterModel.RESPONSE_CD_SUCCESS) {
+                            && responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_SUCCESS) {
                         callback.onSuccess(responseModel);
                     } else {
                         callback.onFail(response);

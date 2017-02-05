@@ -7,6 +7,7 @@ import com.chatapp.service.models.request.RegisterRequest;
 import com.chatapp.service.models.request.UserRequest;
 import com.chatapp.service.models.request.VerifyEmailRequest;
 import com.chatapp.service.models.response.CountryModel;
+import com.chatapp.service.models.response.ListParamsModel;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.RegisterModel;
@@ -107,5 +108,9 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("/api/user/updateLonLat")
     Call<ResponseModel<Object>> updateLonLat(@Header("Authorization") String authorization, @Body Map request);
+
+    @Headers("Content-Type: application/json")
+    @GET("/api/common/listCommon")
+    Call<ResponseModel<ListParamsModel>> listCommon();
 
 }
