@@ -4,13 +4,16 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.utils.AccountUtils;
+import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -19,6 +22,9 @@ import butterknife.OnClick;
 public class UpdateProfileActivity extends BaseActivity implements UpdateProfileMvp.View {
 
     private static final int SELECT_PICTURE = 1;
+
+    @Bind(R.id.iv_avatar)
+    ImageView ivAvatar;
     @Bind(R.id.fab_camera)
     android.view.View mFabCamera;
     @Bind(R.id.edt_display_name)
@@ -54,6 +60,15 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
     private void displayMyProfileInfo() {
 
         if (userModel != null) {
+
+            if (!TextUtils.isEmpty(userModel.getAvatar())) {
+                Picasso.with(this)
+                        .load(userModel.getAvatar())
+                        .error(R.drawable.london_flat)
+                        .placeholder(R.drawable.london_flat)
+                        .into(ivAvatar);
+            }
+
             edtDisplayName.setText(userModel.getDisplayName());
             tvAge.setText(String.valueOf(userModel.getAge()));
             tvHeightAndWeight.setText(String.format("%s / %s", userModel.getHeight(), userModel.getWeight()));

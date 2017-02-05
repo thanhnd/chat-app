@@ -7,6 +7,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -83,11 +84,14 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
     private void displayMyProfileInfo() {
         userModel = AccountUtils.getMyProfileModel();
         if (userModel != null) {
-            Picasso.with(this)
-                    .load(userModel.getAvatar())
-                    .error(R.drawable.img_user_avatar)
-                    .placeholder(R.drawable.img_user_avatar)
-                    .into(ivAvatar);
+            if (!TextUtils.isEmpty(userModel.getAvatar())) {
+                Picasso.with(this)
+                        .load(userModel.getAvatar())
+                        .error(R.drawable.london_flat)
+                        .placeholder(R.drawable.london_flat)
+                        .into(ivAvatar);
+            }
+
             collapsingToolbarLayout.setTitle(userModel.getDisplayName());
             tvAge.setText(String.valueOf(userModel.getAge()));
             tvHeightAndWeight.setText(String.format("%s / %s", userModel.getHeight(), userModel.getWeight()));

@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chatapp.R;
@@ -23,6 +24,7 @@ import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.service.models.response.UserProfileModel;
 import com.chatapp.views.UserProfilePropertyView;
+import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -36,6 +38,9 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
     public static final String EXTRA_USER_MODEL = "extra_user_model";
 
     private static final int PERCENTAGE_TO_SHOW_IMAGE = 20;
+
+    @Bind(R.id.iv_avatar)
+    ImageView ivAvatar;
     @Bind(R.id.ib_favorite_status)
     ImageButton ibFavoriteStatus;
     @Bind(R.id.toolbar)
@@ -127,6 +132,13 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
     }
 
     private void displayUserProfileDetails(@NonNull UserProfileModel userProfileModel) {
+        if (!TextUtils.isEmpty(userProfileModel.getAvatar())) {
+            Picasso.with(this)
+                    .load(userProfileModel.getAvatar())
+                    .error(R.drawable.london_flat)
+                    .placeholder(R.drawable.london_flat)
+                    .into(ivAvatar);
+        }
         if (!TextUtils.isEmpty(userProfileModel.getDisplayName())) {
             collapsingToolbarLayout.setTitle(userProfileModel.getDisplayName());
         }
