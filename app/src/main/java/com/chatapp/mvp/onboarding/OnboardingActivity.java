@@ -20,6 +20,8 @@ import com.chatapp.utils.AccountUtils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
+
 public class OnboardingActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final int RC_SIGNIN = 1;
@@ -38,17 +40,17 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
             LogInModel logInModel = AccountUtils.getLogInModel();
             if (logInModel.isConfirm()) {
                 Intent intent = new Intent(this, HomeActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
                 finish();
             } else if (logInModel.isVerified()) {
                 Intent intent = new Intent(OnboardingActivity.this, UpdateBasicProfileActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
                 finish();
             } else if (logInModel.isNotVerify()) {
                 Intent intent = new Intent(OnboardingActivity.this, VerifyActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
                 finish();
             }
