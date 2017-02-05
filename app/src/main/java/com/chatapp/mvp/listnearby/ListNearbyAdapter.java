@@ -147,10 +147,13 @@ public class ListNearbyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return (myProfileModel != null && position == 0) ? ITEM_VIEW_TYPE_MY_PROFILE : ITEM_VIEW_TYPE_OTHER_PROFILE;
     }
 
-    public void add(List<UserModel> userModels) {
+    public void add(List<UserModel> userModels, boolean needClearData) {
+        if (needClearData) {
+            mDataset.clear();
+        }
         int position = mDataset.size();
         mDataset.addAll(userModels);
-        notifyItemInserted(myProfileModel != null ? position + 1 : position);
+        notifyItemRangeInserted(myProfileModel != null ? position + 1 : position, userModels.size());
     }
 
     public void setMyProfileModel(MyProfileModel myProfileModel) {

@@ -74,7 +74,7 @@ public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.Vi
 
     @Override
     public void onGetListNearbySuccess(List<UserModel> userModels) {
-        adapter.add(userModels);
+        adapter.add(userModels, true);
     }
 
     @Override
