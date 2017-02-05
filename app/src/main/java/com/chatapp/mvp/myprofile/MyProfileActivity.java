@@ -102,11 +102,11 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
             collapsingToolbarLayout.setTitle(userModel.getDisplayName());
             tvAge.setText(String.valueOf(userModel.getAge()));
             tvHeightAndWeight.setText(String.format("%s / %s", userModel.getHeight(), userModel.getWeight()));
-            tvEthnicity.setText(String.valueOf(userModel.getEthinicityId()));
-            tvBodyType.setText(String.valueOf(userModel.getBodyTypeId()));
-            tvMyTribes.setText(String.valueOf(userModel.getMyTribesId()));
-            tvRelationshipStatus.setText(String.valueOf(userModel.getRelationshipStatusId()));
 
+            tvEthnicity.setText(userModel.getEnthicity());
+            tvBodyType.setText(userModel.getBodyType());
+            tvMyTribes.setText(userModel.getMyTribes());
+            tvRelationshipStatus.setText(userModel.getRelationshipStatus());
         }
     }
 

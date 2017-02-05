@@ -1,5 +1,8 @@
 package com.chatapp.service.models.response;
 
+import android.text.TextUtils;
+
+import com.chatapp.utils.CacheUtil;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -29,19 +32,23 @@ public class MyProfileModel {
     private String avatar;
     @SerializedName("ethinicity_id")
     @Expose
-    private String ethinicityId;
+    private int ethinicityId;
+    private String ethinicity;
     @SerializedName("body_type_id")
     @Expose
-    private String bodyTypeId;
+    private int bodyTypeId;
+    private String bodyType;
     @SerializedName("my_tribes_id")
     @Expose
-    private String myTribesId;
+    private int myTribesId;
+    private String myTribes;
     @SerializedName("relationship_status_id")
     @Expose
-    private String relationshipStatusId;
+    private int relationshipStatusId;
+    private String relationshipStatus;
     @SerializedName("city_id")
     @Expose
-    private String cityId;
+    private int cityId;
     @SerializedName("state_id")
     @Expose
     private String stateId;
@@ -109,43 +116,88 @@ public class MyProfileModel {
         this.avatar = avatar;
     }
 
-    public String getEthinicityId() {
+    public int getEthinicityId() {
         return ethinicityId;
     }
 
-    public void setEthinicityId(String ethinicityId) {
+    public String getEnthicity() {
+        if (TextUtils.isEmpty(ethinicity)) {
+            ParamModel param = CacheUtil.getParam(getEthinicityId(),
+                    CacheUtil.getListParamsModel().getListEthnicity());
+            if (param != null) {
+                ethinicity = param.getName();
+            }
+        }
+
+        return ethinicity;
+    }
+
+    public void setEthinicityId(int ethinicityId) {
         this.ethinicityId = ethinicityId;
     }
 
-    public String getBodyTypeId() {
+    public int getBodyTypeId() {
         return bodyTypeId;
     }
+    public String getBodyType() {
+        if (TextUtils.isEmpty(bodyType)) {
+            ParamModel param = CacheUtil.getParam(bodyTypeId,
+                    CacheUtil.getListParamsModel().getListBodyType());
+            if (param != null) {
+                bodyType = param.getName();
+            }
+        }
 
-    public void setBodyTypeId(String bodyTypeId) {
+        return bodyType;
+    }
+
+    public void setBodyTypeId(int bodyTypeId) {
         this.bodyTypeId = bodyTypeId;
     }
 
-    public String getMyTribesId() {
+    public int getMyTribesId() {
         return myTribesId;
     }
+    public String getMyTribes() {
+        if (TextUtils.isEmpty(myTribes)) {
+            ParamModel param = CacheUtil.getParam(myTribesId,
+                    CacheUtil.getListParamsModel().getListTribes());
+            if (param != null) {
+                myTribes = param.getName();
+            }
+        }
 
-    public void setMyTribesId(String myTribesId) {
+        return myTribes;
+    }
+
+    public void setMyTribesId(int myTribesId) {
         this.myTribesId = myTribesId;
     }
 
-    public String getRelationshipStatusId() {
+    public int getRelationshipStatusId() {
         return relationshipStatusId;
     }
+    public String getRelationshipStatus() {
+        if (TextUtils.isEmpty(relationshipStatus)) {
+            ParamModel param = CacheUtil.getParam(relationshipStatusId,
+                    CacheUtil.getListParamsModel().getListRelationship());
+            if (param != null) {
+                relationshipStatus = param.getName();
+            }
+        }
 
-    public void setRelationshipStatusId(String relationshipStatusId) {
+        return relationshipStatus;
+    }
+
+    public void setRelationshipStatusId(int relationshipStatusId) {
         this.relationshipStatusId = relationshipStatusId;
     }
 
-    public String getCityId() {
+    public int getCityId() {
         return cityId;
     }
 
-    public void setCityId(String cityId) {
+    public void setCityId(int cityId) {
         this.cityId = cityId;
     }
 
