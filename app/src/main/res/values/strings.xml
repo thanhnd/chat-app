@@ -117,6 +117,6 @@
     <string name="add_friend">Add Friend</string>
     <string name="write_your_greeting">Write your greeting</string>
     <string name="find_me_on">find me on</string>
-
+    <string name="internal_storage">Internal storage</string>
 
 </resources>

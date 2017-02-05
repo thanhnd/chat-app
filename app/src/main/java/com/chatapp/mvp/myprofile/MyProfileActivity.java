@@ -8,6 +8,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chatapp.R;
@@ -15,6 +16,7 @@ import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.updateprofile.UpdateProfileActivity;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.utils.AccountUtils;
+import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,6 +27,8 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
     private static final int PERCENTAGE_TO_SHOW_IMAGE = 20;
     private static final int RC_UPDATE_PROFILE = 1;
 
+    @Bind(R.id.iv_avatar)
+    ImageView ivAvatar;
     @Bind(R.id.fab_edit)
     View mFabEdit;
     @Bind(R.id.toolbar)
@@ -79,6 +83,11 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
     private void displayMyProfileInfo() {
         userModel = AccountUtils.getMyProfileModel();
         if (userModel != null) {
+            Picasso.with(this)
+                    .load(userModel.getAvatar())
+                    .error(R.drawable.img_user_avatar)
+                    .placeholder(R.drawable.img_user_avatar)
+                    .into(ivAvatar);
             collapsingToolbarLayout.setTitle(userModel.getDisplayName());
             tvAge.setText(String.valueOf(userModel.getAge()));
             tvHeightAndWeight.setText(String.format("%s / %s", userModel.getHeight(), userModel.getWeight()));
@@ -86,6 +95,7 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
             tvBodyType.setText(String.valueOf(userModel.getBodyTypeId()));
             tvMyTribes.setText(String.valueOf(userModel.getMyTribesId()));
             tvRelationshipStatus.setText(String.valueOf(userModel.getRelationshipStatusId()));
+
         }
     }
 

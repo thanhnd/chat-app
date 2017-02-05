@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chatapp.R;
+import com.chatapp.mvp.base.BaseListUserAdapter;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.utils.CircleTransform;
@@ -26,21 +27,15 @@ import butterknife.ButterKnife;
  * Created by thanhnguyen on 1/6/17.
  */
 
-public class ListNearbyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ListNearbyAdapter extends BaseListUserAdapter {
     public static final int ITEM_VIEW_TYPE_MY_PROFILE = 0;
     public static final int ITEM_VIEW_TYPE_OTHER_PROFILE = 1;
     private MyProfileModel myProfileModel;
     private ArrayList<UserModel> mDataset;
-    private Context context;
     private OnMyProfileItemClick onMyProfileItemClick;
-    private OnUserProfileItemClick onUserProfileItemClick;
 
     public void setOnMyProfileItemClick(OnMyProfileItemClick onMyProfileItemClick) {
         this.onMyProfileItemClick = onMyProfileItemClick;
-    }
-
-    public void setOnUserProfileItemClick(OnUserProfileItemClick onUserProfileItemClick) {
-        this.onUserProfileItemClick = onUserProfileItemClick;
     }
 
     public class OtherUserViewHolder extends RecyclerView.ViewHolder {
@@ -70,8 +65,8 @@ public class ListNearbyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public ListNearbyAdapter(Context context) {
+        super(context);
         mDataset = new ArrayList<>();
-        this.context = context;
     }
 
     @Override
@@ -101,6 +96,7 @@ public class ListNearbyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             myProfileViewHolder.tvName.setText(name);
             Picasso.with(context)
                     .load(myProfileModel.getAvatar())
+                    .resize(imgDiameter, imgDiameter)
                     .error(R.drawable.img_user_avatar)
                     .placeholder(R.drawable.img_user_avatar)
                     .transform(new CircleTransform())
@@ -121,9 +117,11 @@ public class ListNearbyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             otherUserViewHolder.tvDistance.setText(String.format(Locale.getDefault(), "%d feet away", userModel.getFeetAway()));
             Picasso.with(context)
                     .load(userModel.getAvatar())
+                    .resize(imgDiameter, imgDiameter)
                     .error(R.drawable.img_user_avatar)
                     .placeholder(R.drawable.img_user_avatar)
                     .transform(new CircleTransform())
+                    .fit()
                     .into(otherUserViewHolder.ivAvatar);
             otherUserViewHolder.vItem.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -162,9 +160,5 @@ public class ListNearbyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     public interface OnMyProfileItemClick {
         void onItemClick();
-    }
-
-    public interface OnUserProfileItemClick {
-        void onItemClick(UserModel userModel);
     }
 }

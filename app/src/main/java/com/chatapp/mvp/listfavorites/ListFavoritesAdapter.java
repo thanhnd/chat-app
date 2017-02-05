@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chatapp.R;
+import com.chatapp.mvp.base.BaseListUserAdapter;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.utils.CircleTransform;
 import com.squareup.picasso.Picasso;
@@ -24,14 +25,8 @@ import butterknife.ButterKnife;
  * Created by thanhnguyen on 1/6/17.
  */
 
-public class ListFavoritesAdapter extends RecyclerView.Adapter<ListFavoritesAdapter.ViewHolder> {
+public class ListFavoritesAdapter extends BaseListUserAdapter<ListFavoritesAdapter.ViewHolder> {
     private ArrayList<UserModel> mDataset;
-    private Context context;
-    private OnUserProfileItemClick onUserProfileItemClick;
-
-    public void setOnUserProfileItemClick(OnUserProfileItemClick onUserProfileItemClick) {
-        this.onUserProfileItemClick = onUserProfileItemClick;
-    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         View vItem;
@@ -47,8 +42,8 @@ public class ListFavoritesAdapter extends RecyclerView.Adapter<ListFavoritesAdap
     }
 
     public ListFavoritesAdapter(Context context) {
+        super(context);
         mDataset = new ArrayList<>();
-        this.context = context;
     }
 
     @Override
@@ -71,6 +66,7 @@ public class ListFavoritesAdapter extends RecyclerView.Adapter<ListFavoritesAdap
         holder.tvOnlineStatus.setEnabled(userModel.isOnline());
         Picasso.with(context)
                 .load(userModel.getAvatar())
+                .resize(imgDiameter, imgDiameter)
                 .error(R.drawable.img_user_avatar)
                 .placeholder(R.drawable.img_user_avatar)
                 .transform(new CircleTransform())
@@ -97,9 +93,4 @@ public class ListFavoritesAdapter extends RecyclerView.Adapter<ListFavoritesAdap
         mDataset.addAll(userModels);
         notifyItemInserted(position);
     }
-
-    public interface OnUserProfileItemClick {
-        void onItemClick(UserModel userModel);
-    }
-
 }

@@ -1,11 +1,9 @@
 package com.chatapp.utils;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.RectF;
 
 import com.squareup.picasso.Transformation;
 
@@ -23,16 +21,17 @@ public class CircleTransform implements Transformation {
             source.recycle();
         }
 
-        //Bitmap bitmap = Bitmap.createBitmap(size, size, source.getConfig());
-        Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(size, size, source.getConfig());
 
         Canvas canvas = new Canvas(bitmap);
-        final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        Paint paint = new Paint();
+        BitmapShader shader = new BitmapShader(squaredBitmap,
+                BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP);
+        paint.setShader(shader);
+        paint.setAntiAlias(true);
 
         float r = size / 2f;
         canvas.drawCircle(r, r, r, paint);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(squaredBitmap, null, new RectF(0, 0, size, size), paint);
 
         squaredBitmap.recycle();
         return bitmap;

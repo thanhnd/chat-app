@@ -33,7 +33,6 @@ public class InteractorImpl implements ListFavoritesMvp.Interactor {
             @Override
             public void onResponse(Call<ResponseModel<List<UserModel>>> call, Response<ResponseModel<List<UserModel>>> response) {
                 ResponseModel<List<UserModel>> responseModel = response.body();
-                Log.d(response.raw().toString());
                 if (callback != null) {
                     if (response.isSuccessful() && responseModel != null
                             && responseModel.getResponseCd() == RegisterModel.RESPONSE_CD_SUCCESS) {

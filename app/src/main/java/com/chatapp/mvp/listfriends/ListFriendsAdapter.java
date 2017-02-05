@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chatapp.R;
+import com.chatapp.mvp.base.BaseListUserAdapter;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.utils.CircleTransform;
 import com.squareup.picasso.Picasso;
@@ -24,15 +25,9 @@ import butterknife.ButterKnife;
  * Created by thanhnguyen on 1/6/17.
  */
 
-public class ListFriendsAdapter extends RecyclerView.Adapter<ListFriendsAdapter.ViewHolder> {
+public class ListFriendsAdapter extends BaseListUserAdapter<ListFriendsAdapter.ViewHolder> {
 
     private ArrayList<UserModel> mDataset;
-    private Context context;
-    private OnUserProfileItemClick onUserProfileItemClick;
-
-    public void setOnUserProfileItemClick(OnUserProfileItemClick onUserProfileItemClick) {
-        this.onUserProfileItemClick = onUserProfileItemClick;
-    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         View vItem;
@@ -48,8 +43,8 @@ public class ListFriendsAdapter extends RecyclerView.Adapter<ListFriendsAdapter.
     }
 
     public ListFriendsAdapter(Context context) {
+        super(context);
         mDataset = new ArrayList<>();
-        this.context = context;
     }
 
     @Override
@@ -62,7 +57,6 @@ public class ListFriendsAdapter extends RecyclerView.Adapter<ListFriendsAdapter.
         return vh;
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final UserModel userModel = mDataset.get(position);
@@ -72,6 +66,7 @@ public class ListFriendsAdapter extends RecyclerView.Adapter<ListFriendsAdapter.
         holder.tvOnlineStatus.setEnabled(userModel.isOnline());
         Picasso.with(context)
                 .load(userModel.getAvatar())
+                .resize(imgDiameter, imgDiameter)
                 .error(R.drawable.img_user_avatar)
                 .placeholder(R.drawable.img_user_avatar)
                 .transform(new CircleTransform())
@@ -84,7 +79,6 @@ public class ListFriendsAdapter extends RecyclerView.Adapter<ListFriendsAdapter.
                 }
             }
         });
-
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -97,9 +91,5 @@ public class ListFriendsAdapter extends RecyclerView.Adapter<ListFriendsAdapter.
         int position = mDataset.size();
         mDataset.addAll(userModels);
         notifyItemInserted(position);
-    }
-
-    public interface OnUserProfileItemClick {
-        void onItemClick(UserModel userModel);
     }
 }
