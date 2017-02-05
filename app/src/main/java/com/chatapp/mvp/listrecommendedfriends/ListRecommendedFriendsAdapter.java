@@ -88,6 +88,7 @@ public class ListRecommendedFriendsAdapter extends RecyclerView.Adapter<ListReco
         holder.tvNoted.setText(String.format(Locale.getDefault(), "\"%s\"", userModel.getNoted()));
         Picasso.with(context)
                 .load(userModel.getAvatar())
+                .centerCrop()
                 .error(R.drawable.img_user_avatar)
                 .placeholder(R.drawable.img_user_avatar)
                 .transform(new CircleTransform())

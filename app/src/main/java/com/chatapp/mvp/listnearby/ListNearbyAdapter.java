@@ -96,6 +96,7 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
             myProfileViewHolder.tvName.setText(name);
             Picasso.with(context)
                     .load(myProfileModel.getAvatar())
+                    .centerCrop()
                     .resize(imgDiameter, imgDiameter)
                     .error(R.drawable.img_user_avatar)
                     .placeholder(R.drawable.img_user_avatar)

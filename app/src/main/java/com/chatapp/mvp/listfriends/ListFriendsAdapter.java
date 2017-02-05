@@ -66,6 +66,7 @@ public class ListFriendsAdapter extends BaseListUserAdapter<ListFriendsAdapter.V
         holder.tvOnlineStatus.setEnabled(userModel.isOnline());
         Picasso.with(context)
                 .load(userModel.getAvatar())
+                .centerCrop()
                 .resize(imgDiameter, imgDiameter)
                 .error(R.drawable.img_user_avatar)
                 .placeholder(R.drawable.img_user_avatar)
