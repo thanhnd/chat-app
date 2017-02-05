@@ -151,9 +151,8 @@ public class ListNearbyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         if (needClearData) {
             mDataset.clear();
         }
-        int position = mDataset.size();
         mDataset.addAll(userModels);
-        notifyItemRangeInserted(myProfileModel != null ? position + 1 : position, userModels.size());
+        notifyDataSetChanged();
     }
 
     public void setMyProfileModel(MyProfileModel myProfileModel) {
