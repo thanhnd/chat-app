@@ -110,8 +110,6 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                     PERMISSION_ACCESS_COARSE_LOCATION);
         }
-
-
     }
 
     private void switchFragment(Fragment fragment) {
@@ -183,9 +181,13 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
+
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
         if (mLastLocation != null) {
@@ -196,7 +198,6 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
             Log.d("Latitude:" + mLastLocation.getLatitude() + ", Longitude:" + mLastLocation.getLongitude());
 
             present.updateLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-
         }
     }
 
@@ -211,12 +212,20 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
     }
 
     protected void onStart() {
-        mGoogleApiClient.connect();
+
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.connect();
+        }
+
         super.onStart();
     }
 
     protected void onStop() {
-        mGoogleApiClient.disconnect();
+
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.disconnect();
+        }
+
         super.onStop();
     }
 }
