@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chatapp.R;
@@ -37,8 +36,8 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
     public static final String EXTRA_USER_MODEL = "extra_user_model";
 
     private static final int PERCENTAGE_TO_SHOW_IMAGE = 20;
-    @Bind(R.id.iv_favorite_status)
-    ImageView ivFavoriteStatus;
+    @Bind(R.id.ib_favorite_status)
+    ImageButton ibFavoriteStatus;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.appbar)
@@ -94,7 +93,7 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
         userModel = (UserModel) intent.getSerializableExtra(EXTRA_USER_MODEL);
 
 
-        ivFavoriteStatus.setImageResource(userModel.isFavourite() ?
+        ibFavoriteStatus.setImageResource(userModel.isFavourite() ?
                 R.drawable.ic_status_favorite_yes : R.drawable.ic_tab_favorite);
 
         tvLimitGreeting.setText("0/" + LIMIT_ADD_FRIEND_GREETING_CHARACTER);
@@ -182,7 +181,7 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
         if (currentScrollPercentage >= PERCENTAGE_TO_SHOW_IMAGE) {
             if (!mIsImageHidden) {
                 mIsImageHidden = true;
-                ViewCompat.animate(ivFavoriteStatus).scaleY(0).scaleX(0).start();
+                ViewCompat.animate(ibFavoriteStatus).scaleY(0).scaleX(0).start();
                 tvOnlineStatus.setVisibility(View.GONE);
             }
         }
@@ -190,7 +189,7 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
         if (currentScrollPercentage < PERCENTAGE_TO_SHOW_IMAGE) {
             if (mIsImageHidden) {
                 mIsImageHidden = false;
-                ViewCompat.animate(ivFavoriteStatus).scaleY(1).scaleX(1).start();
+                ViewCompat.animate(ibFavoriteStatus).scaleY(1).scaleX(1).start();
                 tvOnlineStatus.setVisibility(View.VISIBLE);
             }
         }
@@ -201,7 +200,7 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
         displayUserProfileDetails(userProfileModel);
     }
 
-    @OnClick(R.id.iv_favorite_status)
+    @OnClick(R.id.ib_favorite_status)
     void onClickFavorite() {
 
         if (!userModel.isFavourite()) {
@@ -240,10 +239,6 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
 
     @OnClick(R.id.ib_chat)
     void onClickChat() {
-        if (!userModel.isFriend()) {
-            showAddFriendView();
-
-        }
     }
 
     @OnClick(R.id.ib_call)
@@ -275,7 +270,7 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
     @Override
     public void onAddFavoriteSuccess() {
         userModel.setIsFavourite(UserModel.IS_FAVORITE);
-        ivFavoriteStatus.setImageResource(R.drawable.ic_status_favorite_yes);
+        ibFavoriteStatus.setImageResource(R.drawable.ic_status_favorite_yes);
     }
 
     @Override
@@ -292,7 +287,7 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
     @Override
     public void onRemoveFavoriteSuccess() {
         userModel.setIsFavourite(UserModel.IS_NOT_FAVORITE);
-        ivFavoriteStatus.setImageResource(R.drawable.ic_tab_favorite);
+        ibFavoriteStatus.setImageResource(R.drawable.ic_tab_favorite);
     }
 
     @Override

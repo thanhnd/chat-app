@@ -45,18 +45,16 @@
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="20dp"
                 android:layout_marginLeft="32dp"
-                android:text="Online" />
+                tools:text="Online" />
 
-            <ImageView
-                android:id="@+id/iv_favorite_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageButton
+                android:id="@+id/ib_favorite_status"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
                 android:layout_gravity="bottom|right"
                 android:layout_marginBottom="20dp"
                 android:layout_marginRight="10dp"
-                android:background="@null"
-                android:minHeight="42dp"
-                android:minWidth="42dp"
+                android:padding="4dp"
                 android:scaleType="center"
                 android:src="@drawable/ic_tab_favorite" />
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -174,7 +172,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@null"
             android:padding="20dp"
             android:src="@drawable/img_chat" />
 
@@ -183,7 +180,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@null"
             android:padding="20dp"
             android:src="@drawable/img_call" />
 
@@ -192,7 +188,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@null"
             android:padding="20dp"
             android:src="@drawable/img_video" />
     </LinearLayout>
