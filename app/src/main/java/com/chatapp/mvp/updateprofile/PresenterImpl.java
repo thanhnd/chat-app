@@ -9,9 +9,11 @@ import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.FileUtils;
+import com.google.gson.internal.LinkedTreeMap;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
+import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -60,7 +62,13 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
             @Override
             public void onSuccess(ResponseModel<Object> response) {
                 if (view.get() != null) {
-                    view.get().onUploadAvatarSuccess();
+                    try {
+                        Map<String, String> responseResult = (LinkedTreeMap<String, String>) response.getResultSet();
+                        String path = responseResult.get("url") + responseResult.get("avatar");
+                        view.get().onUploadAvatarSuccess(path);
+                    } catch (ClassCastException ex) {
+                        view.get().showErrorDialog();
+                    }
                 }
             }
 

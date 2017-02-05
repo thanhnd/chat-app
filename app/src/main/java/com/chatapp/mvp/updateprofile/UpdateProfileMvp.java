@@ -23,7 +23,7 @@ public interface UpdateProfileMvp {
     }
 
     interface View extends BaseView {
-        void onUploadAvatarSuccess();
+        void onUploadAvatarSuccess(String path);
         void onUploadAvatarFail();
     }
 }

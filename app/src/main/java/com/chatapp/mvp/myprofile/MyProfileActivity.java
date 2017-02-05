@@ -75,6 +75,13 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
         appBarLayout.addOnOffsetChangedListener(this);
 
         userModel = AccountUtils.getMyProfileModel();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         tvOnlineStatus.setText("Online");
         tvOnlineStatus.setEnabled(true);
 

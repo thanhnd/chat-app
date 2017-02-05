@@ -53,6 +53,11 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
 
         presenter = new PresenterImpl(this);
         userModel = AccountUtils.getMyProfileModel();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         displayMyProfileInfo();
     }
@@ -101,8 +106,13 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
     }
 
     @Override
-    public void onUploadAvatarSuccess() {
-
+    public void onUploadAvatarSuccess(String path) {
+        userModel.setAvatar(path);
+        Picasso.with(this)
+                .load(path)
+                .error(R.drawable.london_flat)
+                .placeholder(R.drawable.london_flat)
+                .into(ivAvatar);
     }
 
     @Override

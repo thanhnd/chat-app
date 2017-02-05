@@ -49,7 +49,8 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".mvp.userprofile.UserProfileActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".mvp.updateprofile.UpdateProfileActivity" />
+        <activity android:name=".mvp.updateprofile.UpdateProfileActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <activity android:name=".mvp.listrecommendedfriends.ListRecommendedFriendsActivity" />
     </application>
 
