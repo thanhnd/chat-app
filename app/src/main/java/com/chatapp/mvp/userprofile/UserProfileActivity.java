@@ -139,7 +139,7 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
             }
         });
 
-        tvOnlineStatus.setText("Online");
+        tvOnlineStatus.setText(userModel.getOnlineStatus());
         tvOnlineStatus.setEnabled(true);
         present.getUserProfile(userModel.getUserId());
     }
