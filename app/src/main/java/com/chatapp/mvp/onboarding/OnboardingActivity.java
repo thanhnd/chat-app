@@ -55,6 +55,7 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
 
             return;
         }
+
         setContentView(R.layout.activity_onboarding);
         ButterKnife.bind(this);
 

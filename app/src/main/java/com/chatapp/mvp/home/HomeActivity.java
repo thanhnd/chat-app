@@ -26,12 +26,16 @@ import com.chatapp.mvp.listnearby.ListNearbyFragment;
 import com.chatapp.mvp.listrecommendedfriends.ListRecommendedFriendsActivity;
 import com.chatapp.mvp.searchuser.SearchActivity;
 import com.chatapp.utils.AccountUtils;
+import com.chatapp.utils.LocationChangeObservable;
 import com.chatapp.utils.Log;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -54,6 +58,8 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
 
     private GoogleApiClient mGoogleApiClient;
 
+    private List<LocationChangeObservable> locationChangeObservableList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +68,7 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
         ButterKnife.bind(this);
 
         present = new PresentImpl(this);
+        locationChangeObservableList = new ArrayList<>();
 
         // Init toolbar
         setSupportActionBar(toolbar);
@@ -198,6 +205,31 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
             Log.d("Latitude:" + mLastLocation.getLatitude() + ", Longitude:" + mLastLocation.getLongitude());
 
             present.updateLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+
+            notifyUpdateLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        }
+    }
+
+    public void addToLocationChangeObservableList(LocationChangeObservable observable) {
+        if (locationChangeObservableList == null) {
+            locationChangeObservableList = new ArrayList<>();
+        }
+
+        locationChangeObservableList.add(observable);
+
+    }
+
+    public void removeFromLocationChangeObservableList(LocationChangeObservable observable) {
+        if (locationChangeObservableList != null) {
+            locationChangeObservableList.remove(observable);
+        }
+    }
+
+    private void notifyUpdateLocation(double latitude, double longitude) {
+        for (LocationChangeObservable observable: locationChangeObservableList) {
+            if (observable != null) {
+                observable.updateLocation(latitude, longitude);
+            }
         }
     }
 

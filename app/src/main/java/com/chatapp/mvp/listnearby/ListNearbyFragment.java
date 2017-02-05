@@ -1,5 +1,6 @@
 package com.chatapp.mvp.listnearby;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,12 +12,14 @@ import android.view.ViewGroup;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseFragment;
+import com.chatapp.mvp.home.HomeActivity;
 import com.chatapp.mvp.myprofile.MyProfileActivity;
 import com.chatapp.mvp.userprofile.UserProfileActivity;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.ItemOffsetDecoration;
+import com.chatapp.utils.LocationChangeObservable;
 
 import java.util.List;
 
@@ -27,7 +30,7 @@ import butterknife.ButterKnife;
  * Created by thanhnguyen on 1/3/17.
  */
 
-public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.View {
+public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.View, LocationChangeObservable {
 
     @Bind(R.id.rv_list_users)
     RecyclerView recyclerView;
@@ -63,6 +66,7 @@ public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.Vi
 
         present = new PresentImpl(this);
         present.getMyProfile();
+
         present.getListNearBy();
 
         return view;
@@ -90,5 +94,27 @@ public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.Vi
         Intent intent = new Intent(getContext(), UserProfileActivity.class);
         intent.putExtra(UserProfileActivity.EXTRA_USER_MODEL, userModel);
         startActivity(intent);
+    }
+
+    @Override
+    public void updateLocation(double lattitude, double longitude) {
+        present.getListNearBy();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+
+        HomeActivity homeActivity = (HomeActivity) getActivity();
+        homeActivity.addToLocationChangeObservableList(this);
+
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onDetach() {
+        HomeActivity homeActivity = (HomeActivity) getActivity();
+        homeActivity.removeFromLocationChangeObservableList(this);
+
+        super.onDetach();
     }
 }

@@ -12,6 +12,7 @@ import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.home.HomeActivity;
 import com.chatapp.service.models.request.BasicProfileRequest;
+import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.DialogUtils;
 import com.chatapp.views.fragments.ChooseHeightAndWeightDialogFragment;
 
@@ -121,5 +122,12 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
     @Override
     public void onUpdateBasicProfileFail() {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        AccountUtils.logOut();
+
+        super.onBackPressed();
     }
 }
