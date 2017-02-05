@@ -13,10 +13,11 @@ public class UserModel implements Serializable {
 
     public static final int IS_NOT_FAVORITE = 0;
     public static final int IS_FAVORITE = 1;
-    private static final int FRIEND_STATUS_NOT_FRIEND = 0;
-    private static final int FRIEND_STATUS_HAS_REQUESTED = 1;
-    private static final int FRIEND_STATUS_IS_FRIEND = 2;
-    private static final int IS_ONLINE = 1;
+    public static final int FRIEND_STATUS_NOT_FRIEND = 0;
+    public static final int FRIEND_STATUS_HAS_REQUESTED = 1;
+    public static final int FRIEND_STATUS_IS_FRIEND = 2;
+    public static final int IS_ONLINE = 1;
+
     @SerializedName("user_id")
     @Expose
     private String userId;

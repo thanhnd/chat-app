@@ -275,6 +275,7 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
 
     @Override
     public void onRequestAddFriendSuccess() {
+        userModel.setIsFriend(UserModel.FRIEND_STATUS_IS_FRIEND);
         showDialog("Friend request", "Friend request sent. Awaiting response");
         onBackPressed();
     }
