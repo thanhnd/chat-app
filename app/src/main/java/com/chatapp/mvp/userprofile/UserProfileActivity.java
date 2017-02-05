@@ -21,10 +21,8 @@ import android.widget.TextView;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
-import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.service.models.response.UserProfileModel;
-import com.chatapp.utils.AccountUtils;
 import com.chatapp.views.UserProfilePropertyView;
 
 import butterknife.Bind;
@@ -47,19 +45,6 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
     AppBarLayout appBarLayout;
     @Bind(R.id.tv_online_status)
     TextView tvOnlineStatus;
-
-//    @Bind(R.id.tv_age)
-//    TextView tvAge;
-//    @Bind(R.id.tv_height_and_weight)
-//    TextView tvHeightAndWeight;
-//    @Bind(R.id.tv_ethnicity)
-//    TextView tvEthnicity;
-//    @Bind(R.id.tv_body_type)
-//    TextView tvBodyType;
-//    @Bind(R.id.tv_my_tribes)
-//    TextView tvMyTribes;
-//    @Bind(R.id.tv_relationship_status)
-//    TextView tvRelationshipStatus;
 
     @Bind(R.id.ib_chat)
     ImageButton ibChat;
@@ -90,7 +75,6 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
 
     private int mMaxScrollSize;
     private boolean mIsImageHidden;
-    private MyProfileModel myProfileModel;
     private UserModel userModel;
     private UserProfileMvp.UserProfilePresent present;
     private boolean isShowAddFriend;
@@ -107,7 +91,6 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
         appBarLayout.addOnOffsetChangedListener(this);
 
         Intent intent = getIntent();
-        myProfileModel = AccountUtils.getMyProfileModel();
         userModel = (UserModel) intent.getSerializableExtra(EXTRA_USER_MODEL);
 
 
@@ -220,7 +203,15 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
 
     @OnClick(R.id.iv_favorite_status)
     void onClickFavorite() {
-        present.addUserFavorite(userModel.getUserId());
+
+        if (!userModel.isFavourite()) {
+
+            present.addFavorite(userModel.getUserId());
+
+        } else {
+
+            present.removeFavorite(userModel.getUserId());
+        }
     }
 
     @Override
@@ -282,7 +273,8 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
     }
 
     @Override
-    public void onAddUserFavoriteSuccess() {
+    public void onAddFavoriteSuccess() {
+        userModel.setIsFavourite(UserModel.IS_FAVORITE);
         ivFavoriteStatus.setImageResource(R.drawable.ic_status_favorite_yes);
     }
 
@@ -294,6 +286,22 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
 
     @Override
     public void onRequestAddFriendFail() {
+
+    }
+
+    @Override
+    public void onRemoveFavoriteSuccess() {
+        userModel.setIsFavourite(UserModel.IS_NOT_FAVORITE);
+        ivFavoriteStatus.setImageResource(R.drawable.ic_tab_favorite);
+    }
+
+    @Override
+    public void onAddFavoriteFail() {
+
+    }
+
+    @Override
+    public void onRemoveFavoriteFail() {
 
     }
 }

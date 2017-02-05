@@ -86,7 +86,11 @@ public interface ApiService {
 
     @Headers("Content-Type: application/json")
     @POST("/api/profile/addFavourite")
-    Call<ResponseModel<Object>> addUserFavorite(@Header("Authorization") String authorization, @Body UserRequest request);
+    Call<ResponseModel<Object>> addFavorite(@Header("Authorization") String authorization, @Body UserRequest request);
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/profile/delFavourite")
+    Call<ResponseModel<Object>> removeFavorite(@Header("Authorization") String authorization, @Body UserRequest request);
 
     @Headers("Content-Type: application/json")
     @POST("/api/profile/addFriend")

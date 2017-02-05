@@ -11,7 +11,8 @@ import java.io.Serializable;
 
 public class UserModel implements Serializable {
 
-    private static final int IS_FAVORITE = 1;
+    public static final int IS_NOT_FAVORITE = 0;
+    public static final int IS_FAVORITE = 1;
     private static final int FRIEND_STATUS_NOT_FRIEND = 0;
     private static final int FRIEND_STATUS_HAS_REQUESTED = 1;
     private static final int FRIEND_STATUS_IS_FRIEND = 2;

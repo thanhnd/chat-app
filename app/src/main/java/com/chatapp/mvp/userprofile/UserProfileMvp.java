@@ -14,28 +14,38 @@ public interface UserProfileMvp {
 
         void getUserProfile(String userId, AuthorizeApiCallback<ResponseModel<UserProfileModel>> callback);
 
-        void addUserFavorite(String userId, AuthorizeApiCallback<ResponseModel<Object>> callback);
+        void addFavorite(String userId, AuthorizeApiCallback<ResponseModel<Object>> callback);
 
         void requestAddFriend(String userId, String noted, AuthorizeApiCallback<ResponseModel<Object>> callback);
+
+        void removeFavorite(String userId, AuthorizeApiCallback<ResponseModel<Object>> authorizeApiCallback);
     }
 
     interface UserProfilePresent {
 
         void getUserProfile(String userId);
 
-        void addUserFavorite(String userId);
+        void addFavorite(String userId);
 
         void requestAddFriend(String userId, String noted);
+
+        void removeFavorite(String userId);
     }
 
     interface UserProfileView extends BaseView {
 
         void onGetUserProfileSuccess(UserProfileModel userProfileModel);
 
-        void onAddUserFavoriteSuccess();
+        void onAddFavoriteSuccess();
 
         void onRequestAddFriendSuccess();
 
         void onRequestAddFriendFail();
+
+        void onRemoveFavoriteSuccess();
+
+        void onAddFavoriteFail();
+
+        void onRemoveFavoriteFail();
     }
 }

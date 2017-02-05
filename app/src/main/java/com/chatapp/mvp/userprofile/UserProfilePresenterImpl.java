@@ -50,23 +50,27 @@ public class UserProfilePresenterImpl implements UserProfileMvp.UserProfilePrese
     }
 
     @Override
-    public void addUserFavorite(String userId) {
-        interactor.addUserFavorite(userId, new AuthorizeApiCallback<ResponseModel<Object>>() {
+    public void addFavorite(String userId) {
+        interactor.addFavorite(userId, new AuthorizeApiCallback<ResponseModel<Object>>() {
             @Override
             public void onSuccess(ResponseModel<Object> response) {
                 if (view.get() != null) {
-                    view.get().onAddUserFavoriteSuccess();
+                    view.get().onAddFavoriteSuccess();
                 }
             }
 
             @Override
             public void onFail(Response<ResponseModel<Object>> response) {
-
+                if (view.get() != null) {
+                    view.get().onAddFavoriteFail();
+                }
             }
 
             @Override
             public void onFail(Call<ResponseModel<Object>> call, Throwable throwable) {
-
+                if (view.get() != null) {
+                    view.get().onAddFavoriteFail();
+                }
             }
 
             @Override
@@ -77,6 +81,7 @@ public class UserProfilePresenterImpl implements UserProfileMvp.UserProfilePrese
             }
         });
     }
+
 
     @Override
     public void requestAddFriend(String userId, String noted) {
@@ -99,6 +104,39 @@ public class UserProfilePresenterImpl implements UserProfileMvp.UserProfilePrese
             public void onFail(Call<ResponseModel<Object>> call, Throwable throwable) {
                 if (view.get() != null) {
                     view.get().onRequestAddFriendFail();
+                }
+            }
+
+            @Override
+            public void onTokenExpired() {
+                if (view.get() != null) {
+                    view.get().onTokenExpired();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void removeFavorite(String userId) {
+        interactor.removeFavorite(userId, new AuthorizeApiCallback<ResponseModel<Object>>() {
+            @Override
+            public void onSuccess(ResponseModel<Object> response) {
+                if (view.get() != null) {
+                    view.get().onRemoveFavoriteSuccess();
+                }
+            }
+
+            @Override
+            public void onFail(Response<ResponseModel<Object>> response) {
+                if (view.get() != null) {
+                    view.get().onRemoveFavoriteFail();
+                }
+            }
+
+            @Override
+            public void onFail(Call<ResponseModel<Object>> call, Throwable throwable) {
+                if (view.get() != null) {
+                    view.get().onRemoveFavoriteFail();
                 }
             }
 
