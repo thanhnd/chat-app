@@ -2,6 +2,7 @@ package com.chatapp.mvp.listfavorites;
 
 import com.chatapp.service.ApiCallback;
 import com.chatapp.service.ApiService;
+import com.chatapp.service.ApiServiceHelper;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.RegisterModel;
 import com.chatapp.service.models.response.ResponseModel;
@@ -26,7 +27,7 @@ public class InteractorImpl implements ListFavoritesMvp.Interactor {
             return;
         }
         String authorization = logInModel.getToken();
-        ApiService service = ApiService.retrofit.create(ApiService.class);
+        ApiService service = ApiServiceHelper.getInstance();
         Call<ResponseModel<List<UserModel>>> call = service.listFavorites(authorization);
         call.enqueue(new Callback<ResponseModel<List<UserModel>>>() {
             @Override

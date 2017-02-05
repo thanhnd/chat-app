@@ -2,6 +2,7 @@ package com.chatapp.mvp.listrecommendedfriends;
 
 import com.chatapp.service.ApiCallback;
 import com.chatapp.service.ApiService;
+import com.chatapp.service.ApiServiceHelper;
 import com.chatapp.service.models.request.UserRequest;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.RegisterModel;
@@ -27,7 +28,7 @@ public class InteractorImpl implements ListRecommendedFriendsMvp.Interactor {
             return;
         }
         String authorization = logInModel.getToken();
-        ApiService service = ApiService.retrofit.create(ApiService.class);
+        ApiService service = ApiServiceHelper.getInstance();
         Call<ResponseModel<List<UserModel>>> call = service.listRecommendedFriends(authorization);
         call.enqueue(new Callback<ResponseModel<List<UserModel>>>() {
             @Override
@@ -61,7 +62,7 @@ public class InteractorImpl implements ListRecommendedFriendsMvp.Interactor {
             return;
         }
         String authorization = logInModel.getToken();
-        ApiService service = ApiService.retrofit.create(ApiService.class);
+        ApiService service = ApiServiceHelper.getInstance();
         Call<ResponseModel<Object>> call = service.acceptFriendRequest(authorization, new UserRequest(userId));
         call.enqueue(new Callback<ResponseModel<Object>>() {
             @Override

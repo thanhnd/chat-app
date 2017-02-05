@@ -1,6 +1,7 @@
 package com.chatapp.mvp.listnearby;
 
 import com.chatapp.service.ApiService;
+import com.chatapp.service.ApiServiceHelper;
 import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.request.ListNearbyRequest;
 import com.chatapp.service.models.response.LogInModel;
@@ -28,7 +29,7 @@ public class InteractorImpl implements ListNearbyMvp.Interactor {
             return;
         }
         String authorization = logInModel.getToken();
-        ApiService service = ApiService.retrofit.create(ApiService.class);
+        ApiService service = ApiServiceHelper.getInstance();
         Call<ResponseModel<List<UserModel>>> call = service.listNearby(authorization, request);
         call.enqueue(new Callback<ResponseModel<List<UserModel>>>() {
             @Override
@@ -66,7 +67,7 @@ public class InteractorImpl implements ListNearbyMvp.Interactor {
         }
         String authorization = logInModel.getToken();
 
-        ApiService service = ApiService.retrofit.create(ApiService.class);
+        ApiService service = ApiServiceHelper.getInstance();
         Call<ResponseModel<MyProfileModel>> call = service.getMyProfile(authorization);
         call.enqueue(new Callback<ResponseModel<MyProfileModel>>() {
             @Override

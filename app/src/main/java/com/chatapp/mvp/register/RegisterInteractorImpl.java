@@ -3,6 +3,7 @@ package com.chatapp.mvp.register;
 
 import com.chatapp.service.ApiCallback;
 import com.chatapp.service.ApiService;
+import com.chatapp.service.ApiServiceHelper;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.request.RegisterRequest;
 import com.chatapp.service.models.response.LogInModel;
@@ -19,7 +20,7 @@ public class RegisterInteractorImpl implements RegisterMvp.RegisterInteractor {
 
     @Override
     public void login(LogInRequest request, final ApiCallback<ResponseModel<LogInModel>> apiCallback) {
-        ApiService service = ApiService.retrofit.create(ApiService.class);
+        ApiService service = ApiServiceHelper.getInstance();
         Call<ResponseModel<LogInModel>> call = service.signIn(request);
         call.enqueue(new Callback<ResponseModel<LogInModel>>() {
             @Override
@@ -49,7 +50,7 @@ public class RegisterInteractorImpl implements RegisterMvp.RegisterInteractor {
 
     @Override
     public void register(RegisterRequest request, final ApiCallback<ResponseModel<RegisterModel>> callback) {
-        ApiService service = ApiService.retrofit.create(ApiService.class);
+        ApiService service = ApiServiceHelper.getInstance();
         Call<ResponseModel<RegisterModel>> call = service.register(request);
         call.enqueue(new Callback<ResponseModel<RegisterModel>>() {
             @Override
@@ -83,7 +84,7 @@ public class RegisterInteractorImpl implements RegisterMvp.RegisterInteractor {
             return;
         }
         String authorization = logInModel.getToken();
-        ApiService service = ApiService.retrofit.create(ApiService.class);
+        ApiService service = ApiServiceHelper.getInstance();
         Call<ResponseModel<Object>> call = service.getVerifyCode(authorization);
         call.enqueue(new Callback<ResponseModel<Object>>() {
             @Override

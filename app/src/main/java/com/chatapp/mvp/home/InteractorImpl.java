@@ -1,5 +1,6 @@
 package com.chatapp.mvp.home;
 
+import com.chatapp.service.ApiServiceHelper;
 import com.chatapp.service.ApiService;
 import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.response.LogInModel;
@@ -26,7 +27,7 @@ public class InteractorImpl implements HomeMvp.Interactor {
             return;
         }
         String authorization = logInModel.getToken();
-        ApiService service = ApiService.retrofit.create(ApiService.class);
+        ApiService service = ApiServiceHelper.getInstance();
         Map<String, Double> location = new HashMap<>();
         location.put("longitude", longitude);
         location.put("latitude", latitude);

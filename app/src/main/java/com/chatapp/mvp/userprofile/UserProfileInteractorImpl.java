@@ -2,6 +2,7 @@ package com.chatapp.mvp.userprofile;
 
 
 import com.chatapp.service.ApiService;
+import com.chatapp.service.ApiServiceHelper;
 import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.request.UserRequest;
 import com.chatapp.service.models.response.LogInModel;
@@ -25,7 +26,7 @@ public class UserProfileInteractorImpl implements UserProfileMvp.UserProfileInte
         }
         String authorization = logInModel.getToken();
 
-        ApiService service = ApiService.retrofit.create(ApiService.class);
+        ApiService service = ApiServiceHelper.getInstance();
         Call<ResponseModel<UserProfileModel>> call = service.getUserProfile(authorization, userId);
         call.enqueue(new Callback<ResponseModel<UserProfileModel>>() {
             @Override
@@ -64,7 +65,7 @@ public class UserProfileInteractorImpl implements UserProfileMvp.UserProfileInte
         }
         String authorization = logInModel.getToken();
 
-        ApiService service = ApiService.retrofit.create(ApiService.class);
+        ApiService service = ApiServiceHelper.getInstance();
         Call<ResponseModel<Object>> call = service.addUserFavorite(authorization, new UserRequest(userId));
         call.enqueue(new Callback<ResponseModel<Object>>() {
             @Override
@@ -103,7 +104,7 @@ public class UserProfileInteractorImpl implements UserProfileMvp.UserProfileInte
         }
         String authorization = logInModel.getToken();
 
-        ApiService service = ApiService.retrofit.create(ApiService.class);
+        ApiService service = ApiServiceHelper.getInstance();
         Call<ResponseModel<Object>> call = service.requestAddFriend(authorization, new UserRequest(userId, noted));
         call.enqueue(new Callback<ResponseModel<Object>>() {
             @Override

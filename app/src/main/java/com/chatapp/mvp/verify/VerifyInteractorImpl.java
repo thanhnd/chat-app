@@ -3,6 +3,7 @@ package com.chatapp.mvp.verify;
 
 import com.chatapp.service.ApiCallback;
 import com.chatapp.service.ApiService;
+import com.chatapp.service.ApiServiceHelper;
 import com.chatapp.service.models.request.VerifyEmailRequest;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.ResponseModel;
@@ -23,7 +24,7 @@ public class VerifyInteractorImpl implements VerifyMvp.VerifyInteractor {
             return;
         }
         String authorization = logInModel.getToken();
-        ApiService service = ApiService.retrofit.create(ApiService.class);
+        ApiService service = ApiServiceHelper.getInstance();
         Call<ResponseModel<VerifyModel>> call = service.verifyCode(authorization, request);
         call.enqueue(new Callback<ResponseModel<VerifyModel>>() {
             @Override

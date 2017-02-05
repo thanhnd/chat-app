@@ -1,6 +1,7 @@
 package com.chatapp.mvp.updatebasicprofile;
 
 import com.chatapp.service.ApiService;
+import com.chatapp.service.ApiServiceHelper;
 import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.request.BasicProfileRequest;
 import com.chatapp.service.models.response.LogInModel;
@@ -24,7 +25,7 @@ public class UpdateBasicProfileInteractorImpl implements UpdateBasicProfileMvp.U
             return;
         }
         String authorization = logInModel.getToken();
-        ApiService service = ApiService.retrofit.create(ApiService.class);
+        ApiService service = ApiServiceHelper.getInstance();
         Call<ResponseModel<Object>> call = service.updateBasicProfile(authorization, request);
         call.enqueue(new Callback<ResponseModel<Object>>() {
             @Override
