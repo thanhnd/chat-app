@@ -1,7 +1,7 @@
 package com.chatapp.mvp.updatebasicprofile;
 
-import com.chatapp.service.ApiCallback;
 import com.chatapp.service.ApiService;
+import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.request.BasicProfileRequest;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.ResponseModel;
@@ -18,7 +18,7 @@ import retrofit2.Response;
 
 public class UpdateBasicProfileInteractorImpl implements UpdateBasicProfileMvp.UpdateBasicProfileInteractor {
     @Override
-    public void submit(BasicProfileRequest request, final ApiCallback<ResponseModel<Object>> apiCallback) {
+    public void submit(BasicProfileRequest request, final AuthorizeApiCallback<ResponseModel<Object>> apiCallback) {
         LogInModel logInModel = AccountUtils.getLogInModel();
         if (logInModel == null) {
             return;

@@ -1,7 +1,7 @@
 package com.chatapp.mvp.updatebasicprofile;
 
 import com.chatapp.mvp.base.BaseView;
-import com.chatapp.service.ApiCallback;
+import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.request.BasicProfileRequest;
 import com.chatapp.service.models.response.ResponseModel;
 
@@ -11,8 +11,8 @@ import com.chatapp.service.models.response.ResponseModel;
 
 public interface UpdateBasicProfileMvp {
     interface UpdateBasicProfileInteractor {
-        void submit(BasicProfileRequest request,
-                    ApiCallback<ResponseModel<Object>> callback);
+
+        void submit(BasicProfileRequest request, AuthorizeApiCallback<ResponseModel<Object>> apiCallback);
     }
 
     /**

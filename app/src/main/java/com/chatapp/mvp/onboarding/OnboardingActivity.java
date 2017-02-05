@@ -13,6 +13,7 @@ import com.chatapp.mvp.home.HomeActivity;
 import com.chatapp.mvp.login.LogInActivity;
 import com.chatapp.mvp.register.RegisterActivity;
 import com.chatapp.mvp.updatebasicprofile.UpdateBasicProfileActivity;
+import com.chatapp.mvp.verify.VerifyActivity;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.utils.AccountUtils;
 
@@ -41,9 +42,15 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
                 startActivity(intent);
                 finish();
             } else if (logInModel.isVerified()) {
-                startActivity(new Intent(OnboardingActivity.this, UpdateBasicProfileActivity.class));
+                Intent intent = new Intent(OnboardingActivity.this, UpdateBasicProfileActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
             } else if (logInModel.isNotVerify()) {
-                startActivity(new Intent(OnboardingActivity.this, UpdateBasicProfileActivity.class));
+                Intent intent = new Intent(OnboardingActivity.this, VerifyActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
             }
 
             return;

@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,8 +17,10 @@ import com.chatapp.utils.CircleTransform;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -28,6 +31,7 @@ import butterknife.ButterKnife;
 
 public class ListRecommendedFriendsAdapter extends RecyclerView.Adapter<ListRecommendedFriendsAdapter.ViewHolder> {
     private ArrayList<UserModel> mDataset;
+    private Set<UserModel> mSelecteds;
     private Context context;
     private OnUserProfileItemClick onUserProfileItemClick;
     private OnAddFriendClick onAddFriendClick;
@@ -46,9 +50,8 @@ public class ListRecommendedFriendsAdapter extends RecyclerView.Adapter<ListReco
         @Bind(R.id.tv_name) TextView tvName;
         @Bind(R.id.tv_online_status) TextView tvOnlineStatus;
         @Bind(R.id.tv_noted) TextView tvNoted;
-        @Bind(R.id.ib_add_recommended_friend)
-        ImageButton ibAddFriend;
-
+        @Bind(R.id.ib_add_recommended_friend) ImageButton ibAddFriend;
+        @Bind(R.id.cb_selected) CheckBox cbSelectedItem;
 
         public ViewHolder(View v) {
             super(v);
@@ -59,6 +62,7 @@ public class ListRecommendedFriendsAdapter extends RecyclerView.Adapter<ListReco
 
     public ListRecommendedFriendsAdapter(Context context) {
         mDataset = new ArrayList<>();
+        mSelecteds = new HashSet<>();
         this.context = context;
     }
 
@@ -79,7 +83,7 @@ public class ListRecommendedFriendsAdapter extends RecyclerView.Adapter<ListReco
         final UserModel userModel = mDataset.get(position);
         String name = TextUtils.isEmpty(userModel.getDisplayName()) ? "No name" : userModel.getDisplayName();
         holder.tvName.setText(name);
-        holder.tvOnlineStatus.setText(userModel.isOnline() ? "Online" : "Offline");
+        holder.tvOnlineStatus.setText(userModel.getOnlineStatus());
         holder.tvOnlineStatus.setEnabled(userModel.isOnline());
         holder.tvNoted.setText(String.format(Locale.getDefault(), "\"%s\"", userModel.getNoted()));
         Picasso.with(context)
@@ -106,6 +110,16 @@ public class ListRecommendedFriendsAdapter extends RecyclerView.Adapter<ListReco
             }
         });
 
+        holder.cbSelectedItem.setChecked(mSelecteds.contains(userModel));
+        holder.cbSelectedItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckBox checkBox = (CheckBox)v;
+                if (checkBox.isChecked()) {
+                    mSelecteds.add(userModel);
+                }
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)

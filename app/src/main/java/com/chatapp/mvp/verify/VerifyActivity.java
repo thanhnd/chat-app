@@ -58,6 +58,7 @@ public class VerifyActivity extends BaseActivity implements VerifyMvp.VerifyView
             vVerifyEmail.setVisibility(View.GONE);
             vVerifyPhone.setVisibility(View.VISIBLE);
         } else {
+            AccountUtils.logOut();
             finish();
         }
     }

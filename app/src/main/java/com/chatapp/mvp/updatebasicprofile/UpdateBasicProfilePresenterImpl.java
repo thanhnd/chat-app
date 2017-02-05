@@ -2,7 +2,7 @@ package com.chatapp.mvp.updatebasicprofile;
 
 import android.text.TextUtils;
 
-import com.chatapp.service.ApiCallback;
+import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.request.BasicProfileRequest;
 import com.chatapp.service.models.response.ResponseModel;
 
@@ -28,7 +28,12 @@ public class UpdateBasicProfilePresenterImpl implements UpdateBasicProfileMvp.Up
         if (view.get() != null) {
             view.get().showProgress();
         }
-        interactor.submit(request, new ApiCallback<ResponseModel<Object>>() {
+        interactor.submit(request, new AuthorizeApiCallback<ResponseModel<Object>>() {
+            @Override
+            public void onTokenExpired() {
+
+            }
+
             @Override
             public void onSuccess(ResponseModel<Object> response) {
                 if (view.get() != null) {

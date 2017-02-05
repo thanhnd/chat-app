@@ -80,15 +80,17 @@ public class RegisterActivity extends BaseActivity implements RegisterMvp.Regist
     public void submitRegisterSubmit() {
         RegisterRequest request = new RegisterRequest();
         password = edtPassword.getText().toString();
+
         request.setPassword(password);
         if(isRegisterByEmail) {
             email = edtEmail.getText().toString();
             request.setEmail(email);
         } else {
-            countryCode = edtCountryCode.getText().toString();
-            phone = edtPhone.getText().toString();
-            request.setCountry(selectedCountry.getCountryId());
-            request.setMobile(phone);
+            if (selectedCountry != null) {
+                request.setCountry(selectedCountry.getCountryId());
+                phone = edtPhone.getText().toString();
+                request.setMobile(phone);
+            }
         }
         present.submitRegisterForm(request);
     }
