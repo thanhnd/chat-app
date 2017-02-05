@@ -9,13 +9,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.chatapp.R;
-import com.chatapp.mvp.home.HomeActivity;
 import com.chatapp.mvp.login.LogInActivity;
 import com.chatapp.mvp.register.RegisterActivity;
-import com.chatapp.mvp.updatebasicprofile.UpdateBasicProfileActivity;
-import com.chatapp.mvp.verify.VerifyActivity;
-import com.chatapp.service.models.response.LogInModel;
-import com.chatapp.utils.AccountUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,25 +28,6 @@ public class OnboardingActivity extends AppCompatActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (AccountUtils.isLoggedIn()) {
-            Intent intent = null;
-            LogInModel logInModel = AccountUtils.getLogInModel();
-            if (logInModel.isConfirm()) {
-                intent = new Intent(this, HomeActivity.class);
-            } else if (logInModel.isVerified()) {
-                intent = new Intent(OnboardingActivity.this, UpdateBasicProfileActivity.class);
-            } else if (logInModel.isNotVerify()) {
-                intent = new Intent(OnboardingActivity.this, VerifyActivity.class);
-            }
-
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-
-            finish();
-            return;
-        }
 
         setContentView(R.layout.activity_onboarding);
         ButterKnife.bind(this);

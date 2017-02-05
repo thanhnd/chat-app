@@ -21,14 +21,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".mvp.onboarding.OnboardingActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".mvp.splash.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".mvp.onboarding.OnboardingActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".mvp.login.LogInActivity"
             android:theme="@style/AppTheme.NoActionBar" />
