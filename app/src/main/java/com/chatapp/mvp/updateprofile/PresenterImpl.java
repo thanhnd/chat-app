@@ -64,7 +64,7 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
                 if (view.get() != null) {
                     try {
                         Map<String, String> responseResult = (LinkedTreeMap<String, String>) response.getResultSet();
-                        String path = responseResult.get("url") + responseResult.get("avatar");
+                        String path = responseResult.get("url");
                         view.get().onUploadAvatarSuccess(path);
                     } catch (ClassCastException ex) {
                         view.get().showErrorDialog();

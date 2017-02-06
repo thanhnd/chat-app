@@ -69,6 +69,7 @@
                         android:text="@string/register_country_code_label" />
                     <TextView
                         android:id="@+id/edt_country"
+                        style="@style/App_EditTextStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:duplicateParentState="true"
