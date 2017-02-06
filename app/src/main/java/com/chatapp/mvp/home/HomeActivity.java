@@ -168,6 +168,7 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
 
     @Override
     public void onLocationChanged(Location location) {
+        updateLocation();
         Log.d("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
     }
 
@@ -189,6 +190,10 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
     @Override
     public void onConnected(@Nullable Bundle bundle) {
 
+        updateLocation();
+    }
+
+    private void updateLocation() {
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

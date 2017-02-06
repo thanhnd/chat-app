@@ -29,11 +29,13 @@ public class PresentImpl implements ListNearbyMvp.Present {
     }
     @Override
     public void getListNearBy() {
-        ListNearbyRequest request = new ListNearbyRequest();
-        if (AccountUtils.getLongitude() != null && AccountUtils.getLongitude() != null) {
-            request.setLongitude(AccountUtils.getLongitude());
-            request.setLatitude(AccountUtils.getLatitude());
+        if (AccountUtils.getLongitude() == null || AccountUtils.getLongitude() == null) {
+            return;
         }
+
+        ListNearbyRequest request = new ListNearbyRequest();
+        request.setLongitude(AccountUtils.getLongitude());
+        request.setLatitude(AccountUtils.getLatitude());
 
         interactor.getListNearBy(request, new AuthorizeApiCallback<ResponseModel<List<UserModel>>>() {
             @Override
