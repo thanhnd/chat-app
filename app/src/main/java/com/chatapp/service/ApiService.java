@@ -15,6 +15,7 @@ import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.service.models.response.UserProfileModel;
 import com.chatapp.service.models.response.VerifyModel;
+import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.List;
 import java.util.Map;
@@ -118,7 +119,7 @@ public interface ApiService {
 
     @Multipart
     @POST("/api/user/uploadAvatar")
-    Call<ResponseModel<Object>> uploadAvatar(@Header("Authorization") String authorization,
-                                                      @Part MultipartBody.Part file);
+    Call<ResponseModel<LinkedTreeMap<String, String>>> uploadAvatar(@Header("Authorization") String authorization,
+                                                                    @Part MultipartBody.Part file);
 
 }

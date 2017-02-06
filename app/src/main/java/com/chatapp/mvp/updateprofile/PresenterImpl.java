@@ -32,7 +32,7 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
     }
 
     @Override
-    public void uploadAvatar(Uri fileUri) {
+    public void uploadAvatar(Uri url) {
 
         LogInModel logInModel = AccountUtils.getLogInModel();
         if (logInModel == null) {
@@ -40,12 +40,12 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
         }
         String authorization = logInModel.getToken();
 
-        File file = FileUtils.getFile(MyApplication.getInstance(), fileUri);
+        File file = FileUtils.getFile(MyApplication.getInstance(), url);
 
         // create RequestBody instance from file
         RequestBody requestFile =
                 RequestBody.create(
-                        MediaType.parse(MyApplication.getInstance().getContentResolver().getType(fileUri)),
+                        MediaType.parse(MyApplication.getInstance().getContentResolver().getType(url)),
                         file
                 );
 
@@ -53,17 +53,17 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
         MultipartBody.Part filePart =
                 MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
-        interactor.uploadAvatar(authorization, filePart, new AuthorizeApiCallback<ResponseModel<Object>>() {
+        interactor.uploadAvatar(authorization, filePart, new AuthorizeApiCallback<ResponseModel<LinkedTreeMap<String, String>>>() {
             @Override
             public void onTokenExpired() {
 
             }
 
             @Override
-            public void onSuccess(ResponseModel<Object> response) {
+            public void onSuccess(ResponseModel<LinkedTreeMap<String, String>> response) {
                 if (view.get() != null) {
                     try {
-                        Map<String, String> responseResult = (LinkedTreeMap<String, String>) response.getResultSet();
+                        Map<String, String> responseResult = response.getResultSet();
                         String path = responseResult.get("url");
                         view.get().onUploadAvatarSuccess(path);
                     } catch (ClassCastException ex) {
@@ -73,14 +73,14 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
             }
 
             @Override
-            public void onFail(Response<ResponseModel<Object>> response) {
+            public void onFail(Response<ResponseModel<LinkedTreeMap<String, String>>> response) {
                 if (view.get() != null) {
                     view.get().onUploadAvatarFail();
                 }
             }
 
             @Override
-            public void onFail(Call<ResponseModel<Object>> call, Throwable throwable) {
+            public void onFail(Call<ResponseModel<LinkedTreeMap<String, String>>> call, Throwable throwable) {
                 if (view.get() != null) {
                     view.get().onUploadAvatarFail();
                 }

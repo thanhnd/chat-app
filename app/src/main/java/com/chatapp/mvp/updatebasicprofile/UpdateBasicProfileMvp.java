@@ -1,33 +1,56 @@
 package com.chatapp.mvp.updatebasicprofile;
 
+import android.net.Uri;
+
 import com.chatapp.mvp.base.BaseView;
 import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.request.BasicProfileRequest;
+import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.ResponseModel;
+import com.google.gson.internal.LinkedTreeMap;
+
+import okhttp3.MultipartBody;
 
 /**
  * Created by thanhnguyen on 1/8/17.
  */
 
 public interface UpdateBasicProfileMvp {
-    interface UpdateBasicProfileInteractor {
+    interface Interactor {
 
-        void submit(BasicProfileRequest request, AuthorizeApiCallback<ResponseModel<Object>> apiCallback);
+        void submit(BasicProfileRequest request, AuthorizeApiCallback<ResponseModel<Object>> callback);
+
+        void uploadAvatar(String authorization, MultipartBody.Part filePart,
+                          AuthorizeApiCallback<ResponseModel<LinkedTreeMap<String, String>>> callback);
+
+        void getMyProfile(AuthorizeApiCallback<ResponseModel<MyProfileModel>> callback);
+
     }
 
     /**
      * Created by thanhnguyen on 12/19/16.
      */
-    interface UpdateBasicProfilePresenter {
+    interface ProfilePresenter {
         void submit(BasicProfileRequest request);
+
+        void uploadAvatar(Uri url);
+
+        void getMyProfile();
+
     }
 
     /**
      * Created by thanhnguyen on 12/19/16.
      */
-    interface UpdateBasicProfileView extends BaseView {
+    interface View extends BaseView {
 
         void onUpdateBasicProfileSuccess();
         void onUpdateBasicProfileFail();
+
+        void onUploadAvatarSuccess(String path);
+
+        void onUploadAvatarFail();
+
+        void onGetMyProfileSuccess(MyProfileModel resultSet);
     }
 }

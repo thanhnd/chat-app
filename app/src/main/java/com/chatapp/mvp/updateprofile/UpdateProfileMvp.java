@@ -5,6 +5,7 @@ import android.net.Uri;
 import com.chatapp.mvp.base.BaseView;
 import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.response.ResponseModel;
+import com.google.gson.internal.LinkedTreeMap;
 
 import okhttp3.MultipartBody;
 
@@ -15,11 +16,11 @@ import okhttp3.MultipartBody;
 public interface UpdateProfileMvp {
     interface Interactor {
 
-        void uploadAvatar(String authorization, MultipartBody.Part filePart, AuthorizeApiCallback<ResponseModel<Object>> callback);
+        void uploadAvatar(String authorization, MultipartBody.Part filePart, AuthorizeApiCallback<ResponseModel<LinkedTreeMap<String, String>>> callback);
     }
 
     interface Presenter {
-        void uploadAvatar(Uri selectedImageUri);
+        void uploadAvatar(Uri url);
     }
 
     interface View extends BaseView {
