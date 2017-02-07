@@ -87,6 +87,7 @@
             <include layout="@layout/layout_horizontal_divider" />
 
             <LinearLayout
+                android:id="@+id/v_height_and_weight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"

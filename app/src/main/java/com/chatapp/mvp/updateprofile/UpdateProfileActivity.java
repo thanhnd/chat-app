@@ -17,9 +17,11 @@ import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.DateUtils;
 import com.chatapp.utils.DialogUtils;
+import com.chatapp.views.fragments.ChooseHeightAndWeightDialogFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -51,6 +53,7 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
     UpdateProfileMvp.Presenter presenter;
     MyProfileModel userModel;
     private long timestampDob;
+    private int height, weight;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,7 +87,9 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
             edtDisplayName.setText(userModel.getDisplayName());
             timestampDob = userModel.getBirthday();
             tvAge.setText(String.valueOf(userModel.getAge()));
-            tvHeightAndWeight.setText(String.format("%s / %s", userModel.getHeight(), userModel.getWeight()));
+            height = userModel.getHeight();
+            weight = userModel.getWeight();
+            tvHeightAndWeight.setText(String.format("%s / %s", height, weight));
             tvEthnicity.setText(String.valueOf(userModel.getEthinicityId()));
             tvBodyType.setText(String.valueOf(userModel.getBodyTypeId()));
             tvMyTribes.setText(String.valueOf(userModel.getMyTribesId()));
@@ -101,7 +106,7 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
                 "Select Picture"), SELECT_PICTURE);
     }
 
-    @OnClick({R.id.v_date_of_birth})
+    @OnClick({R.id.v_date_of_birth, R.id.tv_age})
     public void clickChooseDateOfBirth() {
         Calendar calendar = Calendar.getInstance();
         if (timestampDob > 0) {
@@ -122,6 +127,25 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
         });
     }
 
+    @OnClick({R.id.v_height_and_weight, R.id.tv_height_and_weight})
+    void clickChooseHeightAndWeight() {
+        DialogUtils.showChooseHeightAndWeightDialog(this, height, weight,
+                new ChooseHeightAndWeightDialogFragment.OnHeightAndWeightSetListener() {
+                    @Override
+                    public void onHeightAndWeightSet(int h, int w) {
+                        height = h;
+                        weight = w;
+                        displayHeightAndWeight();
+                    }
+                });
+    }
+
+    private void displayHeightAndWeight() {
+        if (height > 0 || weight > 0) {
+            tvHeightAndWeight.setText(
+                    String.format(Locale.getDefault(), "%d / %d", height, weight));
+        }
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
