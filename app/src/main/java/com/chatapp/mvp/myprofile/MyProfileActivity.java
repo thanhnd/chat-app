@@ -57,7 +57,6 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
 
     private int mMaxScrollSize;
     private boolean mIsImageHidden;
-    private MyProfileModel userModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,8 +73,6 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
         setSupportActionBar(toolbar);
         appBarLayout.addOnOffsetChangedListener(this);
 
-        userModel = AccountUtils.getMyProfileModel();
-
     }
 
     @Override
@@ -89,7 +86,7 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
     }
 
     private void displayMyProfileInfo() {
-        userModel = AccountUtils.getMyProfileModel();
+        MyProfileModel userModel = AccountUtils.getMyProfileModel();
         if (userModel != null) {
             if (!TextUtils.isEmpty(userModel.getAvatar())) {
                 Picasso.with(this)

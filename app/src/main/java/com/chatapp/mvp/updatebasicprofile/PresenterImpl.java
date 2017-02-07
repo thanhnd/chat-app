@@ -145,18 +145,17 @@ public class PresenterImpl implements UpdateBasicProfileMvp.ProfilePresenter {
             @Override
             public void onSuccess(ResponseModel<MyProfileModel> response) {
                 if (view.get() != null) {
+                    AccountUtils.setMyProfileModel(response.getResultSet());
                     view.get().onGetMyProfileSuccess(response.getResultSet());
                 }
             }
 
             @Override
             public void onFail(Response<ResponseModel<MyProfileModel>> response) {
-
             }
 
             @Override
             public void onFail(Call<ResponseModel<MyProfileModel>> call, Throwable throwable) {
-
             }
 
             @Override

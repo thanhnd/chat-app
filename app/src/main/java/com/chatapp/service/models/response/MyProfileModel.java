@@ -6,6 +6,9 @@ import com.chatapp.utils.CacheUtil;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
+
 /**
  * Created by thanhnguyen on 1/6/17.
  */
@@ -139,6 +142,7 @@ public class MyProfileModel {
     public int getBodyTypeId() {
         return bodyTypeId;
     }
+
     public String getBodyType() {
         if (TextUtils.isEmpty(bodyType)) {
             ParamModel param = CacheUtil.getParam(bodyTypeId,
@@ -158,6 +162,7 @@ public class MyProfileModel {
     public int getMyTribesId() {
         return myTribesId;
     }
+
     public String getMyTribes() {
         if (TextUtils.isEmpty(myTribes)) {
             ParamModel param = CacheUtil.getParam(myTribesId,
@@ -177,6 +182,7 @@ public class MyProfileModel {
     public int getRelationshipStatusId() {
         return relationshipStatusId;
     }
+
     public String getRelationshipStatus() {
         if (TextUtils.isEmpty(relationshipStatus)) {
             ParamModel param = CacheUtil.getParam(relationshipStatusId,
@@ -250,10 +256,11 @@ public class MyProfileModel {
     }
 
     public int getAge() {
-        Long time= (System.currentTimeMillis() - birthday) / 1000;
-        return Math.round(time) / 31536000;
+        LocalDate birthdate = new LocalDate(birthday);
+        LocalDate now = new LocalDate();
+        Years age = Years.yearsBetween(birthdate, now);
+        return age.getYears();
     }
-
 }
 
 

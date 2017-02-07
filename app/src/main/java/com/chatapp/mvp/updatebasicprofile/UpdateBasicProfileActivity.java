@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,12 +17,13 @@ import com.chatapp.mvp.home.HomeActivity;
 import com.chatapp.service.models.request.BasicProfileRequest;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.utils.AccountUtils;
+import com.chatapp.utils.DateUtils;
 import com.chatapp.utils.DialogUtils;
 import com.chatapp.views.fragments.ChooseHeightAndWeightDialogFragment;
 import com.squareup.picasso.Picasso;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import butterknife.Bind;
@@ -68,6 +70,8 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
                 displayHeightAndWeight();
             }
         });
+
+        presenter.getMyProfile();
     }
 
     @OnClick(R.id.btn_submit)
@@ -94,7 +98,8 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
                 cal.set(Calendar.DAY_OF_MONTH, day);
 
                 timestampDob = cal.getTimeInMillis();
-                tvDob.setText(new SimpleDateFormat("d MMMM yyyy", Locale.getDefault()).format(cal.getTime()));
+                Date date = cal.getTime();
+                tvDob.setText(DateUtils.displayDate(date));
             }
         });
     }
@@ -157,8 +162,8 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
     }
 
     @Override
-    public void onGetMyProfileSuccess(MyProfileModel resultSet) {
-        AccountUtils.setMyProfileModel(resultSet);
+    public void onGetMyProfileSuccess(MyProfileModel myProfileModel) {
+        displayMyProfileInfo();
     }
 
     @Override
@@ -177,6 +182,24 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
                     presenter.uploadAvatar(selectedImageUri);
                 }
             }
+        }
+    }
+
+    private void displayMyProfileInfo() {
+        MyProfileModel userModel = AccountUtils.getMyProfileModel();
+        if (userModel != null) {
+            if (!TextUtils.isEmpty(userModel.getAvatar())) {
+                Picasso.with(this)
+                        .load(userModel.getAvatar())
+                        .error(R.drawable.london_flat)
+                        .placeholder(R.drawable.london_flat)
+                        .into(ivAvatar);
+            }
+
+            edtDisplayName.setText(userModel.getDisplayName());
+            Date date = new Date(userModel.getBirthday());
+            tvDob.setText(DateUtils.displayDate(date));
+            tvHeightAndWeight.setText(String.format("%s / %s", userModel.getHeight(), userModel.getWeight()));
         }
     }
 }
