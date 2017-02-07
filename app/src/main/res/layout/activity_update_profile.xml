@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    tools:context=".mvp.updateprofile.UpdateProfileActivity"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -110,6 +111,7 @@
             <include layout="@layout/layout_horizontal_divider" />
 
             <LinearLayout
+                android:id="@+id/v_ethnicity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -121,12 +123,11 @@
                     android:layout_height="wrap_content"
                     android:text="@string/ethnicity" />
 
-                <TextView
-                    android:id="@+id/tv_ethnicity"
-                    style="@style/App_EditTextStyle"
+                <Spinner
+                    android:id="@+id/spn_ethnicity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="South Asian" />
+                    />
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
@@ -143,12 +144,11 @@
                     android:layout_height="wrap_content"
                     android:text="@string/body_type" />
 
-                <TextView
-                    android:id="@+id/tv_body_type"
-                    style="@style/App_EditTextStyle"
+                <Spinner
+                    android:id="@+id/spn_body_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Average" />
+                    />
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
@@ -165,12 +165,11 @@
                     android:layout_height="wrap_content"
                     android:text="@string/my_tribes" />
 
-                <TextView
-                    android:id="@+id/tv_my_tribes"
-                    style="@style/App_EditTextStyle"
+                <Spinner
+                    android:id="@+id/spn_my_tribes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Bear" />
+                    />
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
@@ -187,12 +186,11 @@
                     android:layout_height="wrap_content"
                     android:text="@string/relationship_status" />
 
-                <TextView
-                    android:id="@+id/tv_relationship_status"
-                    style="@style/App_EditTextStyle"
+                <Spinner
+                    android:id="@+id/spn_relationship_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Committed" />
+                    />
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
@@ -209,11 +207,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/city" />
 
-                <TextView
+                <EditText
                     android:id="@+id/edt_city"
                     style="@style/App_EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="@string/hint_input_your_city"
                     tools:text="Ho Chi Minh city" />
             </LinearLayout>
 
@@ -231,8 +230,31 @@
                     android:layout_height="wrap_content"
                     android:text="@string/state_province" />
 
+                <EditText
+                    android:id="@+id/edt_state_province"
+                    style="@style/App_EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_input_your_city_province"
+                    tools:text="New York" />
+            </LinearLayout>
+
+            <include layout="@layout/layout_horizontal_divider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="10dp">
+
                 <TextView
-                    android:id="@+id/tv_country_region"
+                    style="@style/form_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/country_region" />
+
+                <EditText
+                    android:id="@+id/edt_country_region"
                     style="@style/App_EditTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -384,6 +406,7 @@
             <include layout="@layout/layout_horizontal_divider" />
 
             <Button
+                android:id="@+id/btn_submit"
                 style="@style/Button.Submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

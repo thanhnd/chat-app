@@ -122,4 +122,10 @@ public interface ApiService {
     Call<ResponseModel<LinkedTreeMap<String, String>>> uploadAvatar(@Header("Authorization") String authorization,
                                                                     @Part MultipartBody.Part file);
 
+    @Multipart
+    @POST("/api/profile/update")
+    Call<ResponseModel<Object>> updateProfile(@Header("Authorization") String authorization,
+                                                                    @Part Map request);
+
+
 }

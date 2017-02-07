@@ -7,6 +7,8 @@ import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.response.ResponseModel;
 import com.google.gson.internal.LinkedTreeMap;
 
+import java.util.Map;
+
 import okhttp3.MultipartBody;
 
 /**
@@ -17,14 +19,21 @@ public interface UpdateProfileMvp {
     interface Interactor {
 
         void uploadAvatar(String authorization, MultipartBody.Part filePart, AuthorizeApiCallback<ResponseModel<LinkedTreeMap<String, String>>> callback);
+        void submit(String authorization, Map<String, Object> request, AuthorizeApiCallback<ResponseModel<Object>> callback);
     }
 
     interface Presenter {
         void uploadAvatar(Uri url);
+
+        void submit(Map<String, Object> request);
     }
 
     interface View extends BaseView {
         void onUploadAvatarSuccess(String path);
         void onUploadAvatarFail();
+
+        void onUpdateProfileSuccess();
+
+        void onUpdateProfileFail();
     }
 }

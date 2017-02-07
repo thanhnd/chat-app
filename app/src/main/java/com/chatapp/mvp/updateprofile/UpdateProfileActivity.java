@@ -6,22 +6,32 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.service.models.response.MyProfileModel;
+import com.chatapp.service.models.response.ParamModel;
 import com.chatapp.utils.AccountUtils;
+import com.chatapp.utils.CacheUtil;
 import com.chatapp.utils.DateUtils;
 import com.chatapp.utils.DialogUtils;
 import com.chatapp.views.fragments.ChooseHeightAndWeightDialogFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,19 +51,21 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
     TextView tvAge;
     @Bind(R.id.tv_height_and_weight)
     TextView tvHeightAndWeight;
-    @Bind(R.id.tv_ethnicity)
-    TextView tvEthnicity;
-    @Bind(R.id.tv_body_type)
-    TextView tvBodyType;
-    @Bind(R.id.tv_my_tribes)
-    TextView tvMyTribes;
-    @Bind(R.id.tv_relationship_status)
-    TextView tvRelationshipStatus;
+
+    @Bind(R.id.spn_ethnicity)
+    Spinner spnEthnicity;
+    @Bind(R.id.spn_body_type)
+    Spinner spnBodyType;
+    @Bind(R.id.spn_my_tribes)
+    Spinner spnMyTribes;
+    @Bind(R.id.spn_relationship_status)
+    Spinner spnRelationshipStatus;
 
     UpdateProfileMvp.Presenter presenter;
     MyProfileModel userModel;
     private long timestampDob;
     private int height, weight;
+    ParamModel ethnicityParam, bodyTypeParam, myTribesParam, relationshipStatusParam;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,6 +75,74 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
 
         presenter = new PresenterImpl(this);
         userModel = AccountUtils.getMyProfileModel();
+
+        initView();
+    }
+
+    private void initView() {
+        spnEthnicity.setAdapter(getSpinnerAdapter(CacheUtil.getListParamsModel().getListEthnicity()));
+        spnEthnicity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ethnicityParam = (ParamModel) parent.getSelectedItem();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spnBodyType.setAdapter(getSpinnerAdapter(CacheUtil.getListParamsModel().getListBodyType()));
+        spnBodyType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                bodyTypeParam = (ParamModel) parent.getSelectedItem();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        spnMyTribes.setAdapter(getSpinnerAdapter(CacheUtil.getListParamsModel().getListTribes()));
+        spnMyTribes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                myTribesParam = (ParamModel) parent.getSelectedItem();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        spnRelationshipStatus.setAdapter(getSpinnerAdapter(CacheUtil.getListParamsModel().getListRelationship()));
+        spnRelationshipStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                relationshipStatusParam = (ParamModel) parent.getSelectedItem();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private SpinnerAdapter getSpinnerAdapter(List<ParamModel> params) {
+        ArrayAdapter<ParamModel> dataAdapter = new ArrayAdapter<>(this,
+                R.layout.spinner_item);
+        ParamModel noneParam = new ParamModel();
+        noneParam.setName("Please select");
+        dataAdapter.add(noneParam);
+        dataAdapter.addAll(params);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        return  dataAdapter;
     }
 
     @Override
@@ -90,10 +170,6 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
             height = userModel.getHeight();
             weight = userModel.getWeight();
             tvHeightAndWeight.setText(String.format("%s / %s", height, weight));
-            tvEthnicity.setText(String.valueOf(userModel.getEthinicityId()));
-            tvBodyType.setText(String.valueOf(userModel.getBodyTypeId()));
-            tvMyTribes.setText(String.valueOf(userModel.getMyTribesId()));
-            tvRelationshipStatus.setText(String.valueOf(userModel.getRelationshipStatusId()));
         }
     }
 
@@ -147,6 +223,37 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
         }
     }
 
+    @OnClick(R.id.btn_submit)
+    void clickSubmit() {
+        Map<String, Object> request = new HashMap();
+        String displayName = edtDisplayName.getText().toString();
+        request.put("display_name", displayName);
+
+        if (timestampDob > 0) {
+            request.put("birthday", timestampDob);
+        }
+        if (weight > 0) {
+            request.put("weight", weight);
+        }
+        if (height > 0) {
+            request.put("height", height);
+        }
+
+        if (ethnicityParam != null) {
+            request.put("ethinicity_id", ethnicityParam.getId());
+        }
+
+        if (bodyTypeParam != null) {
+            request.put("body_type_id", bodyTypeParam.getId());
+        }
+
+        if (relationshipStatusParam != null) {
+            request.put("relationship_status_id", relationshipStatusParam.getId());
+        }
+
+        presenter.submit(request);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
@@ -171,6 +278,16 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
 
     @Override
     public void onUploadAvatarFail() {
+
+    }
+
+    @Override
+    public void onUpdateProfileSuccess() {
+        
+    }
+
+    @Override
+    public void onUpdateProfileFail() {
 
     }
 }

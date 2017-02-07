@@ -118,5 +118,7 @@
     <string name="write_your_greeting">Write your greeting</string>
     <string name="find_me_on">find me on</string>
     <string name="internal_storage">Internal storage</string>
+    <string name="hint_input_your_city">Input your city.</string>
+    <string name="hint_input_your_city_province">Input your city/province</string>
 
 </resources>

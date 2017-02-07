@@ -122,7 +122,7 @@ public class MyProfileModel {
     }
 
     public String getEnthicity() {
-        if (TextUtils.isEmpty(ethinicity)) {
+        if (TextUtils.isEmpty(ethinicity) && CacheUtil.getListParamsModel() != null) {
             ParamModel param = CacheUtil.getParam(getEthinicityId(),
                     CacheUtil.getListParamsModel().getListEthnicity());
             if (param != null) {

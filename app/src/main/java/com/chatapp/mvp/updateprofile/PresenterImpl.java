@@ -2,6 +2,7 @@
 package com.chatapp.mvp.updateprofile;
 
 import android.net.Uri;
+import android.text.TextUtils;
 
 import com.chatapp.MyApplication;
 import com.chatapp.service.AuthorizeApiCallback;
@@ -83,6 +84,57 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
             public void onFail(Call<ResponseModel<LinkedTreeMap<String, String>>> call, Throwable throwable) {
                 if (view.get() != null) {
                     view.get().onUploadAvatarFail();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void submit(Map<String, Object> request) {
+        if (view.get() != null) {
+            view.get().showProgress();
+        }
+        interactor.submit(request, new AuthorizeApiCallback<ResponseModel<Object>>() {
+            @Override
+            public void onTokenExpired() {
+                if (view.get() != null) {
+                    view.get().hideProgress();
+                }
+            }
+
+            @Override
+            public void onSuccess(ResponseModel<Object> response) {
+
+                AccountUtils.setAccountStatus(LogInModel.VERIFIED);
+
+                if (view.get() != null) {
+                    view.get().hideProgress();
+                    view.get().onUpdateProfileSuccess();
+                }
+            }
+
+            @Override
+            public void onFail(Response<ResponseModel<Object>> response) {
+                if (view.get() != null) {
+                    view.get().hideProgress();
+
+                    // Get data response from server
+                    ResponseModel responseModel = response.body();
+
+                    // Show error message from server if there is
+                    if (responseModel != null && !TextUtils.isEmpty(responseModel.getResponseMsg())) {
+                        view.get().showErrorDialog(responseModel.getResponseMsg());
+                    } else {
+                        view.get().onUpdateProfileFail();
+                    }
+                }
+            }
+
+            @Override
+            public void onFail(Call<ResponseModel<Object>> call, Throwable throwable) {
+                if (view != null) {
+                    view.get().showErrorDialog();
+                    view.get().hideProgress();
                 }
             }
         });
