@@ -26,7 +26,7 @@ public class SplashActivity extends BaseActivity implements SplashMvp.SplashView
 
     @Override
     public void onGetListCommonParamsSuccess() {
-        Intent intent = new Intent(this, OnboardingActivity.class);
+        Intent intent = null;
         if (AccountUtils.isLoggedIn()) {
             LogInModel logInModel = AccountUtils.getLogInModel();
             if (logInModel.isConfirm()) {
@@ -38,6 +38,21 @@ public class SplashActivity extends BaseActivity implements SplashMvp.SplashView
             }
         }
 
+        if (intent == null) {
+            new Intent(this, OnboardingActivity.class);
+        }
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+
+        finish();
+    }
+
+    @Override
+    public void onGetListCommonFail() {
+
+        Intent intent = new Intent(this, OnboardingActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);

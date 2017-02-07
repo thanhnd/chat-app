@@ -15,6 +15,7 @@ public interface SplashMvp {
 
     interface SplashView {
         void onGetListCommonParamsSuccess();
+        void onGetListCommonFail();
     }
 
     interface Presenter {

@@ -35,12 +35,16 @@ public class PresenterImpl implements SplashMvp.Presenter {
 
             @Override
             public void onFail(Response<ResponseModel<ListParamsModel>> response) {
-
+                if (view.get() != null) {
+                    view.get().onGetListCommonParamsSuccess();
+                }
             }
 
             @Override
             public void onFail(Call<ResponseModel<ListParamsModel>> call, Throwable throwable) {
-
+                if (view.get() != null) {
+                    view.get().onGetListCommonParamsSuccess();
+                }
             }
         });
     }
