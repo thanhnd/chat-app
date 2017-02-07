@@ -21,7 +21,6 @@ public interface ListNearbyMvp {
 
     interface Interactor {
         void getListNearBy(ListNearbyRequest request, AuthorizeApiCallback<ResponseModel<List<UserModel>>> callback);
-        void getMyProfile(AuthorizeApiCallback<ResponseModel<MyProfileModel>> callback);
     }
 
     interface View extends BaseView {

@@ -4,8 +4,10 @@ import android.text.TextUtils;
 
 import com.chatapp.service.ApiCallback;
 import com.chatapp.service.models.request.VerifyEmailRequest;
+import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.VerifyModel;
+import com.chatapp.utils.AccountUtils;
 
 import java.lang.ref.WeakReference;
 
@@ -30,8 +32,12 @@ public class VerifyPresentImpl implements VerifyMvp.VerifyPresent {
             view.get().showProgress();
         }
         interactor.verify(request, new ApiCallback<ResponseModel<VerifyModel>>() {
+
             @Override
             public void onSuccess(ResponseModel<VerifyModel> response) {
+
+                AccountUtils.setAccountStatus(LogInModel.VERIFIED);
+
                 if (view.get() != null) {
                     view.get().hideProgress();
                     view.get().onVerifySuccess();
@@ -40,6 +46,7 @@ public class VerifyPresentImpl implements VerifyMvp.VerifyPresent {
 
             @Override
             public void onFail(Response<ResponseModel<VerifyModel>> response) {
+
                 if (view.get() != null) {
                     view.get().hideProgress();
 

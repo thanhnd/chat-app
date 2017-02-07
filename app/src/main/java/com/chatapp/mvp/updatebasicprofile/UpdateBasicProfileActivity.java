@@ -79,7 +79,10 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
         BasicProfileRequest request = new BasicProfileRequest();
         String displayName = edtDisplayName.getText().toString();
         request.setDisplayName(displayName);
-        request.setBirthday(timestampDob);
+        if (timestampDob > 0) {
+            request.setBirthday(timestampDob);
+        }
+
         request.setUnitSystem(unitType);
         request.setHeight(height);
         request.setWeight(weight);
@@ -136,6 +139,7 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
 
     @Override
     public void onUpdateBasicProfileSuccess() {
+
         Intent intent = new Intent(this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);

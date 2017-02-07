@@ -23,7 +23,9 @@ public class PresenterImpl implements SplashMvp.Presenter {
 
     @Override
     public void getListCommonParams() {
+
         this.interactor.getListCommonParams(new ApiCallback<ResponseModel<ListParamsModel>>() {
+
             @Override
             public void onSuccess(ResponseModel<ListParamsModel> response) {
                 ListParamsModel listParamsModel = response.getResultSet();
@@ -48,5 +50,4 @@ public class PresenterImpl implements SplashMvp.Presenter {
             }
         });
     }
-
 }

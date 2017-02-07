@@ -39,7 +39,7 @@ public class SplashActivity extends BaseActivity implements SplashMvp.SplashView
         }
 
         if (intent == null) {
-            new Intent(this, OnboardingActivity.class);
+            intent = new Intent(this, OnboardingActivity.class);
         }
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

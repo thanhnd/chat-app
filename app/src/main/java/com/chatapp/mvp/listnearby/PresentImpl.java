@@ -1,5 +1,7 @@
 package com.chatapp.mvp.listnearby;
 
+import com.chatapp.mvp.base.GeneralInteractor;
+import com.chatapp.mvp.base.GeneralInteractorImmpl;
 import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.request.ListNearbyRequest;
 import com.chatapp.service.models.response.MyProfileModel;
@@ -21,14 +23,19 @@ public class PresentImpl implements ListNearbyMvp.Present {
 
     private WeakReference<ListNearbyMvp.View> view;
     private ListNearbyMvp.Interactor interactor;
+    private GeneralInteractor generalInteractor;
 
     public PresentImpl(ListNearbyMvp.View view) {
+
         this.view = new WeakReference<>(view);
         this.interactor = new InteractorImpl();
+        this.generalInteractor = new GeneralInteractorImmpl();
 
     }
+
     @Override
     public void getListNearBy() {
+
         if (AccountUtils.getLongitude() == null || AccountUtils.getLongitude() == null) {
             return;
         }
@@ -38,6 +45,7 @@ public class PresentImpl implements ListNearbyMvp.Present {
         request.setLatitude(AccountUtils.getLatitude());
 
         interactor.getListNearBy(request, new AuthorizeApiCallback<ResponseModel<List<UserModel>>>() {
+
             @Override
             public void onSuccess(ResponseModel<List<UserModel>> response) {
                 if (view.get() != null) {
@@ -66,7 +74,7 @@ public class PresentImpl implements ListNearbyMvp.Present {
 
     @Override
     public void getMyProfile() {
-        interactor.getMyProfile(new AuthorizeApiCallback<ResponseModel<MyProfileModel>>() {
+        generalInteractor.getMyProfile(new AuthorizeApiCallback<ResponseModel<MyProfileModel>>() {
             @Override
             public void onSuccess(ResponseModel<MyProfileModel> response) {
                 if (view.get() != null) {

@@ -16,13 +16,20 @@ import static com.chatapp.utils.CacheUtil.getSharedPreferences;
 public class AccountUtils {
     private static final String SIGN_IN_MODEL = "sign_in_model";
 
-    static private LogInModel logInModel;
+    static private volatile LogInModel logInModel;
     private static MyProfileModel myProfileModel;
 
     static private Double longitude;
     static private Double latitude;
 
     public static LogInModel getLogInModel() {
+        if (logInModel == null) {
+            synchronized (AccountUtils.class) {
+                if (logInModel == null) {
+                    logInModel = getCacheSignInModel();
+                }
+            }
+        }
         return logInModel;
     }
 
@@ -31,11 +38,13 @@ public class AccountUtils {
         cacheSignInModel(loginInfo);
     }
 
+    public static void setAccountStatus(int status) {
+        logInModel.setIsActive(status);
+        cacheSignInModel(logInModel);
+    }
+
     public static boolean isLoggedIn() {
-        if (logInModel == null) {
-            logInModel = getCacheSignInModel();
-        }
-        return (logInModel != null);
+        return (getLogInModel() != null);
     }
 
     public static void logOut() {

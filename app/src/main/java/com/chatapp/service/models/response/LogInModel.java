@@ -10,9 +10,10 @@ import java.io.Serializable;
  */
 
 public class LogInModel implements Serializable {
-    private static final int NOT_VERIFY = 0;
-    private static final int VERIFIED = 1;
-    private static final int CONFIRM = 2;
+    public static final int NOT_VERIFY = 0;
+    public static final int VERIFIED = 1;
+    public static final int CONFIRM = 2;
+
     @SerializedName("token")
     @Expose
     private String token;
@@ -32,8 +33,8 @@ public class LogInModel implements Serializable {
         return isActive;
     }
 
-    public void setIsActive(int isActive) {
-        this.isActive = isActive;
+    public void setIsActive(int status) {
+        this.isActive = status;
     }
 
     public boolean isConfirm() {

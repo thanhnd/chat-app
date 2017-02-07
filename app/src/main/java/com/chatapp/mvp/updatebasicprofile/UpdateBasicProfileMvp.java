@@ -23,8 +23,6 @@ public interface UpdateBasicProfileMvp {
         void uploadAvatar(String authorization, MultipartBody.Part filePart,
                           AuthorizeApiCallback<ResponseModel<LinkedTreeMap<String, String>>> callback);
 
-        void getMyProfile(AuthorizeApiCallback<ResponseModel<MyProfileModel>> callback);
-
     }
 
     /**

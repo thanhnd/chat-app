@@ -4,6 +4,8 @@ import android.net.Uri;
 import android.text.TextUtils;
 
 import com.chatapp.MyApplication;
+import com.chatapp.mvp.base.GeneralInteractor;
+import com.chatapp.mvp.base.GeneralInteractorImmpl;
 import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.request.BasicProfileRequest;
 import com.chatapp.service.models.response.LogInModel;
@@ -30,10 +32,12 @@ public class PresenterImpl implements UpdateBasicProfileMvp.ProfilePresenter {
 
     private WeakReference<UpdateBasicProfileMvp.View> view;
     private UpdateBasicProfileMvp.Interactor interactor;
+    private GeneralInteractor generalInteractor;
 
     public PresenterImpl(UpdateBasicProfileMvp.View view) {
         this.view = new WeakReference<>(view);
         this.interactor = new InteractorImpl();
+        this.generalInteractor = new GeneralInteractorImmpl();
     }
 
     @Override
@@ -44,11 +48,16 @@ public class PresenterImpl implements UpdateBasicProfileMvp.ProfilePresenter {
         interactor.submit(request, new AuthorizeApiCallback<ResponseModel<Object>>() {
             @Override
             public void onTokenExpired() {
-
+                if (view.get() != null) {
+                    view.get().hideProgress();
+                }
             }
 
             @Override
             public void onSuccess(ResponseModel<Object> response) {
+
+                AccountUtils.setAccountStatus(LogInModel.VERIFIED);
+
                 if (view.get() != null) {
                     view.get().hideProgress();
                     view.get().onUpdateBasicProfileSuccess();
@@ -141,7 +150,7 @@ public class PresenterImpl implements UpdateBasicProfileMvp.ProfilePresenter {
 
     @Override
     public void getMyProfile() {
-        interactor.getMyProfile(new AuthorizeApiCallback<ResponseModel<MyProfileModel>>() {
+        generalInteractor.getMyProfile(new AuthorizeApiCallback<ResponseModel<MyProfileModel>>() {
             @Override
             public void onSuccess(ResponseModel<MyProfileModel> response) {
                 if (view.get() != null) {
