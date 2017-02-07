@@ -83,7 +83,7 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
         presenter.submit(request);
     }
 
-    @OnClick(R.id.v_date_of_birth)
+    @OnClick({R.id.v_date_of_birth, R.id.tv_dob})
     void clickChooseDateOfBirth() {
         DialogUtils.showDatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -94,7 +94,7 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
                 cal.set(Calendar.DAY_OF_MONTH, day);
 
                 timestampDob = cal.getTimeInMillis();
-                tvDob.setText(new SimpleDateFormat("d MMMM yyyy").format(cal.getTime()).toString());
+                tvDob.setText(new SimpleDateFormat("d MMMM yyyy", Locale.getDefault()).format(cal.getTime()));
             }
         });
     }
