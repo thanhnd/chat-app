@@ -92,7 +92,7 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
 
     @OnClick({R.id.v_date_of_birth, R.id.tv_dob})
     void clickChooseDateOfBirth() {
-        DialogUtils.showDatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        DialogUtils.showDatePickerDialog(this, Calendar.getInstance(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 Calendar cal = Calendar.getInstance();

@@ -13,6 +13,7 @@ import com.chatapp.views.fragments.DatePickerDialogFragment;
 import com.chatapp.views.fragments.ProgressDialogFragment;
 import com.chatapp.views.fragments.RetainedDialogFragment;
 
+import java.util.Calendar;
 import java.util.WeakHashMap;
 
 /**
@@ -146,11 +147,11 @@ public class DialogUtils {
                 .show(activity.getSupportFragmentManager(), DialogUtils.class.getName() + ":confirm");
     }
 
-    public static void showDatePickerDialog(final FragmentActivity activity,
+    public static void showDatePickerDialog(final FragmentActivity activity, Calendar calendar,
                                             DatePickerDialog.OnDateSetListener onDateSetListener) {
         if (activity == null || activity.isFinishing()) return;
         DatePickerDialogFragment
-                .instantiate(onDateSetListener)
+                .instantiate(calendar, onDateSetListener)
                 .show(activity.getSupportFragmentManager(), DialogUtils.class.getName() + ":date_picker");
     }
 

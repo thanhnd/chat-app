@@ -1,10 +1,12 @@
 package com.chatapp.mvp.updateprofile;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,7 +15,11 @@ import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.utils.AccountUtils;
+import com.chatapp.utils.DateUtils;
+import com.chatapp.utils.DialogUtils;
 import com.squareup.picasso.Picasso;
+
+import java.util.Calendar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -44,6 +50,7 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
 
     UpdateProfileMvp.Presenter presenter;
     MyProfileModel userModel;
+    private long timestampDob;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,6 +82,7 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
             }
 
             edtDisplayName.setText(userModel.getDisplayName());
+            timestampDob = userModel.getBirthday();
             tvAge.setText(String.valueOf(userModel.getAge()));
             tvHeightAndWeight.setText(String.format("%s / %s", userModel.getHeight(), userModel.getWeight()));
             tvEthnicity.setText(String.valueOf(userModel.getEthinicityId()));
@@ -92,6 +100,28 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
         startActivityForResult(Intent.createChooser(intent,
                 "Select Picture"), SELECT_PICTURE);
     }
+
+    @OnClick({R.id.v_date_of_birth})
+    public void clickChooseDateOfBirth() {
+        Calendar calendar = Calendar.getInstance();
+        if (timestampDob > 0) {
+            calendar.setTimeInMillis(timestampDob);
+        }
+
+        DialogUtils.showDatePickerDialog(this, calendar, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                Calendar cal = Calendar.getInstance();
+                cal.set(Calendar.YEAR, year);
+                cal.set(Calendar.MONTH, month);
+                cal.set(Calendar.DAY_OF_MONTH, day);
+
+                timestampDob = cal.getTimeInMillis();
+                tvAge.setText(String.valueOf(DateUtils.getAge(timestampDob)));
+            }
+        });
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

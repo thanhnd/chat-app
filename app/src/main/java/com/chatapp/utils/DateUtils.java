@@ -1,5 +1,8 @@
 package com.chatapp.utils;
 
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -14,5 +17,12 @@ public class DateUtils {
 
     public static String displayDate(Date date) {
         return new SimpleDateFormat(COMMON_DATE_FORMAT, Locale.getDefault()).format(date);
+    }
+
+    public static int getAge(long timestamp) {
+        LocalDate birthday = new LocalDate(timestamp);
+        LocalDate now = new LocalDate();
+        Years age = Years.yearsBetween(birthday, now);
+        return age.getYears();
     }
 }

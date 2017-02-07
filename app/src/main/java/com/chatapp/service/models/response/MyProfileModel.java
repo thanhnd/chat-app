@@ -3,11 +3,9 @@ package com.chatapp.service.models.response;
 import android.text.TextUtils;
 
 import com.chatapp.utils.CacheUtil;
+import com.chatapp.utils.DateUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import org.joda.time.LocalDate;
-import org.joda.time.Years;
 
 /**
  * Created by thanhnguyen on 1/6/17.
@@ -256,10 +254,7 @@ public class MyProfileModel {
     }
 
     public int getAge() {
-        LocalDate birthdate = new LocalDate(birthday);
-        LocalDate now = new LocalDate();
-        Years age = Years.yearsBetween(birthdate, now);
-        return age.getYears();
+        return DateUtils.getAge(birthday);
     }
 }
 
