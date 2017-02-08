@@ -142,7 +142,7 @@ public class MyProfileModel {
     }
 
     public String getBodyType() {
-        if (TextUtils.isEmpty(bodyType)) {
+        if (TextUtils.isEmpty(bodyType) && CacheUtil.getListParamsModel() != null) {
             ParamModel param = CacheUtil.getParam(bodyTypeId,
                     CacheUtil.getListParamsModel().getListBodyType());
             if (param != null) {
@@ -162,7 +162,7 @@ public class MyProfileModel {
     }
 
     public String getMyTribes() {
-        if (TextUtils.isEmpty(myTribes)) {
+        if (TextUtils.isEmpty(myTribes) && CacheUtil.getListParamsModel() != null) {
             ParamModel param = CacheUtil.getParam(myTribesId,
                     CacheUtil.getListParamsModel().getListTribes());
             if (param != null) {
@@ -182,7 +182,7 @@ public class MyProfileModel {
     }
 
     public String getRelationshipStatus() {
-        if (TextUtils.isEmpty(relationshipStatus)) {
+        if (TextUtils.isEmpty(relationshipStatus) && CacheUtil.getListParamsModel() != null) {
             ParamModel param = CacheUtil.getParam(relationshipStatusId,
                     CacheUtil.getListParamsModel().getListRelationship());
             if (param != null) {

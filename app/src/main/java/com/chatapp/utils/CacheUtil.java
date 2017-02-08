@@ -26,6 +26,11 @@ public class CacheUtil {
     }
 
     public static ParamModel getParam(int key, List<ParamModel> paramModels) {
+
+        if (paramModels == null) {
+            return  null;
+        }
+
         for (ParamModel paramModel: paramModels) {
             if (paramModel.equals(key)) {
                 return paramModel;

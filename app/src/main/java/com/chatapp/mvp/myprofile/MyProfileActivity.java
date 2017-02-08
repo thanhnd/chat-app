@@ -57,12 +57,15 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
 
     private int mMaxScrollSize;
     private boolean mIsImageHidden;
+    private MyProfileMvp.MyProfilePresenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
         ButterKnife.bind(this);
+
+        presenter = new MyProfilePresenterImpl(this);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +86,8 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
         tvOnlineStatus.setEnabled(true);
 
         displayMyProfileInfo();
+
+        presenter.getMyProfile();
     }
 
     private void displayMyProfileInfo() {
@@ -136,5 +141,10 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
     public void onClickEditFab() {
         Intent intent = new Intent(this, UpdateProfileActivity.class);
         startActivityForResult(intent, RC_UPDATE_PROFILE);
+    }
+
+    @Override
+    public void onGetMyProfileSuccess(MyProfileModel resultSet) {
+
     }
 }

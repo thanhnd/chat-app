@@ -10,7 +10,7 @@ public class ParamModel {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private int id;
 
     @SerializedName("name")
     @Expose
@@ -42,7 +42,7 @@ public class ParamModel {
         }
 
         ParamModel that = (ParamModel) o;
-        return id.intValue() == that.id;
+        return id == that.id;
 
     }
 

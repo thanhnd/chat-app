@@ -283,7 +283,8 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
 
     @Override
     public void onUpdateProfileSuccess() {
-        
+        showDialog("Update Profile", "Successfully update profile");
+
     }
 
     @Override

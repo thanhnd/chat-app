@@ -91,10 +91,16 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
 
     @Override
     public void submit(Map<String, Object> request) {
+        LogInModel logInModel = AccountUtils.getLogInModel();
+        if (logInModel == null) {
+            return;
+        }
         if (view.get() != null) {
             view.get().showProgress();
         }
-        interactor.submit(request, new AuthorizeApiCallback<ResponseModel<Object>>() {
+
+        String authorization = logInModel.getToken();
+        interactor.submit(authorization, request, new AuthorizeApiCallback<ResponseModel<Object>>() {
             @Override
             public void onTokenExpired() {
                 if (view.get() != null) {
@@ -104,9 +110,6 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
 
             @Override
             public void onSuccess(ResponseModel<Object> response) {
-
-                AccountUtils.setAccountStatus(LogInModel.VERIFIED);
-
                 if (view.get() != null) {
                     view.get().hideProgress();
                     view.get().onUpdateProfileSuccess();
