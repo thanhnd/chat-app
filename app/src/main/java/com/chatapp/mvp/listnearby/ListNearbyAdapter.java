@@ -95,14 +95,18 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
             String name = TextUtils.isEmpty(myProfileModel.getDisplayName()) ?
                     "No name" : myProfileModel.getDisplayName();
             myProfileViewHolder.tvName.setText(name);
-            Picasso.with(context)
-                    .load(myProfileModel.getAvatar())
-                    .fit()
-                    .centerCrop()
-                    .error(R.drawable.img_user_avatar)
-                    .placeholder(R.drawable.img_user_avatar)
-                    .transform(new CircleTransform())
-                    .into(myProfileViewHolder.ivAvatar);
+
+            if (!TextUtils.isEmpty(myProfileModel.getAvatar())) {
+                Picasso.with(context)
+                        .load(myProfileModel.getAvatar())
+                        .fit()
+                        .centerCrop()
+                        .error(R.drawable.img_user_avatar)
+                        .placeholder(R.drawable.img_user_avatar)
+                        .transform(new CircleTransform())
+                        .into(myProfileViewHolder.ivAvatar);
+            }
+
             myProfileViewHolder.vItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -119,14 +123,18 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
             String name = TextUtils.isEmpty(userModel.getDisplayName()) ? "No name" : userModel.getDisplayName();
             otherUserViewHolder.tvName.setText(name);
             otherUserViewHolder.tvDistance.setText(String.format(Locale.getDefault(), "%d feet away", userModel.getFeetAway()));
-            Picasso.with(context)
-                    .load(userModel.getAvatar())
-                    .error(R.drawable.img_user_avatar)
-                    .placeholder(R.drawable.img_user_avatar)
-                    .transform(new CircleTransform())
-                    .fit()
-                    .centerCrop()
-                    .into(otherUserViewHolder.ivAvatar);
+
+            if (!TextUtils.isEmpty(userModel.getAvatar())) {
+                Picasso.with(context)
+                        .load(userModel.getAvatar())
+                        .error(R.drawable.img_user_avatar)
+                        .placeholder(R.drawable.img_user_avatar)
+                        .transform(new CircleTransform())
+                        .fit()
+                        .centerCrop()
+                        .into(otherUserViewHolder.ivAvatar);
+            }
+
             otherUserViewHolder.vItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
