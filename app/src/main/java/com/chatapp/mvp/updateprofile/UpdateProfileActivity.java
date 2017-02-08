@@ -142,8 +142,7 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
         ArrayAdapter<ParamModel> dataAdapter = new ArrayAdapter<>(this,
                 R.layout.spinner_item);
         ParamModel noneParam = new ParamModel(0, "Not set");
-        params.add(0, noneParam);
-
+        dataAdapter.add(noneParam);
         dataAdapter.addAll(params);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -177,16 +176,16 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
             tvHeightAndWeight.setText(String.format("%s / %s", height, weight));
 
             ethnicityParam = new ParamModel(userModel.getEthinicityId());
-            spnEthnicity.setSelection(ethnicities.indexOf(ethnicityParam));
+            spnEthnicity.setSelection(ethnicities.indexOf(ethnicityParam) + 1);
 
             myTribesParam = new ParamModel(userModel.getBodyTypeId());
-            spnTribes.setSelection(tribes.indexOf(myTribesParam));
+            spnTribes.setSelection(tribes.indexOf(myTribesParam)  + 1);
 
             bodyTypeParam = new ParamModel(userModel.getBodyTypeId());
-            spnBodyType.setSelection(bodyTypes.indexOf(bodyTypeParam));
+            spnBodyType.setSelection(bodyTypes.indexOf(bodyTypeParam) + 1);
 
             relationshipStatusParam = new ParamModel(userModel.getEthinicityId());
-            spnRelationshipStatus.setSelection(ethnicities.indexOf(relationshipStatusParam));
+            spnRelationshipStatus.setSelection(ethnicities.indexOf(relationshipStatusParam) + 1);
         }
     }
 

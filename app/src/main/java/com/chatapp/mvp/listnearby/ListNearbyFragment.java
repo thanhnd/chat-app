@@ -65,7 +65,6 @@ public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.Vi
         recyclerView.setAdapter(adapter);
 
         present = new PresentImpl(this);
-        present.getMyProfile();
 
         return view;
     }
@@ -74,6 +73,7 @@ public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.Vi
     public void onResume() {
         super.onResume();
 
+        present.getMyProfile();
         present.getListNearBy();
     }
 
