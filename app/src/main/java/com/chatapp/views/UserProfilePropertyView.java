@@ -42,5 +42,4 @@ public class UserProfilePropertyView extends LinearLayout {
         this.tvValue.setText(value);
     }
 
-
 }

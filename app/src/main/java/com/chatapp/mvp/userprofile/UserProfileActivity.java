@@ -156,27 +156,27 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
             vProfileProperties.addView(view);
         }
 
-        if (!TextUtils.isEmpty(userProfileModel.getEthinicityId())) {
+        if (!TextUtils.isEmpty(userProfileModel.getEnthinicity())) {
             UserProfilePropertyView view = new UserProfilePropertyView(this);
-            view.update(getString(R.string.ethnicity), userProfileModel.getEthinicityId());
+            view.update(getString(R.string.ethnicity), userProfileModel.getEnthinicity());
             vProfileProperties.addView(view);
         }
 
-        if (!TextUtils.isEmpty(userProfileModel.getBodyTypeId())) {
+        if (!TextUtils.isEmpty(userProfileModel.getBodyType())) {
             UserProfilePropertyView view = new UserProfilePropertyView(this);
-            view.update(getString(R.string.body_type), userProfileModel.getBodyTypeId());
+            view.update(getString(R.string.body_type), userProfileModel.getBodyType());
             vProfileProperties.addView(view);
         }
 
-        if (!TextUtils.isEmpty(userProfileModel.getMyTribesId())) {
+        if (!TextUtils.isEmpty(userProfileModel.getMyTribes())) {
             UserProfilePropertyView view = new UserProfilePropertyView(this);
-            view.update(getString(R.string.my_tribes), userProfileModel.getMyTribesId());
+            view.update(getString(R.string.my_tribes), userProfileModel.getMyTribes());
             vProfileProperties.addView(view);
         }
 
-        if (!TextUtils.isEmpty(userProfileModel.getRelationshipStatusId())) {
+        if (!TextUtils.isEmpty(userProfileModel.getRelationshipStatus())) {
             UserProfilePropertyView view = new UserProfilePropertyView(this);
-            view.update(getString(R.string.relationship_status), userProfileModel.getRelationshipStatusId());
+            view.update(getString(R.string.relationship_status), userProfileModel.getRelationshipStatus());
             vProfileProperties.addView(view);
         }
 

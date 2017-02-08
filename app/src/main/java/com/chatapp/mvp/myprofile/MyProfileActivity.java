@@ -106,7 +106,7 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
             tvAge.setText(String.valueOf(userModel.getAge()));
             tvHeightAndWeight.setText(String.format("%s / %s", userModel.getHeight(), userModel.getWeight()));
 
-            tvEthnicity.setText(userModel.getEnthicity());
+            tvEthnicity.setText(userModel.getEnthinicity());
             tvBodyType.setText(userModel.getBodyType());
             tvMyTribes.setText(userModel.getMyTribes());
             tvRelationshipStatus.setText(userModel.getRelationshipStatus());
