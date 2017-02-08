@@ -19,7 +19,7 @@
             app:contentScrim="?colorPrimary"
             app:expandedTitleMarginBottom="42dp"
             app:expandedTitleTextAppearance="@style/CollapsingTextAppearance.Inverse"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:title="@string/no_name">
 
             <ImageView

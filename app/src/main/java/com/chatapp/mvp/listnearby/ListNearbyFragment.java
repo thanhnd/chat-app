@@ -67,9 +67,14 @@ public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.Vi
         present = new PresentImpl(this);
         present.getMyProfile();
 
-        present.getListNearBy();
-
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        present.getListNearBy();
     }
 
     @Override

@@ -96,8 +96,8 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
             myProfileViewHolder.tvName.setText(name);
             Picasso.with(context)
                     .load(myProfileModel.getAvatar())
+                    .fit()
                     .centerCrop()
-                    .resize(imgDiameter, imgDiameter)
                     .error(R.drawable.img_user_avatar)
                     .placeholder(R.drawable.img_user_avatar)
                     .transform(new CircleTransform())
@@ -118,11 +118,11 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
             otherUserViewHolder.tvDistance.setText(String.format(Locale.getDefault(), "%d feet away", userModel.getFeetAway()));
             Picasso.with(context)
                     .load(userModel.getAvatar())
-                    .resize(imgDiameter, imgDiameter)
                     .error(R.drawable.img_user_avatar)
                     .placeholder(R.drawable.img_user_avatar)
                     .transform(new CircleTransform())
                     .fit()
+                    .centerCrop()
                     .into(otherUserViewHolder.ivAvatar);
             otherUserViewHolder.vItem.setOnClickListener(new View.OnClickListener() {
                 @Override
