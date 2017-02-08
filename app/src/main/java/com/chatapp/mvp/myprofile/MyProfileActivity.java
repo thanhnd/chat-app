@@ -85,9 +85,10 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
         tvOnlineStatus.setText("Online");
         tvOnlineStatus.setEnabled(true);
 
+        presenter.getMyProfile();
+
         displayMyProfileInfo();
 
-        presenter.getMyProfile();
     }
 
     private void displayMyProfileInfo() {
@@ -145,6 +146,6 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
 
     @Override
     public void onGetMyProfileSuccess(MyProfileModel resultSet) {
-
+        displayMyProfileInfo();
     }
 }

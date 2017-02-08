@@ -57,7 +57,7 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
     @Bind(R.id.spn_body_type)
     Spinner spnBodyType;
     @Bind(R.id.spn_my_tribes)
-    Spinner spnMyTribes;
+    Spinner spnTribes;
     @Bind(R.id.spn_relationship_status)
     Spinner spnRelationshipStatus;
 
@@ -66,6 +66,7 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
     private long timestampDob;
     private int height, weight;
     ParamModel ethnicityParam, bodyTypeParam, myTribesParam, relationshipStatusParam;
+    private List<ParamModel> ethnicities, bodyTypes, tribes, relationships;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,7 +81,8 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
     }
 
     private void initView() {
-        spnEthnicity.setAdapter(getSpinnerAdapter(CacheUtil.getListParamsModel().getListEthnicity()));
+        ethnicities = CacheUtil.getListParamsModel().getListEthnicity();
+        spnEthnicity.setAdapter(getSpinnerAdapter(ethnicities));
         spnEthnicity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -93,7 +95,8 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
             }
         });
 
-        spnBodyType.setAdapter(getSpinnerAdapter(CacheUtil.getListParamsModel().getListBodyType()));
+        bodyTypes = CacheUtil.getListParamsModel().getListBodyType();
+        spnBodyType.setAdapter(getSpinnerAdapter(bodyTypes));
         spnBodyType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -106,9 +109,9 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
             }
         });
 
-
-        spnMyTribes.setAdapter(getSpinnerAdapter(CacheUtil.getListParamsModel().getListTribes()));
-        spnMyTribes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        tribes = CacheUtil.getListParamsModel().getListTribes();
+        spnTribes.setAdapter(getSpinnerAdapter(tribes));
+        spnTribes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 myTribesParam = (ParamModel) parent.getSelectedItem();
@@ -120,7 +123,8 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
             }
         });
 
-        spnRelationshipStatus.setAdapter(getSpinnerAdapter(CacheUtil.getListParamsModel().getListRelationship()));
+        relationships = CacheUtil.getListParamsModel().getListRelationship();
+        spnRelationshipStatus.setAdapter(getSpinnerAdapter(relationships));
         spnRelationshipStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -137,11 +141,12 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
     private SpinnerAdapter getSpinnerAdapter(List<ParamModel> params) {
         ArrayAdapter<ParamModel> dataAdapter = new ArrayAdapter<>(this,
                 R.layout.spinner_item);
-        ParamModel noneParam = new ParamModel();
-        noneParam.setName("Please select");
-        dataAdapter.add(noneParam);
+        ParamModel noneParam = new ParamModel(0, "Not set");
+        params.add(0, noneParam);
+
         dataAdapter.addAll(params);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         return  dataAdapter;
     }
 
@@ -170,6 +175,18 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
             height = userModel.getHeight();
             weight = userModel.getWeight();
             tvHeightAndWeight.setText(String.format("%s / %s", height, weight));
+
+            ethnicityParam = new ParamModel(userModel.getEthinicityId());
+            spnEthnicity.setSelection(ethnicities.indexOf(ethnicityParam));
+
+            myTribesParam = new ParamModel(userModel.getBodyTypeId());
+            spnTribes.setSelection(tribes.indexOf(myTribesParam));
+
+            bodyTypeParam = new ParamModel(userModel.getBodyTypeId());
+            spnBodyType.setSelection(bodyTypes.indexOf(bodyTypeParam));
+
+            relationshipStatusParam = new ParamModel(userModel.getEthinicityId());
+            spnRelationshipStatus.setSelection(ethnicities.indexOf(relationshipStatusParam));
         }
     }
 
@@ -245,6 +262,10 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
 
         if (bodyTypeParam != null) {
             request.put("body_type_id", bodyTypeParam.getId());
+        }
+
+        if (myTribesParam != null) {
+            request.put("my_tribes_id", myTribesParam.getId());
         }
 
         if (relationshipStatusParam != null) {

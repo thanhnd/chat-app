@@ -16,6 +16,15 @@ public class ParamModel {
     @Expose
     private String name;
 
+    public ParamModel(int id) {
+        this.id = id;
+    }
+
+    public ParamModel(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }

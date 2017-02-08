@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    tools:context=".mvp.updateprofile.UpdateProfileActivity"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".mvp.updateprofile.UpdateProfileActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,11 +66,11 @@
             <include layout="@layout/layout_horizontal_divider" />
 
             <LinearLayout
+                android:id="@+id/v_date_of_birth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingTop="10dp"
-                android:id="@+id/v_date_of_birth">
+                android:paddingTop="10dp">
 
                 <TextView
                     style="@style/form_label"
@@ -126,8 +127,7 @@
                 <Spinner
                     android:id="@+id/spn_ethnicity"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
@@ -147,8 +147,7 @@
                 <Spinner
                     android:id="@+id/spn_body_type"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
@@ -168,8 +167,7 @@
                 <Spinner
                     android:id="@+id/spn_my_tribes"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
@@ -189,8 +187,7 @@
                 <Spinner
                     android:id="@+id/spn_relationship_status"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
@@ -281,8 +278,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginTop="4dp"
                     android:gravity="center"
                     android:text="@string/link_your_networks_description" />
 
