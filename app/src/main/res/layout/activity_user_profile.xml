@@ -28,8 +28,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/london_flat"
-                android:tint="#BB3E50B4" />
+                android:src="@drawable/london_flat" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
