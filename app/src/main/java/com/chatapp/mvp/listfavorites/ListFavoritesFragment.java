@@ -53,9 +53,15 @@ public class ListFavoritesFragment extends BaseFragment implements ListFavorites
         recyclerView.setAdapter(adapter);
         present = new PresentImpl(this);
 
-        present.getListFavorites();
-
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        adapter.clearData();
+        present.getListFavorites(true);
     }
 
     @Override

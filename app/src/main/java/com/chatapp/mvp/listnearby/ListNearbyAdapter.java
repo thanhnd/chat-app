@@ -30,7 +30,6 @@ import butterknife.ButterKnife;
 public class ListNearbyAdapter extends BaseListUserAdapter {
     public static final int ITEM_VIEW_TYPE_MY_PROFILE = 0;
     public static final int ITEM_VIEW_TYPE_OTHER_PROFILE = 1;
-    private ArrayList mDataset;
     private OnMyProfileItemClick onMyProfileItemClick;
     private MyProfileModel myProfile;
 

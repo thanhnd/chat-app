@@ -15,9 +15,6 @@ import com.chatapp.service.models.response.UserModel;
 import com.chatapp.utils.CircleTransform;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -27,7 +24,9 @@ import butterknife.ButterKnife;
 
 public class ListFriendsAdapter extends BaseListUserAdapter<ListFriendsAdapter.ViewHolder> {
 
-    private ArrayList<UserModel> mDataset;
+    public ListFriendsAdapter(Context context) {
+        super(context);
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         View vItem;
@@ -40,11 +39,6 @@ public class ListFriendsAdapter extends BaseListUserAdapter<ListFriendsAdapter.V
             vItem = v;
             ButterKnife.bind(this, v);
         }
-    }
-
-    public ListFriendsAdapter(Context context) {
-        super(context);
-        mDataset = new ArrayList<>();
     }
 
     @Override
@@ -80,17 +74,5 @@ public class ListFriendsAdapter extends BaseListUserAdapter<ListFriendsAdapter.V
                 }
             }
         });
-    }
-
-    // Return the size of your dataset (invoked by the layout manager)
-    @Override
-    public int getItemCount() {
-        return mDataset.size();
-    }
-
-    public void add(List<UserModel> userModels) {
-        int position = mDataset.size();
-        mDataset.addAll(userModels);
-        notifyItemInserted(position);
     }
 }

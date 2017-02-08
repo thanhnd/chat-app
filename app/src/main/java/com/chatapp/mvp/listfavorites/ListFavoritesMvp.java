@@ -13,7 +13,7 @@ import java.util.List;
 public interface ListFavoritesMvp {
 
     interface Present {
-        void getListFavorites();
+        void getListFavorites(boolean isFirstPage);
     }
 
     interface Interactor {

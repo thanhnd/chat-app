@@ -26,7 +26,7 @@ public class PresentImpl implements ListFavoritesMvp.Present {
 
     }
     @Override
-    public void getListFavorites() {
+    public void getListFavorites(boolean isFirstPage) {
         interactor.getListFavorites(new ApiCallback<ResponseModel<List<UserModel>>>() {
             @Override
             public void onSuccess(ResponseModel<List<UserModel>> response) {
