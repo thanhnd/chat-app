@@ -16,7 +16,6 @@ import com.chatapp.service.models.response.UserModel;
 import com.chatapp.utils.CircleTransform;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -65,7 +64,6 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
 
     public ListNearbyAdapter(Context context) {
         super(context);
-        mDataset = new ArrayList<>();
     }
 
     @Override
@@ -88,7 +86,7 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
         Object item = mDataset.get(position);
-        if (item instanceof MyProfileModel) {
+        if (getItemViewType(position) == ITEM_VIEW_TYPE_MY_PROFILE) {
 
             MyProfileViewHolder myProfileViewHolder = (MyProfileViewHolder)holder;
             MyProfileModel myProfileModel = (MyProfileModel)item ;
@@ -173,8 +171,12 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
 
     public void setMyProfileModel(MyProfileModel myProfileModel) {
         this.myProfile = myProfileModel;
-        mDataset.add(0, myProfileModel);
-        notifyItemInserted(0);
+        if (mDataset.contains(myProfile)) {
+            notifyItemChanged(0);
+        } else {
+            mDataset.add(0, myProfileModel);
+            notifyItemInserted(0);
+        }
     }
 
     public interface OnMyProfileItemClick {

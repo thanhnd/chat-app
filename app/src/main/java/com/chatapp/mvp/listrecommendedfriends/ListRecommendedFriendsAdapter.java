@@ -12,11 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chatapp.R;
+import com.chatapp.mvp.base.BaseListUserAdapter;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.utils.CircleTransform;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -29,12 +29,13 @@ import butterknife.ButterKnife;
  * Created by thanhnguyen on 1/6/17.
  */
 
-public class ListRecommendedFriendsAdapter extends RecyclerView.Adapter<ListRecommendedFriendsAdapter.ViewHolder> {
-    private ArrayList<UserModel> mDataset;
+public class ListRecommendedFriendsAdapter extends BaseListUserAdapter<ListRecommendedFriendsAdapter.ViewHolder> {
+
+
     private Set<UserModel> mSelecteds;
-    private Context context;
     private OnUserProfileItemClick onUserProfileItemClick;
     private OnAddFriendClick onAddFriendClick;
+    private boolean isEditMode;
 
     public void setOnUserProfileItemClick(OnUserProfileItemClick onUserProfileItemClick) {
         this.onUserProfileItemClick = onUserProfileItemClick;
@@ -61,9 +62,8 @@ public class ListRecommendedFriendsAdapter extends RecyclerView.Adapter<ListReco
     }
 
     public ListRecommendedFriendsAdapter(Context context) {
-        mDataset = new ArrayList<>();
+        super(context);
         mSelecteds = new HashSet<>();
-        this.context = context;
     }
 
     @Override
@@ -126,6 +126,8 @@ public class ListRecommendedFriendsAdapter extends RecyclerView.Adapter<ListReco
                 }
             }
         });
+
+        holder.cbSelectedItem.setVisibility(isEditMode ? View.VISIBLE : View.GONE);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -148,4 +150,7 @@ public class ListRecommendedFriendsAdapter extends RecyclerView.Adapter<ListReco
         void onItemClick(UserModel userModel);
     }
 
+    public void setEditMode(boolean isEditMode) {
+        this.isEditMode = isEditMode;
+    }
 }
