@@ -1,14 +1,11 @@
 package com.chatapp.mvp.listfavorites;
 
-import com.chatapp.service.ApiCallback;
+import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserModel;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Response;
 
 
 /**
@@ -27,22 +24,15 @@ public class PresentImpl implements ListFavoritesMvp.Present {
     }
     @Override
     public void getListFavorites(boolean isFirstPage) {
-        interactor.getListFavorites(new ApiCallback<ResponseModel<List<UserModel>>>() {
+        if (view.get() != null) {
+            view.get().showProgress();
+        }
+        interactor.getListFavorites(new BaseApiCallback<ResponseModel<List<UserModel>>>() {
             @Override
             public void onSuccess(ResponseModel<List<UserModel>> response) {
                 if (view.get() != null) {
                     view.get().onGetListFavoritesSuccess(response.getResultSet());
                 }
-            }
-
-            @Override
-            public void onFail(Response<ResponseModel<List<UserModel>>> response) {
-
-            }
-
-            @Override
-            public void onFail(Call<ResponseModel<List<UserModel>>> call, Throwable throwable) {
-
             }
         });
     }

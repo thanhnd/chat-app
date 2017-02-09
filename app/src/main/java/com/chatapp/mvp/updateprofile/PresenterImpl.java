@@ -2,10 +2,9 @@
 package com.chatapp.mvp.updateprofile;
 
 import android.net.Uri;
-import android.text.TextUtils;
 
 import com.chatapp.MyApplication;
-import com.chatapp.service.AuthorizeApiCallback;
+import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.utils.AccountUtils;
@@ -19,8 +18,6 @@ import java.util.Map;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Response;
 
 public class PresenterImpl implements UpdateProfileMvp.Presenter {
 
@@ -54,11 +51,7 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
         MultipartBody.Part filePart =
                 MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
-        interactor.uploadAvatar(authorization, filePart, new AuthorizeApiCallback<ResponseModel<LinkedTreeMap<String, String>>>() {
-            @Override
-            public void onTokenExpired() {
-
-            }
+        interactor.uploadAvatar(authorization, filePart, new BaseApiCallback<ResponseModel<LinkedTreeMap<String, String>>>() {
 
             @Override
             public void onSuccess(ResponseModel<LinkedTreeMap<String, String>> response) {
@@ -70,20 +63,6 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
                     } catch (ClassCastException ex) {
                         view.get().showErrorDialog();
                     }
-                }
-            }
-
-            @Override
-            public void onFail(Response<ResponseModel<LinkedTreeMap<String, String>>> response) {
-                if (view.get() != null) {
-                    view.get().onUploadAvatarFail();
-                }
-            }
-
-            @Override
-            public void onFail(Call<ResponseModel<LinkedTreeMap<String, String>>> call, Throwable throwable) {
-                if (view.get() != null) {
-                    view.get().onUploadAvatarFail();
                 }
             }
         });
@@ -100,44 +79,13 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
         }
 
         String authorization = logInModel.getToken();
-        interactor.submit(authorization, request, new AuthorizeApiCallback<ResponseModel<Object>>() {
-            @Override
-            public void onTokenExpired() {
-                if (view.get() != null) {
-                    view.get().hideProgress();
-                }
-            }
+        interactor.submit(authorization, request, new BaseApiCallback<ResponseModel<Object>>() {
 
             @Override
             public void onSuccess(ResponseModel<Object> response) {
                 if (view.get() != null) {
                     view.get().hideProgress();
                     view.get().onUpdateProfileSuccess();
-                }
-            }
-
-            @Override
-            public void onFail(Response<ResponseModel<Object>> response) {
-                if (view.get() != null) {
-                    view.get().hideProgress();
-
-                    // Get data response from server
-                    ResponseModel responseModel = response.body();
-
-                    // Show error message from server if there is
-                    if (responseModel != null && !TextUtils.isEmpty(responseModel.getResponseMsg())) {
-                        view.get().showErrorDialog(responseModel.getResponseMsg());
-                    } else {
-                        view.get().onUpdateProfileFail();
-                    }
-                }
-            }
-
-            @Override
-            public void onFail(Call<ResponseModel<Object>> call, Throwable throwable) {
-                if (view != null) {
-                    view.get().showErrorDialog();
-                    view.get().hideProgress();
                 }
             }
         });

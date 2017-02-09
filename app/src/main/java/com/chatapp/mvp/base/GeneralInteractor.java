@@ -1,6 +1,6 @@
 package com.chatapp.mvp.base;
 
-import com.chatapp.service.AuthorizeApiCallback;
+import com.chatapp.service.ApiCallback;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.ResponseModel;
 
@@ -9,5 +9,5 @@ import com.chatapp.service.models.response.ResponseModel;
  */
 
 public interface GeneralInteractor {
-    void getMyProfile(AuthorizeApiCallback<ResponseModel<MyProfileModel>> callback);
+    void getMyProfile(ApiCallback<ResponseModel<MyProfileModel>> callback);
 }

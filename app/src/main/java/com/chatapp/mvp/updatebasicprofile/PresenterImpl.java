@@ -1,12 +1,11 @@
 package com.chatapp.mvp.updatebasicprofile;
 
 import android.net.Uri;
-import android.text.TextUtils;
 
 import com.chatapp.MyApplication;
 import com.chatapp.mvp.base.GeneralInteractor;
 import com.chatapp.mvp.base.GeneralInteractorImmpl;
-import com.chatapp.service.AuthorizeApiCallback;
+import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.request.BasicProfileRequest;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.MyProfileModel;
@@ -22,8 +21,6 @@ import java.util.Map;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Response;
 
 /**
  * Created by thanhnguyen on 12/19/16.
@@ -45,13 +42,7 @@ public class PresenterImpl implements UpdateBasicProfileMvp.ProfilePresenter {
         if (view.get() != null) {
             view.get().showProgress();
         }
-        interactor.submit(request, new AuthorizeApiCallback<ResponseModel<Object>>() {
-            @Override
-            public void onTokenExpired() {
-                if (view.get() != null) {
-                    view.get().hideProgress();
-                }
-            }
+        interactor.submit(request, new BaseApiCallback<ResponseModel<Object>>() {
 
             @Override
             public void onSuccess(ResponseModel<Object> response) {
@@ -61,31 +52,6 @@ public class PresenterImpl implements UpdateBasicProfileMvp.ProfilePresenter {
                 if (view.get() != null) {
                     view.get().hideProgress();
                     view.get().onUpdateBasicProfileSuccess();
-                }
-            }
-
-            @Override
-            public void onFail(Response<ResponseModel<Object>> response) {
-                if (view.get() != null) {
-                    view.get().hideProgress();
-
-                    // Get data response from server
-                    ResponseModel responseModel = response.body();
-
-                    // Show error message from server if there is
-                    if (responseModel != null && !TextUtils.isEmpty(responseModel.getResponseMsg())) {
-                        view.get().showErrorDialog(responseModel.getResponseMsg());
-                    } else {
-                        view.get().onUpdateBasicProfileFail();
-                    }
-                }
-            }
-
-            @Override
-            public void onFail(Call<ResponseModel<Object>> call, Throwable throwable) {
-                if (view != null) {
-                    view.get().showErrorDialog();
-                    view.get().hideProgress();
                 }
             }
         });
@@ -113,11 +79,7 @@ public class PresenterImpl implements UpdateBasicProfileMvp.ProfilePresenter {
         MultipartBody.Part filePart =
                 MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
-        interactor.uploadAvatar(authorization, filePart, new AuthorizeApiCallback<ResponseModel<LinkedTreeMap<String, String>>>() {
-            @Override
-            public void onTokenExpired() {
-
-            }
+        interactor.uploadAvatar(authorization, filePart, new BaseApiCallback<ResponseModel<LinkedTreeMap<String, String>>>() {
 
             @Override
             public void onSuccess(ResponseModel<LinkedTreeMap<String, String>> response) {
@@ -131,46 +93,17 @@ public class PresenterImpl implements UpdateBasicProfileMvp.ProfilePresenter {
                     }
                 }
             }
-
-            @Override
-            public void onFail(Response<ResponseModel<LinkedTreeMap<String, String>>> response) {
-                if (view.get() != null) {
-                    view.get().onUploadAvatarFail();
-                }
-            }
-
-            @Override
-            public void onFail(Call<ResponseModel<LinkedTreeMap<String, String>>> call, Throwable throwable) {
-                if (view.get() != null) {
-                    view.get().onUploadAvatarFail();
-                }
-            }
         });
     }
 
     @Override
     public void getMyProfile() {
-        generalInteractor.getMyProfile(new AuthorizeApiCallback<ResponseModel<MyProfileModel>>() {
+        generalInteractor.getMyProfile(new BaseApiCallback<ResponseModel<MyProfileModel>>() {
             @Override
             public void onSuccess(ResponseModel<MyProfileModel> response) {
                 if (view.get() != null) {
                     AccountUtils.setMyProfileModel(response.getResultSet());
                     view.get().onGetMyProfileSuccess(response.getResultSet());
-                }
-            }
-
-            @Override
-            public void onFail(Response<ResponseModel<MyProfileModel>> response) {
-            }
-
-            @Override
-            public void onFail(Call<ResponseModel<MyProfileModel>> call, Throwable throwable) {
-            }
-
-            @Override
-            public void onTokenExpired() {
-                if (view.get() != null) {
-                    view.get().onTokenExpired();
                 }
             }
         });

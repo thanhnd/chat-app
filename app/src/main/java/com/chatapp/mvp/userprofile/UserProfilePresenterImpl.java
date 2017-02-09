@@ -1,14 +1,11 @@
 
 package com.chatapp.mvp.userprofile;
 
-import com.chatapp.service.AuthorizeApiCallback;
+import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserProfileModel;
 
 import java.lang.ref.WeakReference;
-
-import retrofit2.Call;
-import retrofit2.Response;
 
 public class UserProfilePresenterImpl implements UserProfileMvp.UserProfilePresent {
 
@@ -22,7 +19,7 @@ public class UserProfilePresenterImpl implements UserProfileMvp.UserProfilePrese
 
     @Override
     public void getUserProfile(String userId) {
-        interactor.getUserProfile(userId, new AuthorizeApiCallback<ResponseModel<UserProfileModel>>() {
+        interactor.getUserProfile(userId, new BaseApiCallback<ResponseModel<UserProfileModel>>() {
             @Override
             public void onSuccess(ResponseModel<UserProfileModel> response) {
                 if (view.get() != null) {
@@ -30,53 +27,16 @@ public class UserProfilePresenterImpl implements UserProfileMvp.UserProfilePrese
                 }
             }
 
-            @Override
-            public void onFail(Response<ResponseModel<UserProfileModel>> response) {
-
-            }
-
-            @Override
-            public void onFail(Call<ResponseModel<UserProfileModel>> call, Throwable throwable) {
-
-            }
-
-            @Override
-            public void onTokenExpired() {
-                if (view.get() != null) {
-                    view.get().onTokenExpired();
-                }
-            }
         });
     }
 
     @Override
     public void addFavorite(String userId) {
-        interactor.addFavorite(userId, new AuthorizeApiCallback<ResponseModel<Object>>() {
+        interactor.addFavorite(userId, new BaseApiCallback<ResponseModel<Object>>() {
             @Override
             public void onSuccess(ResponseModel<Object> response) {
                 if (view.get() != null) {
                     view.get().onAddFavoriteSuccess();
-                }
-            }
-
-            @Override
-            public void onFail(Response<ResponseModel<Object>> response) {
-                if (view.get() != null) {
-                    view.get().onAddFavoriteFail();
-                }
-            }
-
-            @Override
-            public void onFail(Call<ResponseModel<Object>> call, Throwable throwable) {
-                if (view.get() != null) {
-                    view.get().onAddFavoriteFail();
-                }
-            }
-
-            @Override
-            public void onTokenExpired() {
-                if (view.get() != null) {
-                    view.get().onTokenExpired();
                 }
             }
         });
@@ -85,32 +45,11 @@ public class UserProfilePresenterImpl implements UserProfileMvp.UserProfilePrese
 
     @Override
     public void requestAddFriend(String userId, String noted) {
-        interactor.requestAddFriend(userId, noted, new AuthorizeApiCallback<ResponseModel<Object>>() {
+        interactor.requestAddFriend(userId, noted, new BaseApiCallback<ResponseModel<Object>>() {
             @Override
             public void onSuccess(ResponseModel<Object> response) {
                 if (view.get() != null) {
                     view.get().onRequestAddFriendSuccess();
-                }
-            }
-
-            @Override
-            public void onFail(Response<ResponseModel<Object>> response) {
-                if (view.get() != null) {
-                    view.get().onRequestAddFriendFail();
-                }
-            }
-
-            @Override
-            public void onFail(Call<ResponseModel<Object>> call, Throwable throwable) {
-                if (view.get() != null) {
-                    view.get().onRequestAddFriendFail();
-                }
-            }
-
-            @Override
-            public void onTokenExpired() {
-                if (view.get() != null) {
-                    view.get().onTokenExpired();
                 }
             }
         });
@@ -118,32 +57,11 @@ public class UserProfilePresenterImpl implements UserProfileMvp.UserProfilePrese
 
     @Override
     public void removeFavorite(String userId) {
-        interactor.removeFavorite(userId, new AuthorizeApiCallback<ResponseModel<Object>>() {
+        interactor.removeFavorite(userId, new BaseApiCallback<ResponseModel<Object>>() {
             @Override
             public void onSuccess(ResponseModel<Object> response) {
                 if (view.get() != null) {
                     view.get().onRemoveFavoriteSuccess();
-                }
-            }
-
-            @Override
-            public void onFail(Response<ResponseModel<Object>> response) {
-                if (view.get() != null) {
-                    view.get().onRemoveFavoriteFail();
-                }
-            }
-
-            @Override
-            public void onFail(Call<ResponseModel<Object>> call, Throwable throwable) {
-                if (view.get() != null) {
-                    view.get().onRemoveFavoriteFail();
-                }
-            }
-
-            @Override
-            public void onTokenExpired() {
-                if (view.get() != null) {
-                    view.get().onTokenExpired();
                 }
             }
         });

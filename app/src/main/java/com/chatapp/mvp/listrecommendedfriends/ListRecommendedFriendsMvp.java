@@ -6,16 +6,19 @@ import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserModel;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by thanhnguyen on 12/17/16.
  */
 public interface ListRecommendedFriendsMvp {
 
-    interface Present {
+    interface Presenter {
         void getListRecommendedFriends();
 
         void acceptFriendRequest(String userId);
+
+        void delete(Set<UserModel> userModels);
     }
 
     interface Interactor {

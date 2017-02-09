@@ -28,7 +28,7 @@ public class InteractorImpl implements SplashMvp.Interactor {
                             && responseModel.getResponseCd() != ResponseModel.RESPONSE_CD_ERROR) {
                         callback.onSuccess(responseModel);
                     } else {
-                        callback.onFail(response);
+                        callback.onFailure(response);
                     }
                 }
             }
@@ -36,7 +36,7 @@ public class InteractorImpl implements SplashMvp.Interactor {
             @Override
             public void onFailure(Call<ResponseModel<ListParamsModel>> call, Throwable t) {
                 if (callback != null) {
-                    callback.onFail(call, t);
+                    callback.onFailure(call, t);
                 }
                 Log.e(t);
             }

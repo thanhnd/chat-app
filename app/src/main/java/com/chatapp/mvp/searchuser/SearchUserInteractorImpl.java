@@ -37,7 +37,7 @@ public class SearchUserInteractorImpl implements SearchUserMvp.Interactor {
                             && responseModel.getResponseCd() != ResponseModel.RESPONSE_CD_ERROR) {
                         callback.onSuccess(responseModel);
                     } else {
-                        callback.onFail(response);
+                        callback.onFailure(response);
                     }
                 }
             }
@@ -45,7 +45,7 @@ public class SearchUserInteractorImpl implements SearchUserMvp.Interactor {
             @Override
             public void onFailure(Call<ResponseModel<List<UserModel>>> call, Throwable t) {
                 if (callback != null) {
-                    callback.onFail(call, t);
+                    callback.onFailure(call, t);
                 }
                 Log.e(t);
             }

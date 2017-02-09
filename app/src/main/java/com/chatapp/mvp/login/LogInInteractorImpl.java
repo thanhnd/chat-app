@@ -30,7 +30,7 @@ public class LogInInteractorImpl implements LoginMvp.LogInInteractor {
                             && responseModel.getResponseCd() != ResponseModel.RESPONSE_CD_ERROR) {
                         loginCallback.onSuccess(responseModel);
                     } else {
-                        loginCallback.onFail(response);
+                        loginCallback.onFailure(response);
                     }
                 }
             }
@@ -38,7 +38,7 @@ public class LogInInteractorImpl implements LoginMvp.LogInInteractor {
             @Override
             public void onFailure(Call<ResponseModel<LogInModel>> call, Throwable t) {
                 if (loginCallback != null) {
-                    loginCallback.onFail(call, t);
+                    loginCallback.onFailure(call, t);
                 }
                 Log.e(t);
             }

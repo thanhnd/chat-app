@@ -1,20 +1,16 @@
 package com.chatapp.mvp.updatebasicprofile;
 
+import com.chatapp.service.ApiCallback;
 import com.chatapp.service.ApiService;
 import com.chatapp.service.ApiServiceHelper;
-import com.chatapp.service.AuthorizeApiCallback;
 import com.chatapp.service.models.request.BasicProfileRequest;
 import com.chatapp.service.models.response.LogInModel;
-import com.chatapp.service.models.response.RegisterModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.utils.AccountUtils;
-import com.chatapp.utils.Log;
 import com.google.gson.internal.LinkedTreeMap;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by thanhnguyen on 12/19/16.
@@ -22,7 +18,7 @@ import retrofit2.Response;
 
 public class InteractorImpl implements UpdateBasicProfileMvp.Interactor {
     @Override
-    public void submit(BasicProfileRequest request, final AuthorizeApiCallback<ResponseModel<Object>> apiCallback) {
+    public void submit(BasicProfileRequest request, final ApiCallback<ResponseModel<Object>> callback) {
         LogInModel logInModel = AccountUtils.getLogInModel();
         if (logInModel == null) {
             return;
@@ -30,58 +26,14 @@ public class InteractorImpl implements UpdateBasicProfileMvp.Interactor {
         String authorization = logInModel.getToken();
         ApiService service = ApiServiceHelper.getInstance();
         Call<ResponseModel<Object>> call = service.updateBasicProfile(authorization, request);
-        call.enqueue(new Callback<ResponseModel<Object>>() {
-            @Override
-            public void onResponse(Call<ResponseModel<Object>> call, Response<ResponseModel<Object>> response) {
-                Log.d(response.raw().toString());
-                ResponseModel<Object> responseModel = response.body();
-                if (apiCallback != null) {
-                    if (response.isSuccessful() && responseModel != null
-                            && responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_SUCCESS) {
-                        apiCallback.onSuccess(responseModel);
-                    } else {
-                        apiCallback.onFail(response);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseModel<Object>> call, Throwable t) {
-                if (apiCallback != null) {
-                    apiCallback.onFail(call, t);
-                }
-                Log.e(t);
-            }
-        });
+        call.enqueue(callback);
     }
 
     @Override
     public void uploadAvatar(String authorization, MultipartBody.Part filePart,
-                             final AuthorizeApiCallback<ResponseModel<LinkedTreeMap<String, String>>> callback) {
+                             final ApiCallback<ResponseModel<LinkedTreeMap<String, String>>> callback) {
         ApiService instance = ApiServiceHelper.getInstance();
         Call<ResponseModel<LinkedTreeMap<String, String>>> call = instance.uploadAvatar(authorization, filePart);
-        call.enqueue(new Callback<ResponseModel<LinkedTreeMap<String, String>>>() {
-            @Override
-            public void onResponse(Call<ResponseModel<LinkedTreeMap<String, String>>> call,
-                                   Response<ResponseModel<LinkedTreeMap<String, String>>> response) {
-                ResponseModel<LinkedTreeMap<String, String>> responseModel = response.body();
-                if (callback != null) {
-                    if (response.isSuccessful() && responseModel != null
-                            && responseModel.getResponseCd() == RegisterModel.RESPONSE_CD_SUCCESS) {
-                        callback.onSuccess(responseModel);
-                    } else {
-                        callback.onFail(response);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseModel<LinkedTreeMap<String, String>>> call, Throwable t) {
-                if (callback != null) {
-                    callback.onFail(call, t);
-                }
-                com.chatapp.utils.Log.e(t);
-            }
-        });
+        call.enqueue(callback);
     }
 }

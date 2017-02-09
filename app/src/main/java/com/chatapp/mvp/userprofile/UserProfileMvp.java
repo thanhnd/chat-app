@@ -1,7 +1,7 @@
 package com.chatapp.mvp.userprofile;
 
 import com.chatapp.mvp.base.BaseView;
-import com.chatapp.service.AuthorizeApiCallback;
+import com.chatapp.service.ApiCallback;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserProfileModel;
 
@@ -12,13 +12,13 @@ import com.chatapp.service.models.response.UserProfileModel;
 public interface UserProfileMvp {
     interface UserProfileInteractor {
 
-        void getUserProfile(String userId, AuthorizeApiCallback<ResponseModel<UserProfileModel>> callback);
+        void getUserProfile(String userId, ApiCallback<ResponseModel<UserProfileModel>> callback);
 
-        void addFavorite(String userId, AuthorizeApiCallback<ResponseModel<Object>> callback);
+        void addFavorite(String userId, ApiCallback<ResponseModel<Object>> callback);
 
-        void requestAddFriend(String userId, String noted, AuthorizeApiCallback<ResponseModel<Object>> callback);
+        void requestAddFriend(String userId, String noted, ApiCallback<ResponseModel<Object>> callback);
 
-        void removeFavorite(String userId, AuthorizeApiCallback<ResponseModel<Object>> authorizeApiCallback);
+        void removeFavorite(String userId, ApiCallback<ResponseModel<Object>> ApiCallback);
     }
 
     interface UserProfilePresent {

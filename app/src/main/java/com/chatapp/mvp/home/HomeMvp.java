@@ -1,6 +1,6 @@
 package com.chatapp.mvp.home;
 
-import com.chatapp.service.AuthorizeApiCallback;
+import com.chatapp.service.ApiCallback;
 import com.chatapp.service.models.response.ResponseModel;
 
 /**
@@ -13,7 +13,7 @@ public interface HomeMvp {
     }
 
     interface Interactor {
-        void updatLocation(double latitude, double longitude, AuthorizeApiCallback<ResponseModel<Object>>  callback);
+        void updatLocation(double latitude, double longitude, ApiCallback<ResponseModel<Object>> callback);
     }
 
     interface View {

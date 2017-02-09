@@ -120,5 +120,9 @@
     <string name="internal_storage">Internal storage</string>
     <string name="hint_input_your_city">Input your city.</string>
     <string name="hint_input_your_city_province">Input your city/province</string>
+    <string name="menu_edit">Edit</string>
+    <string name="seclect_all">Seclect All</string>
+    <string name="delete">Delete</string>
+    <string name="menu_cancel">Cancel</string>
 
 </resources>

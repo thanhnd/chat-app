@@ -3,7 +3,7 @@ package com.chatapp.mvp.updatebasicprofile;
 import android.net.Uri;
 
 import com.chatapp.mvp.base.BaseView;
-import com.chatapp.service.AuthorizeApiCallback;
+import com.chatapp.service.ApiCallback;
 import com.chatapp.service.models.request.BasicProfileRequest;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.ResponseModel;
@@ -18,10 +18,10 @@ import okhttp3.MultipartBody;
 public interface UpdateBasicProfileMvp {
     interface Interactor {
 
-        void submit(BasicProfileRequest request, AuthorizeApiCallback<ResponseModel<Object>> callback);
+        void submit(BasicProfileRequest request, ApiCallback<ResponseModel<Object>> callback);
 
         void uploadAvatar(String authorization, MultipartBody.Part filePart,
-                          AuthorizeApiCallback<ResponseModel<LinkedTreeMap<String, String>>> callback);
+                          ApiCallback<ResponseModel<LinkedTreeMap<String, String>>> callback);
 
     }
 

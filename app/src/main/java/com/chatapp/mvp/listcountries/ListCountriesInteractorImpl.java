@@ -31,7 +31,7 @@ public class ListCountriesInteractorImpl implements ListCountriesMvp.ListCountri
                             && responseModel.getResponseCd() != ResponseModel.RESPONSE_CD_ERROR) {
                         callback.onSuccess(responseModel);
                     } else {
-                        callback.onFail(response);
+                        callback.onFailure(response);
                     }
                 }
             }
@@ -39,7 +39,7 @@ public class ListCountriesInteractorImpl implements ListCountriesMvp.ListCountri
             @Override
             public void onFailure(Call<ResponseModel<List<CountryModel>>> call, Throwable t) {
                 if (callback != null) {
-                    callback.onFail(call, t);
+                    callback.onFailure(call, t);
                 }
                 Log.e(t);
             }

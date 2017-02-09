@@ -37,12 +37,31 @@ public class ListRecommendedFriendsAdapter extends BaseListUserAdapter<ListRecom
     private OnAddFriendClick onAddFriendClick;
     private boolean isEditMode;
 
+    private OnSelectedChangedListener onSelectedChanged;
+
     public void setOnUserProfileItemClick(OnUserProfileItemClick onUserProfileItemClick) {
         this.onUserProfileItemClick = onUserProfileItemClick;
     }
 
     public void setOnAddFriendClick(OnAddFriendClick onAddFriendClick) {
         this.onAddFriendClick = onAddFriendClick;
+    }
+
+    public void selectAll() {
+        for (UserModel userModel: mDataset) {
+            mSelecteds.add(userModel);
+        }
+
+        notifyDataSetChanged();
+        onSelectedChanged.onSelectedChange(mSelecteds);
+    }
+
+    public void setOnSelectedChanged(OnSelectedChangedListener onSelectedChanged) {
+        this.onSelectedChanged = onSelectedChanged;
+    }
+
+    public interface OnSelectedChangedListener {
+        void onSelectedChange(Set<UserModel> userModels);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -123,11 +142,18 @@ public class ListRecommendedFriendsAdapter extends BaseListUserAdapter<ListRecom
                 CheckBox checkBox = (CheckBox)v;
                 if (checkBox.isChecked()) {
                     mSelecteds.add(userModel);
+                } else {
+                    mSelecteds.remove(userModel);
+                }
+
+                if (onSelectedChanged != null) {
+                    onSelectedChanged.onSelectedChange(mSelecteds);
                 }
             }
         });
 
         holder.cbSelectedItem.setVisibility(isEditMode ? View.VISIBLE : View.GONE);
+        holder.ibAddFriend.setVisibility(!isEditMode ? View.VISIBLE : View.GONE);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -152,5 +178,10 @@ public class ListRecommendedFriendsAdapter extends BaseListUserAdapter<ListRecom
 
     public void setEditMode(boolean isEditMode) {
         this.isEditMode = isEditMode;
+        notifyDataSetChanged();
+    }
+
+    public Set<UserModel> getmSelectedItems() {
+        return mSelecteds;
     }
 }

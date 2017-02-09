@@ -40,7 +40,7 @@ public class InteractorImpl implements ListRecommendedFriendsMvp.Interactor {
                             && responseModel.getResponseCd() == RegisterModel.RESPONSE_CD_SUCCESS) {
                         callback.onSuccess(responseModel);
                     } else {
-                        callback.onFail(response);
+                        callback.onFailure(response);
                     }
                 }
             }
@@ -48,7 +48,7 @@ public class InteractorImpl implements ListRecommendedFriendsMvp.Interactor {
             @Override
             public void onFailure(Call<ResponseModel<List<UserModel>>> call, Throwable t) {
                 if (callback != null) {
-                    callback.onFail(call, t);
+                    callback.onFailure(call, t);
                 }
                 Log.e(t);
             }
@@ -74,7 +74,7 @@ public class InteractorImpl implements ListRecommendedFriendsMvp.Interactor {
                             && responseModel.getResponseCd() == RegisterModel.RESPONSE_CD_SUCCESS) {
                         callback.onSuccess(responseModel);
                     } else {
-                        callback.onFail(response);
+                        callback.onFailure(response);
                     }
                 }
             }
@@ -82,7 +82,7 @@ public class InteractorImpl implements ListRecommendedFriendsMvp.Interactor {
             @Override
             public void onFailure(Call<ResponseModel<Object>> call, Throwable t) {
                 if (callback != null) {
-                    callback.onFail(call, t);
+                    callback.onFailure(call, t);
                 }
                 Log.e(t);
             }

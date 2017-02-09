@@ -33,7 +33,7 @@ public class RegisterInteractorImpl implements RegisterMvp.RegisterInteractor {
                         apiCallback.onSuccess(responseModel);
 
                     } else {
-                        apiCallback.onFail(response);
+                        apiCallback.onFailure(response);
                     }
                 }
             }
@@ -41,7 +41,7 @@ public class RegisterInteractorImpl implements RegisterMvp.RegisterInteractor {
             @Override
             public void onFailure(Call<ResponseModel<LogInModel>> call, Throwable t) {
                 if (apiCallback != null) {
-                    apiCallback.onFail(call, t);
+                    apiCallback.onFailure(call, t);
                 }
                 Log.e(t);
             }
@@ -62,7 +62,7 @@ public class RegisterInteractorImpl implements RegisterMvp.RegisterInteractor {
                             && responseModel.getResponseCd() == RegisterModel.RESPONSE_CD_SUCCESS) {
                         callback.onSuccess(responseModel);
                     } else {
-                        callback.onFail(response);
+                        callback.onFailure(response);
                     }
                 }
             }
@@ -70,7 +70,7 @@ public class RegisterInteractorImpl implements RegisterMvp.RegisterInteractor {
             @Override
             public void onFailure(Call<ResponseModel<RegisterModel>> call, Throwable t) {
                 if (callback != null) {
-                    callback.onFail(call, t);
+                    callback.onFailure(call, t);
                 }
                 Log.e(t);
             }
@@ -96,7 +96,7 @@ public class RegisterInteractorImpl implements RegisterMvp.RegisterInteractor {
                             && responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_SUCCESS) {
                         callback.onSuccess(responseModel);
                     } else {
-                        callback.onFail(response);
+                        callback.onFailure(response);
                     }
                 }
             }
@@ -104,7 +104,7 @@ public class RegisterInteractorImpl implements RegisterMvp.RegisterInteractor {
             @Override
             public void onFailure(Call<ResponseModel<Object>> call, Throwable t) {
                 if (callback != null) {
-                    callback.onFail(call, t);
+                    callback.onFailure(call, t);
                 }
                 Log.e(t);
             }

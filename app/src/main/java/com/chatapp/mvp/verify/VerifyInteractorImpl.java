@@ -36,7 +36,7 @@ public class VerifyInteractorImpl implements VerifyMvp.VerifyInteractor {
                             && responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_SUCCESS) {
                         apiCallback.onSuccess(responseModel);
                     } else {
-                        apiCallback.onFail(response);
+                        apiCallback.onFailure(response);
                     }
                 }
             }
@@ -44,7 +44,7 @@ public class VerifyInteractorImpl implements VerifyMvp.VerifyInteractor {
             @Override
             public void onFailure(Call<ResponseModel<VerifyModel>> call, Throwable t) {
                 if (apiCallback != null) {
-                    apiCallback.onFail(call, t);
+                    apiCallback.onFailure(call, t);
                 }
                 Log.e(t);
             }
