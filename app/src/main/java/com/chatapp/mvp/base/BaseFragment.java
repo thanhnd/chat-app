@@ -9,29 +9,37 @@ import com.chatapp.mvp.login.LogInActivity;
  * Created by thanhnguyen on 1/6/17.
  */
 public class BaseFragment extends Fragment implements BaseView {
+
     @Override
     public void showProgress() {
-
     }
 
     @Override
     public void hideProgress() {
-
     }
 
     @Override
     public void showErrorDialog() {
-
+        BaseActivity activity = (BaseActivity) getActivity();
+        if (isAdded() && activity!= null) {
+            activity.showErrorDialog();
+        }
     }
 
     @Override
     public void showErrorDialog(String message) {
-
+        BaseActivity activity = (BaseActivity) getActivity();
+        if (isAdded() && activity!= null) {
+            activity.showErrorDialog(message);
+        }
     }
 
     @Override
     public void showDialog(String title, String message) {
-
+        BaseActivity activity = (BaseActivity) getActivity();
+        if (isAdded() && activity!= null) {
+            activity.showDialog(title, message);
+        }
     }
 
     @Override

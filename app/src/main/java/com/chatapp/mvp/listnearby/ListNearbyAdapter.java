@@ -85,18 +85,16 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
-        Object item = mDataset.get(position);
         if (getItemViewType(position) == ITEM_VIEW_TYPE_MY_PROFILE) {
 
             MyProfileViewHolder myProfileViewHolder = (MyProfileViewHolder)holder;
-            MyProfileModel myProfileModel = (MyProfileModel)item ;
-            String name = TextUtils.isEmpty(myProfileModel.getDisplayName()) ?
-                    "No name" : myProfileModel.getDisplayName();
+            String name = TextUtils.isEmpty(myProfile.getDisplayName()) ?
+                    "No name" : myProfile.getDisplayName();
             myProfileViewHolder.tvName.setText(name);
 
-            if (!TextUtils.isEmpty(myProfileModel.getAvatar())) {
+            if (!TextUtils.isEmpty(myProfile.getAvatar())) {
                 Picasso.with(context)
-                        .load(myProfileModel.getAvatar())
+                        .load(myProfile.getAvatar())
                         .fit()
                         .centerCrop()
                         .error(R.drawable.img_user_avatar)
@@ -117,7 +115,9 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
         } else {
 
             OtherUserViewHolder otherUserViewHolder = (OtherUserViewHolder)holder;
-            final UserModel userModel = (UserModel) item;
+            final UserModel userModel = (UserModel) mDataset.get(
+                    getItemViewType(position) == ITEM_VIEW_TYPE_OTHER_PROFILE ? position - 1 : position);
+
             String name = TextUtils.isEmpty(userModel.getDisplayName()) ? "No name" : userModel.getDisplayName();
             otherUserViewHolder.tvName.setText(name);
             otherUserViewHolder.tvDistance.setText(String.format(Locale.getDefault(), "%d feet away", userModel.getFeetAway()));
@@ -147,22 +147,22 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataset.size();
+        int size = mDataset.size();
+        if (myProfile != null) {
+            size ++;
+        }
+        return size;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return (mDataset.get(position) instanceof MyProfileModel) ? ITEM_VIEW_TYPE_MY_PROFILE : ITEM_VIEW_TYPE_OTHER_PROFILE;
+        return (position == 0 && myProfile != null) ? ITEM_VIEW_TYPE_MY_PROFILE : ITEM_VIEW_TYPE_OTHER_PROFILE;
     }
 
     public void add(List<UserModel> userModels, boolean needClearData) {
 
         if (needClearData) {
             mDataset.clear();
-        }
-
-        if (myProfile != null) {
-            mDataset.add(myProfile);
         }
 
         mDataset.addAll(userModels);
@@ -172,9 +172,6 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
     public void setMyProfileModel(MyProfileModel myProfileModel) {
 
         this.myProfile = myProfileModel;
-        if (!mDataset.contains(myProfile)) {
-            mDataset.add(0, myProfileModel);
-        }
 
         notifyDataSetChanged();
     }

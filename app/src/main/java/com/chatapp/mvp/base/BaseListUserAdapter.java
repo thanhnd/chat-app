@@ -17,7 +17,7 @@ import java.util.List;
 
 public abstract class BaseListUserAdapter<VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
 
-    protected ArrayList<UserModel> mDataset;
+    protected List<UserModel> mDataset;
     protected Context context;
     protected int imgDiameter;
 
