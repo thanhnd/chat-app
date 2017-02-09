@@ -60,12 +60,6 @@ public class PresenterImpl implements UpdateBasicProfileMvp.ProfilePresenter {
     @Override
     public void uploadAvatar(Uri url) {
 
-        LogInModel logInModel = AccountUtils.getLogInModel();
-        if (logInModel == null) {
-            return;
-        }
-        String authorization = logInModel.getToken();
-
         File file = FileUtils.getFile(MyApplication.getInstance(), url);
 
         // create RequestBody instance from file
@@ -79,7 +73,7 @@ public class PresenterImpl implements UpdateBasicProfileMvp.ProfilePresenter {
         MultipartBody.Part filePart =
                 MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
-        interactor.uploadAvatar(authorization, filePart, new BaseApiCallback<ResponseModel<LinkedTreeMap<String, String>>>() {
+        interactor.uploadAvatar(filePart, new BaseApiCallback<ResponseModel<LinkedTreeMap<String, String>>>() {
 
             @Override
             public void onSuccess(ResponseModel<LinkedTreeMap<String, String>> response) {

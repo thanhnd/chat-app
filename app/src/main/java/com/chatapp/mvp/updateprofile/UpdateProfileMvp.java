@@ -18,8 +18,8 @@ import okhttp3.MultipartBody;
 public interface UpdateProfileMvp {
     interface Interactor {
 
-        void uploadAvatar(String authorization, MultipartBody.Part filePart, ApiCallback<ResponseModel<LinkedTreeMap<String, String>>> callback);
-        void submit(String authorization, Map<String, Object> request, ApiCallback<ResponseModel<Object>> callback);
+        void uploadAvatar(MultipartBody.Part filePart, ApiCallback<ResponseModel<LinkedTreeMap<String, String>>> callback);
+        void submit(Map<String, Object> request, ApiCallback<ResponseModel<Object>> callback);
     }
 
     interface Presenter {

@@ -8,13 +8,10 @@ import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.utils.AccountUtils;
-import com.chatapp.utils.Log;
 
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class SearchUserInteractorImpl implements SearchUserMvp.Interactor {
 
@@ -27,28 +24,6 @@ public class SearchUserInteractorImpl implements SearchUserMvp.Interactor {
         String authorization = logInModel.getToken();
         ApiService service = ApiServiceHelper.getInstance();
         Call<ResponseModel<List<UserModel>>> call = service.search(authorization);
-        call.enqueue(new Callback<ResponseModel<List<UserModel>>>() {
-            @Override
-            public void onResponse(Call<ResponseModel<List<UserModel>>> call, Response<ResponseModel<List<UserModel>>> response) {
-                Log.d(response.raw().toString());
-                ResponseModel<List<UserModel>> responseModel = response.body();
-                if (callback != null) {
-                    if (response.isSuccessful() && responseModel != null
-                            && responseModel.getResponseCd() != ResponseModel.RESPONSE_CD_ERROR) {
-                        callback.onSuccess(responseModel);
-                    } else {
-                        callback.onFailure(response);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseModel<List<UserModel>>> call, Throwable t) {
-                if (callback != null) {
-                    callback.onFailure(call, t);
-                }
-                Log.e(t);
-            }
-        });
+        call.enqueue(callback);
     }
 }

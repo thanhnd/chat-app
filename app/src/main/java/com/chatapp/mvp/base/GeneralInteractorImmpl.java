@@ -19,6 +19,8 @@ public class GeneralInteractorImmpl implements GeneralInteractor {
     public void getMyProfile(final ApiCallback<ResponseModel<MyProfileModel>> callback) {
         LogInModel logInModel = AccountUtils.getLogInModel();
         if (logInModel == null) {
+            callback.onTokenExpired();
+
             return;
         }
         String authorization = logInModel.getToken();

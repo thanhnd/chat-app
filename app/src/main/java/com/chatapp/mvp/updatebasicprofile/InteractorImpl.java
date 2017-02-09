@@ -30,8 +30,15 @@ public class InteractorImpl implements UpdateBasicProfileMvp.Interactor {
     }
 
     @Override
-    public void uploadAvatar(String authorization, MultipartBody.Part filePart,
+    public void uploadAvatar(MultipartBody.Part filePart,
                              final ApiCallback<ResponseModel<LinkedTreeMap<String, String>>> callback) {
+        LogInModel logInModel = AccountUtils.getLogInModel();
+        if (logInModel == null) {
+            callback.onTokenExpired();
+            return;
+        }
+
+        String authorization = logInModel.getToken();
         ApiService instance = ApiServiceHelper.getInstance();
         Call<ResponseModel<LinkedTreeMap<String, String>>> call = instance.uploadAvatar(authorization, filePart);
         call.enqueue(callback);

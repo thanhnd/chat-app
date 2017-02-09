@@ -20,7 +20,7 @@ public interface UpdateBasicProfileMvp {
 
         void submit(BasicProfileRequest request, ApiCallback<ResponseModel<Object>> callback);
 
-        void uploadAvatar(String authorization, MultipartBody.Part filePart,
+        void uploadAvatar(MultipartBody.Part filePart,
                           ApiCallback<ResponseModel<LinkedTreeMap<String, String>>> callback);
 
     }

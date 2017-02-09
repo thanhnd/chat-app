@@ -5,9 +5,7 @@ import android.net.Uri;
 
 import com.chatapp.MyApplication;
 import com.chatapp.service.BaseApiCallback;
-import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.ResponseModel;
-import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.FileUtils;
 import com.google.gson.internal.LinkedTreeMap;
 
@@ -31,13 +29,6 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
 
     @Override
     public void uploadAvatar(Uri url) {
-
-        LogInModel logInModel = AccountUtils.getLogInModel();
-        if (logInModel == null) {
-            return;
-        }
-        String authorization = logInModel.getToken();
-
         File file = FileUtils.getFile(MyApplication.getInstance(), url);
 
         // create RequestBody instance from file
@@ -51,7 +42,7 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
         MultipartBody.Part filePart =
                 MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
-        interactor.uploadAvatar(authorization, filePart, new BaseApiCallback<ResponseModel<LinkedTreeMap<String, String>>>() {
+        interactor.uploadAvatar(filePart, new BaseApiCallback<ResponseModel<LinkedTreeMap<String, String>>>() {
 
             @Override
             public void onSuccess(ResponseModel<LinkedTreeMap<String, String>> response) {
@@ -70,16 +61,11 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
 
     @Override
     public void submit(Map<String, Object> request) {
-        LogInModel logInModel = AccountUtils.getLogInModel();
-        if (logInModel == null) {
-            return;
-        }
         if (view.get() != null) {
             view.get().showProgress();
         }
 
-        String authorization = logInModel.getToken();
-        interactor.submit(authorization, request, new BaseApiCallback<ResponseModel<Object>>() {
+        interactor.submit(request, new BaseApiCallback<ResponseModel<Object>>() {
 
             @Override
             public void onSuccess(ResponseModel<Object> response) {
