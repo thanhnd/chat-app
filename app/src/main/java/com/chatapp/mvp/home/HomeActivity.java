@@ -25,6 +25,7 @@ import com.chatapp.mvp.listfriends.ListFriendsFragment;
 import com.chatapp.mvp.listnearby.ListNearbyFragment;
 import com.chatapp.mvp.listrecommendedfriends.ListRecommendedFriendsActivity;
 import com.chatapp.mvp.searchuser.SearchActivity;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.LocationChangeObservable;
 import com.chatapp.utils.Log;
@@ -209,7 +210,11 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
 
             Log.d("Latitude:" + mLastLocation.getLatitude() + ", Longitude:" + mLastLocation.getLongitude());
 
-            present.updateLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            try {
+                present.updateLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            } catch (RequireLoginException e) {
+                onRequiredLogin();
+            }
 
             notifyUpdateLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude());
         }

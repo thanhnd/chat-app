@@ -77,4 +77,12 @@ public abstract class BaseApiCallback<T extends ResponseModel> implements ApiCal
             view.get().onTokenExpired();
         }
     }
+
+    @Override
+    public void onRequiredAuthorization() {
+        if (view != null) {
+            view.get().hideProgress();
+            view.get().onRequiredLogin();
+        }
+    }
 }

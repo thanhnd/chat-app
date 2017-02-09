@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.mvp.updateprofile.UpdateProfileActivity;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.utils.AccountUtils;
@@ -85,7 +86,11 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
         tvOnlineStatus.setText("Online");
         tvOnlineStatus.setEnabled(true);
 
-        presenter.getMyProfile();
+        try {
+            presenter.getMyProfile();
+        } catch (RequireLoginException e) {
+            onRequiredLogin();
+        }
 
         displayMyProfileInfo();
 

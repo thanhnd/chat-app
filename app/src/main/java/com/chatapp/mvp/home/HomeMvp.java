@@ -1,5 +1,6 @@
 package com.chatapp.mvp.home;
 
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.ApiCallback;
 import com.chatapp.service.models.response.ResponseModel;
 
@@ -9,11 +10,11 @@ import com.chatapp.service.models.response.ResponseModel;
 public interface HomeMvp {
 
     interface Present {
-        void updateLocation(double latitude, double longitude);
+        void updateLocation(double latitude, double longitude) throws RequireLoginException;
     }
 
     interface Interactor {
-        void updatLocation(double latitude, double longitude, ApiCallback<ResponseModel<Object>> callback);
+        void updatLocation(double latitude, double longitude, ApiCallback<ResponseModel<Object>> callback) throws RequireLoginException;
     }
 
     interface View {

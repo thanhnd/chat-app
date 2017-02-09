@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseFragment;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.utils.ItemOffsetDecoration;
 
@@ -22,14 +23,14 @@ import butterknife.ButterKnife;
  * Created by thanhnguyen on 1/3/17.
  */
 
-public class ListFavoritesFragment extends BaseFragment implements ListFavorites.View{
+public class ListChatFragment extends BaseFragment implements ListChatMvp.View{
 
     @Bind(R.id.rv_list_users)
     RecyclerView rvNearby;
 
-    private ListFavoritesAdapter adapter;
+    private ListChatAdapter adapter;
 
-    private ListFavorites.Presenter presenter;
+    private ListChatMvp.Presenter presenter;
 
     @Nullable
     @Override
@@ -41,17 +42,21 @@ public class ListFavoritesFragment extends BaseFragment implements ListFavorites
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getContext(), 3);
         rvNearby.setLayoutManager(layoutManager);
         rvNearby.addItemDecoration(new ItemOffsetDecoration(getContext(), R.dimen.list_item_space));
-        adapter = new ListFavoritesAdapter(getContext());
+        adapter = new ListChatAdapter(getContext());
         rvNearby.setAdapter(adapter);
         presenter = new PresenterImpl(this);
 
-        presenter.getListFavorites();
+        try {
+            presenter.getListChat();
+        } catch (RequireLoginException e) {
+            onRequiredLogin();
+        }
 
         return view;
     }
 
     @Override
-    public void onGetListFavoritesSuccess(List<UserModel> resultSet) {
+    public void onGetListChatSuccess(List<UserModel> resultSet) {
         adapter.add(resultSet);
     }
 

@@ -1,6 +1,7 @@
 package com.chatapp.mvp.listrecommendedfriends;
 
 import com.chatapp.mvp.base.BaseView;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.ApiCallback;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserModel;
@@ -14,18 +15,18 @@ import java.util.Set;
 public interface ListRecommendedFriendsMvp {
 
     interface Presenter {
-        void getListRecommendedFriends();
+        void getListRecommendedFriends() throws RequireLoginException;
 
-        void acceptFriendRequest(String userId);
+        void acceptFriendRequest(String userId) throws RequireLoginException;
 
         void delete(Set<UserModel> userModels);
     }
 
     interface Interactor {
 
-        void getListRecommendedFriends(ApiCallback<ResponseModel<List<UserModel>>> callback);
+        void getListRecommendedFriends(ApiCallback<ResponseModel<List<UserModel>>> callback) throws RequireLoginException;
 
-        void acceptFriendRequest(String userId, ApiCallback<ResponseModel<Object>> callback);
+        void acceptFriendRequest(String userId, ApiCallback<ResponseModel<Object>> callback) throws RequireLoginException;
     }
 
     interface View extends BaseView {

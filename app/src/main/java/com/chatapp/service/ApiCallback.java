@@ -15,5 +15,7 @@ public interface ApiCallback<T extends ResponseModel> extends Callback <T>{
     void onFailure(Response<T> response);
 
     void onTokenExpired();
+
+    void onRequiredAuthorization();
 }
 

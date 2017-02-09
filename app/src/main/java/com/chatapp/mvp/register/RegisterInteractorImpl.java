@@ -1,6 +1,7 @@
 package com.chatapp.mvp.register;
 
 
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.ApiCallback;
 import com.chatapp.service.ApiService;
 import com.chatapp.service.ApiServiceHelper;
@@ -30,14 +31,9 @@ public class RegisterInteractorImpl implements RegisterMvp.RegisterInteractor {
     }
 
     @Override
-    public void getVerifyCode(final ApiCallback<ResponseModel<Object>> callback) {
-        LogInModel logInModel = AccountUtils.getLogInModel();
-        if (logInModel == null) {
-            return;
-        }
-        String authorization = logInModel.getToken();
+    public void getVerifyCode(final ApiCallback<ResponseModel<Object>> callback) throws RequireLoginException {
         ApiService service = ApiServiceHelper.getInstance();
-        Call<ResponseModel<Object>> call = service.getVerifyCode(authorization);
+        Call<ResponseModel<Object>> call = service.getVerifyCode(AccountUtils.getAuthorization());
         call.enqueue(callback);
     }
 }

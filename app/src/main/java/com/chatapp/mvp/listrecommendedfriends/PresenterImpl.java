@@ -1,5 +1,6 @@
 package com.chatapp.mvp.listrecommendedfriends;
 
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserModel;
@@ -25,7 +26,7 @@ public class PresenterImpl implements ListRecommendedFriendsMvp.Presenter {
     }
 
     @Override
-    public void getListRecommendedFriends() {
+    public void getListRecommendedFriends() throws RequireLoginException {
         if (view.get() != null) {
             view.get().showProgress();
         }
@@ -40,7 +41,7 @@ public class PresenterImpl implements ListRecommendedFriendsMvp.Presenter {
     }
 
     @Override
-    public void acceptFriendRequest(String userId) {
+    public void acceptFriendRequest(String userId) throws RequireLoginException {
         if (view.get() != null) {
             view.get().showProgress();
         }

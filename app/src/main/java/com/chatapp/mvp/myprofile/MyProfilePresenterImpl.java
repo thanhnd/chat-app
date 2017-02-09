@@ -3,6 +3,7 @@ package com.chatapp.mvp.myprofile;
 
 import com.chatapp.mvp.base.GeneralInteractor;
 import com.chatapp.mvp.base.GeneralInteractorImmpl;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.ResponseModel;
@@ -21,7 +22,7 @@ public class MyProfilePresenterImpl implements MyProfileMvp.MyProfilePresenter {
     }
 
     @Override
-    public void getMyProfile() {
+    public void getMyProfile() throws RequireLoginException {
         if (view.get() != null) {
             view.get().showProgress();
         }

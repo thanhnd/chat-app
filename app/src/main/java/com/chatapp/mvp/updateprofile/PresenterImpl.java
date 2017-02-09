@@ -28,7 +28,7 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
     }
 
     @Override
-    public void uploadAvatar(Uri url) {
+    public void uploadAvatar(Uri url) throws RequireLoginException {
         File file = FileUtils.getFile(MyApplication.getInstance(), url);
 
         // create RequestBody instance from file
@@ -60,7 +60,7 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
     }
 
     @Override
-    public void submit(Map<String, Object> request) {
+    public void submit(Map<String, Object> request) throws RequireLoginException {
         if (view.get() != null) {
             view.get().showProgress();
         }

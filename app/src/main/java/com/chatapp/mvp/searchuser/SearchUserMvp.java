@@ -1,6 +1,7 @@
 package com.chatapp.mvp.searchuser;
 
 import com.chatapp.mvp.base.BaseView;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.ApiCallback;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserModel;
@@ -13,11 +14,11 @@ import java.util.List;
 public interface SearchUserMvp {
 
     interface Presenter {
-        void searchUser(String keyword);
+        void searchUser(String keyword) throws RequireLoginException;
     }
 
     interface Interactor {
-        void searchUser(String keyword, ApiCallback<ResponseModel<List<UserModel>>> callback);
+        void searchUser(String keyword, ApiCallback<ResponseModel<List<UserModel>>> callback) throws RequireLoginException;
     }
 
     interface View extends BaseView {

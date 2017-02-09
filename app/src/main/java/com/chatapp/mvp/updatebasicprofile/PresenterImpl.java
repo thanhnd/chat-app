@@ -5,6 +5,7 @@ import android.net.Uri;
 import com.chatapp.MyApplication;
 import com.chatapp.mvp.base.GeneralInteractor;
 import com.chatapp.mvp.base.GeneralInteractorImmpl;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.request.BasicProfileRequest;
 import com.chatapp.service.models.response.LogInModel;
@@ -38,7 +39,7 @@ public class PresenterImpl implements UpdateBasicProfileMvp.ProfilePresenter {
     }
 
     @Override
-    public void submit(BasicProfileRequest request) {
+    public void submit(BasicProfileRequest request) throws RequireLoginException {
         if (view.get() != null) {
             view.get().showProgress();
         }
@@ -58,7 +59,7 @@ public class PresenterImpl implements UpdateBasicProfileMvp.ProfilePresenter {
     }
 
     @Override
-    public void uploadAvatar(Uri url) {
+    public void uploadAvatar(Uri url) throws RequireLoginException {
 
         File file = FileUtils.getFile(MyApplication.getInstance(), url);
 
@@ -91,7 +92,7 @@ public class PresenterImpl implements UpdateBasicProfileMvp.ProfilePresenter {
     }
 
     @Override
-    public void getMyProfile() {
+    public void getMyProfile() throws RequireLoginException {
         generalInteractor.getMyProfile(new BaseApiCallback<ResponseModel<MyProfileModel>>() {
             @Override
             public void onSuccess(ResponseModel<MyProfileModel> response) {

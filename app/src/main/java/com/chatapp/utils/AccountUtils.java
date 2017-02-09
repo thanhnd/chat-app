@@ -3,6 +3,7 @@ package com.chatapp.utils;
 import android.support.annotation.NonNull;
 
 import com.chatapp.MyApplication;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.MyProfileModel;
 
@@ -105,5 +106,13 @@ public class AccountUtils {
 
     public static void setLatitude(Double latitude) {
         AccountUtils.latitude = latitude;
+    }
+
+    public static String getAuthorization() throws RequireLoginException {
+        LogInModel logInModel = getLogInModel();
+        if (logInModel == null) {
+            throw new RequireLoginException();
+        }
+        return logInModel.getToken();
     }
 }

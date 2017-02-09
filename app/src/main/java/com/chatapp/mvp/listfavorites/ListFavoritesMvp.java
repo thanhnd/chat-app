@@ -1,6 +1,7 @@
 package com.chatapp.mvp.listfavorites;
 
 import com.chatapp.mvp.base.BaseView;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.ApiCallback;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserModel;
@@ -13,11 +14,11 @@ import java.util.List;
 public interface ListFavoritesMvp {
 
     interface Present {
-        void getListFavorites(boolean isFirstPage);
+        void getListFavorites(boolean isFirstPage) throws RequireLoginException;
     }
 
     interface Interactor {
-        void getListFavorites(ApiCallback<ResponseModel<List<UserModel>>> callback);
+        void getListFavorites(ApiCallback<ResponseModel<List<UserModel>>> callback) throws RequireLoginException;
     }
 
     interface View extends BaseView {

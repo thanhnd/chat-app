@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseFragment;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.mvp.userprofile.UserProfileActivity;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.utils.ItemOffsetDecoration;
@@ -51,9 +52,14 @@ public class ListFriendsFragment extends BaseFragment implements ListFriendsMvp.
             }
         });
         recyclerView.setAdapter(adapter);
+
         present = new PresentImpl(this);
 
-        present.getListFriends();
+        try {
+            present.getListFriends();
+        } catch (RequireLoginException e) {
+            onRequiredLogin();
+        }
 
         return view;
     }

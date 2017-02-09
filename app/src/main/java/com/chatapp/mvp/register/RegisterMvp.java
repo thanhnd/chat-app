@@ -1,6 +1,7 @@
 package com.chatapp.mvp.register;
 
 import com.chatapp.mvp.base.BaseView;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.ApiCallback;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.request.RegisterRequest;
@@ -18,7 +19,7 @@ public interface RegisterMvp {
                    ApiCallback<ResponseModel<LogInModel>> loginCallback);
         void register(RegisterRequest request,
                       ApiCallback<ResponseModel<RegisterModel>> callback);
-        void getVerifyCode(ApiCallback<ResponseModel<Object>> callback);
+        void getVerifyCode(ApiCallback<ResponseModel<Object>> callback) throws RequireLoginException;
     }
 
     /**
@@ -27,7 +28,7 @@ public interface RegisterMvp {
     interface RegisterPresent {
         void requestLogin(LogInRequest request);
         void submitRegisterForm(RegisterRequest request);
-        void getVerifyCode();
+        void getVerifyCode() throws RequireLoginException;
     }
 
     /**

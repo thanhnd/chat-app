@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseFragment;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.mvp.userprofile.UserProfileActivity;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.utils.ItemOffsetDecoration;
@@ -61,7 +62,11 @@ public class ListFavoritesFragment extends BaseFragment implements ListFavorites
         super.onResume();
 
         adapter.clearData();
-        present.getListFavorites(true);
+        try {
+            present.getListFavorites(true);
+        } catch (RequireLoginException e) {
+            onRequiredLogin();
+        }
     }
 
     @Override

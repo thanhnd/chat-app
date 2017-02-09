@@ -14,6 +14,7 @@ import com.chatapp.R;
 import com.chatapp.mvp.base.BaseFragment;
 import com.chatapp.mvp.home.HomeActivity;
 import com.chatapp.mvp.myprofile.MyProfileActivity;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.mvp.userprofile.UserProfileActivity;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.UserModel;
@@ -73,8 +74,13 @@ public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.Vi
     public void onResume() {
         super.onResume();
 
-        present.getMyProfile();
-        present.getListNearBy();
+        try {
+            present.getMyProfile();
+            present.getListNearBy();
+        } catch (RequireLoginException e) {
+            onRequiredLogin();
+        }
+
     }
 
     @Override
@@ -103,7 +109,12 @@ public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.Vi
 
     @Override
     public void updateLocation(double lattitude, double longitude) {
-        present.getListNearBy();
+
+        try {
+            present.getListNearBy();
+        } catch (RequireLoginException e) {
+            onRequiredLogin();
+        }
     }
 
     @Override

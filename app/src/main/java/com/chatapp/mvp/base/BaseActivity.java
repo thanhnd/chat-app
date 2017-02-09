@@ -2,11 +2,13 @@ package com.chatapp.mvp.base;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.chatapp.mvp.login.LogInActivity;
 import com.chatapp.utils.DialogUtils;
 
 import java.util.Calendar;
@@ -85,6 +87,17 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
 
     @Override
     public void onTokenExpired() {
+        Intent intent = new Intent(this, LogInActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
+    }
 
+    @Override
+    public void onRequiredLogin() {
+        Intent intent = new Intent(this, LogInActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+        finish();
     }
 }

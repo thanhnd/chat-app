@@ -1,5 +1,6 @@
 package com.chatapp.mvp.verify;
 
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.request.VerifyEmailRequest;
 import com.chatapp.service.models.response.LogInModel;
@@ -22,7 +23,7 @@ public class VerifyPresentImpl implements VerifyMvp.VerifyPresent {
         this.interactor = new VerifyInteractorImpl();
     }
     @Override
-    public void submitVerifyForm(VerifyEmailRequest request) {
+    public void submitVerifyForm(VerifyEmailRequest request) throws RequireLoginException {
         if (view.get() != null) {
             view.get().showProgress();
         }

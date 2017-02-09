@@ -1,5 +1,6 @@
 package com.chatapp.mvp.home;
 
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.response.ResponseModel;
 
@@ -20,7 +21,7 @@ public class PresentImpl implements HomeMvp.Present {
     }
 
     @Override
-    public void updateLocation(double latitude, double longitude) {
+    public void updateLocation(double latitude, double longitude) throws RequireLoginException {
         interactor.updatLocation(latitude, longitude, new BaseApiCallback<ResponseModel<Object>>() {
             @Override
             public void onSuccess(ResponseModel<Object> response) {

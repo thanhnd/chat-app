@@ -1,6 +1,7 @@
 
 package com.chatapp.mvp.searchuser;
 
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserModel;
@@ -19,7 +20,7 @@ public class SearchUserPresenterImpl implements SearchUserMvp.Presenter {
     }
 
     @Override
-    public void searchUser(String keyword) {
+    public void searchUser(String keyword) throws RequireLoginException {
         if (view.get() != null) {
             view.get().showProgress();
         }

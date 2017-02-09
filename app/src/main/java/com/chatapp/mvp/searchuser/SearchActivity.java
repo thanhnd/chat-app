@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.models.response.UserModel;
 
 import java.util.List;
@@ -68,7 +69,11 @@ public class SearchActivity extends BaseActivity implements SearchUserMvp.View {
     private void onNextClick() {
         String keyword = edtKeyword.getText().toString();
         if (!TextUtils.isEmpty(keyword)) {
-            presenter.searchUser(keyword);
+            try {
+               presenter.searchUser(keyword);
+            } catch (RequireLoginException e) {
+                onRequiredLogin();
+            }
         }
     }
 

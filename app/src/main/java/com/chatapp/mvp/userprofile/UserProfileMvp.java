@@ -1,6 +1,7 @@
 package com.chatapp.mvp.userprofile;
 
 import com.chatapp.mvp.base.BaseView;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.ApiCallback;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserProfileModel;
@@ -12,24 +13,24 @@ import com.chatapp.service.models.response.UserProfileModel;
 public interface UserProfileMvp {
     interface UserProfileInteractor {
 
-        void getUserProfile(String userId, ApiCallback<ResponseModel<UserProfileModel>> callback);
+        void getUserProfile(String userId, ApiCallback<ResponseModel<UserProfileModel>> callback) throws RequireLoginException;
 
-        void addFavorite(String userId, ApiCallback<ResponseModel<Object>> callback);
+        void addFavorite(String userId, ApiCallback<ResponseModel<Object>> callback) throws RequireLoginException;
 
-        void requestAddFriend(String userId, String noted, ApiCallback<ResponseModel<Object>> callback);
+        void requestAddFriend(String userId, String noted, ApiCallback<ResponseModel<Object>> callback) throws RequireLoginException;
 
-        void removeFavorite(String userId, ApiCallback<ResponseModel<Object>> ApiCallback);
+        void removeFavorite(String userId, ApiCallback<ResponseModel<Object>> ApiCallback) throws RequireLoginException;
     }
 
     interface UserProfilePresent {
 
-        void getUserProfile(String userId);
+        void getUserProfile(String userId) throws RequireLoginException;
 
-        void addFavorite(String userId);
+        void addFavorite(String userId) throws RequireLoginException;
 
-        void requestAddFriend(String userId, String noted);
+        void requestAddFriend(String userId, String noted) throws RequireLoginException;
 
-        void removeFavorite(String userId);
+        void removeFavorite(String userId) throws RequireLoginException;
     }
 
     interface UserProfileView extends BaseView {

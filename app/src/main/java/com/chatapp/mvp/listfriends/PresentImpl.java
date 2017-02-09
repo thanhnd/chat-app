@@ -1,5 +1,6 @@
 package com.chatapp.mvp.listfriends;
 
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserModel;
@@ -23,7 +24,7 @@ public class PresentImpl implements ListFriendsMvp.Present {
 
     }
     @Override
-    public void getListFriends() {
+    public void getListFriends() throws RequireLoginException {
         interactor.getListFriends(new BaseApiCallback<ResponseModel<List<UserModel>>>() {
             @Override
             public void onSuccess(ResponseModel<List<UserModel>> response) {

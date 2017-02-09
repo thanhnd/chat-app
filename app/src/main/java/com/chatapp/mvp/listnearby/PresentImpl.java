@@ -2,6 +2,7 @@ package com.chatapp.mvp.listnearby;
 
 import com.chatapp.mvp.base.GeneralInteractor;
 import com.chatapp.mvp.base.GeneralInteractorImmpl;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.request.ListNearbyRequest;
 import com.chatapp.service.models.response.MyProfileModel;
@@ -31,7 +32,7 @@ public class PresentImpl implements ListNearbyMvp.Present {
     }
 
     @Override
-    public void getListNearBy() {
+    public void getListNearBy() throws RequireLoginException {
 
         if (AccountUtils.getLongitude() == null || AccountUtils.getLongitude() == null) {
             return;
@@ -53,7 +54,7 @@ public class PresentImpl implements ListNearbyMvp.Present {
     }
 
     @Override
-    public void getMyProfile() {
+    public void getMyProfile() throws RequireLoginException {
         generalInteractor.getMyProfile(new BaseApiCallback<ResponseModel<MyProfileModel>>() {
             @Override
             public void onSuccess(ResponseModel<MyProfileModel> response) {

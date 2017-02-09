@@ -30,4 +30,6 @@ public interface BaseView {
     void showDialog(String title, String message);
 
     void onTokenExpired();
+
+    void onRequiredLogin();
 }

@@ -1,6 +1,7 @@
 package com.chatapp.mvp.myprofile;
 
 import com.chatapp.mvp.base.BaseView;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.models.response.MyProfileModel;
 
 /**
@@ -12,7 +13,7 @@ public interface MyProfileMvp {
     }
 
     interface MyProfilePresenter {
-        void getMyProfile();
+        void getMyProfile() throws RequireLoginException;
     }
 
     interface MyProfileView extends BaseView {

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.home.HomeActivity;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.models.request.BasicProfileRequest;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.utils.AccountUtils;
@@ -71,7 +72,11 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
             }
         });
 
-        presenter.getMyProfile();
+        try {
+            presenter.getMyProfile();
+        } catch (RequireLoginException e) {
+            onRequiredLogin();
+        }
     }
 
     @OnClick(R.id.btn_submit)
@@ -87,7 +92,11 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
         request.setHeight(height);
         request.setWeight(weight);
 
-        presenter.submit(request);
+        try {
+            presenter.submit(request);
+        } catch (RequireLoginException e) {
+            onRequiredLogin();
+        }
     }
 
     @OnClick({R.id.v_date_of_birth, R.id.tv_dob})
@@ -111,13 +120,13 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
     void clickChooseHeightAndWeight() {
         DialogUtils.showChooseHeightAndWeightDialog(this, height, weight,
                 new ChooseHeightAndWeightDialogFragment.OnHeightAndWeightSetListener() {
-            @Override
-            public void onHeightAndWeightSet(int h, int w) {
-                height = h;
-                weight = w;
-                displayHeightAndWeight();
-            }
-        });
+                    @Override
+                    public void onHeightAndWeightSet(int h, int w) {
+                        height = h;
+                        weight = w;
+                        displayHeightAndWeight();
+                    }
+                });
     }
 
     @OnClick(R.id.fab_camera)
@@ -183,7 +192,11 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
             if (requestCode == SELECT_PICTURE) {
                 Uri selectedImageUri = data.getData();
                 if (selectedImageUri != null) {
-                    presenter.uploadAvatar(selectedImageUri);
+                    try {
+                        presenter.uploadAvatar(selectedImageUri);
+                    } catch (RequireLoginException e) {
+                        onRequiredLogin();
+                    }
                 }
             }
         }

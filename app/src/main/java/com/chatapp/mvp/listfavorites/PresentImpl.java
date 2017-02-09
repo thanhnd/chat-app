@@ -1,5 +1,6 @@
 package com.chatapp.mvp.listfavorites;
 
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserModel;
@@ -23,7 +24,7 @@ public class PresentImpl implements ListFavoritesMvp.Present {
 
     }
     @Override
-    public void getListFavorites(boolean isFirstPage) {
+    public void getListFavorites(boolean isFirstPage) throws RequireLoginException {
         if (view.get() != null) {
             view.get().showProgress();
         }

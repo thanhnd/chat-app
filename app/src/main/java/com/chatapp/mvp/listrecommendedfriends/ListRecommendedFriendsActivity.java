@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.mvp.userprofile.UserProfileActivity;
 import com.chatapp.service.models.response.UserModel;
 
@@ -70,14 +71,23 @@ public class ListRecommendedFriendsActivity extends BaseActivity implements List
         adapter.setOnAddFriendClick(new ListRecommendedFriendsAdapter.OnAddFriendClick() {
             @Override
             public void onItemClick(UserModel userModel) {
-                presenter.acceptFriendRequest(userModel.getUserId());
+                try {
+                    presenter.acceptFriendRequest(userModel.getUserId());
+                } catch (RequireLoginException e) {
+                    onRequiredLogin();
+                }
             }
         });
 
         adapter.setOnSelectedChanged(this);
         recyclerView.setAdapter(adapter);
         presenter = new PresenterImpl(this);
-        presenter.getListRecommendedFriends();
+        try {
+            presenter.getListRecommendedFriends();
+        } catch (RequireLoginException e) {
+            onRequiredLogin();
+        }
+
     }
 
     @Override

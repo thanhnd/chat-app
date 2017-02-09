@@ -271,7 +271,13 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
             request.put("relationship_status_id", relationshipStatusParam.getId());
         }
 
-        presenter.submit(request);
+        try {
+
+            presenter.submit(request);
+
+        } catch (RequireLoginException e) {
+            onRequiredLogin();
+        }
     }
 
     @Override
@@ -280,7 +286,11 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
             if (requestCode == SELECT_PICTURE) {
                 Uri selectedImageUri = data.getData();
                 if (selectedImageUri != null) {
-                    presenter.uploadAvatar(selectedImageUri);
+                    try {
+                        presenter.uploadAvatar(selectedImageUri);
+                    } catch (RequireLoginException e) {
+                        onRequiredLogin();
+                    }
                 }
             }
         }

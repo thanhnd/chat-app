@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.service.models.response.UserProfileModel;
 import com.chatapp.views.UserProfilePropertyView;
@@ -33,7 +34,7 @@ import butterknife.OnClick;
 import static com.chatapp.Config.LIMIT_ADD_FRIEND_GREETING_CHARACTER;
 
 public class UserProfileActivity extends BaseActivity implements UserProfileMvp.UserProfileView,
-        AppBarLayout.OnOffsetChangedListener{
+        AppBarLayout.OnOffsetChangedListener {
 
     public static final String EXTRA_USER_MODEL = "extra_user_model";
 
@@ -102,7 +103,7 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
                 R.drawable.ic_status_favorite_yes : R.drawable.ic_tab_favorite);
 
         tvLimitGreeting.setText("0/" + LIMIT_ADD_FRIEND_GREETING_CHARACTER);
-        edtGreeting.setFilters(new InputFilter[] {new InputFilter.LengthFilter(LIMIT_ADD_FRIEND_GREETING_CHARACTER)});
+        edtGreeting.setFilters(new InputFilter[]{new InputFilter.LengthFilter(LIMIT_ADD_FRIEND_GREETING_CHARACTER)});
         edtGreeting.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -128,7 +129,11 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
 
         tvOnlineStatus.setText(userModel.getOnlineStatus());
         tvOnlineStatus.setEnabled(true);
-        present.getUserProfile(userModel.getUserId());
+        try {
+            present.getUserProfile(userModel.getUserId());
+        } catch (RequireLoginException e) {
+            onRequiredLogin();
+        }
     }
 
     private void displayUserProfileDetails(@NonNull UserProfileModel userProfileModel) {
@@ -215,13 +220,19 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
     @OnClick(R.id.ib_favorite_status)
     void onClickFavorite() {
 
-        if (!userModel.isFavourite()) {
+        try {
 
-            present.addFavorite(userModel.getUserId());
+            if (!userModel.isFavourite()) {
 
-        } else {
+                present.addFavorite(userModel.getUserId());
 
-            present.removeFavorite(userModel.getUserId());
+            } else {
+
+                present.removeFavorite(userModel.getUserId());
+            }
+
+        } catch (RequireLoginException e) {
+            onRequiredLogin();
         }
     }
 
@@ -274,7 +285,11 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
             String strGreeting = edtGreeting.getText().toString();
             strGreeting = strGreeting.trim();
             if (!TextUtils.isEmpty(strGreeting)) {
-                present.requestAddFriend(userModel.getUserId(), strGreeting);
+                try {
+                    present.requestAddFriend(userModel.getUserId(), strGreeting);
+                } catch (RequireLoginException e) {
+                    onRequiredLogin();
+                }
             }
         }
     }

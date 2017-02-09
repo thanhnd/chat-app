@@ -1,6 +1,7 @@
 package com.chatapp.mvp.listnearby;
 
 import com.chatapp.mvp.base.BaseView;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.ApiCallback;
 import com.chatapp.service.models.request.ListNearbyRequest;
 import com.chatapp.service.models.response.MyProfileModel;
@@ -15,12 +16,12 @@ import java.util.List;
 public interface ListNearbyMvp {
 
     interface Present {
-        void getListNearBy();
-        void getMyProfile();
+        void getListNearBy() throws RequireLoginException;
+        void getMyProfile() throws RequireLoginException;
     }
 
     interface Interactor {
-        void getListNearBy(ListNearbyRequest request, ApiCallback<ResponseModel<List<UserModel>>> callback);
+        void getListNearBy(ListNearbyRequest request, ApiCallback<ResponseModel<List<UserModel>>> callback) throws RequireLoginException;
     }
 
     interface View extends BaseView {

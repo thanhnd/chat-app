@@ -1,6 +1,7 @@
 
 package com.chatapp.mvp.userprofile;
 
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserProfileModel;
@@ -18,7 +19,7 @@ public class UserProfilePresenterImpl implements UserProfileMvp.UserProfilePrese
     }
 
     @Override
-    public void getUserProfile(String userId) {
+    public void getUserProfile(String userId) throws RequireLoginException {
         interactor.getUserProfile(userId, new BaseApiCallback<ResponseModel<UserProfileModel>>() {
             @Override
             public void onSuccess(ResponseModel<UserProfileModel> response) {
@@ -31,7 +32,7 @@ public class UserProfilePresenterImpl implements UserProfileMvp.UserProfilePrese
     }
 
     @Override
-    public void addFavorite(String userId) {
+    public void addFavorite(String userId) throws RequireLoginException {
         interactor.addFavorite(userId, new BaseApiCallback<ResponseModel<Object>>() {
             @Override
             public void onSuccess(ResponseModel<Object> response) {
@@ -44,7 +45,7 @@ public class UserProfilePresenterImpl implements UserProfileMvp.UserProfilePrese
 
 
     @Override
-    public void requestAddFriend(String userId, String noted) {
+    public void requestAddFriend(String userId, String noted) throws RequireLoginException {
         interactor.requestAddFriend(userId, noted, new BaseApiCallback<ResponseModel<Object>>() {
             @Override
             public void onSuccess(ResponseModel<Object> response) {
@@ -56,7 +57,7 @@ public class UserProfilePresenterImpl implements UserProfileMvp.UserProfilePrese
     }
 
     @Override
-    public void removeFavorite(String userId) {
+    public void removeFavorite(String userId) throws RequireLoginException {
         interactor.removeFavorite(userId, new BaseApiCallback<ResponseModel<Object>>() {
             @Override
             public void onSuccess(ResponseModel<Object> response) {

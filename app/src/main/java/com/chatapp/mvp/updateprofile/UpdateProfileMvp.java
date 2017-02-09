@@ -18,14 +18,14 @@ import okhttp3.MultipartBody;
 public interface UpdateProfileMvp {
     interface Interactor {
 
-        void uploadAvatar(MultipartBody.Part filePart, ApiCallback<ResponseModel<LinkedTreeMap<String, String>>> callback);
-        void submit(Map<String, Object> request, ApiCallback<ResponseModel<Object>> callback);
+        void uploadAvatar(MultipartBody.Part filePart, ApiCallback<ResponseModel<LinkedTreeMap<String, String>>> callback) throws RequireLoginException;
+        void submit(Map<String, Object> request, ApiCallback<ResponseModel<Object>> callback) throws RequireLoginException;
     }
 
     interface Presenter {
-        void uploadAvatar(Uri url);
+        void uploadAvatar(Uri url) throws RequireLoginException;
 
-        void submit(Map<String, Object> request);
+        void submit(Map<String, Object> request) throws RequireLoginException;
     }
 
     interface View extends BaseView {

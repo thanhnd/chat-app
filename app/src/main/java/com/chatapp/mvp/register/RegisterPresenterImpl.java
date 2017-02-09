@@ -1,6 +1,7 @@
 
 package com.chatapp.mvp.register;
 
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.request.RegisterRequest;
@@ -56,7 +57,7 @@ public class RegisterPresenterImpl implements RegisterMvp.RegisterPresent {
     }
 
     @Override
-    public void getVerifyCode() {
+    public void getVerifyCode() throws RequireLoginException {
 
         if (view.get() != null) {
             view.get().showProgress();

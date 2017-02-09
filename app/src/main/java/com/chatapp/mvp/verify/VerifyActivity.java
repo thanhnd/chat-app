@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.updatebasicprofile.UpdateBasicProfileActivity;
+import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.models.request.VerifyEmailRequest;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.utils.AccountUtils;
@@ -91,6 +92,10 @@ public class VerifyActivity extends BaseActivity implements VerifyMvp.VerifyView
         String code = edtCode.getText().toString();
         VerifyEmailRequest request = new VerifyEmailRequest();
         request.setCode(code);
-        present.submitVerifyForm(request);
+        try {
+            present.submitVerifyForm(request);
+        } catch (RequireLoginException e) {
+            onRequiredLogin();
+        }
     }
 }
