@@ -152,7 +152,7 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
 
     @Override
     public int getItemViewType(int position) {
-        return (myProfile != null && position == 0) ? ITEM_VIEW_TYPE_MY_PROFILE : ITEM_VIEW_TYPE_OTHER_PROFILE;
+        return (mDataset.get(position) instanceof MyProfileModel) ? ITEM_VIEW_TYPE_MY_PROFILE : ITEM_VIEW_TYPE_OTHER_PROFILE;
     }
 
     public void add(List<UserModel> userModels, boolean needClearData) {
@@ -170,13 +170,13 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
     }
 
     public void setMyProfileModel(MyProfileModel myProfileModel) {
+
         this.myProfile = myProfileModel;
-        if (mDataset.contains(myProfile)) {
-            notifyItemChanged(0);
-        } else {
+        if (!mDataset.contains(myProfile)) {
             mDataset.add(0, myProfileModel);
-            notifyItemInserted(0);
         }
+
+        notifyDataSetChanged();
     }
 
     public interface OnMyProfileItemClick {
