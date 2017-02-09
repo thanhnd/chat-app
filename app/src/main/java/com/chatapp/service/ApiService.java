@@ -128,4 +128,7 @@ public interface ApiService {
                                               @Body Map request);
 
 
+    @Headers("Content-Type: application/json")
+    @POST("/api/profile/delRequest")
+    Call<ResponseModel<Object>> deleteRecommend(@Header("Authorization") String authorization, @Body List<Map<String,String>> list);
 }

@@ -6,7 +6,10 @@ import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserModel;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 
@@ -57,7 +60,24 @@ public class PresenterImpl implements ListRecommendedFriendsMvp.Presenter {
     }
 
     @Override
-    public void delete(Set<UserModel> userModels) {
+    public void deleteRecommends(Set<UserModel> userModels) throws RequireLoginException {
+        if (view.get() != null) {
+            view.get().showProgress();
+        }
+        List<Map<String, String>> list = new ArrayList<>();
+        for (UserModel userModel: userModels) {
+            Map item = new HashMap<>();
+            item.put("user_id", userModel.getUserId());
+            list.add(item);
+        }
+        interactor.deleteRecomments(list, new BaseApiCallback<ResponseModel<Object>>(view.get()) {
 
+            @Override
+            public void onSuccess(ResponseModel<Object> response) {
+                if (view.get() != null) {
+                    view.get().onDeleteRecommendsSuccess();
+                }
+            }
+        });
     }
 }

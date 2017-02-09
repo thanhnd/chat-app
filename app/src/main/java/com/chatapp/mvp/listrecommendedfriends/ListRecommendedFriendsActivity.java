@@ -60,6 +60,7 @@ public class ListRecommendedFriendsActivity extends BaseActivity implements List
         btnSelectAll.setPaintFlags(btnSelectAll.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         recyclerView.setLayoutManager(layoutManager);
+
         adapter = new ListRecommendedFriendsAdapter(this);
         adapter.setOnUserProfileItemClick(new ListRecommendedFriendsAdapter.OnUserProfileItemClick() {
             @Override
@@ -97,7 +98,12 @@ public class ListRecommendedFriendsActivity extends BaseActivity implements List
 
     @Override
     public void onAcceptFriendSuccess() {
-
+        try {
+            adapter.clearData();
+            presenter.getListRecommendedFriends();
+        } catch (RequireLoginException e) {
+            onRequiredLogin();
+        }
     }
 
     @Override
@@ -105,6 +111,16 @@ public class ListRecommendedFriendsActivity extends BaseActivity implements List
         Intent intent = new Intent(this, UserProfileActivity.class);
         intent.putExtra(UserProfileActivity.EXTRA_USER_MODEL, userModel);
         startActivity(intent);
+    }
+
+    @Override
+    public void onDeleteRecommendsSuccess() {
+        try {
+            adapter.clearData();
+            presenter.getListRecommendedFriends();
+        } catch (RequireLoginException e) {
+            onRequiredLogin();
+        }
     }
 
     @Override
@@ -136,7 +152,11 @@ public class ListRecommendedFriendsActivity extends BaseActivity implements List
     public void onClickDelete() {
         Set<UserModel> userModels = adapter.getmSelectedItems();
         if (userModels.size() > 0) {
-            presenter.delete(userModels);
+            try {
+                presenter.deleteRecommends(userModels);
+            } catch (RequireLoginException e) {
+                onRequiredLogin();
+            }
         }
     }
 
