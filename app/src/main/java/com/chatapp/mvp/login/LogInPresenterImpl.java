@@ -41,7 +41,7 @@ public class LogInPresenterImpl implements LoginMvp.LogInPresenter {
 
 
     @Override
-    public void onConfirmPhoneNumber(final String phone) {
+    public void sendVerifyCodeForgotPasswordWithPhone(final String phone) {
         if (view.get() != null) {
             view.get().showProgress();
         }

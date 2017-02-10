@@ -93,19 +93,33 @@ public class LogInActivity extends BaseActivity implements LoginMvp.LogInView {
     @OnClick(R.id.btn_forgot_password)
     public void clickForgotPassword() {
 
-        if (isLoginWithPhone) {
-            final String phone = edtPhone.getText().toString();
-            if (!TextUtils.isEmpty(phone)) {
-                String message = getString(R.string.msg_forgot_password_confirm);
-                DialogUtils.showConfirmDialog(this, phone, message, "Confirm", "Cancel", new ConfirmDialogFragment.OnConfirmListener() {
-                    @Override
-                    public void onConfirm(RetainedDialogFragment fragment) {
-                        fragment.dismiss();
-                        presenter.onConfirmPhoneNumber(phone);
-                    }
-                }, null);
-            }
+        phone = edtPhone.getText().toString();
+        if (isLoginWithPhone && !TextUtils.isEmpty(phone)) {
+
+            String message = getString(R.string.msg_forgot_password_confirm);
+            DialogUtils.showConfirmDialog(this, phone, message,
+                    getString(R.string.Confirm), getString(R.string.cancel),
+                    new ConfirmDialogFragment.OnConfirmListener() {
+                        @Override
+                        public void onConfirm(RetainedDialogFragment fragment) {
+                            fragment.dismiss();
+                            presenter.sendVerifyCodeForgotPasswordWithPhone(phone);
+                        }
+                    }, null);
+
+        } else {
+            navigateToForgotPasswordWithEmail();
         }
+    }
+
+    private void navigateToForgotPasswordWithEmail() {
+        Intent intent = new Intent(this, ForgotPasswordActivity.class);
+        email = edtEmail.getText().toString();
+        if (TextUtils.isEmpty(email)) {
+            intent.putExtra(ForgotPasswordActivity.EXTRA_EMAIL, email);
+        }
+
+        startActivity(intent);
     }
 
     @Override
@@ -145,16 +159,8 @@ public class LogInActivity extends BaseActivity implements LoginMvp.LogInView {
             if (!TextUtils.isEmpty(phone)) {
                 intent.putExtra(ForgotPasswordActivity.EXTRA_PHONE, phone);
             }
-
-        } else {
-
-            email = edtEmail.getText().toString();
-            if (TextUtils.isEmpty(email)) {
-                intent.putExtra(ForgotPasswordActivity.EXTRA_EMAIL, email);
-            }
+            startActivity(intent);
         }
-
-        startActivity(intent);
     }
 
     @Override

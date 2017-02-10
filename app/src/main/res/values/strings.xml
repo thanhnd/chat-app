@@ -141,5 +141,7 @@
     <string name="hint_password"><i><small>Password</small></i></string>
     <string name="hint_confirm_password"><i><small>Confirm password</small></i></string>
     <string name="update_new_password">Please update a new password for your account</string>
+    <string name="cancel">Cancel</string>
+    <string name="Confirm">Confirm</string>
 
 </resources>

@@ -32,6 +32,6 @@ public interface LoginMvp {
     interface LogInPresenter {
         void login(LogInRequest request);
 
-        void onConfirmPhoneNumber(String phone);
+        void sendVerifyCodeForgotPasswordWithPhone(String phone);
     }
 }
