@@ -33,7 +33,7 @@ public abstract class BaseApiCallback<T extends ResponseModel> implements ApiCal
         }
         T responseModel = response.body();
         if (response.isSuccessful() && responseModel != null) {
-            if (responseModel.getResponseCd() == RegisterModel.RESPONSE_CD_SUCCESS) {
+            if (responseModel.getResponseCd() != RegisterModel.RESPONSE_CD_ERROR) {
 
                 onSuccess(responseModel);
                 return;
@@ -64,7 +64,7 @@ public abstract class BaseApiCallback<T extends ResponseModel> implements ApiCal
 
     @Override
     public final void onFailure(Call<T> call, Throwable t) {
-        if (view != null) {
+        if (view.get() != null) {
             view.get().hideProgress();
             view.get().showErrorDialog();
         }
@@ -72,7 +72,7 @@ public abstract class BaseApiCallback<T extends ResponseModel> implements ApiCal
 
     @Override
     public final void onTokenExpired() {
-        if (view != null) {
+        if (view.get() != null) {
             view.get().hideProgress();
             view.get().onTokenExpired();
         }
@@ -80,7 +80,7 @@ public abstract class BaseApiCallback<T extends ResponseModel> implements ApiCal
 
     @Override
     public void onRequiredAuthorization() {
-        if (view != null) {
+        if (view.get() != null) {
             view.get().hideProgress();
             view.get().onRequiredLogin();
         }

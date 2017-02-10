@@ -213,7 +213,7 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
                         .into(ivAvatar);
             }
 
-            edtDisplayName.setText(userModel.getDisplayNameStr());
+            edtDisplayName.setText(userModel.getDisplayName());
             Date date = new Date(userModel.getBirthday());
             tvDob.setText(DateUtils.displayDate(date));
             tvHeightAndWeight.setText(String.format("%s / %s", userModel.getHeight(), userModel.getWeight()));
