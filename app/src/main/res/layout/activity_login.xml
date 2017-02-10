@@ -126,7 +126,7 @@
 
             <Button
                 android:id="@+id/btn_login"
-                style="@style/Button.Submit"
+                style="@style/App_Button.Submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="22dp"

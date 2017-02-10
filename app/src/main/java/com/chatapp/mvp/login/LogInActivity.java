@@ -15,6 +15,7 @@ import com.chatapp.mvp.register.RegisterActivity;
 import com.chatapp.mvp.updatebasicprofile.UpdateBasicProfileActivity;
 import com.chatapp.mvp.verify.VerifyActivity;
 import com.chatapp.service.models.request.LogInRequest;
+import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.DialogUtils;
 import com.chatapp.views.fragments.ConfirmDialogFragment;
 import com.chatapp.views.fragments.RetainedDialogFragment;
@@ -118,8 +119,10 @@ public class LogInActivity extends BaseActivity implements LoginMvp.LogInView {
     public void onNotVerify() {
         Intent intent = new Intent(this, VerifyActivity.class);
         if (isLoginWithPhone) {
+            AccountUtils.setPhone(phone);
             intent.putExtra(VerifyActivity.EXTRA_PHONE, phone);
         } else {
+            AccountUtils.setPhone(email);
             intent.putExtra(VerifyActivity.EXTRA_EMAIL, email);
         }
         startActivity(intent);

@@ -43,21 +43,34 @@ public class VerifyActivity extends BaseActivity implements VerifyMvp.VerifyView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_verify_email);
+        setContentView(R.layout.activity_verify);
         ButterKnife.bind(this);
         present = new VerifyPresentImpl(this);
         Intent intent = getIntent();
         email = intent.getStringExtra(EXTRA_EMAIL);
         phone = intent.getStringExtra(EXTRA_PHONE);
+
+        if (TextUtils.isEmpty(email)) {
+            email = AccountUtils.getEmail();
+        }
+
+        if (TextUtils.isEmpty(phone)) {
+            phone = AccountUtils.getPhone();
+        }
+
         if (!TextUtils.isEmpty(email)) {
+
             tvEmail.setText(email);
             vVerifyEmail.setVisibility(View.VISIBLE);
             vVerifyPhone.setVisibility(View.GONE);
+
         } else if (!TextUtils.isEmpty(phone)) {
+
             tvSentCodeToPhone.setText(getString(R.string.msg_sent_verify_phone_code,
                     AccountUtils.getHiddenPhone(phone)));
             vVerifyEmail.setVisibility(View.GONE);
             vVerifyPhone.setVisibility(View.VISIBLE);
+
         } else {
             AccountUtils.logOut();
             finish();

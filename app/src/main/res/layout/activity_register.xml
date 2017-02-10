@@ -130,7 +130,7 @@
 
             <Button
                 android:id="@+id/btn_submit"
-                style="@style/Button.Submit"
+                style="@style/App_Button.Submit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/register_by_email_create_account"

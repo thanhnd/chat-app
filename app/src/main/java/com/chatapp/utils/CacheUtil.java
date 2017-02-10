@@ -3,6 +3,7 @@ package com.chatapp.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.chatapp.MyApplication;
 import com.chatapp.service.models.response.ListParamsModel;
 import com.chatapp.service.models.response.ParamModel;
 
@@ -16,7 +17,7 @@ public class CacheUtil {
     public static final String PREFS_NAME = "chat_app";
     private static ListParamsModel listParamsModel;
 
-    public static SharedPreferences getSharedPreferences(Context context) {
+    private static SharedPreferences getSharedPreferences(Context context) {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
     }
 
@@ -32,7 +33,7 @@ public class CacheUtil {
         }
 
         for (ParamModel paramModel: paramModels) {
-            if (paramModel.equals(key)) {
+            if (paramModel.getId() == key) {
                 return paramModel;
             }
         }
@@ -40,8 +41,20 @@ public class CacheUtil {
         return null;
     }
 
-
     public static ListParamsModel getListParamsModel() {
         return listParamsModel;
+    }
+
+    public static void save(String key, String value) {
+        getSharedPreferences(MyApplication.getInstance())
+                .edit().putString(key, value).apply();
+    }
+
+    public static String get(String key) {
+        return getSharedPreferences(MyApplication.getInstance()).getString(key, "");
+    }
+
+    public static void remove(String key) {
+        getSharedPreferences(MyApplication.getInstance()).edit().remove(key).apply();
     }
 }

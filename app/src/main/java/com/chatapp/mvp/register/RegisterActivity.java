@@ -16,6 +16,7 @@ import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.request.RegisterRequest;
 import com.chatapp.service.models.response.CountryModel;
 import com.chatapp.service.models.response.LogInModel;
+import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.DialogUtils;
 
 import java.util.Locale;
@@ -123,8 +124,10 @@ public class RegisterActivity extends BaseActivity implements RegisterMvp.Regist
     public void onLoginSuccess(LogInModel logInModel) {
         Intent intent = new Intent(this, VerifyActivity.class);
         if (isRegisterByEmail) {
+            AccountUtils.setEmail(email);
             intent.putExtra(VerifyActivity.EXTRA_EMAIL, email);
         } else {
+            AccountUtils.setPhone(phone);
             intent.putExtra(VerifyActivity.EXTRA_PHONE, phone);
         }
         startActivity(intent);

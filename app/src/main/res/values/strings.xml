@@ -45,10 +45,10 @@
 
 
     <!--    Verify by email    -->
-    <string name="verify_email_code_label">VERIFICATION CODE</string>
-    <string name="verify_email_code_hint">Input the verification code</string>
+    <string name="verify_email_code_label">INPUT THE VERIFICATION CODE</string>
+    <string name="verify_email_code_hint"><i><small>Verification code</small></i></string>
     <string name="verify_email_submit">OK</string>
-    <string name="request_send_code"><u>Resend code?</u></string>
+    <string name="resend_activation_code">Resend Activation Code</string>
 
     <!--    Verify by phone    -->
     <string name="verify_phone_code_label">VERIFICATION CODE</string>

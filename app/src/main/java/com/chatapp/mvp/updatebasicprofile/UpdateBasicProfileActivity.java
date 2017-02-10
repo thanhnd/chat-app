@@ -180,13 +180,6 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
     }
 
     @Override
-    public void onBackPressed() {
-        AccountUtils.logOut();
-
-        super.onBackPressed();
-    }
-
-    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {

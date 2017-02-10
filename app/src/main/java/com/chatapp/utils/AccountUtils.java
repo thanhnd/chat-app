@@ -1,13 +1,11 @@
 package com.chatapp.utils;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
-import com.chatapp.MyApplication;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.MyProfileModel;
-
-import static com.chatapp.utils.CacheUtil.getSharedPreferences;
 
 
 /**
@@ -16,12 +14,17 @@ import static com.chatapp.utils.CacheUtil.getSharedPreferences;
 
 public class AccountUtils {
     private static final String SIGN_IN_MODEL = "sign_in_model";
+    private static final String EMAIL = "email";
+    private static final String PHONE = "phone";
 
     static private volatile LogInModel logInModel;
     private static MyProfileModel myProfileModel;
 
     static private Double longitude;
     static private Double latitude;
+
+    private static String phone;
+    private static String email;
 
     public static LogInModel getLogInModel() {
         if (logInModel == null) {
@@ -36,12 +39,12 @@ public class AccountUtils {
 
     public static void setLogInModel(LogInModel loginInfo) {
         AccountUtils.logInModel = loginInfo;
-        cacheSignInModel(loginInfo);
+        cacheLogInModel(loginInfo);
     }
 
     public static void setAccountStatus(int status) {
         logInModel.setIsActive(status);
-        cacheSignInModel(logInModel);
+        cacheLogInModel(logInModel);
     }
 
     public static boolean isLoggedIn() {
@@ -50,19 +53,16 @@ public class AccountUtils {
 
     public static void logOut() {
         logInModel = null;
-        getSharedPreferences(MyApplication.getInstance()).edit()
-                .putString(SIGN_IN_MODEL, "").apply();
+        CacheUtil.remove(SIGN_IN_MODEL);
     }
 
-    private static void cacheSignInModel(@NonNull LogInModel loginInfo) {
-        getSharedPreferences(MyApplication.getInstance()).edit()
-                .putString(SIGN_IN_MODEL, ParserUtil.toJson(loginInfo, LogInModel.class)).apply();
+    private static void cacheLogInModel(@NonNull LogInModel loginInfo) {
+        CacheUtil.save(SIGN_IN_MODEL, ParserUtil.toJson(loginInfo, LogInModel.class));
     }
-
 
     private static LogInModel getCacheSignInModel() {
-        String str = getSharedPreferences(MyApplication.getInstance())
-                .getString(SIGN_IN_MODEL, "");
+
+        String str = CacheUtil.get(SIGN_IN_MODEL);
         return ParserUtil.fromJson(str, LogInModel.class);
     }
 
@@ -114,5 +114,31 @@ public class AccountUtils {
             throw new RequireLoginException();
         }
         return logInModel.getToken();
+    }
+
+    public static String getPhone() {
+        if (TextUtils.isEmpty(phone)) {
+            phone = CacheUtil.get(PHONE);
+        }
+
+        return phone;
+    }
+
+    public static void setPhone(String phone) {
+        AccountUtils.phone = phone;
+        CacheUtil.save(PHONE, phone);
+    }
+
+    public static String getEmail() {
+        if (TextUtils.isEmpty(email)) {
+            email = CacheUtil.get(EMAIL);
+        }
+
+        return email;
+    }
+
+    public static void setEmail(String email) {
+        AccountUtils.email = email;
+        CacheUtil.save(EMAIL, email);
     }
 }

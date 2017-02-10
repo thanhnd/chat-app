@@ -10,12 +10,13 @@
     <color name="semi_white">#77ffffff</color>
     <color name="gray">#b2b2b2</color>
     <color name="black">#0c0c0d</color>
-    <color name="navy">#56ccd6</color>
+    <color name="navy">#00cccc</color>
     <color name="body">#7e6d4a</color>
     <color name="dark_purge">#663366</color>
     <color name="light_purge">#C97AB1</color>
     <color name="purge">#8F2E72</color>
     <color name="edit_text_color">@color/light_purge</color>
     <color name="edit_text_hint_color">@color/light_purge</color>
+    <color name="title">#333366</color>
 
 </resources>
