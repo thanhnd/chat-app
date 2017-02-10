@@ -107,7 +107,7 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
                         .into(ivAvatar);
             }
 
-            collapsingToolbarLayout.setTitle(userModel.getDisplayName());
+            collapsingToolbarLayout.setTitle(userModel.getDisplayNameStr());
             tvAge.setText(String.valueOf(userModel.getAge()));
             tvHeightAndWeight.setText(String.format("%s / %s", userModel.getHeight(), userModel.getWeight()));
 

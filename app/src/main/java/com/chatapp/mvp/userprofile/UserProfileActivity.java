@@ -144,9 +144,8 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
                     .placeholder(R.drawable.london_flat)
                     .into(ivAvatar);
         }
-        if (!TextUtils.isEmpty(userProfileModel.getDisplayName())) {
-            collapsingToolbarLayout.setTitle(userProfileModel.getDisplayName());
-        }
+
+        collapsingToolbarLayout.setTitle(userProfileModel.getDisplayNameStr());
 
         if (userProfileModel.getAge() > 0) {
             UserProfilePropertyView view = new UserProfilePropertyView(this);

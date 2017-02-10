@@ -73,6 +73,10 @@ public class UserProfileModel {
         return displayName;
     }
 
+    public String getDisplayNameStr() {
+        return  TextUtils.isEmpty(displayName) ? "No name" : displayName;
+    }
+
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }

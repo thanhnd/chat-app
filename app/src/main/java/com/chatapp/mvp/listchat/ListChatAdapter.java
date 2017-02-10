@@ -59,7 +59,7 @@ public class ListChatAdapter extends RecyclerView.Adapter<ListChatAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         UserModel userModel = mDataset.get(position);
-        String name = TextUtils.isEmpty(userModel.getDisplayName()) ? "No name" : userModel.getDisplayName();
+        String name = userModel.getDisplayNameStr();
         holder.tvName.setText(name);
         holder.tvOnlineStatus.setText(userModel.getOnlineStatus());
         holder.tvOnlineStatus.setEnabled(userModel.isOnline());

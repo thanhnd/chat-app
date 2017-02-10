@@ -1,5 +1,7 @@
 package com.chatapp.service.models.response;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -52,8 +54,12 @@ public class UserModel implements Serializable {
         this.userId = userId;
     }
 
-    public String getDisplayName() {
+    private String getDisplayName() {
         return displayName;
+    }
+
+    public String getDisplayNameStr() {
+        return  TextUtils.isEmpty(displayName) ? "No name" : displayName;
     }
 
     public void setDisplayName(String displayName) {

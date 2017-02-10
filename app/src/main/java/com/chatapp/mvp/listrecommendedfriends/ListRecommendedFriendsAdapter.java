@@ -100,7 +100,7 @@ public class ListRecommendedFriendsAdapter extends BaseListUserAdapter<ListRecom
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final UserModel userModel = mDataset.get(position);
-        String name = TextUtils.isEmpty(userModel.getDisplayName()) ? "No name" : userModel.getDisplayName();
+        String name = userModel.getDisplayNameStr();
         holder.tvName.setText(name);
         holder.tvOnlineStatus.setText(userModel.getOnlineStatus());
         holder.tvOnlineStatus.setEnabled(userModel.isOnline());

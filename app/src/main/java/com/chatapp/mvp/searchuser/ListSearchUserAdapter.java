@@ -56,14 +56,16 @@ public class ListSearchUserAdapter extends RecyclerView.Adapter<ListSearchUserAd
     @Override
     public void onBindViewHolder(ListSearchUserAdapter.ViewHolder holder, int position) {
         UserModel userModel = users.get(position);
-        String name = TextUtils.isEmpty(userModel.getDisplayName()) ? "No name" : userModel.getDisplayName();
+        String name = userModel.getDisplayNameStr();
         holder.tvName.setText(name);
-        holder.tvOnlineStatus.setText(userModel.isOnline() ? "Online" : "Offline");
+        holder.tvOnlineStatus.setText(userModel.getOnlineStatus());
         holder.tvOnlineStatus.setEnabled(userModel.isOnline());
 
         if (!TextUtils.isEmpty(userModel.getAvatar())) {
             Picasso.with(context)
                     .load(userModel.getAvatar())
+                    .fit()
+                    .centerCrop()
                     .error(R.drawable.img_user_avatar)
                     .placeholder(R.drawable.img_user_avatar)
                     .transform(new CircleTransform())

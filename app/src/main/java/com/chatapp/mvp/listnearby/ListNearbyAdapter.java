@@ -88,8 +88,7 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
         if (getItemViewType(position) == ITEM_VIEW_TYPE_MY_PROFILE) {
 
             MyProfileViewHolder myProfileViewHolder = (MyProfileViewHolder)holder;
-            String name = TextUtils.isEmpty(myProfile.getDisplayName()) ?
-                    "No name" : myProfile.getDisplayName();
+            String name = myProfile.getDisplayNameStr();
             myProfileViewHolder.tvName.setText(name);
 
             if (!TextUtils.isEmpty(myProfile.getAvatar())) {
@@ -118,7 +117,7 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
             final UserModel userModel = (UserModel) mDataset.get(
                     getItemViewType(position) == ITEM_VIEW_TYPE_OTHER_PROFILE ? position - 1 : position);
 
-            String name = TextUtils.isEmpty(userModel.getDisplayName()) ? "No name" : userModel.getDisplayName();
+            String name = userModel.getDisplayNameStr();
             otherUserViewHolder.tvName.setText(name);
             otherUserViewHolder.tvDistance.setText(String.format(Locale.getDefault(), "%d feet away", userModel.getFeetAway()));
 

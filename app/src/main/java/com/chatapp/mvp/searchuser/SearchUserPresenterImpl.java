@@ -24,15 +24,10 @@ public class SearchUserPresenterImpl implements SearchUserMvp.Presenter {
         if (view.get() != null) {
             view.get().showProgress();
         }
-        interactor.searchUser(keyword, new BaseApiCallback<ResponseModel<List<UserModel>>>() {
+        interactor.searchUser(keyword, new BaseApiCallback<ResponseModel<List<UserModel>>>(view.get()) {
             @Override
             public void onSuccess(ResponseModel<List<UserModel>> responseModel) {
-                if (view.get() != null) {
-                    view.get().hideProgress();
-                    if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_SUCCESS) {
-                        view.get().onSearchSuccess(responseModel.getResultSet());
-                    }
-                }
+                view.get().onSearchSuccess(responseModel.getResultSet());
             }
         });
 
