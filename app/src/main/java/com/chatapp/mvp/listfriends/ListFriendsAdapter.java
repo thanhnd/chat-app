@@ -58,14 +58,17 @@ public class ListFriendsAdapter extends BaseListUserAdapter<ListFriendsAdapter.V
         holder.tvName.setText(name);
         holder.tvOnlineStatus.setText(userModel.getOnlineStatus());
         holder.tvOnlineStatus.setEnabled(userModel.isOnline());
-        Picasso.with(context)
-                .load(userModel.getAvatar())
-                .centerCrop()
-                .resize(imgDiameter, imgDiameter)
-                .error(R.drawable.img_user_avatar)
-                .placeholder(R.drawable.img_user_avatar)
-                .transform(new CircleTransform())
-                .into(holder.ivAvatar);
+        if (!TextUtils.isEmpty(userModel.getAvatar())) {
+            Picasso.with(context)
+                    .load(userModel.getAvatar())
+                    .centerCrop()
+                    .resize(imgDiameter, imgDiameter)
+                    .error(R.drawable.img_user_avatar)
+                    .placeholder(R.drawable.img_user_avatar)
+                    .transform(new CircleTransform())
+                    .into(holder.ivAvatar);
+        }
+
         holder.vItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

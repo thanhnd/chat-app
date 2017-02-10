@@ -60,12 +60,16 @@ public class ListSearchUserAdapter extends RecyclerView.Adapter<ListSearchUserAd
         holder.tvName.setText(name);
         holder.tvOnlineStatus.setText(userModel.isOnline() ? "Online" : "Offline");
         holder.tvOnlineStatus.setEnabled(userModel.isOnline());
-        Picasso.with(context)
-                .load(userModel.getAvatar())
-                .error(R.drawable.img_user_avatar)
-                .placeholder(R.drawable.img_user_avatar)
-                .transform(new CircleTransform())
-                .into(holder.ivAvatar);
+
+        if (!TextUtils.isEmpty(userModel.getAvatar())) {
+            Picasso.with(context)
+                    .load(userModel.getAvatar())
+                    .error(R.drawable.img_user_avatar)
+                    .placeholder(R.drawable.img_user_avatar)
+                    .transform(new CircleTransform())
+                    .into(holder.ivAvatar);
+        }
+
 
     }
 

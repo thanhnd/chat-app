@@ -61,14 +61,17 @@ public class ListChatAdapter extends RecyclerView.Adapter<ListChatAdapter.ViewHo
         UserModel userModel = mDataset.get(position);
         String name = TextUtils.isEmpty(userModel.getDisplayName()) ? "No name" : userModel.getDisplayName();
         holder.tvName.setText(name);
-        holder.tvOnlineStatus.setText(userModel.isOnline() ? "Online" : "Offline");
+        holder.tvOnlineStatus.setText(userModel.getOnlineStatus());
         holder.tvOnlineStatus.setEnabled(userModel.isOnline());
-        Picasso.with(context)
-                .load(userModel.getAvatar())
-                .error(R.drawable.img_user_avatar)
-                .placeholder(R.drawable.img_user_avatar)
-                .transform(new CircleTransform())
-                .into(holder.ivAvatar);
+        if (!TextUtils.isEmpty(userModel.getAvatar())) {
+            Picasso.with(context)
+                    .load(userModel.getAvatar())
+                    .error(R.drawable.img_user_avatar)
+                    .placeholder(R.drawable.img_user_avatar)
+                    .transform(new CircleTransform())
+                    .into(holder.ivAvatar);
+        }
+
 
     }
 
