@@ -80,7 +80,7 @@
 
                 <TextView
                     android:id="@+id/tv_age"
-                    style="@style/App_EditTextStyle"
+                    style="@style/App_EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="20" />
@@ -103,7 +103,7 @@
 
                 <TextView
                     android:id="@+id/tv_height_and_weight"
-                    style="@style/App_EditTextStyle"
+                    style="@style/App_EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="173 / 61" />
@@ -206,7 +206,7 @@
 
                 <EditText
                     android:id="@+id/edt_city"
-                    style="@style/App_EditTextStyle"
+                    style="@style/App_EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_input_your_city"
@@ -229,7 +229,7 @@
 
                 <EditText
                     android:id="@+id/edt_state_province"
-                    style="@style/App_EditTextStyle"
+                    style="@style/App_EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_input_your_city_province"
@@ -252,7 +252,7 @@
 
                 <EditText
                     android:id="@+id/edt_country_region"
-                    style="@style/App_EditTextStyle"
+                    style="@style/App_EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="USA" />

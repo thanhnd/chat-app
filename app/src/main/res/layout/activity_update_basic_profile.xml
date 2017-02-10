@@ -96,7 +96,7 @@
                             android:layout_height="wrap_content"
                             android:background="@null"
                             android:duplicateParentState="true"
-                            style="@style/App_EditTextStyle"
+                            style="@style/App_EditText"
                             android:hint="@string/profile_day_of_birth_hint"
                             tools:text="11 Nov 1999" />
                     </LinearLayout>
@@ -122,7 +122,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/profile_unit_system_label" />
+                    android:text="@string/unit_system" />
 
                 <RadioGroup
                     android:id="@+id/rg_unit_type"
@@ -182,7 +182,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        style="@style/App_EditTextStyle"
+                        style="@style/App_EditText"
                         android:hint="@string/profile_height_and_weight_hint"
                         tools:text="173 ft/ 61 lb" />
 

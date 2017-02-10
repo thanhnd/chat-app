@@ -8,12 +8,15 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.setting.SettingActivity;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.mvp.updateprofile.UpdateProfileActivity;
 import com.chatapp.service.models.response.MyProfileModel;
@@ -152,5 +155,29 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
     @Override
     public void onGetMyProfileSuccess(MyProfileModel resultSet) {
         displayMyProfileInfo();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_my_profile, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.action_setting:
+                onClickSetting();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void onClickSetting() {
+        Intent intent = new Intent(this, SettingActivity.class);
+        startActivity(intent);
     }
 }

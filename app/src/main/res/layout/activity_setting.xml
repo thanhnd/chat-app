@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                style="@style/App_Button.Setting"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/show_distance" />
+
+        </LinearLayout>
+
+        <include layout="@layout/layout_horizontal_divider_white" />
+
+        <Button
+            style="@style/App_Button.Setting.Navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/blocked_list" />
+
+        <include layout="@layout/layout_horizontal_divider_white" />
+
+        <Button
+            style="@style/App_Button.Setting.Navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/blocked_list" />
+
+        <include layout="@layout/layout_horizontal_divider_white" />
+
+        <Button
+            style="@style/App_Button.Setting.Navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/change_password" />
+
+        <include layout="@layout/layout_horizontal_divider_white" />
+
+        <Button
+            style="@style/App_Button.Setting.Navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_profile" />
+
+        <include layout="@layout/layout_horizontal_divider_white" />
+
+        <Button
+            style="@style/App_Button.Setting.Navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about" />
+
+        <include layout="@layout/layout_horizontal_divider_white" />
+
+        <Button
+            style="@style/App_Button.Setting.Navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/terms_of_use" />
+
+        <include layout="@layout/layout_horizontal_divider_white" />
+
+        <Button
+            style="@style/App_Button.Setting.Navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/privacy_policy" />
+
+        <include layout="@layout/layout_horizontal_divider_white" />
+
+        <Button
+            android:id="@+id/btn_log_out"
+            style="@style/App_Button.Setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/log_out"
+            android:textSize="18sp" />
+
+        <include layout="@layout/layout_horizontal_divider_white" />
+
+
+    </LinearLayout>
+
+</ScrollView>

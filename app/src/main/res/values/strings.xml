@@ -77,7 +77,7 @@
     <string name="profile_day_of_birth_hint">Input your date of birth</string>
     <string name="profile_height_and_weight_label">HEIGHT AND WEIGHT</string>
     <string name="profile_height_and_weight_hint">Input your height and weight</string>
-    <string name="profile_unit_system_label">UNIT SYSTEM</string>
+    <string name="unit_system">UNIT SYSTEM</string>
     <string name="update_profile_btn_complete">Complete</string>
     <string name="update_profile_unit_type_type_cm_kg">cm/kg</string>
     <string name="update_profile_unit_type_ft_lb">ft/lb</string>
@@ -125,5 +125,13 @@
     <string name="delete">Delete</string>
     <string name="menu_cancel">Cancel</string>
     <string name="msg_forgot_password_confirm">We will send a verification code by SMS to the phone number. Please make sure that your phone number is correct.</string>
+    <string name="show_distance">Show distance</string>
+    <string name="blocked_list">Blocked List</string>
+    <string name="change_password">Change password</string>
+    <string name="delete_profile">Delete profile</string>
+    <string name="about">about</string>
+    <string name="terms_of_use">Terms of user</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="log_out">log out</string>
 
 </resources>
