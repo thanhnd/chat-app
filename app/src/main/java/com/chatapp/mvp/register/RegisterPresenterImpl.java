@@ -27,13 +27,10 @@ public class RegisterPresenterImpl implements RegisterMvp.RegisterPresent {
         if (view.get() != null) {
             view.get().showProgress();
         }
-        interactor.register(request, new BaseApiCallback<ResponseModel<RegisterModel>>() {
+        interactor.register(request, new BaseApiCallback<ResponseModel<RegisterModel>>(view.get()) {
             @Override
             public void onSuccess(ResponseModel<RegisterModel> response) {
-                if (view.get() != null) {
-                    view.get().hideProgress();
-                    view.get().onRegisterSuccess();
-                }
+                view.get().onRegisterSuccess();
             }
         });
     }
@@ -44,14 +41,11 @@ public class RegisterPresenterImpl implements RegisterMvp.RegisterPresent {
             view.get().showProgress();
         }
 
-        interactor.login(request, new BaseApiCallback<ResponseModel<LogInModel>>() {
+        interactor.login(request, new BaseApiCallback<ResponseModel<LogInModel>>(view.get()) {
             @Override
             public void onSuccess(ResponseModel<LogInModel> responseModel) {
-                if (view.get() != null) {
-                    view.get().hideProgress();
-                    AccountUtils.setLogInModel(responseModel.getResultSet());
-                    view.get().onLoginSuccess(responseModel.getResultSet());
-                }
+                AccountUtils.setLogInModel(responseModel.getResultSet());
+                view.get().onLoginSuccess(responseModel.getResultSet());
             }
         });
     }
