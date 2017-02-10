@@ -24,6 +24,4 @@ public interface SearchUserMvp {
     interface View extends BaseView {
         void onSearchSuccess(List<UserModel> resultSet);
     }
-
-
 }

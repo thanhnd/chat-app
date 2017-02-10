@@ -58,7 +58,7 @@ public class SearchActivity extends BaseActivity implements SearchUserMvp.View {
                 boolean handled = false;
                 if (i == EditorInfo.IME_ACTION_SEARCH
                         || i == EditorInfo.IME_ACTION_DONE) {
-                    onNextClick();
+                    onSearchClick();
                     handled = true;
                 }
                 return handled;
@@ -66,7 +66,7 @@ public class SearchActivity extends BaseActivity implements SearchUserMvp.View {
         });
     }
 
-    private void onNextClick() {
+    private void onSearchClick() {
         String keyword = edtKeyword.getText().toString();
         if (!TextUtils.isEmpty(keyword)) {
             try {
@@ -79,7 +79,7 @@ public class SearchActivity extends BaseActivity implements SearchUserMvp.View {
 
     @Override
     public void onSearchSuccess(List<UserModel> resultSet) {
-        if (resultSet != null && !resultSet.isEmpty()) {
+        if (resultSet != null) {
             adapter.setUsers(resultSet);
         }
 

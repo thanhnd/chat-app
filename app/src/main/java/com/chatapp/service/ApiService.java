@@ -78,8 +78,8 @@ public interface ApiService {
     Call<ResponseModel<List<UserModel>>> listFriends(@Header("Authorization") String authorization);
 
     @Headers("Content-Type: application/json")
-    @GET("/api/profile/listFavourite")
-    Call<ResponseModel<List<UserModel>>> search(@Header("Authorization") String authorization);
+    @POST("/api/profile/search")
+    Call<ResponseModel<List<UserModel>>> search(@Header("Authorization") String authorization, @Body Map<String, String> request);
 
     @Headers("Content-Type: application/json")
     @POST("/api/profile/myProfile")
