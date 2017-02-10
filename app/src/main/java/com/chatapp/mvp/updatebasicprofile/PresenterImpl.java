@@ -48,7 +48,7 @@ public class PresenterImpl implements UpdateBasicProfileMvp.ProfilePresenter {
             @Override
             public void onSuccess(ResponseModel<Object> response) {
 
-                AccountUtils.setAccountStatus(LogInModel.VERIFIED);
+                AccountUtils.setAccountStatus(LogInModel.CONFIRM);
 
                 if (view.get() != null) {
                     view.get().hideProgress();

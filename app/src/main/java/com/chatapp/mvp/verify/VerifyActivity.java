@@ -111,4 +111,14 @@ public class VerifyActivity extends BaseActivity implements VerifyMvp.VerifyView
             onRequiredLogin();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        if (getCallingActivity() == null) {
+            logOut();
+            return;
+        }
+
+        super.onBackPressed();
+    }
 }

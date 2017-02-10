@@ -3,9 +3,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimary">@color/purge</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="android:textColorSecondary">@android:color/white</item>
         <item name="colorAccent">@color/title</item>
         <item name="editTextStyle">@style/App_EditText</item>
         <item name="imageButtonStyle">@style/App_ImageButton</item>
@@ -115,8 +114,7 @@
     <style name="App_ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar">
         <item name="titleTextStyle">@style/ActionBarTitleText</item>
         <item name="background">@color/white</item>
-        <item name="actionOverflowButtonStyle">@style/ActionBarButton</item>
-
+        <item name="android:textColorSecondary">@color/title</item>
     </style>
 
     <style name="ActionBarTitleText" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
@@ -124,7 +122,5 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="ActionBarButton" parent="@style/Widget.AppCompat.Light.ActionButton.Overflow">
-    </style>
 
 </resources>
