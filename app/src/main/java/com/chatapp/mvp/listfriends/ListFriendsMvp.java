@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface ListFriendsMvp {
 
-    interface Present {
+    interface Presenter {
         void getListFriends() throws RequireLoginException;
     }
 

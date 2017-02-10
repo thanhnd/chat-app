@@ -55,7 +55,7 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
     @Bind(R.id.bottomBar)
     BottomBar bottomBar;
 
-    HomeMvp.Present present;
+    HomeMvp.Presenter presenter;
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -68,7 +68,7 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
 
         ButterKnife.bind(this);
 
-        present = new PresentImpl(this);
+        presenter = new PresenterImpl(this);
         locationChangeObservableList = new ArrayList<>();
 
         // Init toolbar
@@ -211,7 +211,7 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
             Log.d("Latitude:" + mLastLocation.getLatitude() + ", Longitude:" + mLastLocation.getLongitude());
 
             try {
-                present.updateLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+                presenter.updateLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude());
             } catch (RequireLoginException e) {
                 onRequiredLogin();
             }

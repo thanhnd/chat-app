@@ -17,13 +17,13 @@ import java.util.List;
  * Created by thanhnguyen on 1/6/17.
  */
 
-public class PresentImpl implements ListNearbyMvp.Present {
+public class PresenterImpl implements ListNearbyMvp.Presenter {
 
     private WeakReference<ListNearbyMvp.View> view;
     private ListNearbyMvp.Interactor interactor;
     private GeneralInteractor generalInteractor;
 
-    public PresentImpl(ListNearbyMvp.View view) {
+    public PresenterImpl(ListNearbyMvp.View view) {
 
         this.view = new WeakReference<>(view);
         this.interactor = new InteractorImpl();

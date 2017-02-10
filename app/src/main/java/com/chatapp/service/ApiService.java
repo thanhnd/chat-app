@@ -5,7 +5,6 @@ import com.chatapp.service.models.request.ListNearbyRequest;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.request.RegisterRequest;
 import com.chatapp.service.models.request.UserRequest;
-import com.chatapp.service.models.request.VerifyEmailRequest;
 import com.chatapp.service.models.response.CountryModel;
 import com.chatapp.service.models.response.ListParamsModel;
 import com.chatapp.service.models.response.LogInModel;
@@ -36,10 +35,6 @@ import retrofit2.http.Path;
  */
 
 public interface ApiService {
-//    Retrofit retrofit = new Retrofit.Builder()
-//            .baseUrl(Config.BASE_URL)
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build();
 
     @Headers("Content-Type: application/json")
     @POST("/api/user/login")
@@ -51,7 +46,7 @@ public interface ApiService {
 
     @Headers("Content-Type: application/json")
     @POST("/api/user/verifyCode")
-    Call<ResponseModel<VerifyModel>> verifyCode(@Header("Authorization") String authorization, @Body VerifyEmailRequest request);
+    Call<ResponseModel<VerifyModel>> verifyCode(@Header("Authorization") String authorization, @Body Map<String, String> request);
 
     @Headers("Content-Type: application/json")
     @POST("/api/profile/updateBasic")
@@ -132,6 +127,14 @@ public interface ApiService {
     Call<ResponseModel<Object>> deleteRecommend(@Header("Authorization") String authorization, @Body List<Map<String,String>> list);
 
     @Headers("Content-Type: application/json")
-    @POST("/api/user/forgotPassword")
+    @POST("/api/user/forgotCodePass")
     Call<ResponseModel<Object>> sendVerifyCodeForgotPassword(@Body Map<String, String> request);
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/user/confirmCodeForgotPass")
+    Call<ResponseModel> confirmCodeForgotPassword(@Body Map<String, String> request);
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/user/changePassword")
+    Call<ResponseModel> changePassword(@Body Map<String, String> request);
 }

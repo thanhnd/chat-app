@@ -10,6 +10,7 @@ import android.widget.RadioGroup;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.forgotpassword.ForgotPasswordActivity;
 import com.chatapp.mvp.home.HomeActivity;
 import com.chatapp.mvp.register.RegisterActivity;
 import com.chatapp.mvp.updatebasicprofile.UpdateBasicProfileActivity;
@@ -138,7 +139,22 @@ public class LogInActivity extends BaseActivity implements LoginMvp.LogInView {
 
     @Override
     public void sendVerifyCodeForgotPasswordWithPhoneSuccess() {
+        Intent intent = new Intent(this, ForgotPasswordActivity.class);
+        if (isLoginWithPhone) {
+            phone = edtPhone.getText().toString().trim();
+            if (!TextUtils.isEmpty(phone)) {
+                intent.putExtra(ForgotPasswordActivity.EXTRA_PHONE, phone);
+            }
 
+        } else {
+
+            email = edtEmail.getText().toString();
+            if (TextUtils.isEmpty(email)) {
+                intent.putExtra(ForgotPasswordActivity.EXTRA_EMAIL, email);
+            }
+        }
+
+        startActivity(intent);
     }
 
     @Override

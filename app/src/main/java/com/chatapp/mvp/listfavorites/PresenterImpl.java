@@ -13,12 +13,12 @@ import java.util.List;
  * Created by thanhnguyen on 1/6/17.
  */
 
-public class PresentImpl implements ListFavoritesMvp.Present {
+public class PresenterImpl implements ListFavoritesMvp.Presenter {
 
     private WeakReference<ListFavoritesMvp.View> view;
     private ListFavoritesMvp.Interactor interactor;
 
-    public PresentImpl(ListFavoritesMvp.View view) {
+    public PresenterImpl(ListFavoritesMvp.View view) {
         this.view = new WeakReference<>(view);
         this.interactor = new InteractorImpl();
 

@@ -12,9 +12,11 @@ import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.updatebasicprofile.UpdateBasicProfileActivity;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
-import com.chatapp.service.models.request.VerifyEmailRequest;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.utils.AccountUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -45,7 +47,9 @@ public class VerifyActivity extends BaseActivity implements VerifyMvp.VerifyView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify);
         ButterKnife.bind(this);
+
         present = new VerifyPresentImpl(this);
+
         Intent intent = getIntent();
         email = intent.getStringExtra(EXTRA_EMAIL);
         phone = intent.getStringExtra(EXTRA_PHONE);
@@ -72,8 +76,7 @@ public class VerifyActivity extends BaseActivity implements VerifyMvp.VerifyView
             vVerifyPhone.setVisibility(View.VISIBLE);
 
         } else {
-            AccountUtils.logOut();
-            finish();
+            logOut();
         }
     }
 
@@ -102,14 +105,17 @@ public class VerifyActivity extends BaseActivity implements VerifyMvp.VerifyView
 
     private void submitVerifyCode() {
         //Submit Verify code
-        String code = edtCode.getText().toString();
-        VerifyEmailRequest request = new VerifyEmailRequest();
-        request.setCode(code);
-        try {
-            present.submitVerifyForm(request);
-        } catch (RequireLoginException e) {
-            onRequiredLogin();
+        String code = edtCode.getText().toString().trim();
+        Map<String, String> request = new HashMap<>();
+        request.put("code", code);
+        if (!TextUtils.isEmpty(code)) {
+            try {
+                present.submitVerifyForm(request);
+            } catch (RequireLoginException e) {
+                onRequiredLogin();
+            }
         }
+
     }
 
     @Override

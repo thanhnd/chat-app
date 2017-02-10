@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface ListFavoritesMvp {
 
-    interface Present {
+    interface Presenter {
         void getListFavorites(boolean isFirstPage) throws RequireLoginException;
     }
 

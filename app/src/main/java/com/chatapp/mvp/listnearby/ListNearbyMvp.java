@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface ListNearbyMvp {
 
-    interface Present {
+    interface Presenter {
         void getListNearBy() throws RequireLoginException;
         void getMyProfile() throws RequireLoginException;
     }

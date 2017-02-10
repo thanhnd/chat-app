@@ -10,12 +10,12 @@ import java.lang.ref.WeakReference;
  * Created by thanhnguyen on 1/6/17.
  */
 
-public class PresentImpl implements HomeMvp.Present {
+public class PresenterImpl implements HomeMvp.Presenter {
 
     private WeakReference<HomeMvp.View> view;
     private HomeMvp.Interactor interactor;
 
-    public PresentImpl(HomeMvp.View view) {
+    public PresenterImpl(HomeMvp.View view) {
         this.view = new WeakReference<>(view);
         this.interactor = new InteractorImpl();
     }

@@ -32,7 +32,7 @@ public class ListFriendsFragment extends BaseFragment implements ListFriendsMvp.
 
     private ListFriendsAdapter adapter;
 
-    private ListFriendsMvp.Present present;
+    private ListFriendsMvp.Presenter presenter;
 
     @Nullable
     @Override
@@ -53,10 +53,10 @@ public class ListFriendsFragment extends BaseFragment implements ListFriendsMvp.
         });
         recyclerView.setAdapter(adapter);
 
-        present = new PresentImpl(this);
+        presenter = new PresenterImpl(this);
 
         try {
-            present.getListFriends();
+            presenter.getListFriends();
         } catch (RequireLoginException e) {
             onRequiredLogin();
         }

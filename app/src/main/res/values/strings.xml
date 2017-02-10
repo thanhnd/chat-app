@@ -133,5 +133,13 @@
     <string name="terms_of_use">Terms of user</string>
     <string name="privacy_policy">Privacy policy</string>
     <string name="log_out">log out</string>
+    <string name="msg_sent_verify_phone_code_change_password">Verify code has been sent to your phone number. It may take a few minutes if the network is busy.</string>
+    <string name="next">Next</string>
+    <string name="update">Update</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="hint_password"><i><small>Password</small></i></string>
+    <string name="hint_confirm_password"><i><small>Confirm password</small></i></string>
+    <string name="update_new_password">Please update a new password for your account</string>
 
 </resources>

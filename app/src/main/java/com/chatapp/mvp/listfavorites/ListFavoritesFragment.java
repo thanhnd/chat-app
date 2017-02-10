@@ -32,7 +32,7 @@ public class ListFavoritesFragment extends BaseFragment implements ListFavorites
 
     private ListFavoritesAdapter adapter;
 
-    private ListFavoritesMvp.Present present;
+    private ListFavoritesMvp.Presenter presenter;
 
     @Nullable
     @Override
@@ -52,7 +52,7 @@ public class ListFavoritesFragment extends BaseFragment implements ListFavorites
             }
         });
         recyclerView.setAdapter(adapter);
-        present = new PresentImpl(this);
+        presenter = new PresenterImpl(this);
 
         return view;
     }
@@ -63,7 +63,7 @@ public class ListFavoritesFragment extends BaseFragment implements ListFavorites
 
         adapter.clearData();
         try {
-            present.getListFavorites(true);
+            presenter.getListFavorites(true);
         } catch (RequireLoginException e) {
             onRequiredLogin();
         }

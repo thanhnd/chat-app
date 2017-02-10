@@ -54,6 +54,7 @@
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <activity android:name=".mvp.listrecommendedfriends.ListRecommendedFriendsActivity" />
         <activity android:name=".mvp.setting.SettingActivity" />
+        <activity android:name=".mvp.forgotpassword.ForgotPasswordActivity" />
     </application>
 
 </manifest>

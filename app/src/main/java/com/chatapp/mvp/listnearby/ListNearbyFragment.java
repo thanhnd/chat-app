@@ -37,7 +37,7 @@ public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.Vi
     RecyclerView recyclerView;
 
     private ListNearbyAdapter adapter;
-    private ListNearbyMvp.Present present;
+    private ListNearbyMvp.Presenter presenter;
 
     @Nullable
     @Override
@@ -65,7 +65,7 @@ public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.Vi
         });
         recyclerView.setAdapter(adapter);
 
-        present = new PresentImpl(this);
+        presenter = new PresenterImpl(this);
 
         return view;
     }
@@ -75,8 +75,8 @@ public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.Vi
         super.onResume();
 
         try {
-            present.getMyProfile();
-            present.getListNearBy();
+            presenter.getMyProfile();
+            presenter.getListNearBy();
         } catch (RequireLoginException e) {
             onRequiredLogin();
         }
@@ -111,7 +111,7 @@ public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.Vi
     public void updateLocation(double lattitude, double longitude) {
 
         try {
-            present.getListNearBy();
+            presenter.getListNearBy();
         } catch (RequireLoginException e) {
             onRequiredLogin();
         }

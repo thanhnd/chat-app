@@ -9,7 +9,7 @@ import com.chatapp.service.models.response.ResponseModel;
  */
 public interface HomeMvp {
 
-    interface Present {
+    interface Presenter {
         void updateLocation(double latitude, double longitude) throws RequireLoginException;
     }
 
