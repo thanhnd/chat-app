@@ -31,14 +31,19 @@ public class LogInActivity extends BaseActivity implements LoginMvp.LogInView {
 
     @Bind(R.id.rg_login_type)
     RadioGroup rgLoginType;
+
     @Bind(R.id.v_input_email)
     View vInputEmail;
+
     @Bind(R.id.v_input_phone)
     View vInputPhone;
+
     @Bind(R.id.edt_phone)
     EditText edtPhone;
+
     @Bind(R.id.edt_email)
     EditText edtEmail;
+
     @Bind(R.id.edt_password)
     EditText edtPassword;
 
@@ -115,7 +120,7 @@ public class LogInActivity extends BaseActivity implements LoginMvp.LogInView {
     private void navigateToForgotPasswordWithEmail() {
         Intent intent = new Intent(this, ForgotPasswordActivity.class);
         email = edtEmail.getText().toString();
-        if (TextUtils.isEmpty(email)) {
+        if (!TextUtils.isEmpty(email)) {
             intent.putExtra(ForgotPasswordActivity.EXTRA_EMAIL, email);
         }
 

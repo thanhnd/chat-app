@@ -38,6 +38,15 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
     @Bind(R.id.v_verify_email)
     View vVerifyEmail;
 
+    @Bind(R.id.v_finish)
+    View vFinish;
+
+    @Bind(R.id.v_enter_email)
+    View vEnterEmail;
+
+    @Bind(R.id.edt_email)
+    EditText edtEmail;
+
     @Bind(R.id.tv_phone)
     TextView tvPhone;
 
@@ -55,6 +64,8 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
     private String phone, email;
     private boolean loginByPhone;
 
+    private View[] steps;
+    private int currentStep;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,12 +85,9 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
     private void initView() {
         loginByPhone = !TextUtils.isEmpty(phone);
 
-        toggleVerifyUI();
-    }
-
-    private void toggleVerifyUI() {
-
         if (loginByPhone) {
+
+            steps = new View[] {vVerifyCode, vNewPassword, vFinish};
 
             vVerifyPhone.setVisibility(View.VISIBLE);
             vVerifyEmail.setVisibility(View.GONE);
@@ -87,9 +95,21 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
 
         } else {
 
+            steps = new View[] {vEnterEmail, vVerifyCode, vNewPassword, vFinish};
             vVerifyPhone.setVisibility(View.GONE);
             vVerifyEmail.setVisibility(View.VISIBLE);
-            tvEmail.setText(email);
+            if (!TextUtils.isEmpty(email)) {
+                edtEmail.setText(email);
+            }
+        }
+
+        showStep(currentStep);
+    }
+
+    private void showStep(int stepIndex) {
+        for(int i = 0; i < steps.length; i++) {
+            View step = steps[i];
+            step.setVisibility(i == stepIndex ? View.VISIBLE: View.GONE);
         }
     }
 
@@ -102,15 +122,29 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
         }
     }
 
+    @OnClick(R.id.btn_submit_email)
+    public void onClickSubmitEmail() {
+
+        email = edtEmail.getText().toString().trim();
+        if (!TextUtils.isEmpty(email)) {
+            presenter.sendVerifyCodeForgotPassword(email);
+        }
+    }
+
     @Override
     public void onSubmitCodeSuccess() {
-        vVerifyCode.setVisibility(View.GONE);
-        vNewPassword.setVisibility(View.VISIBLE);
+        showStep(++ currentStep);
     }
 
     @Override
     public void onSubmitPasswordSuccess() {
+        showStep(++ currentStep);
+    }
 
+    @Override
+    public void sendVerifyCodeForgotPasswordWithEmailSuccess() {
+        tvEmail.setText(email);
+        showStep(++ currentStep);
     }
 
     @OnClick(R.id.btn_update)
@@ -128,6 +162,10 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
         if (confirmPassword.equals(password)) {
             presenter.changePassword(request);
         }
+    }
 
+    @OnClick(R.id.btn_finish)
+    public void onClickFinish() {
+        finish();
     }
 }

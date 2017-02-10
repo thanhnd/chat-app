@@ -14,10 +14,6 @@ public interface LoginMvp {
     interface LogInInteractor {
 
         void login(LogInRequest logInRequest, BaseApiCallback<ResponseModel<LogInModel>> callback);
-
-        void sendVerifyCodeForgotPasswordWithPhone(String phone, BaseApiCallback<ResponseModel<Object>> baseApiCallback);
-
-        void sendVerifyCodeForgotPasswordWithEmail(String email, BaseApiCallback<ResponseModel<Object>> callback);
     }
 
     interface LogInView extends BaseView {

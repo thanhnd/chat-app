@@ -17,12 +17,16 @@ public interface ForgotPasswordMvp {
         void submitVerifyCode(String code);
 
         void changePassword(Map<String, String> request);
+
+        void sendVerifyCodeForgotPassword(String email);
     }
 
     interface View extends BaseView {
         void onSubmitCodeSuccess();
 
         void onSubmitPasswordSuccess();
+
+        void sendVerifyCodeForgotPasswordWithEmailSuccess();
     }
 
     interface Interactor {

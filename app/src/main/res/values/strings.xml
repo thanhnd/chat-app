@@ -143,5 +143,11 @@
     <string name="update_new_password">Please update a new password for your account</string>
     <string name="cancel">Cancel</string>
     <string name="Confirm">Confirm</string>
+    <string name="forgot_password_enter_email">Enter your email address below:</string>
+    <string name="email_address">Email address</string>
+    <string name="hint_your_email"><i><small>Your Email</small></i></string>
+    <string name="btn_continue">Continue</string>
+    <string name="btn_go_back_and_login">Go back and login</string>
+    <string name="forgot_password_success">New password successfully set up.</string>
 
 </resources>
