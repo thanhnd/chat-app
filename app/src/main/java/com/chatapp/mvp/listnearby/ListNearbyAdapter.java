@@ -160,12 +160,14 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
 
     public void add(List<UserModel> userModels, boolean needClearData) {
 
-        if (needClearData) {
-            mDataset.clear();
-        }
+        if (userModels != null && userModels.size() > 0) {
+            if (needClearData) {
+                mDataset.clear();
+            }
 
-        mDataset.addAll(userModels);
-        notifyDataSetChanged();
+            mDataset.addAll(userModels);
+            notifyDataSetChanged();
+        }
     }
 
     public void setMyProfileModel(MyProfileModel myProfileModel) {

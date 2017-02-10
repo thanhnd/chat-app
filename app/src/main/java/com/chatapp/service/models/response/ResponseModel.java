@@ -12,6 +12,7 @@ public class ResponseModel<T> {
     public static final int RESPONSE_CD_ERROR = 1;
     public static final int RESPONSE_CD_NOT_ACTIVE = 5;
     public static final int RESPONSE_CD_NOT_CONFIRM = 6;
+    public static final int RESPONSE_CD_ACCOUNT_EXPIRED = 8;
     @SerializedName("response_cd")
     @Expose
     private int responseCd;
@@ -47,6 +48,6 @@ public class ResponseModel<T> {
     }
 
     public boolean isTokenExpired() {
-        return "Account Expired".equals(responseMsg);
+        return responseCd == RESPONSE_CD_ACCOUNT_EXPIRED;
     }
 }

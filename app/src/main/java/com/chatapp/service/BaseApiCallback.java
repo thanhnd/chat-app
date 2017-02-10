@@ -33,12 +33,16 @@ public abstract class BaseApiCallback<T extends ResponseModel> implements ApiCal
         }
         T responseModel = response.body();
         if (response.isSuccessful() && responseModel != null) {
-            if (responseModel.getResponseCd() != RegisterModel.RESPONSE_CD_ERROR) {
+            if (responseModel.isTokenExpired()) {
+
+                onTokenExpired();
+                return;
+
+            } else if (responseModel.getResponseCd() == RegisterModel.RESPONSE_CD_SUCCESS
+                    || responseModel.getResponseCd() == RegisterModel.RESPONSE_CD_NOT_CONFIRM
+                    || responseModel.getResponseCd() == RegisterModel.RESPONSE_CD_NOT_ACTIVE) {
 
                 onSuccess(responseModel);
-                return;
-            } else if (responseModel.isTokenExpired()){
-                onTokenExpired();
                 return;
             }
         }
