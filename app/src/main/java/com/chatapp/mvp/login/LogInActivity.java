@@ -2,6 +2,7 @@ package com.chatapp.mvp.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,8 @@ import com.chatapp.mvp.updatebasicprofile.UpdateBasicProfileActivity;
 import com.chatapp.mvp.verify.VerifyActivity;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.utils.DialogUtils;
+import com.chatapp.views.fragments.ConfirmDialogFragment;
+import com.chatapp.views.fragments.RetainedDialogFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -85,6 +88,24 @@ public class LogInActivity extends BaseActivity implements LoginMvp.LogInView {
         startActivityForResult(new Intent(LogInActivity.this, RegisterActivity.class), RC_TO_REGISTER);
     }
 
+    @OnClick(R.id.btn_forgot_password)
+    public void clickForgotPassword() {
+
+        if (isLoginWithPhone) {
+            final String phone = edtPhone.getText().toString();
+            if (!TextUtils.isEmpty(phone)) {
+                String message = getString(R.string.msg_forgot_password_confirm);
+                DialogUtils.showConfirmDialog(this, phone, message, "Confirm", "Cancel", new ConfirmDialogFragment.OnConfirmListener() {
+                    @Override
+                    public void onConfirm(RetainedDialogFragment fragment) {
+                        fragment.dismiss();
+                        presenter.onConfirmPhoneNumber(phone);
+                    }
+                }, null);
+            }
+        }
+    }
+
     @Override
     public void onLogInSuccess() {
         Intent intent = new Intent(this, HomeActivity.class);
@@ -110,6 +131,11 @@ public class LogInActivity extends BaseActivity implements LoginMvp.LogInView {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void sendVerifyCodeForgotPasswordWithPhoneSuccess() {
+
     }
 
     @Override

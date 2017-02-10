@@ -78,8 +78,5 @@ public class ListFavoritesAdapter extends BaseListUserAdapter<ListFavoritesAdapt
                 }
             }
         });
-
     }
-
-
 }

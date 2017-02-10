@@ -11,33 +11,45 @@ import java.lang.ref.WeakReference;
 
 public class LogInPresenterImpl implements LoginMvp.LogInPresenter {
 
-    private WeakReference<LoginMvp.LogInView> loginView;
-    private LoginMvp.LogInInteractor logInInteractor;
+    private WeakReference<LoginMvp.LogInView> view;
+    private LoginMvp.LogInInteractor interactor;
 
     public LogInPresenterImpl(LoginMvp.LogInView logInView) {
-        this.loginView = new WeakReference<>(logInView);
-        this.logInInteractor = new LogInInteractorImpl();
+        this.view = new WeakReference<>(logInView);
+        this.interactor = new LogInInteractorImpl();
     }
 
     @Override
     public void login(LogInRequest request) {
-        if (loginView.get() != null) {
-            loginView.get().showProgress();
+        if (view.get() != null) {
+            view.get().showProgress();
         }
-        logInInteractor.login(request, new BaseApiCallback<ResponseModel<LogInModel>>() {
+        interactor.login(request, new BaseApiCallback<ResponseModel<LogInModel>>(view.get()) {
             @Override
             public void onSuccess(ResponseModel<LogInModel> responseModel) {
-                if (loginView.get() != null) {
-                    loginView.get().hideProgress();
-                    AccountUtils.setLogInModel(responseModel.getResultSet());
-                    if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_NOT_ACTIVE) {
-                        loginView.get().onNotVerify();
-                    } else if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_NOT_CONFIRM) {
-                        loginView.get().onNotConfirm();
-                    } else if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_SUCCESS) {
-                        loginView.get().onLogInSuccess();
-                    }
+                AccountUtils.setLogInModel(responseModel.getResultSet());
+                if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_NOT_ACTIVE) {
+                    view.get().onNotVerify();
+                } else if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_NOT_CONFIRM) {
+                    view.get().onNotConfirm();
+                } else if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_SUCCESS) {
+                    view.get().onLogInSuccess();
+                }
+            }
+        });
+    }
 
+
+    @Override
+    public void onConfirmPhoneNumber(final String phone) {
+        if (view.get() != null) {
+            view.get().showProgress();
+        }
+        interactor.sendVerifyCodeForgotPasswordWithPhone(phone, new BaseApiCallback<ResponseModel<Object>>(view.get()) {
+            @Override
+            public void onSuccess(ResponseModel<Object> response) {
+                if (view.get() != null) {
+                    view.get().sendVerifyCodeForgotPasswordWithPhoneSuccess();
                 }
             }
         });

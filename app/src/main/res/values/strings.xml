@@ -124,5 +124,6 @@
     <string name="seclect_all">Seclect All</string>
     <string name="delete">Delete</string>
     <string name="menu_cancel">Cancel</string>
+    <string name="msg_forgot_password_confirm">We will send a verification code by SMS to the phone number. Please make sure that your phone number is correct.</string>
 
 </resources>

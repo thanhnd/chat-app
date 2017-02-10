@@ -127,8 +127,11 @@ public interface ApiService {
     Call<ResponseModel<Object>> updateProfile(@Header("Authorization") String authorization,
                                               @Body Map request);
 
-
     @Headers("Content-Type: application/json")
     @POST("/api/profile/delRequest")
     Call<ResponseModel<Object>> deleteRecommend(@Header("Authorization") String authorization, @Body List<Map<String,String>> list);
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/user/forgotPassword")
+    Call<ResponseModel<Object>> sendVerifyCodeForgotPassword(@Body Map<String, String> request);
 }
