@@ -5,24 +5,25 @@
     android:orientation="vertical">
 
     <ImageView
-        android:background="@drawable/circle_purge"
-        android:padding="3dp"
         android:id="@+id/iv_avatar"
-        android:layout_width="@dimen/list_img_diameter"
-        android:layout_height="@dimen/list_img_diameter"
-        android:scaleType="centerCrop"
+        android:layout_width="@dimen/list_img_boundary_diameter"
+        android:layout_height="@dimen/list_img_boundary_diameter"
         android:layout_gravity="center"
+        android:background="@drawable/circle_purge_transparent"
+        android:padding="7dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/img_user_avatar" />
+
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:ellipsize="marquee"
         android:gravity="center"
         android:singleLine="true"
         android:textColor="@color/white"
-        android:layout_marginTop="12dp"
         android:textSize="11sp" />
 
 </LinearLayout>
