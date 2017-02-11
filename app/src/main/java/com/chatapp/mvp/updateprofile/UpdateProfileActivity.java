@@ -1,10 +1,14 @@
 package com.chatapp.mvp.updateprofile;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
@@ -40,6 +45,7 @@ import butterknife.OnClick;
 public class UpdateProfileActivity extends BaseActivity implements UpdateProfileMvp.View {
 
     private static final int SELECT_PICTURE = 1;
+    private static final int PERMISSION_READ_EXTERNAL_STORAGE = 101;
 
     @Bind(R.id.iv_avatar)
     ImageView ivAvatar;
@@ -146,7 +152,7 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
         dataAdapter.addAll(params);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        return  dataAdapter;
+        return dataAdapter;
     }
 
     @Override
@@ -179,7 +185,7 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
             spnEthnicity.setSelection(ethnicities.indexOf(ethnicityParam) + 1);
 
             myTribesParam = new ParamModel(userModel.getBodyTypeId());
-            spnTribes.setSelection(tribes.indexOf(myTribesParam)  + 1);
+            spnTribes.setSelection(tribes.indexOf(myTribesParam) + 1);
 
             bodyTypeParam = new ParamModel(userModel.getBodyTypeId());
             spnBodyType.setSelection(bodyTypes.indexOf(bodyTypeParam) + 1);
@@ -191,6 +197,17 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
 
     @OnClick(R.id.fab_camera)
     public void onClickCamera() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    PERMISSION_READ_EXTERNAL_STORAGE);
+        } else {
+            openGallery();
+        }
+
+    }
+
+    private void openGallery() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -320,5 +337,20 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
     @Override
     public void onUpdateProfileFail() {
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_READ_EXTERNAL_STORAGE:
+
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    openGallery();
+                } else {
+                    Toast.makeText(this, "Need access your phone to get pictures!", Toast.LENGTH_SHORT).show();
+                }
+
+                break;
+        }
     }
 }

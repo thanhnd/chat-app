@@ -66,6 +66,7 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
 
     private View[] steps;
     private int currentStep;
+    private String code;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -116,7 +117,7 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
     @OnClick(R.id.btn_next)
     public void onClickNext() {
 
-        String code = edtCode.getText().toString().trim();
+        code = edtCode.getText().toString().trim();
         if (!TextUtils.isEmpty(code)) {
             presenter.submitVerifyCode(code);
         }
@@ -154,6 +155,7 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
 
         Map<String, String> request = new HashMap<>();
         request.put("password", password);
+        request.put("code", code);
         if (loginByPhone) {
             request.put("phone", phone);
         } else {
