@@ -18,8 +18,6 @@ import com.chatapp.mvp.verify.VerifyActivity;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.DialogUtils;
-import com.chatapp.views.fragments.ConfirmDialogFragment;
-import com.chatapp.views.fragments.RetainedDialogFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -98,30 +96,26 @@ public class LogInActivity extends BaseActivity implements LoginMvp.LogInView {
     @OnClick(R.id.btn_forgot_password)
     public void clickForgotPassword() {
 
-        phone = edtPhone.getText().toString();
-        if (isLoginWithPhone && !TextUtils.isEmpty(phone)) {
-
-            String message = getString(R.string.msg_forgot_password_confirm);
-            DialogUtils.showConfirmDialog(this, phone, message,
-                    getString(R.string.Confirm), getString(R.string.cancel),
-                    new ConfirmDialogFragment.OnConfirmListener() {
-                        @Override
-                        public void onConfirm(RetainedDialogFragment fragment) {
-                            fragment.dismiss();
-                            presenter.sendVerifyCodeForgotPasswordWithPhone(phone);
-                        }
-                    }, null);
-
-        } else {
-            navigateToForgotPasswordWithEmail();
-        }
+        navigateToForgotPassword();
     }
 
-    private void navigateToForgotPasswordWithEmail() {
+    private void navigateToForgotPassword() {
         Intent intent = new Intent(this, ForgotPasswordActivity.class);
-        email = edtEmail.getText().toString();
-        if (!TextUtils.isEmpty(email)) {
-            intent.putExtra(ForgotPasswordActivity.EXTRA_EMAIL, email);
+        intent.putExtra(ForgotPasswordActivity.EXTRA_IS_LOGIN_WITH_PHONE, isLoginWithPhone);
+
+        if (isLoginWithPhone) {
+
+            phone = edtPhone.getText().toString();
+            if (!TextUtils.isEmpty(phone)) {
+                intent.putExtra(ForgotPasswordActivity.EXTRA_PHONE, phone);
+            }
+
+        } else {
+
+            email = edtEmail.getText().toString();
+            if (!TextUtils.isEmpty(email)) {
+                intent.putExtra(ForgotPasswordActivity.EXTRA_EMAIL, email);
+            }
         }
 
         startActivity(intent);
@@ -154,18 +148,6 @@ public class LogInActivity extends BaseActivity implements LoginMvp.LogInView {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
-    }
-
-    @Override
-    public void sendVerifyCodeForgotPasswordWithPhoneSuccess() {
-        Intent intent = new Intent(this, ForgotPasswordActivity.class);
-        if (isLoginWithPhone) {
-            phone = edtPhone.getText().toString().trim();
-            if (!TextUtils.isEmpty(phone)) {
-                intent.putExtra(ForgotPasswordActivity.EXTRA_PHONE, phone);
-            }
-            startActivity(intent);
-        }
     }
 
     @Override

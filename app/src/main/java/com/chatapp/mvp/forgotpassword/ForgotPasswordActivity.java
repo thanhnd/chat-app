@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.utils.DialogUtils;
+import com.chatapp.views.fragments.ConfirmDialogFragment;
+import com.chatapp.views.fragments.RetainedDialogFragment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +25,7 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
 
     public static final String EXTRA_PHONE = "extra_phone";
     public static final String EXTRA_EMAIL = "extra_email";
+    public static final String EXTRA_IS_LOGIN_WITH_PHONE = "is_login_with_phone";
 
     @Bind(R.id.edt_code)
     EditText edtCode;
@@ -44,8 +48,14 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
     @Bind(R.id.v_enter_email)
     View vEnterEmail;
 
+    @Bind(R.id.v_enter_phone)
+    View vEnterPhone;
+
     @Bind(R.id.edt_email)
     EditText edtEmail;
+
+    @Bind(R.id.edt_phone)
+    EditText edtPhone;
 
     @Bind(R.id.tv_phone)
     TextView tvPhone;
@@ -62,7 +72,7 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
     ForgotPasswordMvp.Presenter presenter;
 
     private String phone, email;
-    private boolean loginByPhone;
+    private boolean isLoginWithPhone;
 
     private View[] steps;
     private int currentStep;
@@ -80,19 +90,21 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
         Intent intent = getIntent();
         phone = intent.getStringExtra(EXTRA_PHONE);
         email = intent.getStringExtra(EXTRA_EMAIL);
+        isLoginWithPhone = intent.getBooleanExtra(EXTRA_IS_LOGIN_WITH_PHONE, true);
         initView();
     }
 
     private void initView() {
-        loginByPhone = !TextUtils.isEmpty(phone);
+        if (isLoginWithPhone) {
 
-        if (loginByPhone) {
-
-            steps = new View[] {vVerifyCode, vNewPassword, vFinish};
+            steps = new View[] {vEnterPhone, vVerifyCode, vNewPassword, vFinish};
 
             vVerifyPhone.setVisibility(View.VISIBLE);
             vVerifyEmail.setVisibility(View.GONE);
-            tvPhone.setText(phone);
+            if (!TextUtils.isEmpty(phone)) {
+                tvPhone.setText(phone);
+                edtPhone.setText(phone);
+            }
 
         } else {
 
@@ -128,8 +140,15 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
 
         email = edtEmail.getText().toString().trim();
         if (!TextUtils.isEmpty(email)) {
-            presenter.sendVerifyCodeForgotPassword(email);
+            Map<String, String> request = new HashMap<>();
+            request.put("email", email);
+            presenter.sendVerifyCodeForgotPassword(request);
         }
+    }
+
+    @OnClick(R.id.btn_submit_phone)
+    public void onClickSubmitPhone() {
+        showConfirmPhoneDialog();
     }
 
     @Override
@@ -143,7 +162,7 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
     }
 
     @Override
-    public void sendVerifyCodeForgotPasswordWithEmailSuccess() {
+    public void sendVerifyCodeForgotPasswordSuccess() {
         tvEmail.setText(email);
         showStep(++ currentStep);
     }
@@ -156,13 +175,37 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
         Map<String, String> request = new HashMap<>();
         request.put("password", password);
         request.put("code", code);
-        if (loginByPhone) {
+        if (isLoginWithPhone) {
             request.put("phone", phone);
         } else {
             request.put("email", email);
         }
         if (confirmPassword.equals(password)) {
             presenter.changePassword(request);
+        }
+    }
+
+    private void showConfirmPhoneDialog() {
+        phone = edtPhone.getText().toString();
+        if (!TextUtils.isEmpty(phone)) {
+            String message = getString(R.string.msg_forgot_password_confirm);
+            DialogUtils.showConfirmDialog(this, phone, message,
+                    getString(R.string.Confirm), getString(R.string.cancel),
+                    new ConfirmDialogFragment.OnConfirmListener() {
+
+                        @Override
+                        public void onConfirm(RetainedDialogFragment fragment) {
+                            fragment.dismiss();
+
+                            phone = edtPhone.getText().toString().trim();
+                            if (!TextUtils.isEmpty(phone)) {
+
+                                Map<String, String> request = new HashMap<>();
+                                request.put("phone", phone);
+                                presenter.sendVerifyCodeForgotPassword(request);
+                            }
+                        }
+                    }, null);
         }
     }
 

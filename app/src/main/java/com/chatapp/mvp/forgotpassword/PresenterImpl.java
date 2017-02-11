@@ -62,19 +62,16 @@ public class PresenterImpl implements ForgotPasswordMvp.Presenter {
     }
 
     @Override
-    public void sendVerifyCodeForgotPassword(String email) {
+    public void sendVerifyCodeForgotPassword(Map<String, String> request) {
         if (view.get() != null) {
             view.get().showProgress();
         }
-
-        Map<String, String> request = new HashMap<>();
-        request.put("email", email);
 
         generalInteractor.sendVerifyCodeForgotPassword(request, new BaseApiCallback<ResponseModel<Object>>(view.get()) {
             @Override
             public void onSuccess(ResponseModel<Object> response) {
                 if (view.get() != null) {
-                    view.get().sendVerifyCodeForgotPasswordWithEmailSuccess();
+                    view.get().sendVerifyCodeForgotPasswordSuccess();
                 }
             }
         });

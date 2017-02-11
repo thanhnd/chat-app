@@ -144,10 +144,13 @@
     <string name="cancel">Cancel</string>
     <string name="Confirm">Confirm</string>
     <string name="forgot_password_enter_email">Enter your email address below:</string>
+    <string name="forgot_password_enter_phone">Enter your phone number below:</string>
     <string name="email_address">Email address</string>
     <string name="hint_your_email"><i><small>Your Email</small></i></string>
+    <string name="hint_your_phone_number"><i><small>Your Phone Number</small></i></string>
     <string name="btn_continue">Continue</string>
     <string name="btn_go_back_and_login">Go back and login</string>
     <string name="forgot_password_success">New password successfully set up.</string>
+    <string name="phone_number">Phone Number</string>
 
 </resources>

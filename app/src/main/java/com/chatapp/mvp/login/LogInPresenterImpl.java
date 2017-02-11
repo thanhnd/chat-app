@@ -17,12 +17,10 @@ public class LogInPresenterImpl implements LoginMvp.LogInPresenter {
 
     private WeakReference<LoginMvp.LogInView> view;
     private LoginMvp.LogInInteractor interactor;
-    private GeneralInteractor generalInteractor;
 
     public LogInPresenterImpl(LoginMvp.LogInView logInView) {
         this.view = new WeakReference<>(logInView);
         this.interactor = new LogInInteractorImpl();
-        this.generalInteractor = new GeneralInteractorImmpl();
     }
 
     @Override
@@ -40,25 +38,6 @@ public class LogInPresenterImpl implements LoginMvp.LogInPresenter {
                     view.get().onNotConfirm();
                 } else if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_SUCCESS) {
                     view.get().onLogInSuccess();
-                }
-            }
-        });
-    }
-
-
-    @Override
-    public void sendVerifyCodeForgotPasswordWithPhone(final String phone) {
-        if (view.get() != null) {
-            view.get().showProgress();
-        }
-        Map<String, String> request = new HashMap<>();
-        request.put("mobile", phone);
-        generalInteractor.sendVerifyCodeForgotPassword(request,
-                new BaseApiCallback<ResponseModel<Object>>(view.get()) {
-            @Override
-            public void onSuccess(ResponseModel<Object> response) {
-                if (view.get() != null) {
-                    view.get().sendVerifyCodeForgotPasswordWithPhoneSuccess();
                 }
             }
         });

@@ -18,7 +18,7 @@ public interface ForgotPasswordMvp {
 
         void changePassword(Map<String, String> request);
 
-        void sendVerifyCodeForgotPassword(String email);
+        void sendVerifyCodeForgotPassword(Map<String, String> request);
     }
 
     interface View extends BaseView {
@@ -26,7 +26,7 @@ public interface ForgotPasswordMvp {
 
         void onSubmitPasswordSuccess();
 
-        void sendVerifyCodeForgotPasswordWithEmailSuccess();
+        void sendVerifyCodeForgotPasswordSuccess();
     }
 
     interface Interactor {

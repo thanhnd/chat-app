@@ -21,13 +21,9 @@ public interface LoginMvp {
         void onNotVerify();
         void onLogInError();
         void onNotConfirm();
-
-        void sendVerifyCodeForgotPasswordWithPhoneSuccess();
     }
 
     interface LogInPresenter {
         void login(LogInRequest request);
-
-        void sendVerifyCodeForgotPasswordWithPhone(String phone);
     }
 }
