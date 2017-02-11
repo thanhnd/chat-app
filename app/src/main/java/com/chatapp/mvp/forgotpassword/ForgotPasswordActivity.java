@@ -176,7 +176,7 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
         request.put("password", password);
         request.put("code", code);
         if (isLoginWithPhone) {
-            request.put("phone", phone);
+            request.put("mobile", phone);
         } else {
             request.put("email", email);
         }
@@ -201,7 +201,7 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
                             if (!TextUtils.isEmpty(phone)) {
 
                                 Map<String, String> request = new HashMap<>();
-                                request.put("phone", phone);
+                                request.put("mobile", phone);
                                 presenter.sendVerifyCodeForgotPassword(request);
                             }
                         }
