@@ -46,6 +46,10 @@ public class UserModel implements Serializable {
     @Expose
     private String noted;
 
+    @SerializedName("is_block")
+    @Expose
+    private boolean block;
+
     public String getUserId() {
         return userId;
     }
@@ -119,5 +123,9 @@ public class UserModel implements Serializable {
 
     public void setNoted(String noted) {
         this.noted = noted;
+    }
+
+    public boolean isBlock() {
+        return block;
     }
 }

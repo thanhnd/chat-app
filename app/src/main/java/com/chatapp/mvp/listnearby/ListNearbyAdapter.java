@@ -41,6 +41,9 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
         @Bind(R.id.tv_name) TextView tvName;
         @Bind(R.id.tv_distance) TextView tvDistance;
         @Bind(R.id.iv_avatar) ImageView ivAvatar;
+        @Bind(R.id.iv_favorite) ImageView ivFavorite;
+        @Bind(R.id.iv_friend) ImageView ivFriend;
+        @Bind(R.id.iv_block) ImageView ivBlock;
         View vItem;
 
         public OtherUserViewHolder(View v) {
@@ -140,6 +143,11 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
                     }
                 }
             });
+
+            otherUserViewHolder.ivFavorite.setVisibility(userModel.isFavourite() ? View.VISIBLE : View.INVISIBLE);
+            otherUserViewHolder.ivFriend.setVisibility(userModel.isFriend() ? View.VISIBLE : View.INVISIBLE);
+            otherUserViewHolder.ivBlock.setVisibility(userModel.isBlock() ? View.VISIBLE : View.INVISIBLE);
+
         }
     }
 
