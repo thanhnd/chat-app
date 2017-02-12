@@ -18,10 +18,10 @@
         android:layout_height="wrap_content"
         android:ellipsize="marquee"
         android:gravity="center"
-        android:singleLine="true"
-        android:textColor="@color/white"
-        android:layout_marginTop="12dp"
-        android:textSize="11sp" />
+        android:lines="1"
+        style="@style/App_Text.White"
+        android:layout_marginTop="10dp"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/tv_online_status"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_gravity="center"
-        android:textSize="10sp"
+        android:textSize="11sp"
         style="@style/App_Text.OnlineStatus" />
 
 </LinearLayout>

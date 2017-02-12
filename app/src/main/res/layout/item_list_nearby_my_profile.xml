@@ -4,26 +4,39 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/iv_avatar"
+    <RelativeLayout
         android:layout_width="@dimen/list_img_boundary_diameter"
         android:layout_height="@dimen/list_img_boundary_diameter"
         android:layout_gravity="center"
-        android:background="@drawable/circle_purge_transparent"
-        android:padding="7dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/img_user_avatar" />
+        android:gravity="center">
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_purge_transparent"
+            android:padding="6dp">
+
+            <ImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="@dimen/list_img_diameter_with_border"
+                android:layout_height="@dimen/list_img_diameter_with_border"
+                android:layout_gravity="center"
+                android:background="@drawable/circle_purge"
+                android:padding="@dimen/avatar_border"
+                android:src="@drawable/img_user_avatar" />
+        </RelativeLayout>
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_name"
+        style="@style/App_Text.White"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:ellipsize="marquee"
         android:gravity="center"
-        android:singleLine="true"
-        android:textColor="@color/white"
-        android:textSize="11sp" />
+        android:lines="1"
+        android:textSize="12sp" />
 
 </LinearLayout>
