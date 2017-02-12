@@ -53,7 +53,7 @@
 
             <TextView
                 android:id="@+id/tv_online_status"
-                style="@style/online_status"
+                style="@style/App_Text.OnlineStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

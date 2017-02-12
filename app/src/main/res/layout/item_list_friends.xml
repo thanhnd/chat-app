@@ -6,7 +6,6 @@
 
     <ImageView
         android:background="@drawable/circle_purge"
-        android:padding="3dp"
         android:id="@+id/iv_avatar"
         android:layout_width="@dimen/list_img_diameter"
         android:layout_height="@dimen/list_img_diameter"
@@ -31,6 +30,6 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:textSize="10sp"
-        style="@style/online_status" />
+        style="@style/App_Text.OnlineStatus" />
 
 </LinearLayout>
