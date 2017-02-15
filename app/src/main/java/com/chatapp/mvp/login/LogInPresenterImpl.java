@@ -1,17 +1,20 @@
 
 package com.chatapp.mvp.login;
 
-import com.chatapp.mvp.base.GeneralInteractor;
-import com.chatapp.mvp.base.GeneralInteractorImmpl;
+import android.os.Bundle;
+
 import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.utils.AccountUtils;
+import com.chatapp.utils.ChatHelper;
+import com.chatapp.utils.SharedPreferencesUtil;
+import com.quickblox.core.QBEntityCallback;
+import com.quickblox.core.exception.QBResponseException;
+import com.quickblox.users.model.QBUser;
 
 import java.lang.ref.WeakReference;
-import java.util.HashMap;
-import java.util.Map;
 
 public class LogInPresenterImpl implements LoginMvp.LogInPresenter {
 
@@ -31,7 +34,13 @@ public class LogInPresenterImpl implements LoginMvp.LogInPresenter {
         interactor.login(request, new BaseApiCallback<ResponseModel<LogInModel>>(view.get()) {
             @Override
             public void onSuccess(ResponseModel<LogInModel> responseModel) {
-                AccountUtils.setLogInModel(responseModel.getResultSet());
+                LogInModel logInModel = responseModel.getResultSet();
+                AccountUtils.setLogInModel(logInModel);
+                final QBUser user = new QBUser(logInModel.getLogin(), logInModel.getPass());
+
+                login(user);
+
+
                 if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_NOT_ACTIVE) {
                     view.get().onNotVerify();
                 } else if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_NOT_CONFIRM) {
@@ -39,6 +48,24 @@ public class LogInPresenterImpl implements LoginMvp.LogInPresenter {
                 } else if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_SUCCESS) {
                     view.get().onLogInSuccess();
                 }
+            }
+        });
+    }
+
+    private void login(final QBUser user) {
+        ChatHelper.getInstance().login(user, new QBEntityCallback<Void>() {
+            @Override
+            public void onSuccess(Void result, Bundle bundle) {
+                SharedPreferencesUtil.saveQbUser(user);
+
+//                DialogsActivity.start(LoginActivity.this);
+//                finish();
+//
+//                ProgressDialogFragment.hide(getSupportFragmentManager());
+            }
+
+            @Override
+            public void onError(QBResponseException e) {
             }
         });
     }

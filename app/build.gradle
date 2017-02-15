@@ -26,6 +26,11 @@ android {
             output.outputFile = new File(file.parentFile, fileName)
         }
     }
+
+    dexOptions {
+        incremental true
+        javaMaxHeapSize "12g"
+    }
 }
 
 dependencies {
@@ -48,6 +53,10 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'joda-time:joda-time:2.9.7'
+
+
+    compile 'com.quickblox:quickblox-android-sdk-chat:3.0'
+    compile 'com.quickblox:quickblox-android-sdk-content:3.0'
 
     testCompile 'junit:junit:4.12'
 }

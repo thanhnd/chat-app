@@ -17,9 +17,18 @@ public class LogInModel implements Serializable {
     @SerializedName("token")
     @Expose
     private String token;
+
     @SerializedName("is_active")
     @Expose
     private int isActive;
+
+    @SerializedName("login")
+    @Expose
+    private String login;
+
+    @SerializedName("pass")
+    @Expose
+    private String pass;
 
     public String getToken() {
         return token;
@@ -49,4 +58,19 @@ public class LogInModel implements Serializable {
         return isActive == NOT_VERIFY;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
 }
