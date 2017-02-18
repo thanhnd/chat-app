@@ -3,13 +3,13 @@ package com.chatapp.mvp.login;
 
 import android.os.Bundle;
 
+import com.chatapp.chat.utils.SharedPreferencesUtil;
 import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.ChatHelper;
-import com.chatapp.utils.SharedPreferencesUtil;
 import com.quickblox.core.QBEntityCallback;
 import com.quickblox.core.exception.QBResponseException;
 import com.quickblox.users.model.QBUser;
@@ -58,10 +58,6 @@ public class LogInPresenterImpl implements LoginMvp.LogInPresenter {
             public void onSuccess(Void result, Bundle bundle) {
                 SharedPreferencesUtil.saveQbUser(user);
 
-//                DialogsActivity.start(LoginActivity.this);
-//                finish();
-//
-//                ProgressDialogFragment.hide(getSupportFragmentManager());
             }
 
             @Override

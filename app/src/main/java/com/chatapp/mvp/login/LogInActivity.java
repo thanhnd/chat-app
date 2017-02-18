@@ -11,13 +11,13 @@ import android.widget.RadioGroup;
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.forgotpassword.ForgotPasswordActivity;
-import com.chatapp.mvp.home.HomeActivity;
 import com.chatapp.mvp.register.RegisterActivity;
 import com.chatapp.mvp.updatebasicprofile.UpdateBasicProfileActivity;
 import com.chatapp.mvp.verify.VerifyActivity;
 import com.chatapp.service.models.request.LogInRequest;
 import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.DialogUtils;
+import com.chatapp.chat.ui.activity.DialogsActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -123,10 +123,14 @@ public class LogInActivity extends BaseActivity implements LoginMvp.LogInView {
 
     @Override
     public void onLogInSuccess() {
-        Intent intent = new Intent(this, HomeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+//        Intent intent = new Intent(this, HomeActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(intent);
+//        finish();
+
+        DialogsActivity.start(this);
         finish();
+
     }
 
     @Override

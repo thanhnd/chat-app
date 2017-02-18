@@ -8,9 +8,13 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.chatapp.chat.utils.SharedPreferencesUtil;
+import com.chatapp.chat.utils.chat.ChatHelper;
 import com.chatapp.mvp.login.LogInActivity;
 import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.DialogUtils;
+import com.quickblox.core.QBEntityCallback;
+import com.quickblox.core.exception.QBResponseException;
 
 import java.util.Calendar;
 
@@ -97,10 +101,28 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
     }
 
     public void logOut() {
+        userLogout();
         AccountUtils.logOut();
         Intent intent = new Intent(this, LogInActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
+    }
+
+    private void userLogout() {
+        ChatHelper.getInstance().logout(new QBEntityCallback<Void>() {
+            @Override
+            public void onSuccess(Void aVoid, Bundle bundle) {
+//                if (googlePlayServicesHelper.checkPlayServicesAvailable()) {
+//                    googlePlayServicesHelper.unregisterFromGcm(Consts.GCM_SENDER_ID);
+//                }
+                SharedPreferencesUtil.removeQbUser();
+            }
+
+            @Override
+            public void onError(QBResponseException e) {
+//                reconnectToChatLogout(SharedPreferencesUtil.getQbUser());
+            }
+        });
     }
 }

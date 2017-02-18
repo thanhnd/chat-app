@@ -2,6 +2,7 @@ package com.chatapp.utils;
 
 import android.os.Bundle;
 
+import com.chatapp.chat.utils.SharedPreferencesUtil;
 import com.chatapp.qb.QbUsersHolder;
 import com.chatapp.qb.callback.QbEntityCallbackTwoTypeWrapper;
 import com.chatapp.qb.callback.QbEntityCallbackWrapper;

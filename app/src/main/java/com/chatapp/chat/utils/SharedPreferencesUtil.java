@@ -1,5 +1,6 @@
-package com.chatapp.utils;
+package com.chatapp.chat.utils;
 
+import com.quickblox.sample.core.utils.SharedPrefsHelper;
 import com.quickblox.users.model.QBUser;
 
 public class SharedPreferencesUtil {
