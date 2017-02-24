@@ -19,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.chatapp.R;
+import com.chatapp.chat.ui.activity.DialogsFragment;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.listfavorites.ListFavoritesFragment;
 import com.chatapp.mvp.listfriends.ListFriendsFragment;
@@ -91,7 +92,7 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
                         break;
                     case R.id.tab_item_chat:
                         switchFragment(Fragment.instantiate(HomeActivity.this,
-                                ListChatFragment.class.getName()));
+                                DialogsFragment.class.getName()));
                         break;
                     case R.id.tab_item_friends:
                         switchFragment(Fragment.instantiate(HomeActivity.this,

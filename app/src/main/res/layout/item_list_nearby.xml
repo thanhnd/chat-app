@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:background="@drawable/bg"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -57,6 +59,7 @@
         android:ellipsize="marquee"
         android:gravity="center"
         android:lines="1"
+        tools:text="Thanh Nguyen"
         style="@style/App_Text.White"
         android:textSize="12sp" />
 
@@ -68,6 +71,7 @@
         android:drawableLeft="@drawable/ic_distance_small"
         android:drawablePadding="2dp"
         android:gravity="center"
+        tools:text="Online"
         android:textColor="@color/gray"
         android:textSize="11sp" />
 

@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
 
 import com.chatapp.R;
-import com.chatapp.chat.ui.activity.SplashActivity;
+import com.chatapp.mvp.splash.SplashActivity;
 import com.quickblox.sample.core.gcm.CoreGcmPushListenerService;
 import com.quickblox.sample.core.utils.NotificationUtils;
 import com.quickblox.sample.core.utils.ResourceUtils;

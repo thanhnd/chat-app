@@ -7,15 +7,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.quickblox.chat.model.QBChatDialog;
-import com.quickblox.chat.model.QBDialogType;
 import com.chatapp.R;
 import com.chatapp.chat.utils.StringUtils;
 import com.chatapp.chat.utils.qb.QbDialogUtils;
+import com.chatapp.utils.DateUtils;
+import com.quickblox.chat.model.QBChatDialog;
+import com.quickblox.chat.model.QBDialogType;
 import com.quickblox.sample.core.ui.adapter.BaseSelectableListAdapter;
-import com.quickblox.sample.core.utils.ResourceUtils;
 import com.quickblox.sample.core.utils.UiUtils;
 
+import java.util.Date;
 import java.util.List;
 
 public class DialogsAdapter extends BaseSelectableListAdapter<QBChatDialog> {
@@ -37,7 +38,7 @@ public class DialogsAdapter extends BaseSelectableListAdapter<QBChatDialog> {
             holder.nameTextView = (TextView) convertView.findViewById(R.id.text_dialog_name);
             holder.lastMessageTextView = (TextView) convertView.findViewById(R.id.text_dialog_last_message);
             holder.dialogImageView = (ImageView) convertView.findViewById(R.id.image_dialog_icon);
-            holder.unreadCounterTextView = (TextView) convertView.findViewById(R.id.text_dialog_unread_count);
+            holder.tvTime = (TextView) convertView.findViewById(R.id.text_dialog_time);
 
             convertView.setTag(holder);
         } else {
@@ -56,16 +57,8 @@ public class DialogsAdapter extends BaseSelectableListAdapter<QBChatDialog> {
         holder.nameTextView.setText(QbDialogUtils.getDialogName(dialog));
         holder.lastMessageTextView.setText(prepareTextLastMessage(dialog));
 
-        int unreadMessagesCount = dialog.getUnreadMessageCount();
-        if (unreadMessagesCount == 0) {
-            holder.unreadCounterTextView.setVisibility(View.GONE);
-        } else {
-            holder.unreadCounterTextView.setVisibility(View.VISIBLE);
-            holder.unreadCounterTextView.setText(String.valueOf(unreadMessagesCount > 99 ? 99 : unreadMessagesCount));
-        }
-
-        holder.rootLayout.setBackgroundColor(isItemSelected(position) ? ResourceUtils.getColor(R.color.selected_list_item_color) :
-                ResourceUtils.getColor(android.R.color.transparent));
+        String time = DateUtils.displayDate(new Date(dialog.getLastMessageDateSent() * 1000));
+        holder.tvTime.setText(time);
 
         return convertView;
     }
@@ -91,6 +84,6 @@ public class DialogsAdapter extends BaseSelectableListAdapter<QBChatDialog> {
         ImageView dialogImageView;
         TextView nameTextView;
         TextView lastMessageTextView;
-        TextView unreadCounterTextView;
+        TextView tvTime;
     }
 }

@@ -1,51 +1,44 @@
-package com.chatapp.chat.ui.activity;
+package com.chatapp.mvp.base;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.PersistableBundle;
-import android.support.annotation.StringRes;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBar;
-import android.util.Log;
-import android.view.View;
+import android.support.annotation.Nullable;
 
-import com.quickblox.core.QBEntityCallback;
-import com.quickblox.core.exception.QBResponseException;
 import com.chatapp.R;
 import com.chatapp.chat.utils.SharedPreferencesUtil;
 import com.chatapp.chat.utils.chat.ChatHelper;
 import com.chatapp.chat.utils.qb.QbAuthUtils;
 import com.chatapp.chat.utils.qb.QbSessionStateCallback;
-import com.quickblox.sample.core.ui.activity.CoreBaseActivity;
+import com.chatapp.utils.Log;
+import com.quickblox.chat.model.QBChatDialog;
+import com.quickblox.core.QBEntityCallback;
+import com.quickblox.core.exception.QBResponseException;
 import com.quickblox.sample.core.ui.dialog.ProgressDialogFragment;
-import com.quickblox.sample.core.utils.ErrorUtils;
 import com.quickblox.users.model.QBUser;
 
 import java.util.ArrayList;
 
-public abstract class BaseActivity extends CoreBaseActivity implements QbSessionStateCallback {
+public abstract class BaseChatActivity extends BaseActivity implements QbSessionStateCallback {
 
     public static final int REQUEST_SELECT_PEOPLE = 174;
     public static final int REQUEST_DIALOG_ID_FOR_UPDATE = 165;
-    private static final String TAG = BaseActivity.class.getSimpleName();
 
     private static final Handler mainThreadHandler = new Handler(Looper.getMainLooper());
 
-    protected ActionBar actionBar;
     protected boolean isAppSessionActive;
+    private boolean isProcessingResultInProgress;
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        actionBar = getSupportActionBar();
 
         boolean wasAppRestored = savedInstanceState != null;
         boolean isQbSessionActive = QbAuthUtils.isSessionActive();
         final boolean needToRestoreSession = wasAppRestored || !isQbSessionActive;
-        Log.v(TAG, "wasAppRestored = " + wasAppRestored);
-        Log.v(TAG, "isQbSessionActive = " + isQbSessionActive);
+        Log.d("wasAppRestored = " + wasAppRestored);
+        Log.d("isQbSessionActive = " + isQbSessionActive);
 
         // Triggering callback via Handler#post() method
         // to let child's code in onCreate() to execute first
@@ -63,22 +56,9 @@ public abstract class BaseActivity extends CoreBaseActivity implements QbSession
         });
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        outState.putInt("dummy_value", 0);
-        super.onSaveInstanceState(outState, outPersistentState);
-    }
-
-    protected abstract View getSnackbarAnchorView();
-
-    protected Snackbar showErrorSnackbar(@StringRes int resId, Exception e,
-                                         View.OnClickListener clickListener) {
-        return ErrorUtils.showSnackbar(getSnackbarAnchorView(), resId, e,
-                com.quickblox.sample.core.R.string.dlg_retry, clickListener);
-    }
 
     private void recreateChatSession() {
-        Log.d(TAG, "Need to recreate chat session");
+        Log.d("Need to recreate chat session");
 
         QBUser user = SharedPreferencesUtil.getQbUser();
         if (user == null) {
@@ -94,7 +74,7 @@ public abstract class BaseActivity extends CoreBaseActivity implements QbSession
         ChatHelper.getInstance().login(user, new QBEntityCallback<Void>() {
             @Override
             public void onSuccess(Void result, Bundle bundle) {
-                Log.v(TAG, "Chat login onSuccess()");
+                Log.d("Chat login onSuccess()");
                 isAppSessionActive = true;
                 onSessionCreated(true);
 
@@ -105,14 +85,7 @@ public abstract class BaseActivity extends CoreBaseActivity implements QbSession
             public void onError(QBResponseException e) {
                 isAppSessionActive = false;
                 ProgressDialogFragment.hide(getSupportFragmentManager());
-                Log.w(TAG, "Chat login onError(): " + e);
-                showErrorSnackbar(R.string.error_recreate_session, e,
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                reloginToChat(user);
-                            }
-                        });
+                Log.w("Chat login onError(): " + e);
                 onSessionCreated(false);
             }
         });
@@ -148,5 +121,32 @@ public abstract class BaseActivity extends CoreBaseActivity implements QbSession
 //        else {
 //            updateDialogsAdapter();
 //        }
+    }
+
+    protected void createDialog(final QBUser user) {
+        ArrayList<QBUser> users = new ArrayList<>();
+        users.add(user);
+        users.add(ChatHelper.getCurrentUser());
+        createDialog(users);
+    }
+
+    protected void createDialog(final ArrayList<QBUser> selectedUsers) {
+        ChatHelper.getInstance().createDialogWithSelectedUsers(selectedUsers,
+                new QBEntityCallback<QBChatDialog>() {
+                    @Override
+                    public void onSuccess(QBChatDialog dialog, Bundle args) {
+                        isProcessingResultInProgress = false;
+                        com.chatapp.chat.ui.activity.ChatActivity.startForResult(BaseChatActivity.this,
+                                REQUEST_DIALOG_ID_FOR_UPDATE, dialog.getDialogId());
+                        ProgressDialogFragment.hide(getSupportFragmentManager());
+                    }
+
+                    @Override
+                    public void onError(QBResponseException e) {
+                        isProcessingResultInProgress = false;
+                        ProgressDialogFragment.hide(getSupportFragmentManager());
+                    }
+                }
+        );
     }
 }

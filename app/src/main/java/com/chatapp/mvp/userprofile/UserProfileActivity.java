@@ -20,11 +20,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chatapp.R;
-import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.base.BaseChatActivity;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.service.models.response.UserProfileModel;
 import com.chatapp.views.UserProfilePropertyView;
+import com.quickblox.users.model.QBUser;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
@@ -33,7 +34,7 @@ import butterknife.OnClick;
 
 import static com.chatapp.Config.LIMIT_ADD_FRIEND_GREETING_CHARACTER;
 
-public class UserProfileActivity extends BaseActivity implements UserProfileMvp.UserProfileView,
+public class UserProfileActivity extends BaseChatActivity implements UserProfileMvp.UserProfileView,
         AppBarLayout.OnOffsetChangedListener {
 
     public static final String EXTRA_USER_MODEL = "extra_user_model";
@@ -261,6 +262,8 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
 
     @OnClick(R.id.ib_chat)
     void onClickChat() {
+        QBUser user = new QBUser(userModel.getChatId());
+        createDialog(user);
     }
 
     @OnClick(R.id.ib_call)
@@ -324,6 +327,11 @@ public class UserProfileActivity extends BaseActivity implements UserProfileMvp.
 
     @Override
     public void onRemoveFavoriteFail() {
+
+    }
+
+    @Override
+    public void onSessionCreated(boolean success) {
 
     }
 }

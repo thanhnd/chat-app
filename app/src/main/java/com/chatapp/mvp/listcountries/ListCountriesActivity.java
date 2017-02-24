@@ -74,7 +74,7 @@ public class ListCountriesActivity extends BaseActivity implements ListCountries
         adapter.setOnFilterResultChange(new ListCountriesAdapter.OnFilterResultChange() {
             @Override
             public void onChanged(List<CountryModel> newResult) {
-                tvEmpty.setVisibility(newResult.isEmpty() ? View.VISIBLE : View.GONE);
+                tvEmpty.setVisibility(newResult == null || newResult.isEmpty() ? View.VISIBLE : View.GONE);
             }
         });
     }

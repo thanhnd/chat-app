@@ -43,6 +43,9 @@
     <dimen name="list_img_diameter">75dp</dimen>
     <dimen name="list_img_diameter_with_border">77dp</dimen>
     <dimen name="list_img_boundary_diameter">85dp</dimen>
+
+    <dimen name="list_img_diameter_with_border_small">47dp</dimen>
+    <dimen name="list_img_boundary_diameter_small">57dp</dimen>
     <dimen name="form_padding">34dp</dimen>
     <dimen name="avatar_border">2dp</dimen>
 </resources>

@@ -10,6 +10,7 @@ import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.ChatHelper;
+import com.chatapp.utils.Log;
 import com.quickblox.core.QBEntityCallback;
 import com.quickblox.core.exception.QBResponseException;
 import com.quickblox.users.model.QBUser;
@@ -21,6 +22,7 @@ public class LogInPresenterImpl implements LoginMvp.LogInPresenter {
     private WeakReference<LoginMvp.LogInView> view;
     private LoginMvp.LogInInteractor interactor;
 
+    private ResponseModel<LogInModel> responseModel;
     public LogInPresenterImpl(LoginMvp.LogInView logInView) {
         this.view = new WeakReference<>(logInView);
         this.interactor = new LogInInteractorImpl();
@@ -38,16 +40,8 @@ public class LogInPresenterImpl implements LoginMvp.LogInPresenter {
                 AccountUtils.setLogInModel(logInModel);
                 final QBUser user = new QBUser(logInModel.getLogin(), logInModel.getPass());
 
+                LogInPresenterImpl.this.responseModel = responseModel;
                 login(user);
-
-
-                if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_NOT_ACTIVE) {
-                    view.get().onNotVerify();
-                } else if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_NOT_CONFIRM) {
-                    view.get().onNotConfirm();
-                } else if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_SUCCESS) {
-                    view.get().onLogInSuccess();
-                }
             }
         });
     }
@@ -58,10 +52,18 @@ public class LogInPresenterImpl implements LoginMvp.LogInPresenter {
             public void onSuccess(Void result, Bundle bundle) {
                 SharedPreferencesUtil.saveQbUser(user);
 
+                if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_NOT_ACTIVE) {
+                    view.get().onNotVerify();
+                } else if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_NOT_CONFIRM) {
+                    view.get().onNotConfirm();
+                } else if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_SUCCESS) {
+                    view.get().onLogInSuccess();
+                }
             }
 
             @Override
             public void onError(QBResponseException e) {
+                Log.e(e.toString());
             }
         });
     }

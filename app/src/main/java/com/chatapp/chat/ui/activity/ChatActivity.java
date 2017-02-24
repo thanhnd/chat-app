@@ -54,6 +54,8 @@ public class ChatActivity extends BaseActivity implements OnImagePickedListener 
     private static final int REQUEST_CODE_ATTACHMENT = 721;
     private static final int REQUEST_CODE_SELECT_PEOPLE = 752;
 
+    private static final String ARG_USER = "user";
+
     private static final String PROPERTY_SAVE_TO_HISTORY = "save_to_history";
 
     public static final String EXTRA_DIALOG_ID = "dialogId";
@@ -96,6 +98,12 @@ public class ChatActivity extends BaseActivity implements OnImagePickedListener 
         initChatConnectionListener();
 
         initViews();
+
+        Intent intent = getIntent();
+        QBUser qbUser = (QBUser) intent.getSerializableExtra(ARG_USER);
+        if (qbUser != null) {
+            updateDialog(qbUser);
+        }
     }
 
     @Override
@@ -220,7 +228,7 @@ public class ChatActivity extends BaseActivity implements OnImagePickedListener 
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE_SELECT_PEOPLE) {
@@ -427,6 +435,12 @@ public class ChatActivity extends BaseActivity implements OnImagePickedListener 
                     }
                 }
         );
+    }
+
+    private void updateDialog(final QBUser user) {
+        ArrayList<QBUser> users = new ArrayList<>();
+        users.add(user);
+        updateDialog(users);
     }
 
     private void loadDialogUsers() {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.chatapp.R;
+import com.chatapp.chat.utils.SharedPreferencesUtil;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.home.HomeActivity;
 import com.chatapp.mvp.onboarding.OnboardingActivity;
@@ -11,6 +12,11 @@ import com.chatapp.mvp.updatebasicprofile.UpdateBasicProfileActivity;
 import com.chatapp.mvp.verify.VerifyActivity;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.utils.AccountUtils;
+import com.chatapp.utils.Log;
+import com.quickblox.auth.QBAuth;
+import com.quickblox.auth.model.QBSession;
+import com.quickblox.core.QBEntityCallback;
+import com.quickblox.core.exception.QBResponseException;
 
 public class SplashActivity extends BaseActivity implements SplashMvp.SplashView {
 
@@ -21,7 +27,6 @@ public class SplashActivity extends BaseActivity implements SplashMvp.SplashView
 
         presenter = new PresenterImpl(this);
         presenter.getListCommonParams();
-
     }
 
     @Override
@@ -30,11 +35,20 @@ public class SplashActivity extends BaseActivity implements SplashMvp.SplashView
         if (AccountUtils.isLoggedIn()) {
             LogInModel logInModel = AccountUtils.getLogInModel();
             if (logInModel.isConfirm()) {
+                if (!SharedPreferencesUtil.hasQbUser()) {
+                    createSession();
+                }
+
                 intent = new Intent(this, HomeActivity.class);
+
             } else if (logInModel.isVerified()) {
+
                 intent = new Intent(this, UpdateBasicProfileActivity.class);
+
             } else if (logInModel.isNotVerify()) {
+
                 intent = new Intent(this, VerifyActivity.class);
+
             }
         }
 
@@ -58,5 +72,19 @@ public class SplashActivity extends BaseActivity implements SplashMvp.SplashView
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
         finish();
+    }
+
+    private void createSession() {
+        QBAuth.createSession().performAsync(new QBEntityCallback<QBSession>() {
+            @Override
+            public void onSuccess(QBSession result, Bundle params) {
+                Log.d("Login success");
+            }
+
+            @Override
+            public void onError(QBResponseException e) {
+                Log.d("Login Failure");
+            }
+        });
     }
 }

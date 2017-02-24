@@ -1,37 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/ListItem"
     android:id="@+id/root"
-    android:paddingLeft="@dimen/list_item_side_margin"
-    android:paddingRight="@dimen/list_item_side_margin"
+    style="@style/ListItem"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    tools:background="@drawable/bg"
     tools:ignore="RtlHardcoded">
 
-    <ImageView
-        android:id="@+id/image_dialog_icon"
-        style="@style/ListItemIconStyle"
-        tools:ignore="ContentDescription"
-        tools:src="@drawable/ic_chat_group" />
+    <RelativeLayout
+        android:layout_width="@dimen/list_img_boundary_diameter_small"
+        android:layout_height="@dimen/list_img_boundary_diameter_small"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+
+        <ImageView
+            android:id="@+id/image_dialog_icon"
+            android:layout_width="@dimen/list_img_diameter_with_border_small"
+            android:layout_height="@dimen/list_img_diameter_with_border_small"
+            android:layout_gravity="center"
+            android:background="@drawable/circle_purge"
+            android:padding="2dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_user_avatar" />
+
+        <ImageView
+            android:id="@+id/iv_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/image_dialog_icon"
+            android:layout_marginBottom="-6dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_status_favorite_small" />
+
+        <ImageView
+            android:id="@+id/iv_friend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/iv_favorite"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="0dp"
+            android:src="@drawable/ic_status_friend_small" />
+
+        <ImageView
+            android:id="@+id/iv_block"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/iv_friend"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="-5dp"
+            android:src="@drawable/ic_status_block_small" />
+    </RelativeLayout>
 
     <LinearLayout
         style="@style/WeightWidth"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/text_dialog_name"
+                style="@style/DialogNameStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingRight="10dp"
+                tools:text="Room name" />
+
+            <TextView
+                android:textColor="@color/text_title5"
+                android:id="@+id/text_dialog_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="SEP 1" />
+        </LinearLayout>
+
         <TextView
-            android:id="@+id/text_dialog_name"
-            style="@style/DialogNameStyle"
-            tools:text="Room name" />
+            android:id="@+id/tv_online_status"
+            style="@style/App_Text.OnlineStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Online"
+            android:textSize="11sp" />
 
         <TextView
             android:id="@+id/text_dialog_last_message"
             style="@style/DialogLastMessageStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             tools:text="Long last message to see how margin on the right side works" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/text_dialog_unread_count"
-        style="@style/DialogUnreadCounterStyle"
-        android:visibility="visible"
-        tools:text="4" />
 </LinearLayout>
