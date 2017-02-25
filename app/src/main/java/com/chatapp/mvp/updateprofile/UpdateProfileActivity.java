@@ -22,14 +22,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chatapp.R;
-import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.chat.utils.chat.ChatHelper;
+import com.chatapp.mvp.base.BaseChatActivity;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.ParamModel;
 import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.CacheUtil;
 import com.chatapp.utils.DateUtils;
 import com.chatapp.utils.DialogUtils;
+import com.chatapp.utils.Log;
 import com.chatapp.views.fragments.ChooseHeightAndWeightDialogFragment;
+import com.quickblox.core.QBEntityCallback;
+import com.quickblox.core.exception.QBResponseException;
+import com.quickblox.core.server.Performer;
+import com.quickblox.users.QBUsers;
+import com.quickblox.users.model.QBUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
@@ -42,7 +49,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class UpdateProfileActivity extends BaseActivity implements UpdateProfileMvp.View {
+public class UpdateProfileActivity extends BaseChatActivity implements UpdateProfileMvp.View {
 
     private static final int SELECT_PICTURE = 1;
     private static final int PERMISSION_READ_EXTERNAL_STORAGE = 101;
@@ -73,6 +80,7 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
     private int height, weight;
     ParamModel ethnicityParam, bodyTypeParam, myTribesParam, relationshipStatusParam;
     private List<ParamModel> ethnicities, bodyTypes, tribes, relationships;
+    private String displayName;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -259,8 +267,11 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
     @OnClick(R.id.btn_submit)
     void clickSubmit() {
         Map<String, Object> request = new HashMap();
-        String displayName = edtDisplayName.getText().toString();
-        request.put("display_name", displayName);
+        displayName = edtDisplayName.getText().toString().trim();
+
+        if (!TextUtils.isEmpty(displayName)) {
+            request.put("display_name", displayName);
+        }
 
         if (timestampDob > 0) {
             request.put("birthday", timestampDob);
@@ -330,6 +341,31 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
 
     @Override
     public void onUpdateProfileSuccess() {
+
+        if (!TextUtils.isEmpty(displayName)
+                && !displayName.equals(userModel.getDisplayName())) {
+            final QBUser currentUser = ChatHelper.getCurrentUser();
+
+            QBUser qbUser = new QBUser();
+            qbUser.setId(currentUser.getId());
+            qbUser.setFullName(displayName);
+            Performer<QBUser> qbUserPerformer = QBUsers.updateUser(qbUser);
+            qbUserPerformer.performAsync(new QBEntityCallback<QBUser>() {
+                @Override
+                public void onSuccess(QBUser qbUser, Bundle bundle) {
+
+                    currentUser.setFullName(displayName);
+
+                    Log.d();
+                }
+
+                @Override
+                public void onError(QBResponseException e) {
+                    Log.e(e);
+                }
+            });
+        }
+
         showDialog("Update Profile", "Successfully update profile");
 
     }
@@ -352,5 +388,10 @@ public class UpdateProfileActivity extends BaseActivity implements UpdateProfile
 
                 break;
         }
+    }
+
+    @Override
+    public void onSessionCreated(boolean success) {
+
     }
 }
