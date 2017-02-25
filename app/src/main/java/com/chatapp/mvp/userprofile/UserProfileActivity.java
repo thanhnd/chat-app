@@ -269,7 +269,7 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
             if (userProfileModel != null) {
                 int chatId = Integer.parseInt(userProfileModel.getChatId());
                 QBUser user = new QBUser(chatId);
-                createDialog(user);
+                createDialog(userProfileModel.getAvatar(), user);
             }
 
         } catch (NumberFormatException e) {

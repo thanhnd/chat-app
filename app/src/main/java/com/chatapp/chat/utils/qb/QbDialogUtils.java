@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static com.quickblox.chat.utils.DialogUtils.buildDialog;
+
 public class QbDialogUtils {
     private static final String TAG = QbDialogUtils.class.getSimpleName();
 
@@ -22,7 +24,13 @@ public class QbDialogUtils {
         QBUser currentUser = ChatHelper.getCurrentUser();
         users.remove(currentUser);
 
-        return DialogUtils.buildDialog(users.toArray(new QBUser[users.size()]));
+        return buildDialog(users.toArray(new QBUser[users.size()]));
+    }
+
+    public static QBChatDialog createDialog(String photo, List<QBUser> users) {
+        QBChatDialog chatDialog = createDialog(users);
+        chatDialog.setPhoto(photo);
+        return chatDialog;
     }
 
     public static List<QBUser> getAddedUsers(QBChatDialog dialog, List<QBUser> currentUsers) {

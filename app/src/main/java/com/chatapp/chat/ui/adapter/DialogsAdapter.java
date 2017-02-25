@@ -10,11 +10,11 @@ import android.widget.TextView;
 import com.chatapp.R;
 import com.chatapp.chat.utils.StringUtils;
 import com.chatapp.chat.utils.qb.QbDialogUtils;
+import com.chatapp.utils.CircleTransform;
 import com.chatapp.utils.DateUtils;
 import com.quickblox.chat.model.QBChatDialog;
-import com.quickblox.chat.model.QBDialogType;
 import com.quickblox.sample.core.ui.adapter.BaseSelectableListAdapter;
-import com.quickblox.sample.core.utils.UiUtils;
+import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 import java.util.List;
@@ -46,12 +46,16 @@ public class DialogsAdapter extends BaseSelectableListAdapter<QBChatDialog> {
         }
 
         QBChatDialog dialog = getItem(position);
-        if (dialog.getType().equals(QBDialogType.GROUP)) {
-            holder.dialogImageView.setBackgroundDrawable(UiUtils.getGreyCircleDrawable());
-            holder.dialogImageView.setImageResource(R.drawable.ic_chat_group);
-        } else {
-            holder.dialogImageView.setBackgroundDrawable(UiUtils.getColorCircleDrawable(position));
-            holder.dialogImageView.setImageDrawable(null);
+
+        if (!TextUtils.isEmpty(dialog.getPhoto())) {
+            Picasso.with(context)
+                    .load(dialog.getPhoto())
+                    .fit()
+                    .centerCrop()
+                    .error(R.drawable.img_user_avatar)
+                    .placeholder(R.drawable.img_user_avatar)
+                    .transform(new CircleTransform())
+                    .into(holder.dialogImageView);
         }
 
         holder.nameTextView.setText(QbDialogUtils.getDialogName(dialog));

@@ -123,15 +123,15 @@ public abstract class BaseChatActivity extends BaseActivity implements QbSession
 //        }
     }
 
-    protected void createDialog(final QBUser user) {
+    protected void createDialog(String photo, final QBUser user) {
         ArrayList<QBUser> users = new ArrayList<>();
         users.add(user);
         users.add(ChatHelper.getCurrentUser());
-        createDialog(users);
+        createDialog(photo, users);
     }
 
-    protected void createDialog(final ArrayList<QBUser> selectedUsers) {
-        ChatHelper.getInstance().createDialogWithSelectedUsers(selectedUsers,
+    protected void createDialog(final String photo, final ArrayList<QBUser> selectedUsers) {
+        ChatHelper.getInstance().createDialogWithSelectedUsers(photo, selectedUsers,
                 new QBEntityCallback<QBChatDialog>() {
                     @Override
                     public void onSuccess(QBChatDialog dialog, Bundle args) {
