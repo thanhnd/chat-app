@@ -50,10 +50,6 @@ public class UserModel implements Serializable {
     @Expose
     private boolean block;
 
-    @SerializedName("chat_id")
-    @Expose
-    private Integer chatId;
-
     public String getUserId() {
         return userId;
     }
@@ -133,11 +129,5 @@ public class UserModel implements Serializable {
         return block;
     }
 
-    public Integer getChatId() {
-        return chatId;
-    }
 
-    public void setChatId(Integer chatId) {
-        this.chatId = chatId;
-    }
 }

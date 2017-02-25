@@ -24,6 +24,7 @@ import com.chatapp.mvp.base.BaseChatActivity;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.service.models.response.UserProfileModel;
+import com.chatapp.utils.Log;
 import com.chatapp.views.UserProfilePropertyView;
 import com.quickblox.users.model.QBUser;
 import com.squareup.picasso.Picasso;
@@ -84,6 +85,7 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
     private UserModel userModel;
     private UserProfileMvp.UserProfilePresent present;
     private boolean isShowAddFriend;
+    private UserProfileModel userProfileModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -214,6 +216,7 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
 
     @Override
     public void onGetUserProfileSuccess(UserProfileModel userProfileModel) {
+        this.userProfileModel = userProfileModel;
         displayUserProfileDetails(userProfileModel);
     }
 
@@ -262,8 +265,16 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
 
     @OnClick(R.id.ib_chat)
     void onClickChat() {
-        QBUser user = new QBUser(userModel.getChatId());
-        createDialog(user);
+        try {
+            if (userProfileModel != null) {
+                int chatId = Integer.parseInt(userProfileModel.getChatId());
+                QBUser user = new QBUser(chatId);
+                createDialog(user);
+            }
+
+        } catch (NumberFormatException e) {
+            Log.e(e);
+        }
     }
 
     @OnClick(R.id.ib_call)

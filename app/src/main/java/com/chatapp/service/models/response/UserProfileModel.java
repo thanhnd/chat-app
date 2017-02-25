@@ -69,6 +69,10 @@ public class UserProfileModel {
     @Expose
     private String linkin;
 
+    @SerializedName("chat_id")
+    @Expose
+    private String chatId;
+
     public String getDisplayName() {
         return displayName;
     }
@@ -259,6 +263,14 @@ public class UserProfileModel {
 
     public int getAge() {
         return DateUtils.getAge(birthday);
+    }
+
+    public String getChatId() {
+        return chatId;
+    }
+
+    public void setChatId(String chatId) {
+        this.chatId = chatId;
     }
 }
 
