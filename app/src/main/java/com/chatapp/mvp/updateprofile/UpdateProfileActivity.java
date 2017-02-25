@@ -34,7 +34,6 @@ import com.chatapp.utils.Log;
 import com.chatapp.views.fragments.ChooseHeightAndWeightDialogFragment;
 import com.quickblox.core.QBEntityCallback;
 import com.quickblox.core.exception.QBResponseException;
-import com.quickblox.core.server.Performer;
 import com.quickblox.users.QBUsers;
 import com.quickblox.users.model.QBUser;
 import com.squareup.picasso.Picasso;
@@ -341,33 +340,41 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
 
     @Override
     public void onUpdateProfileSuccess() {
-
-        if (!TextUtils.isEmpty(displayName)
-                && !displayName.equals(userModel.getDisplayName())) {
-            final QBUser currentUser = ChatHelper.getCurrentUser();
-
-            QBUser qbUser = new QBUser();
-            qbUser.setId(currentUser.getId());
-            qbUser.setFullName(displayName);
-            Performer<QBUser> qbUserPerformer = QBUsers.updateUser(qbUser);
-            qbUserPerformer.performAsync(new QBEntityCallback<QBUser>() {
-                @Override
-                public void onSuccess(QBUser qbUser, Bundle bundle) {
-
-                    currentUser.setFullName(displayName);
-
-                    Log.d();
-                }
-
-                @Override
-                public void onError(QBResponseException e) {
-                    Log.e(e);
-                }
-            });
-        }
-
+        updateQuickbloxUser();
         showDialog("Update Profile", "Successfully update profile");
+    }
 
+    private void updateQuickbloxUser() {
+        boolean isNeedUpdate = false;
+        QBUser qbUser = new QBUser();
+        final QBUser currentUser = ChatHelper.getCurrentUser();
+
+        if (currentUser != null) {
+            qbUser.setId(currentUser.getId());
+            if (!TextUtils.isEmpty(displayName)
+                    && !displayName.equals(userModel.getDisplayName())) {
+                qbUser.setFullName(displayName);
+                isNeedUpdate = true;
+
+            }
+
+            if (isNeedUpdate) {
+                QBUsers.updateUser(qbUser).performAsync(new QBEntityCallback<QBUser>() {
+                    @Override
+                    public void onSuccess(QBUser qbUser, Bundle bundle) {
+
+                        currentUser.setFullName(displayName);
+
+                        Log.d();
+                    }
+
+                    @Override
+                    public void onError(QBResponseException e) {
+                        Log.e(e);
+                    }
+                });
+            }
+        }
     }
 
     @Override
