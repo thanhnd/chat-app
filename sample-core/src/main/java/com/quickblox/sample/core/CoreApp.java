@@ -1,10 +1,10 @@
 package com.quickblox.sample.core;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import com.quickblox.core.QBSettings;
 
-public class CoreApp extends Application {
+public class CoreApp extends MultiDexApplication {
 
     private static CoreApp instance;
 

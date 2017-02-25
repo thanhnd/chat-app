@@ -17,6 +17,7 @@ android {
 }
 
 dependencies {
+    compile 'com.android.support:multidex:1.0.1'
     compile ("com.quickblox:quickblox-android-sdk-messages:$rootProject.qbSdkVersion" )
 
     compile "com.google.android.gms:play-services-gcm:${rootProject.playServicesVersion}"

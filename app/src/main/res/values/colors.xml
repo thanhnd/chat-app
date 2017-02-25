@@ -23,4 +23,6 @@
     <color name="text_caption">#7777AC</color>
     <color name="text_title5">#828699</color>
 
+    <color name="divider_color">#33ffffff</color>
+
 </resources>

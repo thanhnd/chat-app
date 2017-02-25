@@ -52,8 +52,11 @@ dependencies {
     compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'joda-time:joda-time:2.9.7'
-//    compile 'com.quickblox:quickblox-android-sdk-chat:3.0'
-//    compile 'com.quickblox:quickblox-android-sdk-content:3.0'
+    compile 'com.quickblox:quickblox-android-sdk-chat:3.0'
+    compile 'com.quickblox:quickblox-android-sdk-content:3.0'
     testCompile 'junit:junit:4.12'
-    compile project(':sample-chat')
+    compile(project(":sample-core"))
+    compile 'com.github.orangegangsters:swipy:1.2.2@aar'
+    compile "com.github.bumptech.glide:glide:${rootProject.glideVersion}"
+    compile "se.emilsjolander:stickylistheaders:${rootProject.stickyListHeaders}"
 }

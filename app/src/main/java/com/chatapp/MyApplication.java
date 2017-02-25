@@ -11,18 +11,10 @@ import com.quickblox.sample.core.CoreApp;
 
 public class MyApplication extends CoreApp {
 
-//    private static MyApplication instance;
-//
-//    public static MyApplication getInstance() {
-//        return instance;
-//    }
-
     @Override
     public void onCreate() {
         super.onCreate();
 
-//        instance = this;
-//
         initCredentials(Config.QB_APP_ID, Config.QB_AUTH_KEY, Config.QB_AUTH_SECRET, Config.QB_ACCOUNT_KEY);
     }
 
@@ -35,9 +27,4 @@ public class MyApplication extends CoreApp {
             //Catch nothing
         }
     }
-
-//    public void initCredentials(String APP_ID, String AUTH_KEY, String AUTH_SECRET, String ACCOUNT_KEY) {
-//        QBSettings.getInstance().init(getApplicationContext(), APP_ID, AUTH_KEY, AUTH_SECRET);
-//        QBSettings.getInstance().setAccountKey(ACCOUNT_KEY);
-//    }
 }
