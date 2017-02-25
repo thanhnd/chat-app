@@ -274,6 +274,8 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
 
         } catch (NumberFormatException e) {
             Log.e(e);
+
+            showErrorDialog("Cannot chat with this user.");
         }
     }
 
