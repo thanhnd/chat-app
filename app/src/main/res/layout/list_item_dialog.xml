@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     style="@style/ListItem"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:padding="10dp"
     tools:background="@drawable/bg"
     tools:ignore="RtlHardcoded">
@@ -34,7 +34,8 @@
             android:layout_alignBottom="@id/image_dialog_icon"
             android:layout_marginBottom="-6dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_status_favorite_small" />
+            android:src="@drawable/ic_status_favorite_small"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/iv_friend"
@@ -43,7 +44,8 @@
             android:layout_alignBottom="@id/iv_favorite"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="0dp"
-            android:src="@drawable/ic_status_friend_small" />
+            android:src="@drawable/ic_status_friend_small"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/iv_block"
@@ -52,7 +54,8 @@
             android:layout_alignBottom="@id/iv_friend"
             android:layout_marginBottom="14dp"
             android:layout_marginLeft="-5dp"
-            android:src="@drawable/ic_status_block_small" />
+            android:src="@drawable/ic_status_block_small"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <LinearLayout
@@ -76,10 +79,10 @@
                 tools:text="Room name" />
 
             <TextView
-                android:textColor="@color/text_title5"
                 android:id="@+id/text_dialog_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text_title5"
                 tools:text="SEP 1" />
         </LinearLayout>
 
