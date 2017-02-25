@@ -4,7 +4,7 @@ import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 
-import com.chatapp.chat.App;
+import com.chatapp.MyApplication;
 import com.chatapp.R;
 
 import org.jivesoftware.smack.ConnectionListener;
@@ -37,7 +37,7 @@ public class VerboseQbChatConnectionListener implements ConnectionListener {
     @Override
     public void connectionClosedOnError(final Exception e) {
         Log.i(TAG, "connectionClosedOnError(): " + e.getLocalizedMessage());
-        snackbar = Snackbar.make(rootView, App.getInstance().getString(R.string.connection_error), Snackbar.LENGTH_INDEFINITE);
+        snackbar = Snackbar.make(rootView, MyApplication.getInstance().getString(R.string.connection_error), Snackbar.LENGTH_INDEFINITE);
         snackbar.show();
     }
 
@@ -45,7 +45,7 @@ public class VerboseQbChatConnectionListener implements ConnectionListener {
     public void reconnectingIn(final int seconds) {
         if (seconds % 5 == 0 && seconds != 0) {
             Log.i(TAG, "reconnectingIn(): " + seconds);
-            snackbar = Snackbar.make(rootView, App.getInstance().getString(R.string.reconnect_alert, seconds), Snackbar.LENGTH_INDEFINITE);
+            snackbar = Snackbar.make(rootView, MyApplication.getInstance().getString(R.string.reconnect_alert, seconds), Snackbar.LENGTH_INDEFINITE);
             snackbar.show();
         }
     }

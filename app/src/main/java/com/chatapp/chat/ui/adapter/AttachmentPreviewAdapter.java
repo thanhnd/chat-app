@@ -11,13 +11,13 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
+import com.chatapp.MyApplication;
+import com.chatapp.R;
+import com.chatapp.chat.utils.chat.ChatHelper;
 import com.quickblox.chat.model.QBAttachment;
 import com.quickblox.core.QBEntityCallback;
 import com.quickblox.core.QBProgressCallback;
 import com.quickblox.core.exception.QBResponseException;
-import com.chatapp.chat.App;
-import com.chatapp.R;
-import com.chatapp.chat.utils.chat.ChatHelper;
 import com.quickblox.sample.core.ui.adapter.BaseListAdapter;
 import com.quickblox.sample.core.utils.ResourceUtils;
 
@@ -105,7 +105,7 @@ public class AttachmentPreviewAdapter extends BaseListAdapter<File> {
         }
 
         final File attachmentFile = getItem(position);
-        Glide.with(App.getInstance())
+        Glide.with(MyApplication.getInstance())
                 .load(attachmentFile)
                 .override(ResourceUtils.getDimen(R.dimen.chat_attachment_preview_size),
                         ResourceUtils.getDimen(R.dimen.chat_attachment_preview_size))

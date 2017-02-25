@@ -1,6 +1,5 @@
 package com.chatapp.chat.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -11,24 +10,20 @@ import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.View;
 
-import com.quickblox.core.QBEntityCallback;
-import com.quickblox.core.exception.QBResponseException;
 import com.chatapp.R;
 import com.chatapp.chat.utils.SharedPreferencesUtil;
 import com.chatapp.chat.utils.chat.ChatHelper;
 import com.chatapp.chat.utils.qb.QbAuthUtils;
 import com.chatapp.chat.utils.qb.QbSessionStateCallback;
+import com.quickblox.core.QBEntityCallback;
+import com.quickblox.core.exception.QBResponseException;
 import com.quickblox.sample.core.ui.activity.CoreBaseActivity;
 import com.quickblox.sample.core.ui.dialog.ProgressDialogFragment;
 import com.quickblox.sample.core.utils.ErrorUtils;
 import com.quickblox.users.model.QBUser;
 
-import java.util.ArrayList;
-
 public abstract class BaseActivity extends CoreBaseActivity implements QbSessionStateCallback {
 
-    public static final int REQUEST_SELECT_PEOPLE = 174;
-    public static final int REQUEST_DIALOG_ID_FOR_UPDATE = 165;
     private static final String TAG = BaseActivity.class.getSimpleName();
 
     private static final Handler mainThreadHandler = new Handler(Looper.getMainLooper());
@@ -116,37 +111,5 @@ public abstract class BaseActivity extends CoreBaseActivity implements QbSession
                 onSessionCreated(false);
             }
         });
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_SELECT_PEOPLE) {
-                ArrayList<QBUser> selectedUsers = (ArrayList<QBUser>) data
-                        .getSerializableExtra(com.chatapp.chat.ui.activity.SelectUsersActivity.EXTRA_QB_USERS);
-
-//                if (isPrivateDialogExist(selectedUsers)){
-//                    selectedUsers.remove(ChatHelper.getCurrentUser());
-//                    QBChatDialog existingPrivateDialog = QbDialogHolder.getInstance().getPrivateDialogWithUser(selectedUsers.get(0));
-//                    isProcessingResultInProgress = false;
-//                    com.chatapp.chat.ui.activity.ChatActivity.startForResult(DialogsActivity.this, REQUEST_DIALOG_ID_FOR_UPDATE, existingPrivateDialog.getDialogId());
-//                } else {
-//                    ProgressDialogFragment.show(getSupportFragmentManager(), R.string.create_chat);
-//                    createDialog(selectedUsers);
-//                }
-            } else if (requestCode == REQUEST_DIALOG_ID_FOR_UPDATE) {
-//                if (data != null) {
-//                    String dialogId = data.getStringExtra(com.chatapp.chat.ui.activity.ChatActivity.EXTRA_DIALOG_ID);
-//                    loadUpdatedDialog(dialogId);
-//                } else {
-//                    isProcessingResultInProgress = false;
-//                    updateDialogsList();
-//                }
-            }
-        }
-//        else {
-//            updateDialogsAdapter();
-//        }
     }
 }
