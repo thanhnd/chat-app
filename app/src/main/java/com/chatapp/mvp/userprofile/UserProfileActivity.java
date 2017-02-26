@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.chatapp.R;
 import com.chatapp.chat.ui.activity.CallActivity;
+import com.chatapp.chat.utils.Consts;
 import com.chatapp.chat.utils.PushNotificationSender;
 import com.chatapp.chat.utils.WebRtcSessionManager;
 import com.chatapp.chat.utils.chat.ChatHelper;
@@ -295,6 +296,9 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
 
         } else {
             onClickCall(false);
+            if (checker.lacksPermissions(Consts.PERMISSIONS[1])) {
+                startPermissionsActivity(true);
+            }
         }
     }
 
@@ -304,6 +308,9 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
             showAddFriendView();
         } else {
             onClickCall(true);
+            if (checker.lacksPermissions(Consts.PERMISSIONS)) {
+                startPermissionsActivity(false);
+            }
         }
     }
 

@@ -1,12 +1,14 @@
 package com.chatapp.mvp.base;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 
 import com.chatapp.R;
+import com.chatapp.chat.ui.activity.PermissionsActivity;
+import com.chatapp.chat.utils.Consts;
+import com.chatapp.chat.utils.PermissionsChecker;
 import com.chatapp.chat.utils.SharedPreferencesUtil;
 import com.chatapp.chat.utils.chat.ChatHelper;
 import com.chatapp.chat.utils.qb.QbAuthUtils;
@@ -29,6 +31,7 @@ public abstract class BaseChatActivity extends BaseActivity implements QbSession
 
     protected boolean isAppSessionActive;
     private boolean isProcessingResultInProgress;
+    protected PermissionsChecker checker;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +57,8 @@ public abstract class BaseChatActivity extends BaseActivity implements QbSession
                 }
             }
         });
+
+        checker = new PermissionsChecker(getApplicationContext());
     }
 
 
@@ -91,38 +96,6 @@ public abstract class BaseChatActivity extends BaseActivity implements QbSession
         });
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_SELECT_PEOPLE) {
-                ArrayList<QBUser> selectedUsers = (ArrayList<QBUser>) data
-                        .getSerializableExtra(com.chatapp.chat.ui.activity.SelectUsersActivity.EXTRA_QB_USERS);
-
-//                if (isPrivateDialogExist(selectedUsers)){
-//                    selectedUsers.remove(ChatHelper.getCurrentUser());
-//                    QBChatDialog existingPrivateDialog = QbDialogHolder.getInstance().getPrivateDialogWithUser(selectedUsers.get(0));
-//                    isProcessingResultInProgress = false;
-//                    com.chatapp.chat.ui.activity.ChatActivity.startForResult(DialogsActivity.this, REQUEST_DIALOG_ID_FOR_UPDATE, existingPrivateDialog.getDialogId());
-//                } else {
-//                    ProgressDialogFragment.show(getSupportFragmentManager(), R.string.create_chat);
-//                    createDialog(selectedUsers);
-//                }
-            } else if (requestCode == REQUEST_DIALOG_ID_FOR_UPDATE) {
-//                if (data != null) {
-//                    String dialogId = data.getStringExtra(com.chatapp.chat.ui.activity.ChatActivity.EXTRA_DIALOG_ID);
-//                    loadUpdatedDialog(dialogId);
-//                } else {
-//                    isProcessingResultInProgress = false;
-//                    updateDialogsList();
-//                }
-            }
-        }
-//        else {
-//            updateDialogsAdapter();
-//        }
-    }
-
     protected void createDialog(String photo, final QBUser user) {
         ArrayList<QBUser> users = new ArrayList<>();
         users.add(user);
@@ -148,5 +121,9 @@ public abstract class BaseChatActivity extends BaseActivity implements QbSession
                     }
                 }
         );
+    }
+
+    protected void startPermissionsActivity(boolean checkOnlyAudio) {
+        PermissionsActivity.startActivity(this, checkOnlyAudio, Consts.PERMISSIONS);
     }
 }

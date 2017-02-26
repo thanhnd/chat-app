@@ -3,6 +3,7 @@ package com.chatapp;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
+import com.chatapp.chat.utils.Consts;
 import com.quickblox.sample.core.CoreApp;
 
 /**
@@ -15,7 +16,7 @@ public class MyApplication extends CoreApp {
     public void onCreate() {
         super.onCreate();
 
-        initCredentials(Config.QB_APP_ID, Config.QB_AUTH_KEY, Config.QB_AUTH_SECRET, Config.QB_ACCOUNT_KEY);
+        initCredentials(Consts.QB_APP_ID, Consts.QB_AUTH_KEY, Consts.QB_AUTH_SECRET, Consts.QB_ACCOUNT_KEY);
     }
 
     @Override
