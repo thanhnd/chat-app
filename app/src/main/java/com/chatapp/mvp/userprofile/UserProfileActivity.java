@@ -20,6 +20,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chatapp.R;
+import com.chatapp.chat.ui.activity.CallActivity;
+import com.chatapp.chat.utils.PushNotificationSender;
+import com.chatapp.chat.utils.WebRtcSessionManager;
+import com.chatapp.chat.utils.chat.ChatHelper;
 import com.chatapp.mvp.base.BaseChatActivity;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.models.response.UserModel;
@@ -27,7 +31,12 @@ import com.chatapp.service.models.response.UserProfileModel;
 import com.chatapp.utils.Log;
 import com.chatapp.views.UserProfilePropertyView;
 import com.quickblox.users.model.QBUser;
+import com.quickblox.videochat.webrtc.QBRTCClient;
+import com.quickblox.videochat.webrtc.QBRTCSession;
+import com.quickblox.videochat.webrtc.QBRTCTypes;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -284,6 +293,8 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
         if (!userModel.isFriend()) {
             showAddFriendView();
 
+        } else {
+            onClickCall(false);
         }
     }
 
@@ -291,6 +302,8 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
     void onClickVideo() {
         if (!userModel.isFriend()) {
             showAddFriendView();
+        } else {
+            onClickCall(true);
         }
     }
 
@@ -346,5 +359,40 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
     @Override
     public void onSessionCreated(boolean success) {
 
+    }
+
+    private void onClickCall(boolean isVideoCall) {
+
+        try {
+            if (userProfileModel != null) {
+                int chatId = Integer.parseInt(userProfileModel.getChatId());
+                startCall(isVideoCall, chatId);
+            }
+
+        } catch (NumberFormatException e) {
+            Log.e(e);
+
+            showErrorDialog("Cannot chat with this user.");
+        }
+    }
+
+    private void startCall(boolean isVideoCall, int chatId) {
+        Log.d("startCall()");
+        ArrayList<Integer> opponentsList = new ArrayList<>();
+        opponentsList.add(chatId);
+        QBRTCTypes.QBConferenceType conferenceType = isVideoCall
+                ? QBRTCTypes.QBConferenceType.QB_CONFERENCE_TYPE_VIDEO
+                : QBRTCTypes.QBConferenceType.QB_CONFERENCE_TYPE_AUDIO;
+
+        QBRTCClient qbrtcClient = QBRTCClient.getInstance(getApplicationContext());
+
+        QBRTCSession newQbRtcSession = qbrtcClient.createNewSessionWithOpponents(opponentsList, conferenceType);
+
+        WebRtcSessionManager.getInstance(this).setCurrentSession(newQbRtcSession);
+        QBUser currentUser = ChatHelper.getCurrentUser();
+        PushNotificationSender.sendPushMessage(opponentsList, currentUser.getFullName());
+
+        CallActivity.start(this, false);
+        Log.d("conferenceType = " + conferenceType);
     }
 }

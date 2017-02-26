@@ -70,6 +70,8 @@
 
         <activity android:name=".chat.ui.activity.AttachmentImageActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".chat.ui.activity.CallActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
