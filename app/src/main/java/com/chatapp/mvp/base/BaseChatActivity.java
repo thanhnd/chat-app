@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 
 import com.chatapp.R;
+import com.chatapp.chat.ui.activity.ChatActivity;
 import com.chatapp.chat.ui.activity.PermissionsActivity;
 import com.chatapp.chat.utils.Consts;
 import com.chatapp.chat.utils.PermissionsChecker;
@@ -109,7 +110,7 @@ public abstract class BaseChatActivity extends BaseActivity implements QbSession
                     @Override
                     public void onSuccess(QBChatDialog dialog, Bundle args) {
                         isProcessingResultInProgress = false;
-                        com.chatapp.chat.ui.activity.ChatActivity.startForResult(BaseChatActivity.this,
+                        ChatActivity.startForResult(BaseChatActivity.this,
                                 REQUEST_DIALOG_ID_FOR_UPDATE, dialog.getDialogId());
                         ProgressDialogFragment.hide(getSupportFragmentManager());
                     }

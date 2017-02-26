@@ -92,7 +92,7 @@
         </receiver>
         <service android:name=".chat.services.CallService" />
         <service
-            android:name=".chat.gcm.GcmPushListenerService"
+            android:name=".chat.services.gcm.GcmPushListenerService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -100,7 +100,7 @@
         </service>
 
         <service
-            android:name=".chat.gcm.GcmPushInstanceIDService"
+            android:name=".chat.services.gcm.GcmPushInstanceIDService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID" />

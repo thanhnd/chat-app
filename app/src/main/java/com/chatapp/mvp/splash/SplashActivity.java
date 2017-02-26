@@ -37,6 +37,8 @@ public class SplashActivity extends BaseActivity implements SplashMvp.SplashView
             if (logInModel.isConfirm()) {
                 if (!SharedPreferencesUtil.hasQbUser()) {
                     createSession();
+                } else {
+                    startLoginService(SharedPreferencesUtil.getQbUser());
                 }
 
                 intent = new Intent(this, HomeActivity.class);

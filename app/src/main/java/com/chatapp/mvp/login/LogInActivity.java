@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 
 import com.chatapp.R;
+import com.chatapp.chat.utils.SharedPreferencesUtil;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.forgotpassword.ForgotPasswordActivity;
 import com.chatapp.mvp.home.HomeActivity;
@@ -123,6 +124,8 @@ public class LogInActivity extends BaseActivity implements LoginMvp.LogInView {
 
     @Override
     public void onLogInSuccess() {
+        startLoginService(SharedPreferencesUtil.getQbUser());
+
         Intent intent = new Intent(this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);

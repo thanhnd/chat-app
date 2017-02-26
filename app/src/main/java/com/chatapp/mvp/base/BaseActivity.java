@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.chatapp.chat.services.CallService;
 import com.chatapp.chat.utils.SharedPreferencesUtil;
 import com.chatapp.chat.utils.chat.ChatHelper;
 import com.chatapp.mvp.login.LogInActivity;
@@ -15,6 +16,7 @@ import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.DialogUtils;
 import com.quickblox.core.QBEntityCallback;
 import com.quickblox.core.exception.QBResponseException;
+import com.quickblox.users.model.QBUser;
 
 import java.util.Calendar;
 
@@ -124,5 +126,9 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
 //                reconnectToChatLogout(SharedPreferencesUtil.getQbUser());
             }
         });
+    }
+
+    protected void startLoginService(QBUser qbUser) {
+        CallService.start(this, qbUser);
     }
 }
