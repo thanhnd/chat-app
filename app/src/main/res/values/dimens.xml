@@ -48,4 +48,5 @@
     <dimen name="list_img_boundary_diameter_small">57dp</dimen>
     <dimen name="form_padding">34dp</dimen>
     <dimen name="avatar_border">2dp</dimen>
+    <dimen name="submit_btn_bg_corner_radius">4dp</dimen>
 </resources>

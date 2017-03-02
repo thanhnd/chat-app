@@ -18,6 +18,7 @@
         app:ci_drawable_unselected="@drawable/circle_black"
         app:ci_width="7dp"
         app:ci_height="7dp"
+        android:layout_marginTop="24dp"
         android:layout_height="48dp"/>
 
 </RelativeLayout>
