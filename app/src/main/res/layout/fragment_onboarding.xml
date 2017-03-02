@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <com.chatapp.views.LoopViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="170dp" />
+        android:layout_height="200dp" />
 
     <me.relex.circleindicator.CircleIndicator
         android:id="@+id/indicator"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="bottom"/>
+        android:layout_alignBottom="@id/viewpager"
+        app:ci_drawable="@drawable/circle_purge"
+        app:ci_drawable_unselected="@drawable/circle_black"
+        app:ci_width="7dp"
+        app:ci_height="7dp"
+        android:layout_height="48dp"/>
 
-</LinearLayout>
+</RelativeLayout>

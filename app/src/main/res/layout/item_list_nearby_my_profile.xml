@@ -21,7 +21,7 @@
                 android:layout_width="@dimen/list_img_diameter_with_border"
                 android:layout_height="@dimen/list_img_diameter_with_border"
                 android:layout_gravity="center"
-                android:background="@drawable/circle_purge"
+                android:background="@drawable/circle_light_purge"
                 android:padding="@dimen/avatar_border"
                 android:src="@drawable/img_user_avatar" />
         </RelativeLayout>

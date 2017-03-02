@@ -36,7 +36,7 @@
 
         <activity
             android:name=".mvp.onboarding.OnboardingActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/OnboardingTheme" />
         <activity
             android:name=".mvp.login.LogInActivity"
             android:theme="@style/AppTheme.NoActionBar" />

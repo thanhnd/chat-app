@@ -21,7 +21,7 @@ public class OnboardingPagerAdapter extends PagerAdapter {
         this.context = context;
         items = new ArrayList<>();
         items.add(new OnboardingItem("FREE MESSAGING", "Make your chats come alive with an endless variety ..."));
-        items.add(new OnboardingItem("FREE VOICE & VIDEO CALLS", "Talk with your AppName friends whenever you want for free!"));
+        items.add(new OnboardingItem("FREE CALL, VIDEO CALL", "Talk with your AppName friends whenever you want for free!"));
         items.add(new OnboardingItem("WELCOME TO THE APPNAME", "Go anywhere & always take AppName with you."));
     }
 

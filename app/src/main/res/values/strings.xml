@@ -38,7 +38,7 @@
     <string name="login_to_create_account"><u>Create Account</u></string>
     <string name="register_by_email_create_account">Create Account</string>
     <string name="submit">Complete</string>
-    <string name="login_here"> <u>Login here</u></string>
+    <string name="login_here">Login here</string>
     <string name="register_with_your_phone"><![CDATA[<u>Register with your phone</u>]]></string>
     <string name="register_with_your_email"><![CDATA[<u>Register with your email</u>]]></string>
     <string name="agree_to_terms_policies"><![CDATA[<font color=#a85e91>By registering, you agree to our</font> <u>Terms of use & Policies</u>.]]></string>
@@ -152,5 +152,6 @@
     <string name="btn_go_back_and_login">Go back and login</string>
     <string name="forgot_password_success">New password successfully set up.</string>
     <string name="phone_number">Phone Number</string>
+    <string name="join_us">JOIN US</string>
 
 </resources>

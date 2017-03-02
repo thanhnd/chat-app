@@ -15,7 +15,7 @@
     <color name="dark_purge">#663366</color>
     <color name="light_purge">#C97AB1</color>
     <color name="light_purge_transparent">#88C97AB1</color>
-    <color name="purge">#8F2E72</color>
+    <color name="purge">#c35aaf</color>
 
     <color name="edit_text_color">@color/light_purge</color>
     <color name="edit_text_hint_color">@color/light_purge</color>
