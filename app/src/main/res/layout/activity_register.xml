@@ -24,6 +24,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                tools:visibility="gone"
                 android:id="@+id/v_register_by_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,10 +47,19 @@
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
                     android:maxLines="1" />
+                <TextView
+                    android:id="@+id/tv_error_email"
+                    style="@style/App_Text.Error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    tools:text="Please enter your email." />
 
             </LinearLayout>
 
             <LinearLayout
+                tools:visibility="visible"
                 android:id="@+id/v_register_by_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,6 +87,14 @@
                         android:duplicateParentState="true"
                         android:hint="@string/register_country_hint"
                         tools:text="AF +93 | Afganistan" />
+                    <TextView
+                        android:id="@+id/tv_error_country"
+                        style="@style/App_Text.Error"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        tools:text="Please enter your country." />
 
                 </LinearLayout>
 
@@ -101,6 +119,14 @@
                         android:imeOptions="actionNext"
                         android:inputType="phone"
                         android:maxLines="1" />
+                    <TextView
+                        android:id="@+id/tv_error_phone"
+                        style="@style/App_Text.Error"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        tools:text="Please enter your phone number." />
 
                 </LinearLayout>
             </LinearLayout>
@@ -128,6 +154,14 @@
                     android:hint="@string/register_password_hint"
                     android:imeOptions="actionDone"
                     android:maxLines="1" />
+                <TextView
+                    android:id="@+id/tv_error_password"
+                    style="@style/App_Text.Error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    tools:text="Please enter your password." />
             </LinearLayout>
 
             <Button

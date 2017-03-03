@@ -3,12 +3,16 @@ package com.chatapp.mvp.register;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Patterns;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.chatapp.Config;
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.listcountries.ListCountriesActivity;
@@ -39,6 +43,15 @@ public class RegisterActivity extends BaseActivity implements RegisterMvp.Regist
     @Bind(R.id.edt_password)
     EditText edtPassword;
 
+    @Bind(R.id.tv_error_password)
+    TextView tvPasswordError;
+    @Bind(R.id.tv_error_email)
+    TextView tvEmailError;
+    @Bind(R.id.tv_error_phone)
+    TextView tvPhoneError;
+    @Bind(R.id.tv_error_country)
+    TextView tvCountryError;
+
     @Bind(R.id.btn_switch_register_type)
     Button btnSwitchRegisterType;
     @Bind(R.id.btn_link_to_agree_terms_policies)
@@ -60,6 +73,17 @@ public class RegisterActivity extends BaseActivity implements RegisterMvp.Regist
         ButterKnife.bind(this);
 
         edtPassword.setTransformationMethod(new PasswordTransformationMethod());
+        edtPassword.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    processRegister();
+
+                    return true;
+                }
+
+                return false;
+            }
+        });
 
         btnLinkToAgreeTermAndPolicies.setText(Html.fromHtml(getString(R.string.agree_to_terms_policies)));
         btnSwitchRegisterType.setText(Html.fromHtml(getString(R.string.register_with_your_phone)));
@@ -82,22 +106,92 @@ public class RegisterActivity extends BaseActivity implements RegisterMvp.Regist
     }
     @OnClick(R.id.btn_submit)
     public void submitRegisterSubmit() {
-        RegisterRequest request = new RegisterRequest();
-        password = edtPassword.getText().toString();
+        processRegister();
+    }
 
-        request.setPassword(password);
-        if(isRegisterByEmail) {
-            email = edtEmail.getText().toString();
-            request.setEmail(email);
+    private void processRegister() {
+        if (validate()) {
+            RegisterRequest request = new RegisterRequest();
+            password = edtPassword.getText().toString().trim();
+
+            request.setPassword(password);
+            if(isRegisterByEmail) {
+                email = edtEmail.getText().toString().trim();
+                request.setEmail(email);
+            } else {
+                if (selectedCountry != null) {
+                    request.setCountry(selectedCountry.getCountryId());
+                    phone = edtPhone.getText().toString();
+                    request.setMobile(phone);
+                }
+            }
+            present.submitRegisterForm(request);
+        }
+
+    }
+
+    private boolean validate() {
+        boolean result = true;
+        String password = edtPassword.getText().toString().trim();
+        if (TextUtils.isEmpty(password)) {
+            tvPasswordError.setText("Please enter your password.");
+            tvPasswordError.setVisibility(View.VISIBLE);
+            edtPassword.requestFocus();
+            result = false;
+        } else if(password.length() < Config.PASSWORD_MIN_LENGTH) {
+            tvPasswordError.setText("Password at least 8 characters.");
+            tvPasswordError.setVisibility(View.VISIBLE);
+            edtPassword.requestFocus();
+            result = false;
         } else {
-            if (selectedCountry != null) {
-                request.setCountry(selectedCountry.getCountryId());
-                phone = edtPhone.getText().toString();
-                request.setMobile(phone);
+            tvPasswordError.setVisibility(View.GONE);
+        }
+
+        if (isRegisterByEmail) {
+            email = edtEmail.getText().toString().trim();
+            if (TextUtils.isEmpty(email)) {
+                tvEmailError.setText("Please enter your email address.");
+                tvEmailError.setVisibility(View.VISIBLE);
+                edtEmail.requestFocus();
+                result = false;
+            } else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                tvEmailError.setText("Please enter a valid email address.");
+                tvEmailError.setVisibility(View.VISIBLE);
+                edtEmail.requestFocus();
+                result = false;
+
+            } else {
+                tvEmailError.setVisibility(View.GONE);
+            }
+
+        } else {
+            phone = edtPhone.getText().toString().trim();
+            if (TextUtils.isEmpty(phone)) {
+                tvPhoneError.setText("Please enter your phone number.");
+                tvPhoneError.setVisibility(View.VISIBLE);
+                edtPhone.requestFocus();
+                result = false;
+            } else if (!Patterns.PHONE.matcher(phone).matches()) {
+                tvPhoneError.setText("Please enter a valid phone number.");
+                tvPhoneError.setVisibility(View.VISIBLE);
+                edtPhone.requestFocus();
+                result = false;
+            } else {
+                tvPhoneError.setVisibility(View.GONE);
+            }
+
+            if (selectedCountry == null) {
+                tvCountryError.setText("Please choose country code");
+                tvCountryError.setVisibility(View.VISIBLE);
+                result = false;
+            } else {
+                tvCountryError.setVisibility(View.GONE);
             }
         }
-        present.submitRegisterForm(request);
+
+        return result;
     }
+
     @OnClick(R.id.edt_country)
     public void clickCountryCode() {
         Intent intent = new Intent(this, ListCountriesActivity.class);
