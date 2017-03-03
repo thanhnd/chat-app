@@ -3,6 +3,7 @@ package com.chatapp.mvp.verify;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,8 +37,11 @@ public class VerifyActivity extends BaseActivity implements VerifyMvp.VerifyView
     TextView tvSentCodeToPhone;
     @Bind(R.id.edt_code)
     EditText edtCode;
+    @Bind(R.id.tv_error_code)
+    TextView tvCodeError;
     @Bind(R.id.btn_submit)
     Button btnSubmit;
+    
 
     private VerifyMvp.VerifyPresent present;
     private String email, phone;
@@ -47,6 +51,20 @@ public class VerifyActivity extends BaseActivity implements VerifyMvp.VerifyView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify);
         ButterKnife.bind(this);
+
+        edtCode.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    processSubmit();
+
+                    return true;
+                }
+
+                return false;
+            }
+        });
+
+
 
         present = new VerifyPresentImpl(this);
 
@@ -84,8 +102,25 @@ public class VerifyActivity extends BaseActivity implements VerifyMvp.VerifyView
     public void clickSubmit() {
         LogInModel logInModel = AccountUtils.getLogInModel();
         if (logInModel != null && !TextUtils.isEmpty(logInModel.getToken())) {
-            submitVerifyCode();
+            processSubmit();
+        } else {
+            logOut();
         }
+    }
+
+    private void processSubmit() {
+
+        String code = edtCode.getText().toString().trim();
+        if (TextUtils.isEmpty(code)) {
+            tvCodeError.setText("Please enter the verification code.");
+            tvCodeError.setVisibility(View.VISIBLE);
+            edtCode.requestFocus();
+            return;
+        } else {
+            tvCodeError.setVisibility(View.GONE);
+        }
+
+        submitVerifyCode();
     }
 
     @OnClick(R.id.btn_request_send_code)

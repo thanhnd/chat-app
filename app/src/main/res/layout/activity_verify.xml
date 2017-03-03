@@ -56,6 +56,7 @@
                 tools:text="Please enter the 6-Digit code sent to" />
 
             <TextView
+                style="@style/App_Text.Caption"
                 android:id="@+id/tv_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,6 +85,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/verify_email_code_label" />
@@ -95,6 +97,13 @@
                     android:hint="@string/verify_email_code_hint"
                     android:imeOptions="actionDone"
                     android:maxLines="1" />
+                <TextView
+                    android:id="@+id/tv_error_code"
+                    style="@style/App_Text.Error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:text="Please enter the code." />
 
             </LinearLayout>
 
