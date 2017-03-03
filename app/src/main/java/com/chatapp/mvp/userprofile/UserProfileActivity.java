@@ -103,6 +103,12 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
         setContentView(R.layout.activity_user_profile);
         ButterKnife.bind(this);
 
+        Picasso.with(this)
+                .load(R.drawable.london_flat)
+                .error(R.drawable.london_flat)
+                .placeholder(R.drawable.london_flat)
+                .into(ivAvatar);
+
         present = new UserProfilePresenterImpl(this);
 
         setSupportActionBar(toolbar);

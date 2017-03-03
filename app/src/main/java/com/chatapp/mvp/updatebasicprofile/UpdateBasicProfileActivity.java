@@ -63,6 +63,12 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
         setContentView(R.layout.activity_update_basic_profile);
         ButterKnife.bind(this);
 
+        Picasso.with(this)
+                .load(R.drawable.london_flat)
+                .error(R.drawable.london_flat)
+                .placeholder(R.drawable.london_flat)
+                .into(ivAvatar);
+
         presenter = new PresenterImpl(this);
         rgUnitType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

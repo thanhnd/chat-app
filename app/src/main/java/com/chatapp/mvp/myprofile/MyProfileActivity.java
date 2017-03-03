@@ -69,6 +69,12 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
         setContentView(R.layout.activity_my_profile);
         ButterKnife.bind(this);
 
+        Picasso.with(this)
+                .load(R.drawable.london_flat)
+                .error(R.drawable.london_flat)
+                .placeholder(R.drawable.london_flat)
+                .into(ivAvatar);
+
         presenter = new MyProfilePresenterImpl(this);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
