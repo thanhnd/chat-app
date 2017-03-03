@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -84,6 +85,9 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
 
         setContentView(R.layout.activity_forgot_password);
         ButterKnife.bind(this);
+
+        edtPassword.setTransformationMethod(new PasswordTransformationMethod());
+        edtConfirmPassword.setTransformationMethod(new PasswordTransformationMethod());
 
         presenter = new PresenterImpl(this);
 

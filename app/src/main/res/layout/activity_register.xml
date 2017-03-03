@@ -13,8 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="@dimen/padding_default_large"
-        android:paddingRight="@dimen/padding_default_large"
+        android:paddingLeft="@dimen/layout_padding"
+        android:paddingRight="@dimen/layout_padding"
         android:paddingTop="@dimen/padding_default_large">
 
         <LinearLayout
@@ -33,6 +33,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/register_email_label" />
@@ -67,6 +68,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/register_country_code_label" />
+
                     <TextView
                         android:id="@+id/edt_country"
                         style="@style/App_EditText"
@@ -114,6 +116,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/register_password_label" />
@@ -124,7 +127,6 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/register_password_hint"
                     android:imeOptions="actionDone"
-                    android:inputType="textPassword"
                     android:maxLines="1" />
             </LinearLayout>
 
@@ -155,7 +157,7 @@
         android:id="@+id/view_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#330033"
+        android:background="#333366"
         android:orientation="horizontal">
 
         <Button

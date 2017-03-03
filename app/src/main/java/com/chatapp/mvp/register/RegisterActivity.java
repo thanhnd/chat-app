@@ -3,6 +3,7 @@ package com.chatapp.mvp.register;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -57,6 +58,8 @@ public class RegisterActivity extends BaseActivity implements RegisterMvp.Regist
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
+
+        edtPassword.setTransformationMethod(new PasswordTransformationMethod());
 
         btnLinkToAgreeTermAndPolicies.setText(Html.fromHtml(getString(R.string.agree_to_terms_policies)));
         btnSwitchRegisterType.setText(Html.fromHtml(getString(R.string.register_with_your_phone)));

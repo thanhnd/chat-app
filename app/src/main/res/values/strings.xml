@@ -16,32 +16,32 @@
     <!--    Sign in    -->
     <string name="identify_or_password_error_incorrect">Invalid phone/email or password.</string>
     <string name="sign_in_email_label">EMAIL</string>
-    <string name="sign_in_email_hint">Input your email</string>
+    <string name="sign_in_email_hint"><i><small>Input your email</small></i></string>
     <string name="sign_in_phone_label">PHONE NUMBER</string>
-    <string name="sign_in_phone_hint">Input your phone number</string>
+    <string name="sign_in_phone_hint"><i><small>Input your phone number</small></i></string>
     <string name="sign_in_password_label">PASSWORD</string>
-    <string name="sign_in_password_hint">Input your password</string>
+    <string name="sign_in_password_hint"><i><small>Input your password</small></i></string>
     <string name="sign_in_mobile">Mobile</string>
     <string name="sign_in_email">Email</string>
 
     <!--    Register    -->
     <string name="register_email_label">EMAIL</string>
-    <string name="register_email_hint">Please input your email</string>
+    <string name="register_email_hint"><i><small>Please input your email</small></i></string>
     <string name="register_country_code_label">COUNTRY CODE</string>
-    <string name="register_country_hint">Input your country code</string>
-    <string name="register_phone_hint">Input your phone number</string>
+    <string name="register_country_hint"><i><small>Input your country code</small></i></string>
+    <string name="register_phone_hint"><i><small>Input your phone number</small></i></string>
     <string name="register_phone_label">PHONE</string>
     <string name="register_password_label">PASSWORD</string>
-    <string name="register_password_hint">Input your password</string>
+    <string name="register_password_hint"><i><small>Input your password</small></i></string>
     <string name="forgot_password"><u>Forgot password</u></string>
     <string name="create_account"><u>Create Account</u></string>
     <string name="login_to_create_account"><u>Create Account</u></string>
     <string name="register_by_email_create_account">Create Account</string>
     <string name="submit">Complete</string>
     <string name="login_here">Login here</string>
-    <string name="register_with_your_phone"><![CDATA[<u>Register with your phone</u>]]></string>
-    <string name="register_with_your_email"><![CDATA[<u>Register with your email</u>]]></string>
-    <string name="agree_to_terms_policies"><![CDATA[<font color=#a85e91>By registering, you agree to our</font> <u>Terms of use & Policies</u>.]]></string>
+    <string name="register_with_your_phone">Register with your phone</string>
+    <string name="register_with_your_email">Register with your email</string>
+    <string name="agree_to_terms_policies"><![CDATA[<font color=#bbbbbb>By registering, you agree to our</font> <b>Terms of use & Policies</b>.]]></string>
 
 
     <!--    Verify by email    -->
@@ -52,7 +52,7 @@
 
     <!--    Verify by phone    -->
     <string name="verify_phone_code_label">VERIFICATION CODE</string>
-    <string name="verify_phone_code_hint">Input the verification code</string>
+    <string name="verify_phone_code_hint"><i><small>Input the verification code</small></i></string>
 
 
     <!--    Dialog    -->
@@ -71,12 +71,12 @@
     <string name="msg_input_verify_phone_code">To complete the process, enter the 6 digit code</string>
 
     <!--    Profile    -->
-    <string name="profile_display_name_hint">Enter your display name</string>
+    <string name="profile_display_name_hint"><i><small>Enter your display name</small></i></string>
     <string name="profile_day_of_birth_label">DATE OF BIRTH</string>
     <string name="profile_display_name_label">DISPLAY NAME</string>
-    <string name="profile_day_of_birth_hint">Input your date of birth</string>
+    <string name="profile_day_of_birth_hint"><i><small>Input your date of birth</small></i></string>
     <string name="profile_height_and_weight_label">HEIGHT AND WEIGHT</string>
-    <string name="profile_height_and_weight_hint">Input your height and weight</string>
+    <string name="profile_height_and_weight_hint"><i><small>Input your height and weight</small></i></string>
     <string name="unit_system">UNIT SYSTEM</string>
     <string name="update_profile_btn_complete">Complete</string>
     <string name="update_profile_unit_type_type_cm_kg">cm/kg</string>
@@ -88,7 +88,7 @@
     <string name="tab_favorites">FAVORITES</string>
     <string name="cannot_find_country">Cannot find country</string>
     <string name="cannot_find_user">Cannot find user</string>
-    <string name="list_country_hint_search">Search</string>
+    <string name="list_country_hint_search"><i><small>Search</small></i></string>
     <string name="no_name">No Name</string>
 
     <string name="age">age</string>
@@ -104,22 +104,22 @@
     <string name="link_your_networks">Link Your Networks</string>
     <string name="link_your_networks_description">You can always access archived conversations later</string>
     <string name="facebook">facebook</string>
-    <string name="facebook_hint">Enter your facebook username</string>
+    <string name="facebook_hint"><i><small>Enter your facebook username</small></i></string>
     <string name="google">google+</string>
-    <string name="google_hint">Enter your Google+ handler</string>
+    <string name="google_hint"><i><small>Enter your Google+ handler</small></i></string>
     <string name="twitter">twitter</string>
-    <string name="twitter_hint">Enter your Twitter handler</string>
+    <string name="twitter_hint"><i><small>Enter your Twitter handler</small></i></string>
     <string name="instagram">instagram</string>
-    <string name="instagram_hint">Enter your Instagram username</string>
+    <string name="instagram_hint"><i><small>Enter your Instagram username</small></i></string>
     <string name="linkedin">linkedin</string>
-    <string name="linkedin_hint">Enter your LinkedIn username</string>
+    <string name="linkedin_hint"><i><small>Enter your LinkedIn username</small></i></string>
     <string name="save_changes">Save Changes</string>
     <string name="add_friend">Add Friend</string>
     <string name="write_your_greeting">Write your greeting</string>
     <string name="find_me_on">find me on</string>
     <string name="internal_storage">Internal storage</string>
-    <string name="hint_input_your_city">Input your city.</string>
-    <string name="hint_input_your_city_province">Input your city/province</string>
+    <string name="hint_input_your_city"><i><small>Input your city</small></i></string>
+    <string name="hint_input_your_city_province"><i><small>Input your city/province</small></i></string>
     <string name="menu_edit">Edit</string>
     <string name="seclect_all">Seclect All</string>
     <string name="delete">Delete</string>

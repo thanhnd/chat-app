@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    android:padding="22dp"
+    android:padding="@dimen/layout_padding"
     tools:context=".mvp.login.LogInActivity">
 
     <LinearLayout
@@ -120,7 +120,6 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/sign_in_password_hint"
                     android:imeOptions="actionDone"
-                    android:inputType="textPassword"
                     android:maxLines="1" />
             </LinearLayout>
 
