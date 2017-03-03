@@ -74,6 +74,14 @@
                     android:imeOptions="actionNext"
                     android:inputType="phone"
                     android:maxLines="1" />
+
+                <TextView
+                    android:id="@+id/tv_error_phone"
+                    style="@style/App_Text.Error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:text="Please enter your phone." />
             </LinearLayout>
 
             <LinearLayout
@@ -100,6 +108,14 @@
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
                     android:maxLines="1" />
+
+                <TextView
+                    android:id="@+id/tv_error_email"
+                    style="@style/App_Text.Error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:text="Please enter your phone." />
             </LinearLayout>
 
             <LinearLayout
@@ -123,7 +139,16 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/sign_in_password_hint"
                     android:imeOptions="actionDone"
+                    android:lines="1"
                     android:maxLines="1" />
+
+                <TextView
+                    android:id="@+id/tv_error_password"
+                    style="@style/App_Text.Error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:text="Please enter your password." />
             </LinearLayout>
 
             <Button

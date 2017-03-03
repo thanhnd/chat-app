@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Patterns;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.chatapp.R;
 import com.chatapp.chat.utils.SharedPreferencesUtil;
@@ -47,6 +50,13 @@ public class LogInActivity extends BaseActivity implements LoginMvp.LogInView {
     @Bind(R.id.edt_password)
     EditText edtPassword;
 
+    @Bind(R.id.tv_error_phone)
+    TextView tvPhoneError;
+    @Bind(R.id.tv_error_email)
+    TextView tvEmailError;
+    @Bind(R.id.tv_error_password)
+    TextView tvPasswordError;
+
     private LoginMvp.LogInPresenter presenter;
     private boolean isLoginWithPhone = true;
     String phone, email;
@@ -57,6 +67,17 @@ public class LogInActivity extends BaseActivity implements LoginMvp.LogInView {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         edtPassword.setTransformationMethod(new PasswordTransformationMethod());
+        edtPassword.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    processLogin();
+
+                    return true;
+                }
+
+                return false;
+            }
+        });
 
         rgLoginType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -78,17 +99,73 @@ public class LogInActivity extends BaseActivity implements LoginMvp.LogInView {
 
     @OnClick(R.id.btn_login)
     public void clickLogin(Button btnLogin) {
-        LogInRequest request = new LogInRequest();
-        String password = edtPassword.getText().toString();
-        request.setPassword(password);
-        if (isLoginWithPhone) {
-            phone = edtPhone.getText().toString();
-            request.setMobile(phone);
-        } else {
-            email = edtEmail.getText().toString();
-            request.setEmail(email);
+        processLogin();
+    }
+
+    private void processLogin() {
+        if (validate()) {
+            LogInRequest request = new LogInRequest();
+            String password = edtPassword.getText().toString().trim();
+            request.setPassword(password);
+            if (isLoginWithPhone) {
+                phone = edtPhone.getText().toString();
+                request.setMobile(phone);
+            } else {
+                email = edtEmail.getText().toString();
+                request.setEmail(email);
+            }
+            presenter.login(request);
         }
-        presenter.login(request);
+    }
+
+    private boolean validate() {
+        boolean result = true;
+        String password = edtPassword.getText().toString().trim();
+        if (TextUtils.isEmpty(password)) {
+            tvPasswordError.setText("Please enter your password.");
+            tvPasswordError.setVisibility(View.VISIBLE);
+            edtPassword.requestFocus();
+            result = false;
+        } else {
+            tvPasswordError.setVisibility(View.GONE);
+        }
+
+        if (isLoginWithPhone) {
+            phone = edtPhone.getText().toString().trim();
+            if (TextUtils.isEmpty(phone)) {
+                tvPhoneError.setText("Please enter your phone number.");
+                tvPhoneError.setVisibility(View.VISIBLE);
+                edtPhone.requestFocus();
+                result = false;
+            } else if (!Patterns.PHONE.matcher(phone).matches()) {
+                tvPhoneError.setText("Please enter a valid phone number.");
+                tvPhoneError.setVisibility(View.VISIBLE);
+                edtPhone.requestFocus();
+                result = false;
+            } else {
+                tvPhoneError.setVisibility(View.GONE);
+            }
+
+        } else {
+            email = edtEmail.getText().toString().trim();
+            if (TextUtils.isEmpty(email)) {
+                tvEmailError.setText("Please enter your email address.");
+                tvEmailError.setVisibility(View.VISIBLE);
+                edtEmail.requestFocus();
+                result = false;
+            } else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                tvEmailError.setText("Please enter a valid email address.");
+                tvEmailError.setVisibility(View.VISIBLE);
+                edtEmail.requestFocus();
+                result = false;
+
+            } else {
+                tvEmailError.setVisibility(View.GONE);
+            }
+
+        }
+
+        return result;
     }
 
     @OnClick(R.id.btn_go_to_register)
