@@ -49,6 +49,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/profile_display_name_label" />
@@ -72,6 +73,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -85,6 +87,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            style="@style/App_Text.Caption"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/profile_day_of_birth_label" />
@@ -118,6 +121,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/App_Text.Caption"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -172,6 +176,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        style="@style/App_Text.Caption"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/profile_height_and_weight_label" />

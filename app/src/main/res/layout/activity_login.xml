@@ -61,6 +61,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sign_in_phone_label" />
@@ -86,6 +87,7 @@
                 android:visibility="gone">
 
                 <TextView
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sign_in_email_label" />
@@ -110,6 +112,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sign_in_password_label" />

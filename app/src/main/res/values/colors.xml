@@ -17,9 +17,9 @@
     <color name="light_purge_transparent">#88C97AB1</color>
     <color name="purge">#c35aaf</color>
 
-    <color name="edit_text_color">@color/light_purge</color>
+    <color name="edit_text_color">@color/accent</color>
     <color name="edit_text_hint_color">@color/light_purge</color>
-    <color name="title">#333366</color>
+    <color name="accent">#333366</color>
     <color name="text_caption">#7777AC</color>
     <color name="text_title5">#828699</color>
 
