@@ -227,7 +227,7 @@ public class LogInActivity extends BaseActivity implements LoginMvp.LogInView {
     @Override
     public void onNotConfirm() {
         Intent intent = new Intent(this, UpdateBasicProfileActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
     }
