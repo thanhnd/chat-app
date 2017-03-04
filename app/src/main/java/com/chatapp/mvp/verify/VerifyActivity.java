@@ -41,7 +41,6 @@ public class VerifyActivity extends BaseActivity implements VerifyMvp.VerifyView
     TextView tvCodeError;
     @Bind(R.id.btn_submit)
     Button btnSubmit;
-    
 
     private VerifyMvp.VerifyPresent present;
     private String email, phone;
