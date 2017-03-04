@@ -5,6 +5,7 @@ import com.chatapp.mvp.base.GeneralInteractor;
 import com.chatapp.mvp.base.GeneralInteractorImmpl;
 import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.response.ResponseModel;
+import com.chatapp.utils.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -35,10 +36,25 @@ public class PresenterImpl implements ForgotPasswordMvp.Presenter {
         interactor.submitVerifyCode(request, new BaseApiCallback<ResponseModel>(view.get()) {
             @Override
             public void onSuccess(ResponseModel response) {
-                if (view.get() != null) {
-                    view.get().hideProgress();
-                    view.get().onSubmitCodeSuccess();
+
+                try {
+                    Map result = (Map) response.getResultSet();
+                    String chatId = (String) result.get("chat_id");
+                    String oldPassword = (String) result.get("password_old");
+
+
+                    if (view.get() != null) {
+                        view.get().hideProgress();
+                        view.get().onSubmitCodeSuccess(chatId, oldPassword);
+                    }
+                } catch (Exception e) {
+                    Log.e(e);
+                    if (view.get() != null) {
+                        view.get().hideProgress();
+                        view.get().onSubmitCodeError();
+                    }
                 }
+
             }
         });
 

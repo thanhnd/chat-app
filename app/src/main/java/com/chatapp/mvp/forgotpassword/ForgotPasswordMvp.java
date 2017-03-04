@@ -22,11 +22,13 @@ public interface ForgotPasswordMvp {
     }
 
     interface View extends BaseView {
-        void onSubmitCodeSuccess();
+        void onSubmitCodeSuccess(String chatId, String oldPassword);
 
         void onSubmitPasswordSuccess();
 
         void sendVerifyCodeForgotPasswordSuccess();
+
+        void onSubmitCodeError();
     }
 
     interface Interactor {

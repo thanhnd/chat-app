@@ -13,9 +13,15 @@ import android.widget.TextView;
 import com.chatapp.Config;
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.utils.ChatHelper;
 import com.chatapp.utils.DialogUtils;
+import com.chatapp.utils.Log;
 import com.chatapp.views.fragments.ConfirmDialogFragment;
 import com.chatapp.views.fragments.RetainedDialogFragment;
+import com.quickblox.core.QBEntityCallback;
+import com.quickblox.core.exception.QBResponseException;
+import com.quickblox.users.QBUsers;
+import com.quickblox.users.model.QBUser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -95,6 +101,10 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
     private View[] steps;
     private int currentStep;
     private String code;
+
+    private String chatId;
+    private String oldPassword;
+    private String password;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -202,19 +212,64 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
     }
 
     @Override
-    public void onSubmitCodeSuccess() {
+    public void onSubmitCodeSuccess(String chatId, String oldPassword) {
+        this.chatId = chatId;
+        this.oldPassword = oldPassword;
+
         showStep(++ currentStep);
+        loginQuickblox();
     }
 
     @Override
     public void onSubmitPasswordSuccess() {
+
         showStep(++ currentStep);
+    }
+
+    private void loginQuickblox() {
+        final QBUser user = new QBUser();
+
+        user.setLogin(chatId);
+        user.setPassword(oldPassword);
+
+        ChatHelper.getInstance().login(user, new QBEntityCallback<Void>() {
+            @Override
+            public void onSuccess(Void result, Bundle bundle) {
+                user.setOldPassword(oldPassword);
+                user.setPassword(password);
+                updateQuickbloxUser(user);
+            }
+
+            @Override
+            public void onError(QBResponseException e) {
+                Log.e(e.toString());
+            }
+        });
+    }
+
+    private void updateQuickbloxUser(QBUser user) {
+        QBUsers.updateUser(user).performAsync(new QBEntityCallback<QBUser>() {
+            @Override
+            public void onSuccess(QBUser qbUser, Bundle bundle) {
+                Log.d();
+            }
+
+            @Override
+            public void onError(QBResponseException e) {
+                Log.e(e);
+            }
+        });
     }
 
     @Override
     public void sendVerifyCodeForgotPasswordSuccess() {
         tvEmail.setText(email);
         showStep(++ currentStep);
+    }
+
+    @Override
+    public void onSubmitCodeError() {
+
     }
 
     @OnClick(R.id.btn_update)
@@ -261,7 +316,7 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
     }
 
     private void processUpdate() {
-        String password = edtPassword.getText().toString().trim();
+        password = edtPassword.getText().toString().trim();
         String confirmPassword = edtConfirmPassword.getText().toString().trim();
 
         Map<String, String> request = new HashMap<>();
