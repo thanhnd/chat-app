@@ -61,6 +61,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="Andrea Jameson" />
+                <TextView
+                    android:id="@+id/tv_error_display_name"
+                    style="@style/App_Text.Error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:text="Please enter your name." />
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
@@ -84,6 +91,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="20" />
+                <TextView
+                    android:id="@+id/tv_error_dob"
+                    style="@style/App_Text.Error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:text="Please enter your birthday." />
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
@@ -107,6 +121,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="173 / 61" />
+                <TextView
+                    android:id="@+id/tv_error_height_and_weight"
+                    style="@style/App_Text.Error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:text="Please enter your height and weight." />
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />

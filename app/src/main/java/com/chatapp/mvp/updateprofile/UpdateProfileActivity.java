@@ -73,6 +73,15 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
     @Bind(R.id.spn_relationship_status)
     Spinner spnRelationshipStatus;
 
+    @Bind(R.id.tv_error_display_name)
+    TextView tvDisplayNameError;
+
+    @Bind(R.id.tv_error_height_and_weight)
+    TextView tvHeightAndWeightError;
+
+    @Bind(R.id.tv_error_dob)
+    TextView tvDobError;
+
     UpdateProfileMvp.Presenter presenter;
     MyProfileModel userModel;
     private long timestampDob;
@@ -265,6 +274,12 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
 
     @OnClick(R.id.btn_submit)
     void clickSubmit() {
+        if (validate()) {
+            processSubmit();
+        }
+    }
+
+    private void processSubmit() {
         Map<String, Object> request = new HashMap();
         displayName = edtDisplayName.getText().toString().trim();
 
@@ -305,6 +320,43 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
         } catch (RequireLoginException e) {
             onRequiredLogin();
         }
+    }
+
+    private boolean validate() {
+        boolean result = true;
+        String displayName = edtDisplayName.getText().toString();
+
+
+        if (TextUtils.isEmpty(displayName)) {
+            tvDisplayNameError.setText("Please enter your display name.");
+            tvDisplayNameError.setVisibility(View.VISIBLE);
+            edtDisplayName.requestFocus();
+            result = false;
+        } else {
+            tvDisplayNameError.setVisibility(View.GONE);
+        }
+
+        if (timestampDob == 0) {
+            tvDobError.setText("Please enter your birthday.");
+            tvDobError.setVisibility(View.VISIBLE);
+            result = false;
+        } else if(DateUtils.getAge(timestampDob) < 18) {
+            tvDobError.setText("Your age's at least 18 years old.");
+            tvDobError.setVisibility(View.VISIBLE);
+            result = false;
+        } else {
+            tvDobError.setVisibility(View.GONE);
+        }
+
+        if (height == 0 || weight == 0) {
+            tvHeightAndWeightError.setText("Please enter your height and weight.");
+            tvHeightAndWeightError.setVisibility(View.VISIBLE);
+            result = false;
+        } else {
+            tvHeightAndWeightError.setVisibility(View.GONE);
+        }
+
+        return result;
     }
 
     @Override
