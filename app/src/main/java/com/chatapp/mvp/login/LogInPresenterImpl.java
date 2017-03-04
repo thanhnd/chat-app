@@ -41,16 +41,23 @@ public class LogInPresenterImpl implements LoginMvp.LogInPresenter {
                 final QBUser user = new QBUser(logInModel.getLogin(), logInModel.getPass());
 
                 LogInPresenterImpl.this.responseModel = responseModel;
-                login(user);
+                loginQuickblox(user);
             }
         });
     }
 
-    private void login(final QBUser user) {
+    private void loginQuickblox(final QBUser user) {
+        if (view.get() != null) {
+            view.get().showProgress();
+        }
         ChatHelper.getInstance().login(user, new QBEntityCallback<Void>() {
             @Override
             public void onSuccess(Void result, Bundle bundle) {
                 SharedPreferencesUtil.saveQbUser(user);
+
+                if (view.get() != null) {
+                    view.get().hideProgress();
+                }
 
                 if (responseModel.getResponseCd() == ResponseModel.RESPONSE_CD_NOT_ACTIVE) {
                     view.get().onNotVerify();
@@ -63,6 +70,9 @@ public class LogInPresenterImpl implements LoginMvp.LogInPresenter {
 
             @Override
             public void onError(QBResponseException e) {
+                if (view.get() != null) {
+                    view.get().hideProgress();
+                }
                 Log.e(e.toString());
             }
         });
