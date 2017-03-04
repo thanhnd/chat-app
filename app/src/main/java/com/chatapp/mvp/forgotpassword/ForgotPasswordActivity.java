@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.chatapp.Config;
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.utils.DialogUtils;
@@ -69,6 +71,21 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
 
     @Bind(R.id.edt_confirm_password)
     EditText edtConfirmPassword;
+
+    @Bind(R.id.tv_error_email)
+    TextView tvEmailError;
+
+    @Bind(R.id.tv_error_phone)
+    TextView tvPhoneError;
+
+    @Bind(R.id.tv_error_password)
+    TextView tvPasswordError;
+
+    @Bind(R.id.tv_error_confirm_password)
+    TextView tvConfirmPasswordError;
+
+    @Bind(R.id.tv_error_code)
+    TextView tvCodeError;
 
     ForgotPasswordMvp.Presenter presenter;
 
@@ -134,16 +151,34 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
     public void onClickNext() {
 
         code = edtCode.getText().toString().trim();
-        if (!TextUtils.isEmpty(code)) {
-            presenter.submitVerifyCode(code);
+        if (TextUtils.isEmpty(code)) {
+            tvCodeError.setText("Please enter the verification code.");
+            tvCodeError.setVisibility(View.VISIBLE);
+            edtCode.requestFocus();
+
+            return;
+
+        } else {
+            tvCodeError.setVisibility(View.GONE);
         }
+
+        presenter.submitVerifyCode(code);
     }
 
     @OnClick(R.id.btn_submit_email)
     public void onClickSubmitEmail() {
 
         email = edtEmail.getText().toString().trim();
-        if (!TextUtils.isEmpty(email)) {
+        if (TextUtils.isEmpty(email)) {
+            tvEmailError.setText("Please enter your email address.");
+            tvEmailError.setVisibility(View.VISIBLE);
+            edtEmail.requestFocus();
+        } else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            tvEmailError.setText("Please enter a valid email address.");
+            tvEmailError.setVisibility(View.VISIBLE);
+            edtEmail.requestFocus();
+        } else {
+            tvEmailError.setVisibility(View.GONE);
             Map<String, String> request = new HashMap<>();
             request.put("email", email);
             presenter.sendVerifyCodeForgotPassword(request);
@@ -152,7 +187,18 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
 
     @OnClick(R.id.btn_submit_phone)
     public void onClickSubmitPhone() {
-        showConfirmPhoneDialog();
+        phone = edtPhone.getText().toString();
+        if (TextUtils.isEmpty(phone)) {
+            tvPhoneError.setText("Please enter your phone number.");
+            tvPhoneError.setVisibility(View.VISIBLE);
+            edtPhone.requestFocus();
+        } else if (!Patterns.PHONE.matcher(phone).matches()) {
+            tvPhoneError.setText("Please enter a valid phone number.");
+            tvPhoneError.setVisibility(View.VISIBLE);
+            edtPhone.requestFocus();
+        } else {
+            showConfirmPhoneDialog();
+        }
     }
 
     @Override
@@ -173,8 +219,50 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
 
     @OnClick(R.id.btn_update)
     public void onClickUpdate() {
+        if (validate()) {
+            processUpdate();
+        }
+    }
+
+    private boolean validate() {
+        boolean result = true;
+
         String password = edtPassword.getText().toString().trim();
-        String confirmPassword = edtPassword.getText().toString().trim();
+        String confirmPassword = edtConfirmPassword.getText().toString().trim();
+        if (TextUtils.isEmpty(password)) {
+            tvPasswordError.setText("Please enter your password.");
+            tvPasswordError.setVisibility(View.VISIBLE);
+            edtPassword.requestFocus();
+            result = false;
+        } else if(password.length() < Config.PASSWORD_MIN_LENGTH) {
+            tvPasswordError.setText("Password at least 8 characters.");
+            tvPasswordError.setVisibility(View.VISIBLE);
+            edtPassword.requestFocus();
+            result = false;
+        } else {
+            tvPasswordError.setVisibility(View.GONE);
+        }
+
+        if (TextUtils.isEmpty(confirmPassword)) {
+            tvConfirmPasswordError.setText("Please enter confirm password.");
+            tvConfirmPasswordError.setVisibility(View.VISIBLE);
+            edtConfirmPassword.requestFocus();
+            result = false;
+        } else if(!confirmPassword.equals(password)) {
+            tvConfirmPasswordError.setText("Confirm password doesn't match.");
+            tvConfirmPasswordError.setVisibility(View.VISIBLE);
+            edtConfirmPassword.requestFocus();
+            result = false;
+        } else {
+            tvConfirmPasswordError.setVisibility(View.GONE);
+        }
+
+        return result;
+    }
+
+    private void processUpdate() {
+        String password = edtPassword.getText().toString().trim();
+        String confirmPassword = edtConfirmPassword.getText().toString().trim();
 
         Map<String, String> request = new HashMap<>();
         request.put("password", password);
