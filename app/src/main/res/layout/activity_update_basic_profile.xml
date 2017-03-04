@@ -61,6 +61,13 @@
                     android:background="@null"
                     android:hint="@string/profile_display_name_hint"
                     tools:text="Andrea Jameson" />
+                <TextView
+                    android:id="@+id/tv_error_display_name"
+                    style="@style/App_Text.Error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:text="Please enter your name." />
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
@@ -101,6 +108,13 @@
                             style="@style/App_EditText"
                             android:hint="@string/profile_day_of_birth_hint"
                             tools:text="11 Nov 1999" />
+                        <TextView
+                            android:id="@+id/tv_error_dob"
+                            style="@style/App_Text.Error"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            tools:text="Please enter your birthday." />
                     </LinearLayout>
 
                     <ImageView
@@ -189,6 +203,13 @@
                         style="@style/App_EditText"
                         android:hint="@string/profile_height_and_weight_hint"
                         tools:text="173 ft/ 61 lb" />
+                    <TextView
+                        android:id="@+id/tv_error_height_and_weight"
+                        style="@style/App_Text.Error"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        tools:text="Please enter your height and weight." />
 
                 </LinearLayout>
 

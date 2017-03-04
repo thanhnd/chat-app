@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -53,6 +54,15 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
     @Bind(R.id.rg_unit_type)
     RadioGroup rgUnitType;
 
+    @Bind(R.id.tv_error_display_name)
+    TextView tvDisplayNameError;
+
+    @Bind(R.id.tv_error_height_and_weight)
+    TextView tvHeightAndWeightError;
+
+    @Bind(R.id.tv_error_dob)
+    TextView tvDobError;
+
     private UpdateBasicProfileMvp.ProfilePresenter presenter;
     private long timestampDob;
     private int unitType = UNIT_TYPE_CM_KG, height, weight;
@@ -87,22 +97,61 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
 
     @OnClick(R.id.btn_submit)
     void clickSubmit() {
-        BasicProfileRequest request = new BasicProfileRequest();
+        processSubmit();
+    }
+
+    private void processSubmit() {
+        if (validate()) {
+            BasicProfileRequest request = new BasicProfileRequest();
+            String displayName = edtDisplayName.getText().toString();
+            request.setDisplayName(displayName);
+            if (timestampDob > 0) {
+                request.setBirthday(timestampDob);
+            }
+
+            request.setUnitSystem(unitType);
+            request.setHeight(height);
+            request.setWeight(weight);
+
+            try {
+                presenter.submit(request);
+            } catch (RequireLoginException e) {
+                onRequiredLogin();
+            }
+        }
+    }
+
+    private boolean validate() {
+        boolean result = true;
         String displayName = edtDisplayName.getText().toString();
-        request.setDisplayName(displayName);
-        if (timestampDob > 0) {
-            request.setBirthday(timestampDob);
+
+
+        if (TextUtils.isEmpty(displayName)) {
+            tvDisplayNameError.setText("Please enter your display name.");
+            tvDisplayNameError.setVisibility(View.VISIBLE);
+            edtDisplayName.requestFocus();
+            result = false;
+        } else {
+            tvDisplayNameError.setVisibility(View.GONE);
         }
 
-        request.setUnitSystem(unitType);
-        request.setHeight(height);
-        request.setWeight(weight);
-
-        try {
-            presenter.submit(request);
-        } catch (RequireLoginException e) {
-            onRequiredLogin();
+        if (timestampDob == 0) {
+            tvDobError.setText("Please enter your birthday.");
+            tvDobError.setVisibility(View.VISIBLE);
+            result = false;
+        } else {
+            tvDobError.setVisibility(View.GONE);
         }
+
+        if (height == 0 || weight == 0) {
+            tvHeightAndWeightError.setText("Please enter your height and weight.");
+            tvHeightAndWeightError.setVisibility(View.VISIBLE);
+            result = false;
+        } else {
+            tvHeightAndWeightError.setVisibility(View.GONE);
+        }
+
+        return result;
     }
 
     @OnClick({R.id.v_date_of_birth, R.id.tv_dob})
@@ -122,7 +171,7 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
         });
     }
 
-    @OnClick(R.id.v_height_and_weight)
+    @OnClick({R.id.v_height_and_weight, R.id.tv_height_and_weight})
     void clickChooseHeightAndWeight() {
         DialogUtils.showChooseHeightAndWeightDialog(this, height, weight,
                 new ChooseHeightAndWeightDialogFragment.OnHeightAndWeightSetListener() {
@@ -213,9 +262,16 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
             }
 
             edtDisplayName.setText(userModel.getDisplayName());
-            Date date = new Date(userModel.getBirthday());
-            tvDob.setText(DateUtils.displayDate(date));
-            tvHeightAndWeight.setText(String.format("%s / %s", userModel.getHeight(), userModel.getWeight()));
+            if (userModel.getBirthday() > 0) {
+                Date date = new Date(userModel.getBirthday());
+                tvDob.setText(DateUtils.displayDate(date));
+            }
+
+            if (userModel.getHeight() > 0 && userModel.getWeight() > 0) {
+                height = userModel.getHeight();
+                weight = userModel.getWeight();
+                displayHeightAndWeight();
+            }
         }
     }
 }

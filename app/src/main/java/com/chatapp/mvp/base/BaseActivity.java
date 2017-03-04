@@ -1,7 +1,5 @@
 package com.chatapp.mvp.base;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,8 +15,6 @@ import com.chatapp.utils.DialogUtils;
 import com.quickblox.core.QBEntityCallback;
 import com.quickblox.core.exception.QBResponseException;
 import com.quickblox.users.model.QBUser;
-
-import java.util.Calendar;
 
 public class BaseActivity extends AppCompatActivity implements BaseView {
 
@@ -67,30 +63,6 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
         DialogUtils.showGeneralAlert(this, title, message);
     }
 
-    protected void pickDate(DatePickerDialog.OnDateSetListener onDateSetListener) {
-        // Get Current Date
-        final Calendar c = Calendar.getInstance();
-        final int year = c.get(Calendar.YEAR);
-        final int month = c.get(Calendar.MONTH);
-        final int day = c.get(Calendar.DAY_OF_MONTH);
-
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
-                onDateSetListener, year, month, day);
-        datePickerDialog.show();
-    }
-
-    protected void pickTime(TimePickerDialog.OnTimeSetListener onTimeSetListener) {
-        // Get Current Time
-        final Calendar c = Calendar.getInstance();
-        final int hour = c.get(Calendar.HOUR_OF_DAY);
-        final int minute = c.get(Calendar.MINUTE);
-
-        // Launch Time Picker Dialog
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
-                onTimeSetListener, hour, minute, false);
-        timePickerDialog.show();
-    }
 
     @Override
     public void onTokenExpired() {
