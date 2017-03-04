@@ -115,6 +115,11 @@ public class ListRecommendedFriendsAdapter extends BaseListUserAdapter<ListRecom
                     .placeholder(R.drawable.img_user_avatar)
                     .transform(new CircleTransform())
                     .into(holder.ivAvatar);
+        } else {
+            Picasso.with(context)
+                    .load(R.drawable.img_user_avatar)
+                    .placeholder(R.drawable.img_user_avatar)
+                    .into(holder.ivAvatar);
         }
 
         holder.vItem.setOnClickListener(new View.OnClickListener() {

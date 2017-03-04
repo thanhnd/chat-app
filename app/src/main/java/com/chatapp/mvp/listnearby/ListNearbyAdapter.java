@@ -103,6 +103,11 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
                         .placeholder(R.drawable.img_user_avatar)
                         .transform(new CircleTransform())
                         .into(myProfileViewHolder.ivAvatar);
+            } else {
+                Picasso.with(context)
+                        .load(R.drawable.img_user_avatar)
+                        .placeholder(R.drawable.img_user_avatar)
+                        .into(myProfileViewHolder.ivAvatar);
             }
 
             myProfileViewHolder.vItem.setOnClickListener(new View.OnClickListener() {
@@ -132,6 +137,11 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
                         .transform(new CircleTransform())
                         .fit()
                         .centerCrop()
+                        .into(otherUserViewHolder.ivAvatar);
+            } else {
+                Picasso.with(context)
+                        .load(R.drawable.img_user_avatar)
+                        .placeholder(R.drawable.img_user_avatar)
                         .into(otherUserViewHolder.ivAvatar);
             }
 

@@ -139,6 +139,10 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
             tvDobError.setText("Please enter your birthday.");
             tvDobError.setVisibility(View.VISIBLE);
             result = false;
+        } else if(DateUtils.getAge(timestampDob) < 18) {
+            tvDobError.setText("Your age's at least 18 years old.");
+            tvDobError.setVisibility(View.VISIBLE);
+            result = false;
         } else {
             tvDobError.setVisibility(View.GONE);
         }

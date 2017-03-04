@@ -67,11 +67,9 @@ public abstract class BaseChatActivity extends BaseActivity implements QbSession
         Log.d("Need to recreate chat session");
 
         QBUser user = SharedPreferencesUtil.getQbUser();
-        if (user == null) {
-            throw new RuntimeException("User is null, can't restore session");
+        if (user != null) {
+            reloginToChat(user);
         }
-
-        reloginToChat(user);
     }
 
     private void reloginToChat(final QBUser user) {
