@@ -22,18 +22,19 @@ public class ListCountriesPresenterImpl implements ListCountriesMvp.ListCountrie
 
     @Override
     public void getListCountries() {
-        if (view.get() != null) {
-            view.get().showProgress();
-        }
+
         List<CountryModel> countries = interactor.getCountriesFromDatabase();
         if (countries.size() > 0) {
             if (view.get() != null) {
-                view.get().hideProgress();
                 view.get().onGetListCountriesSuccess(countries);
 
             }
 
             return;
+        }
+
+        if (view.get() != null) {
+            view.get().showProgress();
         }
 
         interactor.listCountries(new BaseApiCallback<ResponseModel<List<CountryModel>>>(view.get()) {
