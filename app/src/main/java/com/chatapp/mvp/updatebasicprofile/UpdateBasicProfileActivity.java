@@ -110,7 +110,7 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
     private void processSubmit() {
         if (validate()) {
             BasicProfileRequest request = new BasicProfileRequest();
-            String displayName = edtDisplayName.getText().toString();
+            displayName = edtDisplayName.getText().toString();
             request.setDisplayName(displayName);
             if (timestampDob > 0) {
                 request.setBirthday(timestampDob);
@@ -262,6 +262,30 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
                 .error(R.drawable.london_flat)
                 .placeholder(R.drawable.london_flat)
                 .into(ivAvatar);
+
+        updateQuickbloxUserAvatar(path);
+    }
+
+    private void updateQuickbloxUserAvatar(final String path) {
+        QBUser qbUser = new QBUser();
+        final QBUser currentUser = ChatHelper.getCurrentUser();
+
+        if (currentUser != null) {
+            qbUser.setId(currentUser.getId());
+            qbUser.setCustomData(path);
+            QBUsers.updateUser(qbUser).performAsync(new QBEntityCallback<QBUser>() {
+                @Override
+                public void onSuccess(QBUser qbUser, Bundle bundle) {
+                    currentUser.setCustomData(path);
+                    Log.d();
+                }
+
+                @Override
+                public void onError(QBResponseException e) {
+                    Log.e(e);
+                }
+            });
+        }
     }
 
     @Override

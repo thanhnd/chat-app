@@ -27,7 +27,7 @@ public class VerifyPresentImpl implements VerifyMvp.VerifyPresent {
         if (view.get() != null) {
             view.get().showProgress();
         }
-        interactor.verify(request, new BaseApiCallback<ResponseModel<VerifyModel>>() {
+        interactor.verify(request, new BaseApiCallback<ResponseModel<VerifyModel>>(view.get()) {
 
             @Override
             public void onSuccess(ResponseModel<VerifyModel> response) {
@@ -39,6 +39,7 @@ public class VerifyPresentImpl implements VerifyMvp.VerifyPresent {
                     view.get().onVerifySuccess();
                 }
             }
+
         });
     }
 }
