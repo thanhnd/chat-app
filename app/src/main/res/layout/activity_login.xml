@@ -52,103 +52,105 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/v_input_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
-                android:layout_marginRight="35dp"
-                android:layout_marginTop="35dp"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/App_Text.Caption"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sign_in_phone_label" />
-
-                <EditText
-                    android:id="@+id/edt_phone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/sign_in_phone_hint"
-                    android:imeOptions="actionNext"
-                    android:inputType="phone"
-                    android:maxLines="1" />
-
-                <TextView
-                    android:id="@+id/tv_error_phone"
-                    style="@style/App_Text.Error"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    tools:text="Please enter your phone." />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/v_input_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
-                android:layout_marginRight="35dp"
-                android:layout_marginTop="35dp"
                 android:orientation="vertical"
-                android:visibility="gone">
-
-                <TextView
-                    style="@style/App_Text.Caption"
+                android:layout_marginLeft="42dp"
+                android:layout_marginRight="42dp"
+                android:layout_marginTop="46dp"
+                android:layout_marginBottom="42dp">
+                <LinearLayout
+                    android:id="@+id/v_input_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/sign_in_email_label" />
 
-                <EditText
-                    android:id="@+id/edt_email"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/App_Text.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sign_in_phone_label" />
+
+                    <EditText
+                        android:id="@+id/edt_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/sign_in_phone_hint"
+                        android:imeOptions="actionNext"
+                        android:inputType="phone"
+                        android:maxLines="1" />
+
+                    <TextView
+                        android:id="@+id/tv_error_phone"
+                        style="@style/App_Text.Error"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        tools:text="Please enter your phone." />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/v_input_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/sign_in_email_hint"
-                    android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1" />
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
-                <TextView
-                    android:id="@+id/tv_error_email"
-                    style="@style/App_Text.Error"
+                    <TextView
+                        style="@style/App_Text.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sign_in_email_label" />
+
+                    <EditText
+                        android:id="@+id/edt_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/sign_in_email_hint"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1" />
+
+                    <TextView
+                        android:id="@+id/tv_error_email"
+                        style="@style/App_Text.Error"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        tools:text="Please enter your phone." />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    tools:text="Please enter your phone." />
-            </LinearLayout>
+                    android:layout_marginTop="35dp"
+                    android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="35dp"
-                android:layout_marginLeft="35dp"
-                android:layout_marginRight="35dp"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
+                    <TextView
+                        style="@style/App_Text.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sign_in_password_label" />
 
-                <TextView
-                    style="@style/App_Text.Caption"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sign_in_password_label" />
+                    <EditText
+                        android:id="@+id/edt_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/sign_in_password_hint"
+                        android:imeOptions="actionDone"
+                        android:lines="1"
+                        android:maxLines="1" />
 
-                <EditText
-                    android:id="@+id/edt_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/sign_in_password_hint"
-                    android:imeOptions="actionDone"
-                    android:lines="1"
-                    android:maxLines="1" />
+                    <TextView
+                        android:id="@+id/tv_error_password"
+                        style="@style/App_Text.Error"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        tools:text="Please enter your password." />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_error_password"
-                    style="@style/App_Text.Error"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    tools:text="Please enter your password." />
             </LinearLayout>
 
             <Button
@@ -164,11 +166,12 @@
             android:id="@+id/view_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp">
 
             <Button
                 android:id="@+id/btn_go_to_register"
-                style="@style/TextAppearance.Small.UnderLine"
+                style="@style/TextAppearance.Small.TransparentBackGround"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left|center_vertical"
@@ -177,7 +180,7 @@
 
             <Button
                 android:id="@+id/btn_forgot_password"
-                style="@style/TextAppearance.Small.UnderLine"
+                style="@style/TextAppearance.Small.TransparentBackGround"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

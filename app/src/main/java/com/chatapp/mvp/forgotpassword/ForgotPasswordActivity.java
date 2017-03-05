@@ -172,7 +172,15 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
             tvCodeError.setVisibility(View.GONE);
         }
 
-        presenter.submitVerifyCode(code);
+        Map<String, String> request = new HashMap<>();
+        request.put("code", code);
+        if (isLoginWithPhone) {
+            request.put("mobile", phone);
+        } else {
+            request.put("email", email);
+        }
+
+        presenter.submitVerifyCode(request);
     }
 
     @OnClick(R.id.btn_submit_email)

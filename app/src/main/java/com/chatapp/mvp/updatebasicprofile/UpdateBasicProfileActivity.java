@@ -13,6 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.chatapp.R;
+import com.chatapp.chat.utils.chat.ChatHelper;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.home.HomeActivity;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
@@ -21,7 +22,12 @@ import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.DateUtils;
 import com.chatapp.utils.DialogUtils;
+import com.chatapp.utils.Log;
 import com.chatapp.views.fragments.ChooseHeightAndWeightDialogFragment;
+import com.quickblox.core.QBEntityCallback;
+import com.quickblox.core.exception.QBResponseException;
+import com.quickblox.users.QBUsers;
+import com.quickblox.users.model.QBUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
@@ -66,6 +72,7 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
     private UpdateBasicProfileMvp.ProfilePresenter presenter;
     private long timestampDob;
     private int unitType = UNIT_TYPE_CM_KG, height, weight;
+    private String displayName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +130,7 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
 
     private boolean validate() {
         boolean result = true;
-        String displayName = edtDisplayName.getText().toString();
+        displayName = edtDisplayName.getText().toString();
 
 
         if (TextUtils.isEmpty(displayName)) {
@@ -207,11 +214,44 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
 
     @Override
     public void onUpdateBasicProfileSuccess() {
+        updateQuickbloxUser();
 
         Intent intent = new Intent(this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
+    }
+
+    private void updateQuickbloxUser() {
+        boolean isNeedUpdate = false;
+        QBUser qbUser = new QBUser();
+        final QBUser currentUser = ChatHelper.getCurrentUser();
+
+        if (currentUser != null) {
+            qbUser.setId(currentUser.getId());
+            if (!TextUtils.isEmpty(displayName)
+                    && !displayName.equals(currentUser.getFullName())) {
+                qbUser.setFullName(displayName);
+                isNeedUpdate = true;
+            }
+
+            if (isNeedUpdate) {
+                QBUsers.updateUser(qbUser).performAsync(new QBEntityCallback<QBUser>() {
+                    @Override
+                    public void onSuccess(QBUser qbUser, Bundle bundle) {
+
+                        currentUser.setFullName(displayName);
+
+                        Log.d();
+                    }
+
+                    @Override
+                    public void onError(QBResponseException e) {
+                        Log.e(e);
+                    }
+                });
+            }
+        }
     }
 
     @Override

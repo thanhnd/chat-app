@@ -8,7 +8,7 @@
     <dimen name="scm_text_huge">28sp</dimen>
 
     <dimen name="scm_row_secondary_height">40dp</dimen>
-    <dimen name="layout_padding">20dp</dimen>
+    <dimen name="layout_padding">24dp</dimen>
     <dimen name="scm_padding_sep">2dp</dimen>
     <dimen name="scm_padding_small">3dp</dimen>
     <dimen name="scm_padding">6dp</dimen>

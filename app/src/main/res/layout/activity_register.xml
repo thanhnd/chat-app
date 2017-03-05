@@ -21,17 +21,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="20dp"
+            android:paddingLeft="42dp"
+            android:paddingRight="42dp"
+            android:paddingTop="42dp">
 
             <LinearLayout
-                tools:visibility="gone"
                 android:id="@+id/v_register_by_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
-                android:layout_marginRight="35dp"
-                android:layout_marginTop="35dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:visibility="gone">
 
                 <TextView
                     style="@style/App_Text.Caption"
@@ -47,34 +48,33 @@
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
                     android:maxLines="1" />
+
                 <TextView
                     android:id="@+id/tv_error_email"
                     style="@style/App_Text.Error"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    tools:visibility="visible"
-                    tools:text="Please enter your email." />
+                    tools:text="Please enter your email."
+                    tools:visibility="visible" />
 
             </LinearLayout>
 
             <LinearLayout
-                tools:visibility="visible"
                 android:id="@+id/v_register_by_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="gone">
+                android:visibility="gone"
+                tools:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginRight="35dp"
-                    android:layout_marginTop="35dp"
                     android:orientation="vertical">
 
                     <TextView
+                        style="@style/App_Text.Caption"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/register_country_code_label" />
@@ -87,26 +87,26 @@
                         android:duplicateParentState="true"
                         android:hint="@string/register_country_hint"
                         tools:text="AF +93 | Afganistan" />
+
                     <TextView
                         android:id="@+id/tv_error_country"
                         style="@style/App_Text.Error"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:visibility="gone"
-                        tools:visibility="visible"
-                        tools:text="Please enter your country." />
+                        tools:text="Please enter your country."
+                        tools:visibility="visible" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="35dp"
-                    android:layout_marginRight="35dp"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical">
 
                     <TextView
+                        style="@style/App_Text.Caption"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/register_phone_label" />
@@ -119,14 +119,15 @@
                         android:imeOptions="actionNext"
                         android:inputType="phone"
                         android:maxLines="1" />
+
                     <TextView
                         android:id="@+id/tv_error_phone"
                         style="@style/App_Text.Error"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:visibility="gone"
-                        tools:visibility="visible"
-                        tools:text="Please enter your phone number." />
+                        tools:text="Please enter your phone number."
+                        tools:visibility="visible" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -135,9 +136,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="35dp"
-                android:layout_marginLeft="35dp"
-                android:layout_marginRight="35dp"
                 android:layout_marginTop="20dp"
                 android:orientation="vertical">
 
@@ -154,24 +152,28 @@
                     android:hint="@string/register_password_hint"
                     android:imeOptions="actionDone"
                     android:maxLines="1" />
+
                 <TextView
                     android:id="@+id/tv_error_password"
                     style="@style/App_Text.Error"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    tools:visibility="visible"
-                    tools:text="Please enter your password." />
+                    tools:text="Please enter your password."
+                    tools:visibility="visible" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btn_submit"
-                style="@style/App_Button.Submit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/register_by_email_create_account"
-                android:textAllCaps="false" />
+
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_submit"
+
+            style="@style/App_Button.Submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register_by_email_create_account"
+            android:textAllCaps="false" />
 
 
     </LinearLayout>
@@ -192,11 +194,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#333366"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="20dp">
 
         <Button
             android:id="@+id/btn_switch_register_type"
-            style="@style/TextAppearance.Small.UnderLine"
+            style="@style/TextAppearance.Small.TransparentBackGround"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true" />

@@ -14,7 +14,7 @@ import java.util.Map;
 public interface ForgotPasswordMvp {
     interface Presenter {
 
-        void submitVerifyCode(String code);
+        void submitVerifyCode(Map<String, String> request);
 
         void changePassword(Map<String, String> request);
 

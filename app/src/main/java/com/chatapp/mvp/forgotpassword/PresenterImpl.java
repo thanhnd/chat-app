@@ -8,7 +8,6 @@ import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.utils.Log;
 
 import java.lang.ref.WeakReference;
-import java.util.HashMap;
 import java.util.Map;
 
 public class PresenterImpl implements ForgotPasswordMvp.Presenter {
@@ -24,10 +23,7 @@ public class PresenterImpl implements ForgotPasswordMvp.Presenter {
     }
 
     @Override
-    public void submitVerifyCode(String code) {
-
-        Map<String, String> request = new HashMap<>();
-        request.put("code", code);
+    public void submitVerifyCode(Map<String, String> request) {
 
         if (view.get() != null) {
             view.get().showProgress();
