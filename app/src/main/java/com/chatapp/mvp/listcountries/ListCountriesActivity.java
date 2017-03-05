@@ -89,7 +89,6 @@ public class ListCountriesActivity extends BaseActivity implements ListCountries
     }
 
 
-
     @Override
     public void onGetListCountriesSuccess(List<CountryModel> listCountries) {
         adapter.setCountries(listCountries);
