@@ -47,12 +47,12 @@ public class UserProfileModel {
     @Expose
     private int relationshipStatusId;
     private String relationshipStatus;
-    @SerializedName("city_id")
+    @SerializedName("city")
     @Expose
-    private int cityId;
-    @SerializedName("state_id")
+    private String city;
+    @SerializedName("state")
     @Expose
-    private String stateId;
+    private String state;
     @SerializedName("facebook")
     @Expose
     private String facebook;
@@ -205,20 +205,20 @@ public class UserProfileModel {
         this.relationshipStatusId = relationshipStatusId;
     }
 
-    public int getCityId() {
-        return cityId;
+    public String getCity() {
+        return city;
     }
 
-    public void setCityId(int cityId) {
-        this.cityId = cityId;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getStateId() {
-        return stateId;
+    public String getState() {
+        return state;
     }
 
-    public void setStateId(String stateId) {
-        this.stateId = stateId;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getFacebook() {

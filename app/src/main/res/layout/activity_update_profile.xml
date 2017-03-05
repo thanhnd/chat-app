@@ -51,7 +51,7 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    style="@style/form_label"
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/display_name" />
@@ -80,7 +80,7 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    style="@style/form_label"
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/age" />
@@ -110,7 +110,7 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    style="@style/form_label"
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/height_and_weight" />
@@ -140,7 +140,7 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    style="@style/form_label"
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/ethnicity" />
@@ -160,7 +160,7 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    style="@style/form_label"
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/body_type" />
@@ -180,7 +180,7 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    style="@style/form_label"
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/my_tribes" />
@@ -200,7 +200,7 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    style="@style/form_label"
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/relationship_status" />
@@ -220,7 +220,7 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    style="@style/form_label"
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/city" />
@@ -243,7 +243,7 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    style="@style/form_label"
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/state_province" />
@@ -266,7 +266,7 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    style="@style/form_label"
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/country_region" />
@@ -315,7 +315,7 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    style="@style/form_label"
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/facebook" />
@@ -338,7 +338,7 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    style="@style/form_label"
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/google" />
@@ -361,7 +361,7 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    style="@style/form_label"
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/twitter" />
@@ -384,7 +384,7 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    style="@style/form_label"
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/instagram" />
@@ -407,7 +407,7 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    style="@style/form_label"
+                    style="@style/App_Text.Caption"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/linkedin" />

@@ -122,7 +122,7 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
 
         } else {
 
-            int index = getItemViewType(position) == ITEM_VIEW_TYPE_OTHER_PROFILE ? position - 1 : position;
+            int index = myProfile != null ? position - 1 : position;
             OtherUserViewHolder otherUserViewHolder = (OtherUserViewHolder)holder;
             try {
                 final UserModel userModel = (UserModel) mDataset.get(index);

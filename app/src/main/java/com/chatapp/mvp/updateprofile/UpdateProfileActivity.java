@@ -74,6 +74,28 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
     @Bind(R.id.tv_error_dob)
     TextView tvDobError;
 
+    @Bind(R.id.edt_state_province)
+    EditText edtState;
+
+    @Bind(R.id.edt_city)
+    EditText edtCity;
+
+    @Bind(R.id.edt_facebook)
+    EditText edtFacebook;
+
+    @Bind(R.id.edt_google)
+    EditText edtGoogle;
+
+    @Bind(R.id.edt_twitter)
+    EditText edtTwitter;
+
+    @Bind(R.id.edt_instagram)
+    EditText edtInstagram;
+
+    @Bind(R.id.edt_linkedin)
+    EditText edtLinkedin;
+
+
     UpdateProfileMvp.Presenter presenter;
     MyProfileModel userModel;
     private long timestampDob;
@@ -200,6 +222,15 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
 
             relationshipStatusParam = new ParamModel(userModel.getEthinicityId());
             spnRelationshipStatus.setSelection(ethnicities.indexOf(relationshipStatusParam) + 1);
+
+            edtCity.setText(userModel.getCity());
+            edtState.setText(userModel.getState());
+
+            edtFacebook.setText(userModel.getFacebook());
+            edtGoogle.setText(userModel.getGoogle());
+            edtTwitter.setText(userModel.getTwitter());
+            edtInstagram.setText(userModel.getInstagram());
+            edtLinkedin.setText(userModel.getLinkin());
         }
     }
 
@@ -290,6 +321,42 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
             request.put("relationship_status_id", relationshipStatusParam.getId());
         }
 
+        String state = edtState.getText().toString().trim();
+        String city = edtCity.getText().toString().trim();
+
+        if (!TextUtils.isEmpty(state)) {
+            request.put("state", state);
+        }
+
+        if (!TextUtils.isEmpty(city)) {
+            request.put("city", city);
+        }
+
+        String facebook = edtFacebook.getText().toString().trim();
+        String google = edtGoogle.getText().toString().trim();
+        String twitter = edtTwitter.getText().toString().trim();
+        String instagram = edtInstagram.getText().toString().trim();
+        String linkedIn = edtLinkedin.getText().toString().trim();
+        if (!TextUtils.isEmpty(facebook)) {
+            request.put("facebook", facebook);
+        }
+
+        if (!TextUtils.isEmpty(google)) {
+            request.put("google", google);
+        }
+
+        if (!TextUtils.isEmpty(twitter)) {
+            request.put("twitter", twitter);
+        }
+
+        if (!TextUtils.isEmpty(instagram)) {
+            request.put("instagram", instagram);
+        }
+
+        if (!TextUtils.isEmpty(linkedIn)) {
+            request.put("linkin", linkedIn);
+        }
+
         try {
 
             presenter.submit(request);
@@ -302,8 +369,6 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
     private boolean validate() {
         boolean result = true;
         String displayName = edtDisplayName.getText().toString();
-
-
         if (TextUtils.isEmpty(displayName)) {
             tvDisplayNameError.setText("Please enter your display name.");
             tvDisplayNameError.setVisibility(View.VISIBLE);
