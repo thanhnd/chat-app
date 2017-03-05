@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/annonce.main.coordinator"
-    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:ignore="RtlHardcoded">
 
     <android.support.design.widget.AppBarLayout
@@ -28,7 +28,7 @@
                 android:id="@+id/iv_avatar"
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -86,30 +86,11 @@
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingBottom="20dp"
-                    android:paddingTop="20dp"
-                    android:text="HEIGHT AND WEIGHT"
-                    tools:text="HEIGHT AND WEIGHT" />
-
-                <TextView
-                    android:id="@+id/tv_height_and_weight"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    tools:text="173 cm / 61 kg" />
-            </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
+
             <LinearLayout
+                android:id="@+id/v_ethnicity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -132,7 +113,9 @@
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
+
             <LinearLayout
+                android:id="@+id/v_body_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -155,7 +138,9 @@
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />
+
             <LinearLayout
+                android:id="@+id/v_tribes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -169,6 +154,29 @@
                     android:text="MY TRIBES"
                     tools:text="MY TRIBES" />
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingBottom="20dp"
+                        android:paddingTop="20dp"
+                        android:text="HEIGHT AND WEIGHT"
+                        tools:text="HEIGHT AND WEIGHT" />
+
+                    <TextView
+                        android:id="@+id/tv_height_and_weight"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        tools:text="173 cm / 61 kg" />
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/tv_my_tribes"
                     android:layout_width="0dp"
@@ -180,6 +188,7 @@
             <include layout="@layout/layout_horizontal_divider" />
 
             <LinearLayout
+                android:id="@+id/v_relationship_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -204,24 +213,56 @@
             <include layout="@layout/layout_horizontal_divider" />
 
             <LinearLayout
+                android:id="@+id/v_find_me_on"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="20dp"
+
+                android:paddingTop="20dp">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingBottom="20dp"
-                    android:paddingTop="20dp"
+                    android:layout_gravity="center_vertical"
                     android:text="FIND ME ON"
                     tools:text="FIND ME ON" />
 
-                <TextView
-                    android:layout_width="0dp"
+                <ImageButton
+                    android:id="@+id/ib_facebook"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    />
+                    android:padding="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/ic_facebook" />
+
+                <ImageButton
+                    android:id="@+id/ib_google"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_google" />
+
+                <ImageButton
+                    android:id="@+id/ib_twitter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_twitter" />
+
+                <ImageButton
+                    android:id="@+id/ib_linkedin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_linkedin" />
+
+                <ImageButton
+                    android:id="@+id/ib_instagram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_instagram" />
             </LinearLayout>
 
             <include layout="@layout/layout_horizontal_divider" />

@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,6 +56,33 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
     @Bind(R.id.tv_relationship_status)
     TextView tvRelationshipStatus;
 
+    @Bind(R.id.v_ethnicity)
+    View vEthnicity;
+    @Bind(R.id.v_body_type)
+    View vBodyType;
+    @Bind(R.id.v_tribes)
+    View vTribes;
+    @Bind(R.id.v_relationship_status)
+    View vRelationshipStatus;
+
+    @Bind(R.id.v_find_me_on)
+    View vFindMeOn;
+
+    @Bind(R.id.ib_facebook)
+    ImageButton ibFacebook;
+
+    @Bind(R.id.ib_google)
+    ImageButton ibGoogle;
+
+    @Bind(R.id.ib_twitter)
+    ImageButton ibTwiter;
+
+    @Bind(R.id.ib_linkedin)
+    ImageButton ibLinkedin;
+
+    @Bind(R.id.ib_instagram)
+    ImageButton ibInstagram;
+
 
     @Bind(R.id.collapsingToolbarLayout)
     CollapsingToolbarLayout collapsingToolbarLayout;
@@ -62,6 +90,8 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
     private int mMaxScrollSize;
     private boolean mIsImageHidden;
     private MyProfileMvp.MyProfilePresenter presenter;
+
+    private String facebook, google, twitter, linkedin, instagram;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -121,9 +151,39 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
             tvHeightAndWeight.setText(String.format("%s / %s", userModel.getHeight(), userModel.getWeight()));
 
             tvEthnicity.setText(userModel.getEnthinicity());
+            vEthnicity.setVisibility(TextUtils.isEmpty(userModel.getEnthinicity()) ? View.GONE : View.VISIBLE);
+
             tvBodyType.setText(userModel.getBodyType());
+            vBodyType.setVisibility(TextUtils.isEmpty(userModel.getBodyType()) ? View.GONE : View.VISIBLE);
+
             tvMyTribes.setText(userModel.getMyTribes());
+            vTribes.setVisibility(TextUtils.isEmpty(userModel.getMyTribes()) ? View.GONE : View.VISIBLE);
+
             tvRelationshipStatus.setText(userModel.getRelationshipStatus());
+            vRelationshipStatus.setVisibility(TextUtils.isEmpty(userModel.getRelationshipStatus()) ? View.GONE : View.VISIBLE);
+
+            facebook = userModel.getFacebook();
+            google = userModel.getGoogle();
+            twitter = userModel.getTwitter();
+            linkedin = userModel.getLinkin();
+            instagram = userModel.getInstagram();
+
+            ibFacebook.setVisibility(TextUtils.isEmpty(facebook) ? View.GONE : View.VISIBLE);
+            ibGoogle.setVisibility(TextUtils.isEmpty(google) ? View.GONE : View.VISIBLE);
+            ibTwiter.setVisibility(TextUtils.isEmpty(twitter) ? View.GONE : View.VISIBLE);
+            ibLinkedin.setVisibility(TextUtils.isEmpty(linkedin) ? View.GONE : View.VISIBLE);
+            ibInstagram.setVisibility(TextUtils.isEmpty(instagram) ? View.GONE : View.VISIBLE);
+
+
+            if (TextUtils.isEmpty(facebook)
+                    && TextUtils.isEmpty(google)
+                    && TextUtils.isEmpty(twitter)
+                    && TextUtils.isEmpty(linkedin)
+                    && TextUtils.isEmpty(instagram)) {
+                vFindMeOn.setVisibility(View.GONE);
+            } else {
+                vFindMeOn.setVisibility(View.VISIBLE);
+            }
         }
     }
 

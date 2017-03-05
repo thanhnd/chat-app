@@ -71,16 +71,19 @@ public class ListNearbyFragment extends BaseFragment implements ListNearbyMvp.Vi
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
 
         try {
             presenter.getMyProfile();
-            presenter.getListNearBy();
+            if (AccountUtils.getLongitude() != null || AccountUtils.getLongitude() != null) {
+                presenter.getListNearBy();
+            } else {
+                ((HomeActivity)getActivity()).updateLocation();
+            }
         } catch (RequireLoginException e) {
             onRequiredLogin();
         }
-
     }
 
     @Override
