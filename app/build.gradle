@@ -28,7 +28,6 @@ android {
     }
 
     dexOptions {
-        incremental true
         javaMaxHeapSize "12g"
     }
 }
@@ -61,4 +60,5 @@ dependencies {
     compile "com.github.bumptech.glide:glide:${rootProject.glideVersion}"
     compile "se.emilsjolander:stickylistheaders:${rootProject.stickyListHeaders}"
     compile "com.quickblox:quickblox-android-sdk-videochat-webrtc:$rootProject.qbSdkVersion"
+    compile "com.quickblox:quickblox-android-sdk-customobjects:$rootProject.qbSdkVersion"
 }

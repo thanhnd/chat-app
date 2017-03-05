@@ -59,6 +59,8 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
         });
     }
 
+
+
     @Override
     public void submit(Map<String, Object> request) throws RequireLoginException {
         if (view.get() != null) {

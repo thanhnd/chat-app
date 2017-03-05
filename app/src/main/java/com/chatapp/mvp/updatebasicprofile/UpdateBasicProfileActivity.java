@@ -197,11 +197,7 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
 
     @OnClick(R.id.fab_camera)
     public void onClickCamera() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,
-                "Select Picture"), SELECT_PICTURE);
+        processUpLoad();
     }
 
     private void displayHeightAndWeight() {

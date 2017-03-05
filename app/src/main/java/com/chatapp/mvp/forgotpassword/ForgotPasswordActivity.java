@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.chatapp.Config;
 import com.chatapp.R;
+import com.chatapp.chat.utils.SharedPreferencesUtil;
 import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.utils.ChatHelper;
 import com.chatapp.utils.DialogUtils;
@@ -230,8 +231,17 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
 
     @Override
     public void onSubmitPasswordSuccess() {
-
         showStep(++ currentStep);
+
+        final QBUser user = new QBUser();
+        final QBUser currentUser = com.chatapp.chat.utils.chat.ChatHelper.getCurrentUser();
+        if (currentUser != null) {
+            user.setId(currentUser.getId());
+            user.setOldPassword(oldPassword);
+            user.setPassword(password);
+
+            updateQuickbloxUser(user);
+        }
     }
 
     private void loginQuickblox() {
@@ -243,9 +253,7 @@ public class ForgotPasswordActivity extends BaseActivity implements ForgotPasswo
         ChatHelper.getInstance().login(user, new QBEntityCallback<Void>() {
             @Override
             public void onSuccess(Void result, Bundle bundle) {
-                user.setOldPassword(oldPassword);
-                user.setPassword(password);
-                updateQuickbloxUser(user);
+                SharedPreferencesUtil.saveQbUser(user);
             }
 
             @Override

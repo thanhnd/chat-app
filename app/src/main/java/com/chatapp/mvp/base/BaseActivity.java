@@ -1,10 +1,15 @@
 package com.chatapp.mvp.base;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.chatapp.chat.services.CallService;
 import com.chatapp.chat.utils.SharedPreferencesUtil;
@@ -17,6 +22,9 @@ import com.quickblox.core.exception.QBResponseException;
 import com.quickblox.users.model.QBUser;
 
 public class BaseActivity extends AppCompatActivity implements BaseView {
+
+    public static final int SELECT_PICTURE = 1;
+    public static final int PERMISSION_READ_EXTERNAL_STORAGE = 101;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -103,4 +111,39 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
     protected void startLoginService(QBUser qbUser) {
         CallService.start(this, qbUser);
     }
+
+    protected void processUpLoad() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    PERMISSION_READ_EXTERNAL_STORAGE);
+        } else {
+            openGallery();
+        }
+
+    }
+
+    protected void openGallery() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,
+                "Select Picture"), SELECT_PICTURE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_READ_EXTERNAL_STORAGE:
+
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    openGallery();
+                } else {
+                    Toast.makeText(this, "Need access your phone to get pictures!", Toast.LENGTH_SHORT).show();
+                }
+
+                break;
+        }
+    }
+
 }
