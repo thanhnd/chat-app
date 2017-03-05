@@ -14,6 +14,7 @@ import com.chatapp.mvp.base.BaseListUserAdapter;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.utils.CircleTransform;
+import com.chatapp.utils.Log;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -121,42 +122,48 @@ public class ListNearbyAdapter extends BaseListUserAdapter {
 
         } else {
 
+            int index = getItemViewType(position) == ITEM_VIEW_TYPE_OTHER_PROFILE ? position - 1 : position;
             OtherUserViewHolder otherUserViewHolder = (OtherUserViewHolder)holder;
-            final UserModel userModel = (UserModel) mDataset.get(
-                    getItemViewType(position) == ITEM_VIEW_TYPE_OTHER_PROFILE ? position - 1 : position);
+            try {
+                final UserModel userModel = (UserModel) mDataset.get(index);
 
-            String name = userModel.getDisplayNameStr();
-            otherUserViewHolder.tvName.setText(name);
-            otherUserViewHolder.tvDistance.setText(String.format(Locale.getDefault(), "%d feet away", userModel.getFeetAway()));
+                String name = userModel.getDisplayNameStr();
+                otherUserViewHolder.tvName.setText(name);
+                otherUserViewHolder.tvDistance.setText(String.format(Locale.getDefault(), "%d feet away", userModel.getFeetAway()));
 
-            if (!TextUtils.isEmpty(userModel.getAvatar())) {
-                Picasso.with(context)
-                        .load(userModel.getAvatar())
-                        .error(R.drawable.img_user_avatar)
-                        .placeholder(R.drawable.img_user_avatar)
-                        .transform(new CircleTransform())
-                        .fit()
-                        .centerCrop()
-                        .into(otherUserViewHolder.ivAvatar);
-            } else {
-                Picasso.with(context)
-                        .load(R.drawable.img_user_avatar)
-                        .placeholder(R.drawable.img_user_avatar)
-                        .into(otherUserViewHolder.ivAvatar);
+                if (!TextUtils.isEmpty(userModel.getAvatar())) {
+                    Picasso.with(context)
+                            .load(userModel.getAvatar())
+                            .error(R.drawable.img_user_avatar)
+                            .placeholder(R.drawable.img_user_avatar)
+                            .transform(new CircleTransform())
+                            .fit()
+                            .centerCrop()
+                            .into(otherUserViewHolder.ivAvatar);
+                } else {
+                    Picasso.with(context)
+                            .load(R.drawable.img_user_avatar)
+                            .placeholder(R.drawable.img_user_avatar)
+                            .into(otherUserViewHolder.ivAvatar);
+                }
+
+                otherUserViewHolder.vItem.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (onUserProfileItemClick != null) {
+                            onUserProfileItemClick.onItemClick(userModel);
+                        }
+                    }
+                });
+
+                otherUserViewHolder.ivFavorite.setVisibility(userModel.isFavourite() ? View.VISIBLE : View.INVISIBLE);
+                otherUserViewHolder.ivFriend.setVisibility(userModel.isFriend() ? View.VISIBLE : View.INVISIBLE);
+                otherUserViewHolder.ivBlock.setVisibility(userModel.isBlock() ? View.VISIBLE : View.INVISIBLE);
+
+            } catch (ArrayIndexOutOfBoundsException e) {
+                Log.e(e);
             }
 
-            otherUserViewHolder.vItem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (onUserProfileItemClick != null) {
-                        onUserProfileItemClick.onItemClick(userModel);
-                    }
-                }
-            });
-
-            otherUserViewHolder.ivFavorite.setVisibility(userModel.isFavourite() ? View.VISIBLE : View.INVISIBLE);
-            otherUserViewHolder.ivFriend.setVisibility(userModel.isFriend() ? View.VISIBLE : View.INVISIBLE);
-            otherUserViewHolder.ivBlock.setVisibility(userModel.isBlock() ? View.VISIBLE : View.INVISIBLE);
 
         }
     }
