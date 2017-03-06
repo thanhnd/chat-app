@@ -77,4 +77,21 @@ public class GeneralInteractorImmpl implements GeneralInteractor {
 
         return  results;
     }
+
+    @Override
+    public CountryModel getCountryFromDatabase(int countryId) {
+        Realm.init(MyApplication.getInstance());
+        Realm realm = Realm.getDefaultInstance();
+
+        realm.beginTransaction();
+        CountryModel countryModel = realm.where(CountryModel.class).equalTo("country_id", countryId).findFirst();
+
+        realm.commitTransaction();
+
+        CountryModel result = realm.copyFromRealm(countryModel);
+
+        realm.close();
+
+        return  result;
+    }
 }

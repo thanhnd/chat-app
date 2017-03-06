@@ -43,7 +43,7 @@ public class PresenterImpl implements UpdateBasicProfileMvp.ProfilePresenter {
         if (view.get() != null) {
             view.get().showProgress();
         }
-        interactor.submit(request, new BaseApiCallback<ResponseModel<Object>>() {
+        interactor.submit(request, new BaseApiCallback<ResponseModel<Object>>(view.get()) {
 
             @Override
             public void onSuccess(ResponseModel<Object> response) {

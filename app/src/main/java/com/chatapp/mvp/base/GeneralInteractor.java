@@ -20,4 +20,5 @@ public interface GeneralInteractor {
     void listCountries(ApiCallback<ResponseModel<List<CountryModel>>> callback);
     void saveCountries(List<CountryModel> listCountries);
     List<CountryModel> getCountriesFromDatabase();
+    CountryModel getCountryFromDatabase(int countryId);
 }

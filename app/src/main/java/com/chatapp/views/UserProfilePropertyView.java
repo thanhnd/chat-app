@@ -37,9 +37,11 @@ public class UserProfilePropertyView extends LinearLayout {
         this(context, null);
     }
 
-    public void update(String label, String value) {
+    public UserProfilePropertyView update(String label, String value) {
         this.tvLabel.setText(label);
         this.tvValue.setText(value);
+
+        return this;
     }
 
 }

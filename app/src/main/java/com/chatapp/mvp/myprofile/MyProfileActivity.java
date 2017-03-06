@@ -20,6 +20,7 @@ import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.setting.SettingActivity;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.mvp.updateprofile.UpdateProfileActivity;
+import com.chatapp.service.models.response.CountryModel;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.utils.AccountUtils;
 import com.squareup.picasso.Picasso;
@@ -64,6 +65,21 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
     View vTribes;
     @Bind(R.id.v_relationship_status)
     View vRelationshipStatus;
+
+    @Bind(R.id.tv_city)
+    TextView tvCity;
+    @Bind(R.id.v_city)
+    View vCity;
+
+    @Bind(R.id.tv_state)
+    TextView tvState;
+    @Bind(R.id.v_state)
+    View vState;
+
+    @Bind(R.id.tv_country)
+    TextView tvCountry;
+    @Bind(R.id.v_country)
+    View vCountry;
 
     @Bind(R.id.v_find_me_on)
     View vFindMeOn;
@@ -115,7 +131,6 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
         });
         setSupportActionBar(toolbar);
         appBarLayout.addOnOffsetChangedListener(this);
-
     }
 
     @Override
@@ -174,6 +189,24 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
             ibLinkedin.setVisibility(TextUtils.isEmpty(linkedin) ? View.GONE : View.VISIBLE);
             ibInstagram.setVisibility(TextUtils.isEmpty(instagram) ? View.GONE : View.VISIBLE);
 
+            String city = userModel.getCity();
+            tvCity.setText(city);
+            vCity.setVisibility(TextUtils.isEmpty(city) ? View.GONE : View.VISIBLE);
+
+            String state = userModel.getState();
+            tvState.setText(state);
+            vState.setVisibility(TextUtils.isEmpty(state) ? View.GONE : View.VISIBLE);
+
+            vCountry.setVisibility(View.GONE);
+
+            int countryId = userModel.getCountryId();
+            if (countryId > 0) {
+                CountryModel countryModel = presenter.getCountry(countryId);
+                if (countryModel != null) {
+                    tvCountry.setText(countryModel.getName());
+                    vCountry.setVisibility(View.VISIBLE);
+                }
+            }
 
             if (TextUtils.isEmpty(facebook)
                     && TextUtils.isEmpty(google)

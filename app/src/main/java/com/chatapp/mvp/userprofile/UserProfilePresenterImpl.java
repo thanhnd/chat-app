@@ -1,21 +1,26 @@
 
 package com.chatapp.mvp.userprofile;
 
+import com.chatapp.mvp.base.GeneralInteractor;
+import com.chatapp.mvp.base.GeneralInteractorImmpl;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.BaseApiCallback;
+import com.chatapp.service.models.response.CountryModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserProfileModel;
 
 import java.lang.ref.WeakReference;
 
-public class UserProfilePresenterImpl implements UserProfileMvp.UserProfilePresent {
+public class UserProfilePresenterImpl implements UserProfileMvp.UserProfilePresenter {
 
     private WeakReference<UserProfileMvp.UserProfileView> view;
     private UserProfileMvp.UserProfileInteractor interactor;
+    private GeneralInteractor generalInteractor;
 
     public UserProfilePresenterImpl(UserProfileMvp.UserProfileView view) {
         this.view = new WeakReference<>(view);
         this.interactor = new UserProfileInteractorImpl();
+        this.generalInteractor = new GeneralInteractorImmpl();
     }
 
     @Override
@@ -66,5 +71,10 @@ public class UserProfilePresenterImpl implements UserProfileMvp.UserProfilePrese
                 }
             }
         });
+    }
+
+    @Override
+    public CountryModel getCountry(int countryId) {
+        return generalInteractor.getCountryFromDatabase(countryId);
     }
 }

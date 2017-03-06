@@ -28,6 +28,7 @@ import com.chatapp.chat.utils.WebRtcSessionManager;
 import com.chatapp.chat.utils.chat.ChatHelper;
 import com.chatapp.mvp.base.BaseChatActivity;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
+import com.chatapp.service.models.response.CountryModel;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.service.models.response.UserProfileModel;
 import com.chatapp.utils.AccountUtils;
@@ -116,7 +117,7 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
     private int mMaxScrollSize;
     private boolean mIsImageHidden;
     private UserModel userModel;
-    private UserProfileMvp.UserProfilePresent present;
+    private UserProfileMvp.UserProfilePresenter presenter;
     private boolean isShowAddFriend;
     private UserProfileModel userProfileModel;
 
@@ -134,7 +135,7 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
                 .placeholder(R.drawable.london_flat)
                 .into(ivAvatar);
 
-        present = new UserProfilePresenterImpl(this);
+        presenter = new UserProfilePresenterImpl(this);
 
         setSupportActionBar(toolbar);
         appBarLayout.addOnOffsetChangedListener(this);
@@ -185,7 +186,7 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
         tvOnlineStatus.setText(userModel.getOnlineStatus());
         tvOnlineStatus.setEnabled(true);
         try {
-            present.getUserProfile(userModel.getUserId());
+            presenter.getUserProfile(userModel.getUserId());
         } catch (RequireLoginException e) {
             onRequiredLogin();
         }
@@ -236,6 +237,27 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
             UserProfilePropertyView view = new UserProfilePropertyView(this);
             view.update(getString(R.string.relationship_status), userProfileModel.getRelationshipStatus());
             vProfileProperties.addView(view);
+        }
+
+        String city = userProfileModel.getCity();
+        if (!TextUtils.isEmpty(city)) {
+            vProfileProperties.addView(new UserProfilePropertyView(this)
+                    .update(getString(R.string.city), city));
+        }
+
+        String state = userProfileModel.getState();
+        if (!TextUtils.isEmpty(state)) {
+            vProfileProperties.addView(new UserProfilePropertyView(this)
+                    .update(getString(R.string.state_province), state));
+        }
+
+        int countryId = userProfileModel.getCountryId();
+        if (countryId > 0) {
+            CountryModel countryModel = presenter.getCountry(countryId);
+            if (countryModel != null) {
+                vProfileProperties.addView(new UserProfilePropertyView(this)
+                        .update(getString(R.string.country_region), countryModel.getName()));
+            }
         }
 
         facebook = userProfileModel.getFacebook();
@@ -301,11 +323,11 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
 
             if (!userModel.isFavourite()) {
 
-                present.addFavorite(userModel.getUserId());
+                presenter.addFavorite(userModel.getUserId());
 
             } else {
 
-                present.removeFavorite(userModel.getUserId());
+                presenter.removeFavorite(userModel.getUserId());
             }
 
         } catch (RequireLoginException e) {
@@ -385,7 +407,7 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
             strGreeting = strGreeting.trim();
             if (!TextUtils.isEmpty(strGreeting)) {
                 try {
-                    present.requestAddFriend(userModel.getUserId(), strGreeting);
+                    presenter.requestAddFriend(userModel.getUserId(), strGreeting);
                 } catch (RequireLoginException e) {
                     onRequiredLogin();
                 }

@@ -96,7 +96,7 @@ public class RegisterPresenterImpl implements RegisterMvp.RegisterPresent {
         if (view.get() != null) {
             view.get().showProgress();
         }
-        interactor.getVerifyCode(new BaseApiCallback<ResponseModel<Object>>() {
+        interactor.getVerifyCode(new BaseApiCallback<ResponseModel<Object>>(view.get()) {
             @Override
             public void onSuccess(ResponseModel<Object> responseModel) {
                 if (view.get() != null) {

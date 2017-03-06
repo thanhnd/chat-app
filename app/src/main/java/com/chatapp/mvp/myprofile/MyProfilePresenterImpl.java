@@ -5,6 +5,7 @@ import com.chatapp.mvp.base.GeneralInteractor;
 import com.chatapp.mvp.base.GeneralInteractorImmpl;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.BaseApiCallback;
+import com.chatapp.service.models.response.CountryModel;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.utils.AccountUtils;
@@ -35,5 +36,10 @@ public class MyProfilePresenterImpl implements MyProfileMvp.MyProfilePresenter {
                 }
             }
         });
+    }
+
+    @Override
+    public CountryModel getCountry(int countryId) {
+        return interactor.getCountryFromDatabase(countryId);
     }
 }

@@ -2,6 +2,7 @@ package com.chatapp.mvp.myprofile;
 
 import com.chatapp.mvp.base.BaseView;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
+import com.chatapp.service.models.response.CountryModel;
 import com.chatapp.service.models.response.MyProfileModel;
 
 /**
@@ -14,6 +15,8 @@ public interface MyProfileMvp {
 
     interface MyProfilePresenter {
         void getMyProfile() throws RequireLoginException;
+
+        CountryModel getCountry(int countryId);
     }
 
     interface MyProfileView extends BaseView {

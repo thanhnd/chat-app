@@ -3,6 +3,7 @@ package com.chatapp.mvp.userprofile;
 import com.chatapp.mvp.base.BaseView;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.ApiCallback;
+import com.chatapp.service.models.response.CountryModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.service.models.response.UserProfileModel;
 
@@ -22,7 +23,7 @@ public interface UserProfileMvp {
         void removeFavorite(String userId, ApiCallback<ResponseModel<Object>> ApiCallback) throws RequireLoginException;
     }
 
-    interface UserProfilePresent {
+    interface UserProfilePresenter {
 
         void getUserProfile(String userId) throws RequireLoginException;
 
@@ -31,6 +32,8 @@ public interface UserProfileMvp {
         void requestAddFriend(String userId, String noted) throws RequireLoginException;
 
         void removeFavorite(String userId) throws RequireLoginException;
+
+        CountryModel getCountry(int countryId);
     }
 
     interface UserProfileView extends BaseView {

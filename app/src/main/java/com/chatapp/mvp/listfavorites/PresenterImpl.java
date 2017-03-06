@@ -28,7 +28,7 @@ public class PresenterImpl implements ListFavoritesMvp.Presenter {
         if (view.get() != null) {
             view.get().showProgress();
         }
-        interactor.getListFavorites(new BaseApiCallback<ResponseModel<List<UserModel>>>() {
+        interactor.getListFavorites(new BaseApiCallback<ResponseModel<List<UserModel>>>(view.get()) {
             @Override
             public void onSuccess(ResponseModel<List<UserModel>> response) {
                 if (view.get() != null) {
