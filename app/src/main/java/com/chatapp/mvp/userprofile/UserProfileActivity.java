@@ -14,6 +14,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -63,12 +64,14 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
     @Bind(R.id.tv_online_status)
     TextView tvOnlineStatus;
 
-    @Bind(R.id.ib_chat)
-    ImageButton ibChat;
-    @Bind(R.id.ib_call)
-    ImageButton ibCall;
-    @Bind(R.id.ib_video)
-    ImageButton ibVideo;
+    @Bind(R.id.btn_chat)
+    Button btnChat;
+    @Bind(R.id.btn_call)
+    Button btnCall;
+    @Bind(R.id.btn_video)
+    Button btnVideo;
+    @Bind(R.id.btn_require_friends)
+    Button btnRequireFriend;
 
     @Bind(R.id.v_profile)
     ViewGroup vProfile;
@@ -137,6 +140,17 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
 
         Intent intent = getIntent();
         userModel = (UserModel) intent.getSerializableExtra(EXTRA_USER_MODEL);
+
+        if (userModel.isFriend()) {
+            btnCall.setVisibility(View.VISIBLE);
+            btnVideo.setVisibility(View.VISIBLE);
+            btnRequireFriend.setVisibility(View.GONE);
+
+        } else {
+            btnCall.setVisibility(View.GONE);
+            btnVideo.setVisibility(View.GONE);
+            btnRequireFriend.setVisibility(View.VISIBLE);
+        }
 
 
         ibFavoriteStatus.setImageResource(userModel.isFavourite() ?
@@ -323,7 +337,7 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
         vAction.setVisibility(View.VISIBLE);
     }
 
-    @OnClick(R.id.ib_chat)
+    @OnClick(R.id.btn_chat)
     void onClickChat() {
         try {
             if (userProfileModel != null) {
@@ -339,7 +353,7 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
         }
     }
 
-    @OnClick(R.id.ib_call)
+    @OnClick(R.id.btn_call)
     void onClickCall() {
         if (!userModel.isFriend()) {
             showAddFriendView();
@@ -352,7 +366,7 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
         }
     }
 
-    @OnClick(R.id.ib_video)
+    @OnClick(R.id.btn_video)
     void onClickVideo() {
         if (!userModel.isFriend()) {
             showAddFriendView();

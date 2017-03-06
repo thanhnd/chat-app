@@ -153,5 +153,8 @@
     <string name="forgot_password_success">New password successfully set up.</string>
     <string name="phone_number">Phone Number</string>
     <string name="join_us">JOIN US</string>
+    <string name="message">Message</string>
+    <string name="call">Call</string>
+    <string name="video_call">Video Call</string>
 
 </resources>
