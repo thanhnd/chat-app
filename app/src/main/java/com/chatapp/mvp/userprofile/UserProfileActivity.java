@@ -30,6 +30,7 @@ import com.chatapp.mvp.base.BaseChatActivity;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.service.models.response.UserProfileModel;
+import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.Log;
 import com.chatapp.views.UserProfilePropertyView;
 import com.quickblox.users.model.QBUser;
@@ -209,8 +210,7 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
 
         if (userProfileModel.getHeight() > 0 && userProfileModel.getWeight() > 0) {
             UserProfilePropertyView view = new UserProfilePropertyView(this);
-            view.update(getString(R.string.height_and_weight),
-                    String.format("%s / %s", userProfileModel.getHeight(), userProfileModel.getWeight()));
+            view.update(getString(R.string.height_and_weight), AccountUtils.getDisplayHeightAndWeight(userProfileModel));
             vProfileProperties.addView(view);
         }
 

@@ -6,6 +6,9 @@ import android.text.TextUtils;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.models.response.LogInModel;
 import com.chatapp.service.models.response.MyProfileModel;
+import com.chatapp.service.models.response.UserProfileModel;
+
+import java.util.Locale;
 
 
 /**
@@ -13,6 +16,10 @@ import com.chatapp.service.models.response.MyProfileModel;
  */
 
 public class AccountUtils {
+
+    public static final int UNIT_TYPE_CM_KG = 0;
+    public static final int UNIT_TYPE_FT_LB = 1;
+
     private static final String SIGN_IN_MODEL = "sign_in_model";
     private static final String EMAIL = "email";
     private static final String PHONE = "phone";
@@ -141,4 +148,14 @@ public class AccountUtils {
         AccountUtils.email = email;
         CacheUtil.save(EMAIL, email);
     }
+
+    public static String getDisplayHeightAndWeight(int height, int weight, int unitType) {
+        return String.format(Locale.getDefault(), unitType == UNIT_TYPE_CM_KG ?
+                "%d cm / %d kg" : "%d ft / %d lb", height, weight);
+    }
+
+    public static String getDisplayHeightAndWeight(UserProfileModel userModel) {
+        return getDisplayHeightAndWeight(userModel.getHeight(), userModel.getWeight(), userModel.getUnitSystem());
+    }
+
 }

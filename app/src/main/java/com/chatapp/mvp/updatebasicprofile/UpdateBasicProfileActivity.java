@@ -32,17 +32,16 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.chatapp.utils.AccountUtils.UNIT_TYPE_CM_KG;
+import static com.chatapp.utils.AccountUtils.UNIT_TYPE_FT_LB;
+
 public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBasicProfileMvp.View {
 
-
-    private static final int UNIT_TYPE_CM_KG = 0;
-    private static final int UNIT_TYPE_FT_LB = 1;
     private static final int SELECT_PICTURE = 1;
 
     @Bind(R.id.iv_avatar)
@@ -202,9 +201,7 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
 
     private void displayHeightAndWeight() {
         if (height > 0 || weight > 0) {
-            tvHeightAndWeight.setText(
-                    String.format(Locale.getDefault(), unitType == UNIT_TYPE_CM_KG ?
-                            "%d cm / %d kg" : "%d ft / %d lb", height, weight));
+            tvHeightAndWeight.setText(AccountUtils.getDisplayHeightAndWeight(height, weight, unitType));
         }
     }
 

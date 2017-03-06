@@ -209,7 +209,7 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
             tvAge.setText(String.valueOf(userModel.getAge()));
             height = userModel.getHeight();
             weight = userModel.getWeight();
-            tvHeightAndWeight.setText(String.format("%s / %s", height, weight));
+            tvHeightAndWeight.setText(AccountUtils.getDisplayHeightAndWeight(height, weight, userModel.getUnitSystem()));
 
             ethnicityParam = new ParamModel(userModel.getEthinicityId());
             spnEthnicity.setSelection(ethnicities.indexOf(ethnicityParam) + 1);

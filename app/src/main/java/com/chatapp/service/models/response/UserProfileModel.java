@@ -73,6 +73,10 @@ public class UserProfileModel {
     @Expose
     private String chatId;
 
+    @SerializedName("unit_system")
+    @Expose
+    private int unitSystem;
+
     public String getDisplayName() {
         return displayName;
     }
@@ -271,6 +275,14 @@ public class UserProfileModel {
 
     public void setChatId(String chatId) {
         this.chatId = chatId;
+    }
+
+    public int getUnitSystem() {
+        return unitSystem;
+    }
+
+    public void setUnitSystem(int unitSystem) {
+        this.unitSystem = unitSystem;
     }
 }
 

@@ -148,7 +148,7 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
 
             collapsingToolbarLayout.setTitle(userModel.getDisplayNameStr());
             tvAge.setText(String.valueOf(userModel.getAge()));
-            tvHeightAndWeight.setText(String.format("%s / %s", userModel.getHeight(), userModel.getWeight()));
+            tvHeightAndWeight.setText(AccountUtils.getDisplayHeightAndWeight(userModel));
 
             tvEthnicity.setText(userModel.getEnthinicity());
             vEthnicity.setVisibility(TextUtils.isEmpty(userModel.getEnthinicity()) ? View.GONE : View.VISIBLE);
