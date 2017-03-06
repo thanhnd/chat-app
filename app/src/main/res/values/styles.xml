@@ -77,7 +77,8 @@
     <style name="CollapsingTextAppearance" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title" />
 
     <style name="CollapsingTextAppearance.Inverse">
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="ToolBarWithNavigationBack">
