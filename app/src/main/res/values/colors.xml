@@ -18,12 +18,13 @@
     <color name="purge">#c35aaf</color>
     <color name="hint">#B7A5C5</color>
 
+    <color name="accent">#333366</color>
     <color name="edit_text_color">@color/accent</color>
     <color name="edit_text_hint_color">@color/hint</color>
-    <color name="accent">#333366</color>
     <color name="text_caption">#7777AC</color>
     <color name="text_title5">#828699</color>
 
     <color name="divider_color">#33ffffff</color>
+    <color name="dark_divider_color">#e5e5e5</color>
 
 </resources>

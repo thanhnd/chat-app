@@ -88,28 +88,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/form_label"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingBottom="20dp"
-                        android:paddingTop="20dp"
-                        android:text="@string/find_me_on" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-                </LinearLayout>
-
-                <include layout="@layout/layout_horizontal_divider" />
-
+                <include layout="@layout/layout_profile_social" />
             </LinearLayout>
 
             <LinearLayout

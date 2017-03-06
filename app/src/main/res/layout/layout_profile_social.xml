@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/v_find_me_on"
+    style="@style/profile_property"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="20dp"
+    android:paddingTop="20dp"
+    tools:showIn="@layout/activity_my_profile">
+
+    <TextView
+        style="@style/App_Text.Caption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:text="FIND ME ON"
+        tools:text="FIND ME ON" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/ib_facebook"
+            style="@style/profile_image_social"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_facebook" />
+
+        <ImageButton
+            android:id="@+id/ib_google"
+            style="@style/profile_image_social"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_google" />
+
+        <ImageButton
+            android:id="@+id/ib_twitter"
+            style="@style/profile_image_social"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_twitter" />
+
+        <ImageButton
+            android:id="@+id/ib_linkedin"
+            style="@style/profile_image_social"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_linkedin" />
+
+        <ImageButton
+            android:id="@+id/ib_instagram"
+            style="@style/profile_image_social"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_instagram" />
+    </LinearLayout>
+</LinearLayout>

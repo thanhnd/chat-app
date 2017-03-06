@@ -32,7 +32,6 @@
         <item name="android:textColorHint">@color/edit_text_hint_color</item>
         <item name="android:background">@drawable/edit_text_bg_sharpe</item>
         <item name="android:paddingBottom">10dp</item>
-
     </style>
 
     <style name="App_TextViewClickableStyle" parent="TextAppearance.AppCompat.Medium.Inverse">
@@ -155,12 +154,23 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/text_caption</item>
     </style>
+    <style name="App_Text.DarkColor">
+        <item name="android:textColor">@color/accent</item>
+    </style>
 
     <style name="App_Text.OnlineStatus">
         <item name="android:lines">1</item>
         <item name="android:drawablePadding">4dp</item>
         <item name="android:drawableLeft">@drawable/online_status</item>
         <item name="android:textColor">@color/online_status_color</item>
+    </style>
+
+    <style name="profile_property">
+        <item name="android:background">@drawable/profile_property_bg_sharpe</item>
+    </style>
+
+    <style name="profile_image_social">
+        <item name="android:layout_marginRight">5dp</item>
     </style>
 
 </resources>

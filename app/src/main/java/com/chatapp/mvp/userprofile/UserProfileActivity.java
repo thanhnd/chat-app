@@ -76,6 +76,25 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
     @Bind(R.id.v_profile_properties)
     ViewGroup vProfileProperties;
 
+    @Bind(R.id.v_find_me_on)
+    View vFindMeOn;
+
+    @Bind(R.id.ib_facebook)
+    ImageButton ibFacebook;
+
+    @Bind(R.id.ib_google)
+    ImageButton ibGoogle;
+
+    @Bind(R.id.ib_twitter)
+    ImageButton ibTwiter;
+
+    @Bind(R.id.ib_linkedin)
+    ImageButton ibLinkedin;
+
+    @Bind(R.id.ib_instagram)
+    ImageButton ibInstagram;
+
+
     @Bind(R.id.v_add_friend)
     View vAddFriend;
     @Bind(R.id.v_action)
@@ -96,6 +115,8 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
     private UserProfileMvp.UserProfilePresent present;
     private boolean isShowAddFriend;
     private UserProfileModel userProfileModel;
+
+    private String facebook, google, twitter, linkedin, instagram;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -201,6 +222,29 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
             UserProfilePropertyView view = new UserProfilePropertyView(this);
             view.update(getString(R.string.relationship_status), userProfileModel.getRelationshipStatus());
             vProfileProperties.addView(view);
+        }
+
+        facebook = userProfileModel.getFacebook();
+        google = userProfileModel.getGoogle();
+        twitter = userProfileModel.getTwitter();
+        linkedin = userProfileModel.getLinkin();
+        instagram = userProfileModel.getInstagram();
+
+        ibFacebook.setVisibility(TextUtils.isEmpty(facebook) ? View.GONE : View.VISIBLE);
+        ibGoogle.setVisibility(TextUtils.isEmpty(google) ? View.GONE : View.VISIBLE);
+        ibTwiter.setVisibility(TextUtils.isEmpty(twitter) ? View.GONE : View.VISIBLE);
+        ibLinkedin.setVisibility(TextUtils.isEmpty(linkedin) ? View.GONE : View.VISIBLE);
+        ibInstagram.setVisibility(TextUtils.isEmpty(instagram) ? View.GONE : View.VISIBLE);
+
+
+        if (TextUtils.isEmpty(facebook)
+                && TextUtils.isEmpty(google)
+                && TextUtils.isEmpty(twitter)
+                && TextUtils.isEmpty(linkedin)
+                && TextUtils.isEmpty(instagram)) {
+            vFindMeOn.setVisibility(View.GONE);
+        } else {
+            vFindMeOn.setVisibility(View.VISIBLE);
         }
 
     }
