@@ -156,5 +156,6 @@
     <string name="message">Message</string>
     <string name="call">Call</string>
     <string name="video_call">Video Call</string>
+    <string name="input_your_country"><i><small>Input your country</small></i></string>
 
 </resources>

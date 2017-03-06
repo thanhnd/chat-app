@@ -24,6 +24,7 @@ import com.quickblox.users.model.QBUser;
 public class BaseActivity extends AppCompatActivity implements BaseView {
 
     public static final int SELECT_PICTURE = 1;
+    protected static final int RC_GET_COUNTRY_CODE = 2;
     public static final int PERMISSION_READ_EXTERNAL_STORAGE = 101;
 
     @Override

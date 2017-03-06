@@ -10,6 +10,7 @@ import com.chatapp.service.models.response.CountryModel;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.utils.AccountUtils;
+import com.chatapp.utils.Log;
 
 import java.util.List;
 import java.util.Map;
@@ -80,18 +81,25 @@ public class GeneralInteractorImmpl implements GeneralInteractor {
 
     @Override
     public CountryModel getCountryFromDatabase(int countryId) {
-        Realm.init(MyApplication.getInstance());
-        Realm realm = Realm.getDefaultInstance();
+        try {
+            Realm.init(MyApplication.getInstance());
+            Realm realm = Realm.getDefaultInstance();
 
-        realm.beginTransaction();
-        CountryModel countryModel = realm.where(CountryModel.class).equalTo("country_id", countryId).findFirst();
+            realm.beginTransaction();
+            CountryModel countryModel = realm.where(CountryModel.class).equalTo("countryId", countryId).findFirst();
 
-        realm.commitTransaction();
+            realm.commitTransaction();
 
-        CountryModel result = realm.copyFromRealm(countryModel);
+            CountryModel result = realm.copyFromRealm(countryModel);
 
-        realm.close();
+            realm.close();
 
-        return  result;
+            return  result;
+        } catch (Exception e) {
+            Log.e(e);
+        }
+
+        return null;
+
     }
 }

@@ -32,8 +32,6 @@ import butterknife.OnClick;
 
 public class RegisterActivity extends BaseActivity implements RegisterMvp.RegisterView {
 
-    private static final int RC_GET_COUNTRY_CODE = 1;
-
     @Bind(R.id.edt_email)
     EditText edtEmail;
     @Bind(R.id.edt_phone)

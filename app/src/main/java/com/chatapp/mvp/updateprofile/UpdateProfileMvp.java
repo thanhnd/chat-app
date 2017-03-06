@@ -4,6 +4,7 @@ import android.net.Uri;
 
 import com.chatapp.mvp.base.BaseView;
 import com.chatapp.service.ApiCallback;
+import com.chatapp.service.models.response.CountryModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.google.gson.internal.LinkedTreeMap;
 
@@ -26,6 +27,8 @@ public interface UpdateProfileMvp {
         void uploadAvatar(Uri url) throws RequireLoginException;
 
         void submit(Map<String, Object> request) throws RequireLoginException;
+
+        CountryModel getCountry(int countryId);
     }
 
     interface View extends BaseView {

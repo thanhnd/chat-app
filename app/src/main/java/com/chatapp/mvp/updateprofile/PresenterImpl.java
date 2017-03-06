@@ -4,7 +4,10 @@ package com.chatapp.mvp.updateprofile;
 import android.net.Uri;
 
 import com.chatapp.MyApplication;
+import com.chatapp.mvp.base.GeneralInteractor;
+import com.chatapp.mvp.base.GeneralInteractorImmpl;
 import com.chatapp.service.BaseApiCallback;
+import com.chatapp.service.models.response.CountryModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.utils.FileUtils;
 import com.google.gson.internal.LinkedTreeMap;
@@ -21,10 +24,12 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
 
     private WeakReference<UpdateProfileMvp.View> view;
     private UpdateProfileMvp.Interactor interactor;
+    private GeneralInteractor generalInteractor;
 
     public PresenterImpl(UpdateProfileMvp.View view) {
         this.view = new WeakReference<>(view);
         this.interactor = new InteractorImpl();
+        this.generalInteractor = new GeneralInteractorImmpl();
     }
 
     @Override
@@ -77,5 +82,10 @@ public class PresenterImpl implements UpdateProfileMvp.Presenter {
                 }
             }
         });
+    }
+
+    @Override
+    public CountryModel getCountry(int countryId) {
+        return generalInteractor.getCountryFromDatabase(countryId);
     }
 }

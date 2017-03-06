@@ -271,11 +271,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/country_region" />
 
-                <EditText
+                <TextView
                     android:id="@+id/edt_country_region"
                     style="@style/App_EditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="@string/input_your_country"
                     tools:text="USA" />
             </LinearLayout>
 

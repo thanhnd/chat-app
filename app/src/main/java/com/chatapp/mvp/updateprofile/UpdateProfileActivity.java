@@ -19,6 +19,8 @@ import android.widget.TextView;
 import com.chatapp.R;
 import com.chatapp.chat.utils.chat.ChatHelper;
 import com.chatapp.mvp.base.BaseChatActivity;
+import com.chatapp.mvp.listcountries.ListCountriesActivity;
+import com.chatapp.service.models.response.CountryModel;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.ParamModel;
 import com.chatapp.utils.AccountUtils;
@@ -80,6 +82,9 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
     @Bind(R.id.edt_city)
     EditText edtCity;
 
+    @Bind(R.id.edt_country_region)
+    TextView edtCountry;
+
     @Bind(R.id.edt_facebook)
     EditText edtFacebook;
 
@@ -103,6 +108,7 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
     ParamModel ethnicityParam, bodyTypeParam, myTribesParam, relationshipStatusParam;
     private List<ParamModel> ethnicities, bodyTypes, tribes, relationships;
     private String displayName;
+    private CountryModel selectedCountry;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -226,6 +232,14 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
             edtCity.setText(userModel.getCity());
             edtState.setText(userModel.getState());
 
+            int countryId= userModel.getCountryId();
+            if (countryId > 0) {
+                selectedCountry = presenter.getCountry(countryId);
+                if (selectedCountry != null) {
+                    edtCountry.setText(selectedCountry.getName());
+                }
+            }
+
             edtFacebook.setText(userModel.getFacebook());
             edtGoogle.setText(userModel.getGoogle());
             edtTwitter.setText(userModel.getTwitter());
@@ -332,6 +346,10 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
             request.put("city", city);
         }
 
+        if (selectedCountry != null) {
+            request.put("country_id", selectedCountry.getCountryId());
+        }
+
         String facebook = edtFacebook.getText().toString().trim();
         String google = edtGoogle.getText().toString().trim();
         String twitter = edtTwitter.getText().toString().trim();
@@ -401,6 +419,12 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
         return result;
     }
 
+    @OnClick(R.id.edt_country_region)
+    public void clickCountry() {
+        Intent intent = new Intent(this, ListCountriesActivity.class);
+        startActivityForResult(intent, RC_GET_COUNTRY_CODE);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
@@ -413,6 +437,9 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
                         onRequiredLogin();
                     }
                 }
+            } else if (requestCode == RC_GET_COUNTRY_CODE) {
+                selectedCountry = (CountryModel) data.getSerializableExtra(ListCountriesActivity.SELECTED_COUNTRY);
+                edtCountry.setText(selectedCountry.getName());
             }
         }
     }
