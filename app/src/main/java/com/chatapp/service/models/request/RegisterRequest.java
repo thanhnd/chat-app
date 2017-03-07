@@ -16,7 +16,7 @@ public class RegisterRequest {
     @SerializedName("password")
     @Expose
     private String password;
-    @SerializedName("country_id")
+    @SerializedName("country")
     @Expose
     private int country;
 
