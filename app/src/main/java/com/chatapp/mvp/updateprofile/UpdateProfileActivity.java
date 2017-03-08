@@ -120,6 +120,8 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
         userModel = AccountUtils.getMyProfileModel();
 
         initView();
+
+        displayMyProfileInfo();
     }
 
     private void initView() {
@@ -192,10 +194,8 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
-        displayMyProfileInfo();
+    protected void onStart() {
+        super.onStart();
     }
 
     private void displayMyProfileInfo() {
