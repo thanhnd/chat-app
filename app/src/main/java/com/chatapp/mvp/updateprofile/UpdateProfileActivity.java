@@ -38,7 +38,6 @@ import com.squareup.picasso.Picasso;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import butterknife.Bind;
@@ -289,8 +288,7 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
 
     private void displayHeightAndWeight() {
         if (height > 0 || weight > 0) {
-            tvHeightAndWeight.setText(
-                    String.format(Locale.getDefault(), "%d / %d", height, weight));
+            tvHeightAndWeight.setText(AccountUtils.getDisplayHeightAndWeight(height, weight, userModel.getUnitSystem()));
         }
     }
 

@@ -81,7 +81,7 @@
 
                     <TextView
                         android:id="@+id/edt_country"
-                        style="@style/App_EditText"
+                        style="@style/App_EditText.Clickable"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:duplicateParentState="true"
