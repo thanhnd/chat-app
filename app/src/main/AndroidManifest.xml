@@ -107,6 +107,10 @@
                 <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="20a6256b5a8d5407df3252da36efa791dbeeaddc"
+            />
     </application>
 
 </manifest>

@@ -32,6 +32,7 @@ import com.chatapp.utils.LocationChangeObservable;
 import com.chatapp.utils.Log;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -59,6 +60,7 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
     HomeMvp.Presenter presenter;
 
     private GoogleApiClient mGoogleApiClient;
+    private LocationRequest mLocationRequest;
 
     private List<LocationChangeObservable> locationChangeObservableList;
 
@@ -112,6 +114,14 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
                     .build();
+        }
+
+        if (mLocationRequest == null) {
+            mLocationRequest = new LocationRequest();
+            mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            mLocationRequest.setInterval(10000);
+            mLocationRequest.setFastestInterval(7000);
+            mLocationRequest.setSmallestDisplacement(1);
         }
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -218,6 +228,14 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
             }
 
             notifyUpdateLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        } else if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest,
+                    new com.google.android.gms.location.LocationListener() {
+                @Override
+                public void onLocationChanged(Location location) {
+                    notifyUpdateLocation(location.getAltitude(), location.getLatitude());
+                }
+            });
         }
     }
 
