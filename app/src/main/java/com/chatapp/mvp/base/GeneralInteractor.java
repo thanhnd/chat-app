@@ -4,6 +4,7 @@ import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.ApiCallback;
 import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.response.CountryModel;
+import com.chatapp.service.models.response.ListParamsModel;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.ResponseModel;
 
@@ -21,4 +22,5 @@ public interface GeneralInteractor {
     void saveCountries(List<CountryModel> listCountries);
     List<CountryModel> getCountriesFromDatabase();
     CountryModel getCountryFromDatabase(int countryId);
+    void getListCommonParams(ApiCallback<ResponseModel<ListParamsModel>> callback);
 }

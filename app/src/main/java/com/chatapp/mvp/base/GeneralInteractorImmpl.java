@@ -7,6 +7,7 @@ import com.chatapp.service.ApiService;
 import com.chatapp.service.ApiServiceHelper;
 import com.chatapp.service.BaseApiCallback;
 import com.chatapp.service.models.response.CountryModel;
+import com.chatapp.service.models.response.ListParamsModel;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.utils.AccountUtils;
@@ -101,5 +102,12 @@ public class GeneralInteractorImmpl implements GeneralInteractor {
 
         return null;
 
+    }
+
+    @Override
+    public void getListCommonParams(final ApiCallback<ResponseModel<ListParamsModel>> callback) {
+        ApiService service = ApiServiceHelper.getInstance();
+        Call<ResponseModel<ListParamsModel>> call = service.listCommon();
+        call.enqueue(callback);
     }
 }
