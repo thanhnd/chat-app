@@ -8,7 +8,7 @@
     <com.chatapp.views.LoopViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="220dp" />
 
     <me.relex.circleindicator.CircleIndicator
         android:id="@+id/indicator"
