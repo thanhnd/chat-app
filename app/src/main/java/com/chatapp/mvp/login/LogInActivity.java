@@ -218,7 +218,7 @@ public class LogInActivity extends BaseActivity implements LoginMvp.LogInView {
             AccountUtils.setPhone(phone);
             intent.putExtra(VerifyActivity.EXTRA_PHONE, phone);
         } else {
-            AccountUtils.setPhone(email);
+            AccountUtils.setEmail(email);
             intent.putExtra(VerifyActivity.EXTRA_EMAIL, email);
         }
         startActivity(intent);

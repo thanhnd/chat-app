@@ -11,12 +11,14 @@ import android.util.Log;
 import android.view.View;
 
 import com.chatapp.R;
+import com.chatapp.chat.utils.Consts;
 import com.chatapp.chat.utils.SharedPreferencesUtil;
 import com.chatapp.chat.utils.chat.ChatHelper;
 import com.chatapp.chat.utils.qb.QbAuthUtils;
 import com.chatapp.chat.utils.qb.QbSessionStateCallback;
 import com.quickblox.core.QBEntityCallback;
 import com.quickblox.core.exception.QBResponseException;
+import com.quickblox.sample.core.gcm.GooglePlayServicesHelper;
 import com.quickblox.sample.core.ui.activity.CoreBaseActivity;
 import com.quickblox.sample.core.ui.dialog.ProgressDialogFragment;
 import com.quickblox.sample.core.utils.ErrorUtils;
@@ -27,6 +29,8 @@ public abstract class BaseActivity extends CoreBaseActivity implements QbSession
     private static final String TAG = BaseActivity.class.getSimpleName();
 
     private static final Handler mainThreadHandler = new Handler(Looper.getMainLooper());
+
+    protected GooglePlayServicesHelper googlePlayServicesHelper;
 
     protected ActionBar actionBar;
     protected boolean isAppSessionActive;
@@ -56,6 +60,24 @@ public abstract class BaseActivity extends CoreBaseActivity implements QbSession
                 }
             }
         });
+
+        googlePlayServicesHelper = new GooglePlayServicesHelper();
+        subscribeToPushes();
+    }
+
+    private void subscribeToPushes() {
+        if (googlePlayServicesHelper.checkPlayServicesAvailable(this)) {
+            Log.d(TAG, "subscribeToPushes()");
+            googlePlayServicesHelper.registerForGcm(Consts.GCM_SENDER_ID);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (googlePlayServicesHelper.checkPlayServicesAvailable(this)) {
+            googlePlayServicesHelper.unregisterFromGcm(Consts.GCM_SENDER_ID);
+        }
     }
 
     @Override

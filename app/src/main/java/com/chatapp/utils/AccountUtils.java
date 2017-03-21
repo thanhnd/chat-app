@@ -60,6 +60,8 @@ public class AccountUtils {
 
     public static void logOut() {
         logInModel = null;
+        setEmail("");
+        setPhone("");
         CacheUtil.remove(SIGN_IN_MODEL);
     }
 
