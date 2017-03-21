@@ -9,4 +9,10 @@
             <solid android:color="@color/navy" />
         </shape>
     </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/submit_btn_bg_corner_radius" />
+            <solid android:color="@color/navy" />
+        </shape>
+    </item>
 </ripple>
