@@ -25,7 +25,7 @@
     <style name="ListDateHeaderStyle" parent="MatchWidth">
         <item name="android:gravity">center</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:textColor">@color/text_color_dark_grey</item>
+        <item name="android:textColor">@color/white</item>
         <item name="typeface">roboto_medium</item>
     </style>
 
