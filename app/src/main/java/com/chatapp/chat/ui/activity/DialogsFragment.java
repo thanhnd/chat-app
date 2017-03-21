@@ -3,10 +3,13 @@ package com.chatapp.chat.ui.activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.view.ActionMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +38,7 @@ import com.quickblox.core.QBEntityCallback;
 import com.quickblox.core.exception.QBResponseException;
 import com.quickblox.core.request.QBRequestGetBuilder;
 import com.quickblox.sample.core.gcm.GooglePlayServicesHelper;
+import com.quickblox.sample.core.utils.constant.GcmConsts;
 
 import java.util.ArrayList;
 
@@ -78,6 +82,41 @@ public class DialogsFragment extends BaseChatFragment implements DialogsManager.
         initUi(view);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        pushBroadcastReceiver = new PushBroadcastReceiver();
+        if (isAppSessionActive) {
+            allDialogsMessagesListener = new AllDialogsMessageListener();
+            systemMessagesListener = new SystemMessagesListener();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(pushBroadcastReceiver);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(pushBroadcastReceiver,
+                new IntentFilter(GcmConsts.ACTION_NEW_GCM_EVENT));
+
+        updateDialogsList();
+    }
+
+    private void updateDialogsList() {
+        if (isAppSessionActive) {
+            requestBuilder.setSkip(skipRecords = 0);
+
+            loadDialogsFromQb(true, true);
+        }
     }
 
     private void initUi(View view) {
@@ -216,4 +255,16 @@ public class DialogsFragment extends BaseChatFragment implements DialogsManager.
             }
         }
     }
+
+    private class PushBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Get extra data included in the Intent
+            String message = intent.getStringExtra(GcmConsts.EXTRA_GCM_MESSAGE);
+            Log.v(TAG, "Received broadcast " + intent.getAction() + " with data: " + message);
+            requestBuilder.setSkip(skipRecords = 0);
+            loadDialogsFromQb(true, true);
+        }
+    }
+
 }
