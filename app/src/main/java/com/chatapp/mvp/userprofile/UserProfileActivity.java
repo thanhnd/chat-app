@@ -359,6 +359,8 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
         vAction.setVisibility(View.VISIBLE);
     }
 
+
+
     @OnClick(R.id.btn_chat)
     void onClickChat() {
         try {
@@ -372,6 +374,13 @@ public class UserProfileActivity extends BaseChatActivity implements UserProfile
             Log.e(e);
 
             showErrorDialog("Cannot chat with this user.");
+        }
+    }
+
+    @OnClick(R.id.btn_require_friends)
+    void clickAddFriend() {
+        if (!userModel.isFriend()) {
+            showAddFriendView();
         }
     }
 
