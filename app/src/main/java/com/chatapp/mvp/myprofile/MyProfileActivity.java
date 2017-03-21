@@ -59,6 +59,10 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
 
     @Bind(R.id.v_ethnicity)
     View vEthnicity;
+
+    @Bind(R.id.v_height_and_weight)
+    View vHeightAndWeight;
+
     @Bind(R.id.v_body_type)
     View vBodyType;
     @Bind(R.id.v_tribes)
@@ -163,7 +167,9 @@ public class MyProfileActivity extends BaseActivity implements MyProfileMvp.MyPr
 
             collapsingToolbarLayout.setTitle(userModel.getDisplayNameStr());
             tvAge.setText(String.valueOf(userModel.getAge()));
+
             tvHeightAndWeight.setText(AccountUtils.getDisplayHeightAndWeight(userModel));
+            vHeightAndWeight.setVisibility(userModel.getHeight() > 0 && userModel.getWeight() > 0 ? View.VISIBLE : View.GONE);
 
             tvEthnicity.setText(userModel.getEnthinicity());
             vEthnicity.setVisibility(TextUtils.isEmpty(userModel.getEnthinicity()) ? View.GONE : View.VISIBLE);

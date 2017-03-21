@@ -116,8 +116,14 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
             }
 
             request.setUnitSystem(unitType);
-            request.setHeight(height);
-            request.setWeight(weight);
+
+            if (height > 0 ) {
+                request.setHeight(height);
+            }
+
+            if (weight > 0) {
+                request.setWeight(weight);
+            }
 
             try {
                 presenter.submit(request);
@@ -153,13 +159,13 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
             tvDobError.setVisibility(View.GONE);
         }
 
-        if (height == 0 || weight == 0) {
-            tvHeightAndWeightError.setText("Please enter your height and weight.");
-            tvHeightAndWeightError.setVisibility(View.VISIBLE);
-            result = false;
-        } else {
-            tvHeightAndWeightError.setVisibility(View.GONE);
-        }
+//        if (height == 0 || weight == 0) {
+//            tvHeightAndWeightError.setText("Please enter your height and weight.");
+//            tvHeightAndWeightError.setVisibility(View.VISIBLE);
+//            result = false;
+//        } else {
+//            tvHeightAndWeightError.setVisibility(View.GONE);
+//        }
 
         return result;
     }
