@@ -23,5 +23,6 @@ public interface SearchUserMvp {
 
     interface View extends BaseView {
         void onSearchSuccess(List<UserModel> resultSet);
+        void navigateToUserProfile(UserModel userModel);
     }
 }

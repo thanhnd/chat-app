@@ -10,22 +10,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chatapp.R;
+import com.chatapp.mvp.base.BaseListUserAdapter;
 import com.chatapp.service.models.response.UserModel;
 import com.chatapp.utils.CircleTransform;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class ListSearchUserAdapter extends RecyclerView.Adapter<ListSearchUserAdapter.ViewHolder> {
-    private List<UserModel> users;
-    private Context context;
-
+public class ListSearchUserAdapter extends BaseListUserAdapter<ListSearchUserAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
+        View vItem;
         @Bind(R.id.tv_name) TextView tvName;
         @Bind(R.id.tv_online_status) TextView tvOnlineStatus;
         @Bind(R.id.tv_location) TextView tvLocation;
@@ -33,13 +28,13 @@ public class ListSearchUserAdapter extends RecyclerView.Adapter<ListSearchUserAd
 
         public ViewHolder(View v) {
             super(v);
+            vItem = v;
             ButterKnife.bind(this, v);
         }
     }
 
     public ListSearchUserAdapter(Context context) {
-        users = new ArrayList<>();
-        this.context = context;
+        super(context);
     }
 
     @Override
@@ -55,7 +50,7 @@ public class ListSearchUserAdapter extends RecyclerView.Adapter<ListSearchUserAd
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ListSearchUserAdapter.ViewHolder holder, int position) {
-        UserModel userModel = users.get(position);
+        final UserModel userModel = mDataset.get(position);
         String name = userModel.getDisplayNameStr();
         holder.tvName.setText(name);
         holder.tvOnlineStatus.setText(userModel.getOnlineStatus());
@@ -72,17 +67,13 @@ public class ListSearchUserAdapter extends RecyclerView.Adapter<ListSearchUserAd
                     .into(holder.ivAvatar);
         }
 
-
-    }
-
-    // Return the size of your dataset (invoked by the layout manager)
-    @Override
-    public int getItemCount() {
-        return users.size();
-    }
-
-    public void setUsers(List<UserModel> userModels) {
-        users = userModels;
-        notifyDataSetChanged();
+        holder.vItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onUserProfileItemClick != null) {
+                    onUserProfileItemClick.onItemClick(userModel);
+                }
+            }
+        });
     }
 }

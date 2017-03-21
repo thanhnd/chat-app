@@ -1,5 +1,6 @@
 package com.chatapp.mvp.searchuser;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.DividerItemDecoration;
@@ -14,7 +15,9 @@ import android.widget.TextView;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.base.BaseListUserAdapter;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
+import com.chatapp.mvp.userprofile.UserProfileActivity;
 import com.chatapp.service.models.response.UserModel;
 
 import java.util.List;
@@ -48,6 +51,12 @@ public class SearchActivity extends BaseActivity implements SearchUserMvp.View {
         rvListUsers.addItemDecoration(dividerItemDecoration);
 
         adapter = new ListSearchUserAdapter(this);
+        adapter.setOnUserProfileItemClick(new BaseListUserAdapter.OnUserProfileItemClick() {
+            @Override
+            public void onItemClick(UserModel userModel) {
+                navigateToUserProfile(userModel);
+            }
+        });
         rvListUsers.setAdapter(adapter);
 
         presenter = new SearchUserPresenterImpl(this);
@@ -80,10 +89,17 @@ public class SearchActivity extends BaseActivity implements SearchUserMvp.View {
     @Override
     public void onSearchSuccess(List<UserModel> resultSet) {
         if (resultSet != null) {
-            adapter.setUsers(resultSet);
+            adapter.add(resultSet);
         }
 
         rvListUsers.setVisibility(adapter.getItemCount() != 0 ? View.VISIBLE : View.GONE);
         tvEmpty.setVisibility(adapter.getItemCount() == 0 ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void navigateToUserProfile(UserModel userModel) {
+        Intent intent = new Intent(this, UserProfileActivity.class);
+        intent.putExtra(UserProfileActivity.EXTRA_USER_MODEL, userModel);
+        startActivity(intent);
     }
 }
