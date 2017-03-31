@@ -7,6 +7,7 @@ import com.chatapp.service.models.response.CountryModel;
 import com.chatapp.service.models.response.ListParamsModel;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.ResponseModel;
+import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.List;
 import java.util.Map;
@@ -22,5 +23,12 @@ public interface GeneralInteractor {
     void saveCountries(List<CountryModel> listCountries);
     List<CountryModel> getCountriesFromDatabase();
     CountryModel getCountryFromDatabase(int countryId);
+
+    void updateShowHideDistance(boolean isShowDistance, ApiCallback<ResponseModel> callback)
+            throws RequireLoginException;
+
+    void getShowHideDistance(ApiCallback<ResponseModel<LinkedTreeMap<String, Integer>>> callback)
+            throws RequireLoginException;
+
     void getListCommonParams(ApiCallback<ResponseModel<ListParamsModel>> callback);
 }

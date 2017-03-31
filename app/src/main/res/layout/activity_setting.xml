@@ -18,11 +18,16 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/btn_show_distance"
                 style="@style/App_Button.Setting"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/show_distance" />
+            <CheckBox
+                android:id="@+id/cb_show_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
@@ -32,7 +37,7 @@
             style="@style/App_Button.Setting.Navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/blocked_list" />
+            android:text="@string/unit_system" />
 
         <include layout="@layout/layout_horizontal_divider_white" />
 

@@ -137,4 +137,18 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("/api/user/changePassword")
     Call<ResponseModel> changePassword(@Body Map<String, String> request);
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/user/showHideDistance")
+    Call<ResponseModel> updateShowHideDistance(@Header("Authorization") String authorization,
+                                         @Body Map<String, Integer> request);
+
+    @Headers("Content-Type: application/json")
+    @GET("/api/user/getShowHideDistance")
+    Call<ResponseModel<LinkedTreeMap<String, Integer>>> getShowHideDistance(@Header("Authorization") String authorization);
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/user/changeUnitSystem")
+    Call<ResponseModel> updateUnitSystem(@Header("Authorization") String authorization,
+                                               @Body Map<String, Integer> request);
 }

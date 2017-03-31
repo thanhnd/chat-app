@@ -12,7 +12,9 @@ import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.ResponseModel;
 import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.Log;
+import com.google.gson.internal.LinkedTreeMap;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -102,6 +104,27 @@ public class GeneralInteractorImmpl implements GeneralInteractor {
 
         return null;
 
+    }
+
+    @Override
+    public void updateShowHideDistance(boolean isShowDistance,
+                                       ApiCallback<ResponseModel> callback)
+            throws RequireLoginException {
+        ApiService service = ApiServiceHelper.getInstance();
+        Map<String, Integer> request = new HashMap<>();
+        request.put("is_show_distance", isShowDistance ? 1 : 0);
+
+        Call<ResponseModel> call = service.updateShowHideDistance(AccountUtils.getAuthorization(), request);
+        call.enqueue(callback);
+    }
+
+    @Override
+    public void getShowHideDistance(ApiCallback<ResponseModel<LinkedTreeMap<String, Integer>>> callback)
+            throws RequireLoginException {
+        ApiService service = ApiServiceHelper.getInstance();
+
+        Call<ResponseModel<LinkedTreeMap<String, Integer>>> call = service.getShowHideDistance(AccountUtils.getAuthorization());
+        call.enqueue(callback);
     }
 
     @Override
