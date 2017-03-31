@@ -148,5 +148,4 @@ public class BaseActivity extends AppCompatActivity implements BaseView {
                 break;
         }
     }
-
 }

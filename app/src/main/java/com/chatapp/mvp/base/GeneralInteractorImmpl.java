@@ -93,7 +93,10 @@ public class GeneralInteractorImmpl implements GeneralInteractor {
 
             realm.commitTransaction();
 
-            CountryModel result = realm.copyFromRealm(countryModel);
+            CountryModel result = null;
+            if (countryModel != null) {
+                result = realm.copyFromRealm(countryModel);
+            }
 
             realm.close();
 
@@ -137,7 +140,7 @@ public class GeneralInteractorImmpl implements GeneralInteractor {
     public void updatePassword(String currentPassword, String newPassword, ApiCallback<ResponseModel> callback) throws RequireLoginException {
         ApiService service = ApiServiceHelper.getInstance();
         Map<String, String> request = new HashMap<>();
-        request.put("currentPass", currentPassword);
+        request.put("currentPassword", currentPassword);
         request.put("password", newPassword);
 
         Call<ResponseModel> call = service.changePassword(AccountUtils.getAuthorization(), request);

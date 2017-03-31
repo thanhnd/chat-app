@@ -50,7 +50,6 @@ public class SplashActivity extends BaseActivity implements SplashMvp.SplashView
             } else if (logInModel.isNotVerify()) {
 
                 intent = new Intent(this, VerifyActivity.class);
-
             }
         }
 

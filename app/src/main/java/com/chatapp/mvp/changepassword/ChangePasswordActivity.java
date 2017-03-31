@@ -10,19 +10,17 @@ import android.widget.TextView;
 
 import com.chatapp.Config;
 import com.chatapp.R;
-import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.base.BaseChatActivity;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
+import com.chatapp.utils.DialogUtils;
 import com.chatapp.utils.Log;
-import com.quickblox.core.QBEntityCallback;
-import com.quickblox.core.exception.QBResponseException;
-import com.quickblox.users.QBUsers;
-import com.quickblox.users.model.QBUser;
+import com.chatapp.views.fragments.RetainedDialogFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ChangePasswordActivity extends BaseActivity implements ChangePasswordMvp.View {
+public class ChangePasswordActivity extends BaseChatActivity implements ChangePasswordMvp.View {
 
     @Bind(R.id.edt_password)
     EditText edtPassword;
@@ -68,27 +66,10 @@ public class ChangePasswordActivity extends BaseActivity implements ChangePasswo
 
     @Override
     public void onChangePasswordSuccess() {
-        final QBUser user = new QBUser();
-        final QBUser currentUser = com.chatapp.chat.utils.chat.ChatHelper.getCurrentUser();
-        if (currentUser != null) {
-            user.setId(currentUser.getId());
-            user.setOldPassword(password);
-            user.setPassword(newPassword);
-
-            updateQuickbloxUser(user);
-        }
-    }
-
-    private void updateQuickbloxUser(QBUser user) {
-        QBUsers.updateUser(user).performAsync(new QBEntityCallback<QBUser>() {
+        DialogUtils.showGeneralAlert(this, "Message", "Password changed successfully.", new RetainedDialogFragment.OnDismissListener() {
             @Override
-            public void onSuccess(QBUser qbUser, Bundle bundle) {
-                Log.d();
-            }
-
-            @Override
-            public void onError(QBResponseException e) {
-                Log.e(e);
+            public void onDismiss(RetainedDialogFragment fragment) {
+                logOut();
             }
         });
     }
@@ -145,5 +126,10 @@ public class ChangePasswordActivity extends BaseActivity implements ChangePasswo
         } catch (RequireLoginException e) {
             Log.e(e);
         }
+    }
+
+    @Override
+    public void onSessionCreated(boolean success) {
+
     }
 }
