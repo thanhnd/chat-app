@@ -23,6 +23,7 @@ public interface GeneralInteractor {
     void saveCountries(List<CountryModel> listCountries);
     List<CountryModel> getCountriesFromDatabase();
     CountryModel getCountryFromDatabase(int countryId);
+    void getListCommonParams(ApiCallback<ResponseModel<ListParamsModel>> callback);
 
     void updateShowHideDistance(boolean isShowDistance, ApiCallback<ResponseModel> callback)
             throws RequireLoginException;
@@ -30,5 +31,7 @@ public interface GeneralInteractor {
     void getShowHideDistance(ApiCallback<ResponseModel<LinkedTreeMap<String, Integer>>> callback)
             throws RequireLoginException;
 
-    void getListCommonParams(ApiCallback<ResponseModel<ListParamsModel>> callback);
+    void updatePassword(String currentPassword, String newPassword, ApiCallback<ResponseModel> callback)
+            throws RequireLoginException;
+
 }

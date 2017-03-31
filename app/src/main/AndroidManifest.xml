@@ -91,6 +91,7 @@
             android:name=".chat.ui.activity.CallActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".chat.ui.activity.PermissionsActivity" />
+        <activity android:name=".mvp.changepassword.ChangePasswordActivity" />
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"

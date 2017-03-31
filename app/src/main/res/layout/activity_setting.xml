@@ -50,6 +50,7 @@
         <include layout="@layout/layout_horizontal_divider_white" />
 
         <Button
+            android:id="@+id/btn_go_to_change_password"
             style="@style/App_Button.Setting.Navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -103,7 +103,13 @@ public class GeneralInteractorImmpl implements GeneralInteractor {
         }
 
         return null;
+    }
 
+    @Override
+    public void getListCommonParams(final ApiCallback<ResponseModel<ListParamsModel>> callback) {
+        ApiService service = ApiServiceHelper.getInstance();
+        Call<ResponseModel<ListParamsModel>> call = service.listCommon();
+        call.enqueue(callback);
     }
 
     @Override
@@ -128,9 +134,14 @@ public class GeneralInteractorImmpl implements GeneralInteractor {
     }
 
     @Override
-    public void getListCommonParams(final ApiCallback<ResponseModel<ListParamsModel>> callback) {
+    public void updatePassword(String currentPassword, String newPassword, ApiCallback<ResponseModel> callback) throws RequireLoginException {
         ApiService service = ApiServiceHelper.getInstance();
-        Call<ResponseModel<ListParamsModel>> call = service.listCommon();
+        Map<String, String> request = new HashMap<>();
+        request.put("currentPass", currentPassword);
+        request.put("password", newPassword);
+
+        Call<ResponseModel> call = service.changePassword(AccountUtils.getAuthorization(), request);
         call.enqueue(callback);
     }
+
 }

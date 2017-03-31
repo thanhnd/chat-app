@@ -127,7 +127,7 @@
     <string name="msg_forgot_password_confirm">We will send a verification code by SMS to the phone number. Please make sure that your phone number is correct.</string>
     <string name="show_distance">Show distance</string>
     <string name="blocked_list">Blocked List</string>
-    <string name="change_password">Change password</string>
+    <string name="change_password">Change Password</string>
     <string name="delete_profile">Delete profile</string>
     <string name="about">about</string>
     <string name="terms_of_use">Terms of user</string>
@@ -157,5 +157,7 @@
     <string name="call">Call</string>
     <string name="video_call">Video Call</string>
     <string name="input_your_country"><i><small>Input your country</small></i></string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="enter_new_password">Enter new password</string>
 
 </resources>

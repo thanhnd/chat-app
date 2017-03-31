@@ -126,9 +126,6 @@ public class RetainedDialogFragment extends DialogFragment {
 
     private static class ConcreteTestHandler extends PauseHandler {
 
-        /**
-         * ForgotPasswordActivity instance
-         */
         private RetainedDialogFragment fragment;
 
         public ConcreteTestHandler(Looper looper) {

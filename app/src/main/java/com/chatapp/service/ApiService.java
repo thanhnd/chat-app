@@ -138,6 +138,8 @@ public interface ApiService {
     @POST("/api/user/changePassword")
     Call<ResponseModel> changePassword(@Body Map<String, String> request);
 
+    // region Settings
+
     @Headers("Content-Type: application/json")
     @POST("/api/user/showHideDistance")
     Call<ResponseModel> updateShowHideDistance(@Header("Authorization") String authorization,
@@ -151,4 +153,28 @@ public interface ApiService {
     @POST("/api/user/changeUnitSystem")
     Call<ResponseModel> updateUnitSystem(@Header("Authorization") String authorization,
                                                @Body Map<String, Integer> request);
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/user/changePasswordUser")
+    Call<ResponseModel> changePassword(@Header("Authorization") String authorization,
+                                               @Body Map<String, String> request);
+    // endregion Settings
+
+    // region Block users
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/user/profile/addBlock")
+    Call<ResponseModel> addBlock(@Header("Authorization") String authorization,
+                                       @Body Map<String, String> request);
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/user/profile/unBlock")
+    Call<ResponseModel> unBlock(@Header("Authorization") String authorization,
+                                 @Body Map<String, String> request);
+
+    @Headers("Content-Type: application/json")
+    @GET("/api/user/profile/listBlockUser")
+    Call<ResponseModel> listBlockUsers(@Header("Authorization") String authorization);
+
+    // endregion block
 }

@@ -1,5 +1,6 @@
 package com.chatapp.mvp.setting;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.Button;
@@ -7,6 +8,7 @@ import android.widget.CheckBox;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.changepassword.ChangePasswordActivity;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.utils.Log;
 
@@ -57,6 +59,12 @@ public class SettingActivity extends BaseActivity implements SettingMvp.View {
     @OnClick(R.id.btn_log_out)
     public void clickLogOut() {
         logOut();
+    }
+
+    @OnClick(R.id.btn_go_to_change_password)
+    public void clickGoToChangePassword() {
+        Intent intent = new Intent(this, ChangePasswordActivity.class);
+        startActivityForResult(intent, RC_CHANGE_PASSWORD);
     }
 
     @Override
