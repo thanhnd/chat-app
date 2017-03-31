@@ -6,8 +6,10 @@ import android.support.annotation.Nullable;
 import android.widget.Button;
 import android.widget.CheckBox;
 
+import com.chatapp.Config;
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.base.BrowserActivity;
 import com.chatapp.mvp.changepassword.ChangePasswordActivity;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.utils.Log;
@@ -59,6 +61,28 @@ public class SettingActivity extends BaseActivity implements SettingMvp.View {
     @OnClick(R.id.btn_log_out)
     public void clickLogOut() {
         logOut();
+    }
+
+    @OnClick(R.id.btn_go_to_about)
+    public void clickGoToAbout() {
+
+        openBrowser(Config.URL_ABOUT);
+    }
+
+    private void openBrowser(String url) {
+        Intent intent = new Intent(this, BrowserActivity.class);
+        intent.putExtra(BrowserActivity.ARG_LOAD_WEB_URL, url);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.btn_go_to_term)
+    public void clickGoToTerm() {
+        openBrowser(Config.URL_TERM);
+    }
+
+    @OnClick(R.id.btn_go_to_privacy)
+    public void clickGotoPrivacy() {
+        openBrowser(Config.URL_PRIVACY);
     }
 
     @OnClick(R.id.btn_go_to_change_password)
