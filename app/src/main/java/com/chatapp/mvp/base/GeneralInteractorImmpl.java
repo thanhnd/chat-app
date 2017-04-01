@@ -147,4 +147,14 @@ public class GeneralInteractorImmpl implements GeneralInteractor {
         call.enqueue(callback);
     }
 
+    @Override
+    public void updateUnitSystem(int unitSystem, BaseApiCallback<ResponseModel> callback) throws RequireLoginException {
+        ApiService service = ApiServiceHelper.getInstance();
+        Map<String, Integer> request = new HashMap<>();
+        request.put("unit_system", unitSystem);
+
+        Call<ResponseModel> call = service.updateUnitSystem(AccountUtils.getAuthorization(), request);
+        call.enqueue(callback);
+    }
+
 }

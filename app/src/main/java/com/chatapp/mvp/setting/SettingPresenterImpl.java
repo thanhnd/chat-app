@@ -54,4 +54,20 @@ public class SettingPresenterImpl implements SettingMvp.Presenter {
             }
         });
     }
+
+    @Override
+    public void updateUnitSystem(int unitSystem) throws RequireLoginException {
+        if (view.get() != null) {
+            view.get().showProgress();
+        }
+
+        interactor.updateUnitSystem(unitSystem, new BaseApiCallback<ResponseModel>(view.get()) {
+            @Override
+            public void onSuccess(ResponseModel response) {
+                if (view.get() != null) {
+                    view.get().onUpdateUnitSystemSuccess(response.getResultSet());
+                }
+            }
+        });
+    }
 }

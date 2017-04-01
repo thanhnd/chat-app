@@ -159,5 +159,6 @@
     <string name="input_your_country"><i><small>Input your country</small></i></string>
     <string name="enter_your_password">Enter your password</string>
     <string name="enter_new_password">Enter new password</string>
+    <string name="settings_dialog_unit_system">Unit System</string>
 
 </resources>

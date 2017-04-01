@@ -13,6 +13,8 @@ public class SettingMvp {
         void onGetShowHideDistanceSuccess(boolean isOn);
 
         void onUpdateShowHideDistanceSuccess(Object resultSet);
+
+        void onUpdateUnitSystemSuccess(Object resultSet);
     }
 
     interface Presenter {
@@ -20,5 +22,7 @@ public class SettingMvp {
         void updateShowHideDistance(boolean isOn) throws  RequireLoginException;
 
         void getShowHideDistance() throws RequireLoginException;
+
+        void updateUnitSystem(int unitSystem) throws  RequireLoginException;
     }
 }

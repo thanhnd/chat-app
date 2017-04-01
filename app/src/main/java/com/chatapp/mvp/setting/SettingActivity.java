@@ -12,7 +12,11 @@ import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.base.BrowserActivity;
 import com.chatapp.mvp.changepassword.ChangePasswordActivity;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
+import com.chatapp.service.models.response.MyProfileModel;
+import com.chatapp.utils.AccountUtils;
+import com.chatapp.utils.DialogUtils;
 import com.chatapp.utils.Log;
+import com.chatapp.views.fragments.ChooseUnitDialogFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -45,6 +49,25 @@ public class SettingActivity extends BaseActivity implements SettingMvp.View {
         } catch (RequireLoginException e) {
             Log.e(e);
         }
+    }
+
+    @OnClick(R.id.btn_choose_unit_system)
+    void onClickChooseUnitSystem() {
+        final MyProfileModel myProfileModel = AccountUtils.getMyProfileModel();
+
+        final int unitSystem = myProfileModel.getUnitSystem();
+
+        DialogUtils.showUnitSystemDialog(this, unitSystem, new ChooseUnitDialogFragment.OnUnitSystemSetListener() {
+            @Override
+            public void onSetUnitSystem(int unitValue) {
+                try {
+                    presenter.updateUnitSystem(unitValue);
+                    myProfileModel.setUnitSystem(unitValue);
+                } catch (RequireLoginException e) {
+                    onTokenExpired();
+                }
+            }
+        });
     }
 
     @OnClick({R.id.btn_show_distance, R.id.cb_show_distance})
@@ -98,6 +121,11 @@ public class SettingActivity extends BaseActivity implements SettingMvp.View {
 
     @Override
     public void onUpdateShowHideDistanceSuccess(Object resultSet) {
+
+    }
+
+    @Override
+    public void onUpdateUnitSystemSuccess(Object resultSet) {
 
     }
 }

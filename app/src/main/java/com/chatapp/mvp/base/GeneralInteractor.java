@@ -34,4 +34,6 @@ public interface GeneralInteractor {
     void updatePassword(String currentPassword, String newPassword, ApiCallback<ResponseModel> callback)
             throws RequireLoginException;
 
+    void updateUnitSystem(int unitSystem, BaseApiCallback<ResponseModel> baseApiCallback)
+            throws RequireLoginException;
 }
