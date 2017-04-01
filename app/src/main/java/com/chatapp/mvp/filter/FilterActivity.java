@@ -10,11 +10,18 @@ import android.widget.CheckBox;
 
 import com.chatapp.R;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.base.FilterCountryActivity;
+import com.chatapp.mvp.base.MultiSelectValueActivity;
 import com.chatapp.mvp.filterresult.FilterResultActivity;
+import com.chatapp.service.models.response.CountryModel;
+import com.chatapp.service.models.response.ParamModel;
+import com.chatapp.utils.CacheUtil;
 import com.chatapp.utils.DialogUtils;
 import com.chatapp.views.fragments.ChooseFilterValueDialogFragment;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,6 +40,12 @@ public class FilterActivity extends BaseActivity implements FilterMvp.View {
 
     private static final int MIN_WEIGHT = 10;
     private static final int MAX_WEIGHT = 300;
+    private static final int RC_FILTER_ETHNICITY = 1;
+    private static final int RC_FILTER_BODY_TYPE = 2;
+    private static final int RC_FILTER_TRIBES = 3;
+    private static final int RC_FILTER_RELATIONSHIP_STATUS = 4;
+    private static final int RC_FILTER_LOCATION = 5;
+
     @Bind(R.id.btn_filter_photo)
     Button btnFilterPhoto;
 
@@ -69,7 +82,8 @@ public class FilterActivity extends BaseActivity implements FilterMvp.View {
     FilterMvp.Presenter presenter;
 
     boolean isFilterOnline, isFilterPhoto;
-    int[] filterAge, filterHeight, filterWeight, filterEthnicities, filterBodyType, filterTribes, filterRelationshipStatus, filterLocation;
+    int[] filterAge, filterHeight, filterWeight, filterEthnicities, filterBodyType, filterTribes, filterRelationshipStatus;
+    int filterLocation;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -159,13 +173,13 @@ public class FilterActivity extends BaseActivity implements FilterMvp.View {
         int maxHeight = filterHeight != null && filterHeight.length > 0 ? filterHeight[1] : MAX_HEIGHT;
         DialogUtils.showChooseFilterValuetDialog(this, "Height", minHeight, maxHeight,
                 MIN_HEIGHT, MAX_HEIGHT, new ChooseFilterValueDialogFragment.OnFilterValueSetListener() {
-            @Override
-            public void onFilterAgeSet(int min, int max) {
-                filterHeight = new int[2];
-                filterHeight[0] = min;
-                filterHeight[1] = max;
-            }
-        });
+                    @Override
+                    public void onFilterAgeSet(int min, int max) {
+                        filterHeight = new int[2];
+                        filterHeight[0] = min;
+                        filterHeight[1] = max;
+                    }
+                });
     }
 
     @OnClick(R.id.btn_filter_weight)
@@ -184,4 +198,83 @@ public class FilterActivity extends BaseActivity implements FilterMvp.View {
                 });
     }
 
+    @OnClick(R.id.btn_filter_ethnicities)
+    void onClickFilterEthnicities() {
+
+        List<ParamModel> listModels = CacheUtil.getListParamsModel().getListEthnicity();
+        Intent intent = new Intent(this, MultiSelectValueActivity.class);
+        intent.putExtra(MultiSelectValueActivity.EXTRA_INPUT_ARR, (ArrayList<ParamModel>) listModels);
+        startActivityForResult(intent, RC_FILTER_ETHNICITY);
+    }
+
+    @OnClick(R.id.btn_filter_body_type)
+    void onClickFilterBodyType() {
+
+        List<ParamModel> listModels = CacheUtil.getListParamsModel().getListBodyType();
+        Intent intent = new Intent(this, MultiSelectValueActivity.class);
+        intent.putExtra(MultiSelectValueActivity.EXTRA_INPUT_ARR, (ArrayList<ParamModel>) listModels);
+        startActivityForResult(intent, RC_FILTER_BODY_TYPE);
+    }
+
+    @OnClick(R.id.btn_filter_tribes)
+    void onClickFilterTribes() {
+
+        List<ParamModel> listModels = CacheUtil.getListParamsModel().getListTribes();
+        Intent intent = new Intent(this, MultiSelectValueActivity.class);
+        intent.putExtra(MultiSelectValueActivity.EXTRA_INPUT_ARR, (ArrayList<ParamModel>) listModels);
+        startActivityForResult(intent, RC_FILTER_TRIBES);
+    }
+
+    @OnClick(R.id.btn_filter_relationship_status)
+    void onClickFilterRelationshipStatus() {
+
+        List<ParamModel> listModels = CacheUtil.getListParamsModel().getListRelationship();
+        Intent intent = new Intent(this, MultiSelectValueActivity.class);
+        intent.putExtra(MultiSelectValueActivity.EXTRA_INPUT_ARR, (ArrayList<ParamModel>) listModels);
+        startActivityForResult(intent, RC_FILTER_RELATIONSHIP_STATUS);
+    }
+
+    @OnClick(R.id.btn_filter_location)
+    void onClickFilterLocation() {
+        presenter.loadFilterCountry();
+    }
+
+    private void showChooseCountry(List<CountryModel> listCountries) {
+        Intent intent = new Intent(this, FilterCountryActivity.class);
+        intent.putExtra(FilterCountryActivity.EXTRA_INPUT_ARR, (ArrayList<CountryModel>) listCountries);
+        startActivityForResult(intent, RC_FILTER_LOCATION);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (data != null) {
+                switch (requestCode) {
+                    case RC_FILTER_ETHNICITY:
+                        filterEthnicities = data.getIntArrayExtra(MultiSelectValueActivity.KEY_OUTPUT_ARR);
+                        return;
+                    case RC_FILTER_BODY_TYPE:
+                        filterBodyType = data.getIntArrayExtra(MultiSelectValueActivity.KEY_OUTPUT_ARR);
+                        return;
+                    case RC_FILTER_TRIBES:
+                        filterTribes = data.getIntArrayExtra(MultiSelectValueActivity.KEY_OUTPUT_ARR);
+                        return;
+                    case RC_FILTER_RELATIONSHIP_STATUS:
+                        filterRelationshipStatus = data.getIntArrayExtra(MultiSelectValueActivity.KEY_OUTPUT_ARR);
+                        return;
+
+                    case RC_FILTER_LOCATION:
+                        filterLocation = data.getIntExtra(FilterCountryActivity.KEY_OUTPUT, 0);
+                        return;
+                }
+
+            }
+        }
+    }
+
+    @Override
+    public void onLoadFilterCountriesSuccess(List<CountryModel> resultSet) {
+        showChooseCountry(resultSet);
+    }
 }

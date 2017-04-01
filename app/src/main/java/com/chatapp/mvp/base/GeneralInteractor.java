@@ -46,4 +46,6 @@ public interface GeneralInteractor {
 
     void applyFilter(Map query, BaseApiCallback<ResponseModel<List<UserModel>>> baseApiCallback)
             throws RequireLoginException;
+
+    void loadFilterCountries(BaseApiCallback<ResponseModel<List<CountryModel>>> callback);
 }

@@ -56,4 +56,9 @@ public class CountryModel extends RealmObject implements Serializable {
     public void setPhonecode(String phonecode) {
         this.phonecode = phonecode;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

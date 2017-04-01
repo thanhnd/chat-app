@@ -95,6 +95,8 @@
         <activity android:name=".mvp.base.BrowserActivity" />
         <activity android:name=".mvp.filter.FilterActivity" />
         <activity android:name=".mvp.filterresult.FilterResultActivity" />
+        <activity android:name=".mvp.base.MultiSelectValueActivity" />
+        <activity android:name=".mvp.base.FilterCountryActivity" />
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"

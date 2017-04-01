@@ -3,8 +3,12 @@ package com.chatapp.mvp.filter;
 
 import com.chatapp.mvp.base.GeneralInteractor;
 import com.chatapp.mvp.base.GeneralInteractorImmpl;
+import com.chatapp.service.BaseApiCallback;
+import com.chatapp.service.models.response.CountryModel;
+import com.chatapp.service.models.response.ResponseModel;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 public class FilterPresenterImpl implements FilterMvp.Presenter {
 
@@ -16,21 +20,18 @@ public class FilterPresenterImpl implements FilterMvp.Presenter {
         this.interactor = new GeneralInteractorImmpl();
     }
 
-//    @Override
-//    public void applyFilter(boolean isFilterPhoto, boolean isFilterOnline,
-//                            int[] filterAge, int[] filterHeight, int[] filterWeight,
-//                            int[] filterEthnicities, int[] filterBodyType, int[] filterTribes, int[] filterRelationshipStatus,
-//                            int[] filterLocation) throws RequireLoginException {
-//        interactor.applyFilter(isFilterPhoto, isFilterOnline, filterAge, filterHeight, filterWeight,
-//                filterEthnicities, filterBodyType, filterTribes, filterRelationshipStatus,
-//                filterLocation,
-//                new BaseApiCallback<ResponseModel<List<UserModel>>>(view.get()) {
-//                    @Override
-//                    public void onSuccess(ResponseModel<List<UserModel>> response) {
-//                        if (view.get() != null) {
-//                            view.get().onApplyFilterSuccess(response.getResultSet());
-//                        }
-//                    }
-//                });
-//    }
+    @Override
+    public void loadFilterCountry() {
+        if (view.get() != null) {
+            view.get().showProgress();
+        }
+        interactor.loadFilterCountries(new BaseApiCallback<ResponseModel<List<CountryModel>>>(view.get()) {
+            @Override
+            public void onSuccess(ResponseModel<List<CountryModel>> response) {
+                if (view.get() != null) {
+                    view.get().onLoadFilterCountriesSuccess(response.getResultSet());
+                }
+            }
+        });
+    }
 }

@@ -181,4 +181,8 @@ public interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("/api/profile/filter")
     Call<ResponseModel<List<UserModel>>> applyFilter(@Header("Authorization") String authorization, @Body Map request);
+
+    @Headers("Content-Type: application/json")
+    @GET("/api/common/listCountryFilter")
+    Call<ResponseModel<List<CountryModel>>> loadFilterCountries();
 }

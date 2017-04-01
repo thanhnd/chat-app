@@ -1,6 +1,9 @@
 package com.chatapp.mvp.filter;
 
 import com.chatapp.mvp.base.BaseView;
+import com.chatapp.service.models.response.CountryModel;
+
+import java.util.List;
 
 /**
  * Created by thanhnguyen on 2/10/17.
@@ -8,11 +11,11 @@ import com.chatapp.mvp.base.BaseView;
 
 public class FilterMvp {
     interface View extends BaseView {
+        void onLoadFilterCountriesSuccess(List<CountryModel> resultSet);
 
-//        void onApplyFilterSuccess(List<UserModel> resultSet);
     }
 
     interface Presenter {
-//        void applyFilter(boolean isFilterPhoto, boolean isFilterOnline, int[] filterAge, int[] filterHeight, int[] filterWeight, int[] filterEthnicities, int[] filterBodyType, int[] filterTribes, int[] filterRelationshipStatus, int[] filterLocation);
+        void loadFilterCountry();
     }
 }

@@ -187,4 +187,10 @@ public class GeneralInteractorImmpl implements GeneralInteractor {
         call.enqueue(callback);
     }
 
+    @Override
+    public void loadFilterCountries(BaseApiCallback<ResponseModel<List<CountryModel>>> callback) {
+        ApiService service = ApiServiceHelper.getInstance();
+        Call<ResponseModel<List<CountryModel>>> call = service.loadFilterCountries();
+        call.enqueue(callback);
+    }
 }
