@@ -93,6 +93,8 @@
         <activity android:name=".chat.ui.activity.PermissionsActivity" />
         <activity android:name=".mvp.changepassword.ChangePasswordActivity" />
         <activity android:name=".mvp.base.BrowserActivity" />
+        <activity android:name=".mvp.filter.FilterActivity" />
+        <activity android:name=".mvp.filterresult.FilterResultActivity" />
 
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"

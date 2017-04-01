@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.chatapp.mvp.base.BaseView;
 import com.chatapp.service.models.response.RegisterModel;
 import com.chatapp.service.models.response.ResponseModel;
+import com.chatapp.utils.Log;
 
 import java.lang.ref.WeakReference;
 
@@ -68,6 +69,7 @@ public abstract class BaseApiCallback<T extends ResponseModel> implements ApiCal
 
     @Override
     public final void onFailure(Call<T> call, Throwable t) {
+        Log.e(t);
         if (view.get() != null) {
             view.get().hideProgress();
             view.get().showErrorDialog();

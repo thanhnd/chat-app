@@ -42,7 +42,7 @@ public class PresenterImpl implements ListNearbyMvp.Presenter {
         request.setLongitude(AccountUtils.getLongitude());
         request.setLatitude(AccountUtils.getLatitude());
 
-        interactor.getListNearBy(request, new BaseApiCallback<ResponseModel<List<UserModel>>>() {
+        interactor.getListNearBy(request, new BaseApiCallback<ResponseModel<List<UserModel>>>(view.get()) {
 
             @Override
             public void onSuccess(ResponseModel<List<UserModel>> response) {
@@ -55,7 +55,7 @@ public class PresenterImpl implements ListNearbyMvp.Presenter {
 
     @Override
     public void getMyProfile() throws RequireLoginException {
-        generalInteractor.getMyProfile(new BaseApiCallback<ResponseModel<MyProfileModel>>() {
+        generalInteractor.getMyProfile(new BaseApiCallback<ResponseModel<MyProfileModel>>(view.get()) {
             @Override
             public void onSuccess(ResponseModel<MyProfileModel> response) {
                 if (view.get() != null) {

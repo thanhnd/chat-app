@@ -10,6 +10,7 @@ import com.chatapp.service.models.response.CountryModel;
 import com.chatapp.service.models.response.ListParamsModel;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.ResponseModel;
+import com.chatapp.service.models.response.UserModel;
 import com.chatapp.utils.AccountUtils;
 import com.chatapp.utils.Log;
 import com.google.gson.internal.LinkedTreeMap;
@@ -154,6 +155,35 @@ public class GeneralInteractorImmpl implements GeneralInteractor {
         request.put("unit_system", unitSystem);
 
         Call<ResponseModel> call = service.updateUnitSystem(AccountUtils.getAuthorization(), request);
+        call.enqueue(callback);
+    }
+
+    @Override
+    public void applyFilter(boolean isFilterPhoto, boolean isFilterOnline,
+                            int[] filterAge, int[] filterHeight, int[] filterWeight,
+                            int[] filterEthnicities, int[] filterBodyType, int[] filterTribes, int[] filterRelationshipStatus,
+                            int[] filterLocation,
+                            BaseApiCallback<ResponseModel<List<UserModel>>> callback) throws RequireLoginException {
+        ApiService service = ApiServiceHelper.getInstance();
+        Map<String, Integer> request = new HashMap<>();
+
+        request.put("age_from", filterAge != null && filterAge.length > 0 ? filterAge[0] : 0);
+        request.put("age_to", filterAge != null && filterAge.length > 0 ? filterAge[1] : 0);
+
+        request.put("height_from", filterHeight != null && filterHeight.length > 0 ? filterHeight[0] : 0);
+        request.put("height_to", filterHeight != null && filterHeight.length > 0 ? filterHeight[1] : 0);
+
+        request.put("weight_from", filterWeight != null && filterWeight.length > 0 ? filterWeight[0] : 0);
+        request.put("weight_to", filterWeight != null && filterWeight.length > 0 ? filterWeight[1] : 0);
+
+        Call<ResponseModel<List<UserModel>>> call = service.applyFilter(AccountUtils.getAuthorization(), request);
+        call.enqueue(callback);
+    }
+
+    @Override
+    public void applyFilter(Map query, BaseApiCallback<ResponseModel<List<UserModel>>> callback) throws RequireLoginException {
+        ApiService service = ApiServiceHelper.getInstance();
+        Call<ResponseModel<List<UserModel>>> call = service.applyFilter(AccountUtils.getAuthorization(), query);
         call.enqueue(callback);
     }
 

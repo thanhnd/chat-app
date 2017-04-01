@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                style="@style/App_Button.Filter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Photo only"
+                android:id="@+id/btn_filter_photo" />
+            <CheckBox
+                android:id="@+id/cb_filter_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <include layout="@layout/layout_horizontal_divider_white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                style="@style/App_Button.Filter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Online"
+                android:id="@+id/btn_filter_online" />
+            <CheckBox
+                android:id="@+id/cb_filter_online"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <include layout="@layout/layout_horizontal_divider_white" />
+
+        <Button
+            style="@style/App_Button.Filter.Navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Age"
+            android:id="@+id/btn_filter_age" />
+
+        <include layout="@layout/layout_horizontal_divider_white" />
+
+        <Button
+            android:id="@+id/btn_filter_height"
+            style="@style/App_Button.Filter.Navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Height" />
+
+        <include layout="@layout/layout_horizontal_divider_white" />
+
+        <Button
+            style="@style/App_Button.Filter.Navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Weight"
+            android:id="@+id/btn_filter_weight" />
+
+        <include layout="@layout/layout_horizontal_divider_white" />
+
+        <Button
+            android:id="@+id/btn_filter_ethnicities"
+            style="@style/App_Button.Filter.Navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ethnicities" />
+
+        <include layout="@layout/layout_horizontal_divider_white" />
+
+        <Button
+            android:id="@+id/btn_filter_body_type"
+            style="@style/App_Button.Filter.Navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Body type" />
+
+        <include layout="@layout/layout_horizontal_divider_white" />
+
+        <Button
+            style="@style/App_Button.Filter.Navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tribes"
+            android:id="@+id/btn_filter_tribes" />
+
+        <include layout="@layout/layout_horizontal_divider_white" />
+
+        <Button
+            style="@style/App_Button.Filter.Navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Relationship satus"
+            android:id="@+id/btn_filter_relationship_status" />
+
+        <include layout="@layout/layout_horizontal_divider_white" />
+
+        <Button
+            style="@style/App_Button.Filter.Navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:id="@+id/btn_filter_location" />
+
+        <include layout="@layout/layout_horizontal_divider_white" />
+
+
+
+    </LinearLayout>
+
+</ScrollView>

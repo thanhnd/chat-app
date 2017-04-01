@@ -10,6 +10,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.chatapp.R;
 import com.chatapp.chat.ui.activity.DialogsFragment;
 import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.filter.FilterActivity;
 import com.chatapp.mvp.listfavorites.ListFavoritesFragment;
 import com.chatapp.mvp.listfriends.ListFriendsFragment;
 import com.chatapp.mvp.listnearby.ListNearbyFragment;
@@ -56,6 +58,9 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
 
     @Bind(R.id.bottomBar)
     BottomBar bottomBar;
+
+    @Bind(R.id.fab_filter)
+    FloatingActionButton fabFilter;
 
     HomeMvp.Presenter presenter;
 
@@ -146,6 +151,12 @@ public class HomeActivity extends BaseActivity implements HomeMvp.View,
     @OnClick(R.id.ib_add_friend)
     public void clickAddFriends() {
         Intent intent = new Intent(this, ListRecommendedFriendsActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.fab_filter)
+    public void clickFilter() {
+        Intent intent = new Intent(this, FilterActivity.class);
         startActivity(intent);
     }
 

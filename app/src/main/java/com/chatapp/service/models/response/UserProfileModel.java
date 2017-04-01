@@ -24,10 +24,10 @@ public class UserProfileModel {
     private long birthday;
     @SerializedName("weight")
     @Expose
-    private int weight;
+    private double weight;
     @SerializedName("height")
     @Expose
-    private int height;
+    private double height;
     @SerializedName("avatar")
     @Expose
     private String avatar;
@@ -105,7 +105,7 @@ public class UserProfileModel {
         this.birthday = birthday;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
@@ -113,7 +113,7 @@ public class UserProfileModel {
         this.weight = weight;
     }
 
-    public int getHeight() {
+    public double getHeight() {
         return height;
     }
 

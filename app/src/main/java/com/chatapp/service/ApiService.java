@@ -163,18 +163,22 @@ public interface ApiService {
     // region Block users
 
     @Headers("Content-Type: application/json")
-    @POST("/api/user/profile/addBlock")
+    @POST("/api/profile/addBlock")
     Call<ResponseModel> addBlock(@Header("Authorization") String authorization,
                                        @Body Map<String, String> request);
 
     @Headers("Content-Type: application/json")
-    @POST("/api/user/profile/unBlock")
+    @POST("/api/profile/unBlock")
     Call<ResponseModel> unBlock(@Header("Authorization") String authorization,
                                  @Body Map<String, String> request);
 
     @Headers("Content-Type: application/json")
-    @GET("/api/user/profile/listBlockUser")
+    @GET("/api/profile/listBlockUser")
     Call<ResponseModel> listBlockUsers(@Header("Authorization") String authorization);
 
     // endregion block
+
+    @Headers("Content-Type: application/json")
+    @POST("/api/profile/filter")
+    Call<ResponseModel<List<UserModel>>> applyFilter(@Header("Authorization") String authorization, @Body Map request);
 }

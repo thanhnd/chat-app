@@ -2,23 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:paddingTop="@dimen/scm_screen_padding"
     android:paddingBottom="@dimen/scm_screen_padding">
 
     <ImageView
         android:id="@+id/iv_avatar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/avatar_small_size"
+        android:layout_height="@dimen/avatar_small_size"
         android:layout_gravity="center"
         android:background="@drawable/circle_light_purge"
-        android:padding="3dp"
+        android:padding="2dp"
         android:src="@drawable/img_user_avatar" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:layout_gravity="center_vertical"
         android:layout_marginLeft="16dp"
         android:orientation="vertical">
 
@@ -26,16 +28,17 @@
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:singleLine="true"
             android:textColor="@color/white"
-            android:textSize="11sp" />
+            android:textSize="11sp"
+            tools:text="Andrea" />
 
         <TextView
             android:id="@+id/tv_online_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/online_status"
+            tools:text="Online"
             android:drawablePadding="4dp"
             android:gravity="center"
             android:textColor="@color/online_status_color"
@@ -47,6 +50,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="4dp"
             android:gravity="center"
+            tools:text="Vietnam"
             android:textColor="@color/light_purge"
             android:textSize="10sp" />
 

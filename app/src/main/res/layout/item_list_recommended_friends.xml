@@ -24,8 +24,8 @@
 
         <ImageView
             android:id="@+id/iv_avatar"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="@dimen/avatar_small_size"
+            android:layout_height="@dimen/avatar_small_size"
             android:padding="2dp"
             android:layout_gravity="center_vertical"
             android:background="@drawable/circle_light_purge"

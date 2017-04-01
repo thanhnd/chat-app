@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 
 import com.chatapp.R;
 import com.chatapp.views.fragments.AlertDialogFragment;
+import com.chatapp.views.fragments.ChooseFilterValueDialogFragment;
 import com.chatapp.views.fragments.ChooseHeightAndWeightDialogFragment;
 import com.chatapp.views.fragments.ChooseUnitDialogFragment;
 import com.chatapp.views.fragments.ConfirmDialogFragment;
@@ -162,7 +163,7 @@ public class DialogUtils {
         if (activity == null || activity.isFinishing()) return;
         ChooseHeightAndWeightDialogFragment
                 .instantiate(height, weight, onHeightAndWeightSetListener)
-                .show(activity.getSupportFragmentManager(), DialogUtils.class.getName() + ":date_picker");
+                .show(activity.getSupportFragmentManager(), DialogUtils.class.getName() + ":choose_height_and_weight");
     }
 
     public static void showUnitSystemDialog(final FragmentActivity activity,
@@ -171,7 +172,16 @@ public class DialogUtils {
         if (activity == null || activity.isFinishing()) return;
         ChooseUnitDialogFragment
                 .instantiate(unit, listener)
-                .show(activity.getSupportFragmentManager(), DialogUtils.class.getName() + ":date_picker");
+                .show(activity.getSupportFragmentManager(), DialogUtils.class.getName() + ":unit_system");
+    }
+
+    public static void showChooseFilterValuetDialog(final FragmentActivity activity, String title,
+                                                       int minValue, int maxValue, int filterMin, int filterMax,
+                                                    ChooseFilterValueDialogFragment.OnFilterValueSetListener listener) {
+        if (activity == null || activity.isFinishing()) return;
+        ChooseFilterValueDialogFragment
+                .instantiate(title, minValue, maxValue, filterMin, filterMax, listener)
+                .show(activity.getSupportFragmentManager(), DialogUtils.class.getName() + ":choose_filter_value");
     }
 
 }

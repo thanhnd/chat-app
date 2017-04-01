@@ -335,8 +335,8 @@ public class UpdateBasicProfileActivity extends BaseActivity implements UpdateBa
             }
 
             if (userModel.getHeight() > 0 && userModel.getWeight() > 0) {
-                height = userModel.getHeight();
-                weight = userModel.getWeight();
+                height = (int)userModel.getHeight();
+                weight = (int)userModel.getWeight();
                 displayHeightAndWeight();
             }
         }

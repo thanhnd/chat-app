@@ -29,7 +29,8 @@ import butterknife.OnClick;
  * Created by thanhnguyen on 1/3/17.
  */
 
-public class ListRecommendedFriendsActivity extends BaseActivity implements ListRecommendedFriendsMvp.View, ListRecommendedFriendsAdapter.OnSelectedChangedListener {
+public class ListRecommendedFriendsActivity extends BaseActivity implements
+        ListRecommendedFriendsMvp.View, ListRecommendedFriendsAdapter.OnSelectedChangedListener {
 
     @Bind(R.id.rv_list)
     RecyclerView recyclerView;

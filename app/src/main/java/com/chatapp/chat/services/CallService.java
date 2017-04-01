@@ -106,13 +106,13 @@ public class CallService extends Service {
         chatService.login(qbUser, new QBEntityCallback<QBUser>() {
             @Override
             public void onSuccess(QBUser qbUser, Bundle bundle) {
-                Log.d(TAG, "login onSuccess");
+                Log.i(TAG, "login onSuccess");
                 startActionsOnSuccessLogin();
             }
 
             @Override
             public void onError(QBResponseException e) {
-                Log.d(TAG, "login onError " + e.getMessage());
+                Log.e(TAG, "login onError " + e.getMessage());
                 sendResultToActivity(false, e.getMessage() != null
                         ? e.getMessage()
                         : "Login error");

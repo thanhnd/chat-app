@@ -212,8 +212,8 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
             edtDisplayName.setText(userModel.getDisplayName());
             timestampDob = userModel.getBirthday();
             tvAge.setText(String.valueOf(userModel.getAge()));
-            height = userModel.getHeight();
-            weight = userModel.getWeight();
+            height = (int)userModel.getHeight();
+            weight = (int)userModel.getWeight();
             tvHeightAndWeight.setText(AccountUtils.getDisplayHeightAndWeight(height, weight, userModel.getUnitSystem()));
 
             ethnicityParam = new ParamModel(userModel.getEthinicityId());

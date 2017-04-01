@@ -157,7 +157,7 @@ public class AccountUtils {
     }
 
     public static String getDisplayHeightAndWeight(UserProfileModel userModel) {
-        return getDisplayHeightAndWeight(userModel.getHeight(), userModel.getWeight(), userModel.getUnitSystem());
+        return getDisplayHeightAndWeight((int)userModel.getHeight(), (int)userModel.getWeight(), userModel.getUnitSystem());
     }
 
 }

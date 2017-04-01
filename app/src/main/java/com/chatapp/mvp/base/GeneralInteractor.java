@@ -7,6 +7,7 @@ import com.chatapp.service.models.response.CountryModel;
 import com.chatapp.service.models.response.ListParamsModel;
 import com.chatapp.service.models.response.MyProfileModel;
 import com.chatapp.service.models.response.ResponseModel;
+import com.chatapp.service.models.response.UserModel;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.List;
@@ -35,5 +36,14 @@ public interface GeneralInteractor {
             throws RequireLoginException;
 
     void updateUnitSystem(int unitSystem, BaseApiCallback<ResponseModel> baseApiCallback)
+            throws RequireLoginException;
+
+    void applyFilter(boolean isFilterPhoto, boolean isFilterOnline,
+                     int[] filterAge, int[] filterHeight, int[] filterWeight,
+                     int[] filterEthnicities, int[] filterBodyType, int[] filterTribes, int[] filterRelationshipStatus,
+                     int[] filterLocation, BaseApiCallback<ResponseModel<List<UserModel>>> baseApiCallback)
+            throws RequireLoginException;
+
+    void applyFilter(Map query, BaseApiCallback<ResponseModel<List<UserModel>>> baseApiCallback)
             throws RequireLoginException;
 }
