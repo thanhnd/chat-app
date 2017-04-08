@@ -134,11 +134,6 @@ public class FilterActivity extends BaseActivity implements FilterMvp.View {
         Intent intent = new Intent(this, FilterResultActivity.class);
         intent.putExtra(FilterResultActivity.ARG_QUERY, request);
         startActivity(intent);
-
-//        presenter.applyFilter(isFilterPhoto, isFilterOnline,
-//                filterAge, filterHeight, filterWeight,
-//                filterEthnicities, filterBodyType, filterTribes, filterRelationshipStatus,
-//                filterLocation);
     }
 
     @OnClick({R.id.btn_filter_online, R.id.cb_filter_online})
@@ -204,6 +199,7 @@ public class FilterActivity extends BaseActivity implements FilterMvp.View {
         List<ParamModel> listModels = CacheUtil.getListParamsModel().getListEthnicity();
         Intent intent = new Intent(this, MultiSelectValueActivity.class);
         intent.putExtra(MultiSelectValueActivity.EXTRA_INPUT_ARR, (ArrayList<ParamModel>) listModels);
+        intent.putExtra(MultiSelectValueActivity.EXTRA_INPUT_SELECTED, filterEthnicities);
         startActivityForResult(intent, RC_FILTER_ETHNICITY);
     }
 

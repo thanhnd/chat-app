@@ -1,1 +1,1 @@
-include ':app', ':sample-core', ':sample-videochat-webrtc'
+include ':app', ':sample-core'

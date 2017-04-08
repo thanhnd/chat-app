@@ -25,10 +25,12 @@ import butterknife.ButterKnife;
 public class MultiSelectValueActivity extends AppCompatActivity {
     public static final String KEY_OUTPUT_ARR = "selectedItems";
     public static final String EXTRA_INPUT_ARR = "inputItems";
+    public static final String EXTRA_INPUT_SELECTED = "inputSelectedItems";
     @Bind(R.id.list)
     ListView listView;
 
     ArrayAdapter<ParamModel> adapter;
+    private int[] selectedArr;
 
     /**
      * Called when the activity is first created.
@@ -41,6 +43,8 @@ public class MultiSelectValueActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         List<ParamModel> inputItems = (List<ParamModel>) intent.getSerializableExtra(EXTRA_INPUT_ARR);
+        selectedArr = intent.getIntArrayExtra(EXTRA_INPUT_SELECTED);
+
         adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_multiple_choice, inputItems);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
@@ -77,16 +81,16 @@ public class MultiSelectValueActivity extends AppCompatActivity {
                 selectedItems.add(adapter.getItem(position));
         }
 
-        int[] outputArr = new int[selectedItems.size()];
+        selectedArr = new int[selectedItems.size()];
 
         for (int i = 0; i < selectedItems.size(); i++) {
-            outputArr[i] = selectedItems.get(i).getId();
+            selectedArr[i] = selectedItems.get(i).getId();
         }
 
         Intent intent = new Intent();
         // Create a bundle object
         Bundle b = new Bundle();
-        b.putIntArray(KEY_OUTPUT_ARR, outputArr);
+        b.putIntArray(KEY_OUTPUT_ARR, selectedArr);
 
         // Add the bundle to the intent.
         intent.putExtras(b);
