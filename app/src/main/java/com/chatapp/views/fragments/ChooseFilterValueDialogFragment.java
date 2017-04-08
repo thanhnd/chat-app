@@ -11,6 +11,7 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.chatapp.R;
+import com.chatapp.utils.Log;
 
 
 public class ChooseFilterValueDialogFragment extends RetainedDialogFragment {
@@ -61,11 +62,20 @@ public class ChooseFilterValueDialogFragment extends RetainedDialogFragment {
 
         npMinAge.setDisplayedValues(values);
         npMaxAge.setDisplayedValues(values);
+        npMaxAge.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                Log.d("newVal = " + newVal);
+            }
+        });
         TextView tvOk = ((TextView) dialog.findViewById(R.id.btnOk));
         tvOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onFilterValueSetListener != null) {
+                    npMinAge.clearFocus();
+                    npMaxAge.clearFocus();
+
                     onFilterValueSetListener.onFilterAgeSet(npMinAge.getValue(), npMaxAge.getValue());
                     dialog.dismiss();
                 }

@@ -195,12 +195,13 @@ public class FilterActivity extends BaseActivity implements FilterMvp.View {
 
     @OnClick(R.id.btn_filter_ethnicities)
     void onClickFilterEthnicities() {
-
-        List<ParamModel> listModels = CacheUtil.getListParamsModel().getListEthnicity();
-        Intent intent = new Intent(this, MultiSelectValueActivity.class);
-        intent.putExtra(MultiSelectValueActivity.EXTRA_INPUT_ARR, (ArrayList<ParamModel>) listModels);
-        intent.putExtra(MultiSelectValueActivity.EXTRA_INPUT_SELECTED, filterEthnicities);
-        startActivityForResult(intent, RC_FILTER_ETHNICITY);
+        if (CacheUtil.getListParamsModel() != null) {
+            List<ParamModel> listModels = CacheUtil.getListParamsModel().getListEthnicity();
+            Intent intent = new Intent(this, MultiSelectValueActivity.class);
+            intent.putExtra(MultiSelectValueActivity.EXTRA_INPUT_ARR, (ArrayList<ParamModel>) listModels);
+            intent.putExtra(MultiSelectValueActivity.EXTRA_INPUT_SELECTED, filterEthnicities);
+            startActivityForResult(intent, RC_FILTER_ETHNICITY);
+        }
     }
 
     @OnClick(R.id.btn_filter_body_type)

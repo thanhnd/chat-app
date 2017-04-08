@@ -63,6 +63,8 @@ public class ChooseFilterWeightDialogFragment extends RetainedDialogFragment {
             @Override
             public void onClick(View v) {
                 if (onFilterAgeSetListener != null) {
+                    npMinAge.clearFocus();
+                    npMaxAge.clearFocus();
                     onFilterAgeSetListener.onFilterAgeSet(npMinAge.getValue(), npMaxAge.getValue());
                     dialog.dismiss();
                 }

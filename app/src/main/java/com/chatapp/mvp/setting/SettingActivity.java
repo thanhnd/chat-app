@@ -27,7 +27,7 @@ import butterknife.OnClick;
  */
 public class SettingActivity extends BaseActivity implements SettingMvp.View {
 
-    @Bind(R.id.btn_show_distance)
+    @Bind(R.id.btn_hide_distance)
     Button btnShowDistance;
 
     @Bind(R.id.cb_show_distance)
@@ -70,8 +70,8 @@ public class SettingActivity extends BaseActivity implements SettingMvp.View {
         });
     }
 
-    @OnClick({R.id.btn_show_distance, R.id.cb_show_distance})
-    void onClickShowDistance() {
+    @OnClick({R.id.btn_hide_distance, R.id.cb_show_distance})
+    void onClickHideDistance() {
         boolean isChecked = cbShowDistance.isChecked();
 
         try {

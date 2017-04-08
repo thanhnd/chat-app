@@ -60,6 +60,8 @@ public class ChooseHeightAndWeightDialogFragment extends RetainedDialogFragment 
             @Override
             public void onClick(View v) {
                 if (onHeightAndWeightSetListener != null) {
+                    npHeight.clearFocus();
+                    npWeight.clearFocus();
                     onHeightAndWeightSetListener.onHeightAndWeightSet(npHeight.getValue(), npWeight.getValue());
                     dialog.dismiss();
                 }

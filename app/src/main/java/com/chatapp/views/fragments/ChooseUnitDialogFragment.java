@@ -49,6 +49,7 @@ public class ChooseUnitDialogFragment extends RetainedDialogFragment {
             @Override
             public void onClick(View v) {
                 if (onUnitSystemSetListener != null) {
+                    pickerUnitSystem.clearFocus();
                     onUnitSystemSetListener.onSetUnitSystem(pickerUnitSystem.getValue());
                     dialog.dismiss();
                 }
