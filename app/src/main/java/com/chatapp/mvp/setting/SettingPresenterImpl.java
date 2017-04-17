@@ -47,9 +47,10 @@ public class SettingPresenterImpl implements SettingMvp.Presenter {
             public void onSuccess(ResponseModel<LinkedTreeMap<String, Integer>> response) {
                 if (view.get() != null) {
                     Map<String, Integer> result = response.getResultSet();
-                    boolean isOn = result.get("is_show_distance") == 1;
-
-                    view.get().onGetShowHideDistanceSuccess(isOn);
+                    if (result != null) {
+                        boolean isHideDistance = result.get("is_hide_distance") == 1;
+                        view.get().onGetShowHideDistanceSuccess(isHideDistance);
+                    }
                 }
             }
         });
