@@ -23,6 +23,12 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/london_flat" />
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/shape_gradient" />
+
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab_camera"
                 android:layout_width="wrap_content"
@@ -39,10 +45,53 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/accent"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Album"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <ImageView
+                    android:id="@+id/iv_library1"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="15dp" />
+
+                <ImageView
+                    android:id="@+id/iv_library2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="15dp" />
+
+                <ImageView
+                    android:id="@+id/iv_library3"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:paddingTop="10dp">
+            android:paddingTop="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,6 +110,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="Andrea Jameson" />
+
                 <TextView
                     android:id="@+id/tv_error_display_name"
                     style="@style/App_Text.Error"
@@ -91,6 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="20" />
+
                 <TextView
                     android:id="@+id/tv_error_dob"
                     style="@style/App_Text.Error"
@@ -118,10 +169,11 @@
                 <TextView
                     android:id="@+id/tv_height_and_weight"
                     style="@style/App_EditText.Clickable"
-                    android:focusableInTouchMode="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:focusableInTouchMode="false"
                     tools:text="173 / 61" />
+
                 <TextView
                     android:id="@+id/tv_error_height_and_weight"
                     style="@style/App_Text.Error"

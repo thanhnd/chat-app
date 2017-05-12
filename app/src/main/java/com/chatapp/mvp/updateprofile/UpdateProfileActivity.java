@@ -28,6 +28,7 @@ import com.chatapp.utils.CacheUtil;
 import com.chatapp.utils.DateUtils;
 import com.chatapp.utils.DialogUtils;
 import com.chatapp.utils.Log;
+import com.chatapp.utils.RoundedCornerTransformation;
 import com.chatapp.views.fragments.ChooseHeightAndWeightDialogFragment;
 import com.quickblox.core.QBEntityCallback;
 import com.quickblox.core.exception.QBResponseException;
@@ -98,6 +99,15 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
 
     @Bind(R.id.edt_linkedin)
     EditText edtLinkedin;
+
+    @Bind(R.id.iv_library1)
+    ImageView ivLibrary1;
+
+    @Bind(R.id.iv_library2)
+    ImageView ivLibrary2;
+
+    @Bind(R.id.iv_library3)
+    ImageView ivLibrary3;
 
 
     UpdateProfileMvp.Presenter presenter;
@@ -207,6 +217,27 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
                         .error(R.drawable.london_flat)
                         .placeholder(R.drawable.london_flat)
                         .into(ivAvatar);
+
+                Picasso.with(this)
+                        .load(userModel.getAvatar())
+                        .transform(new RoundedCornerTransformation(20, 20))
+                        .error(R.drawable.london_flat)
+                        .placeholder(R.drawable.london_flat)
+                        .into(ivLibrary1);
+
+                Picasso.with(this)
+                        .load(userModel.getAvatar())
+                        .transform(new RoundedCornerTransformation(20, 20))
+                        .error(R.drawable.london_flat)
+                        .placeholder(R.drawable.london_flat)
+                        .into(ivLibrary2);
+
+                Picasso.with(this)
+                        .load(userModel.getAvatar())
+                        .transform(new RoundedCornerTransformation(20, 20))
+                        .error(R.drawable.london_flat)
+                        .placeholder(R.drawable.london_flat)
+                        .into(ivLibrary3);
             }
 
             edtDisplayName.setText(userModel.getDisplayName());
