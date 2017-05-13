@@ -3,15 +3,13 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/purge</item>
+        <item name="colorPrimary">@color/purple</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/accent</item>
         <item name="editTextStyle">@style/App_EditText</item>
         <item name="imageButtonStyle">@style/App_ImageButton</item>
         <item name="android:windowBackground">@drawable/bg</item>
         <item name="actionBarStyle">@style/App_ActionBar</item>
-
-
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -70,13 +68,15 @@
 
     </style>
 
-    <style name="CustomDialog" parent="@android:style/Theme.Dialog">
+    <style name="CustomDialog" parent="@android:style/Theme.Holo.Dialog">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowIsFloating">false</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+
     </style>
 
     <style name="CollapsingTextAppearance" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title" />

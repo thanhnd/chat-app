@@ -57,8 +57,8 @@
 
     <!--    Dialog    -->
     <string name="dialog_confirm_title">Confirm</string>
-    <string name="dialog_confirm_ok">CONFIRM</string>
-    <string name="dialog_confirm_cancel">CANCEL</string>
+    <string name="dialog_confirm_ok">Confirm</string>
+    <string name="dialog_confirm_cancel">Cancel</string>
     <string name="general_error_title">Error Message</string>
     <string name="general_warning_title">Warning</string>
     <string name="general_error_message">An error occurs. Please try again later.</string>

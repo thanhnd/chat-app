@@ -4,6 +4,7 @@
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:layout_width="240dp"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/tools"
     cardview:cardBackgroundColor="@color/white">
 
     <LinearLayout
@@ -21,7 +22,7 @@
             android:textColor="@color/light_purge"
             android:textSize="17sp" />
 
-        <NumberPicker
+        <com.chatapp.views.CustomNumberPicker
             android:id="@+id/np_unit_system"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,35 +32,6 @@
 
         <include layout="@layout/layout_horizontal_divider" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/btnCancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/dialog_confirm_cancel"
-                android:textAllCaps="true"
-                android:textColor="@color/gray"
-                android:textSize="17sp" />
-
-            <TextView
-                android:id="@+id/btnOk"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                android:padding="10dp"
-                android:text="@string/dialog_confirm_ok"
-                android:textAllCaps="true"
-                android:textColor="@color/light_purge"
-                android:textSize="17sp" />
-        </LinearLayout>
+        <include layout="@layout/layout_confirm_dialog_footer" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/purge</color>
-    <color name="colorPrimaryDark">@color/dark_purge</color>
+    <color name="colorPrimary">@color/purple</color>
+    <color name="colorPrimaryDark">@color/dark_purple</color>
     <color name="colorAccent">@color/light_purge</color>
 
     <!-- Common -->
@@ -12,11 +12,22 @@
     <color name="black">#0c0c0d</color>
     <color name="navy">#00cccc</color>
     <color name="body">#7e6d4a</color>
-    <color name="dark_purge">#663366</color>
-    <color name="light_purge">#C97AB1</color>
-    <color name="light_purge_transparent">#88C97AB1</color>
-    <color name="purge">#c35aaf</color>
-    <color name="hint">#B7A5C5</color>
+
+    <color name="purple">#6E4D88</color>
+    <color name="light_purge">#8E73A3</color>
+    <color name="lighter_purple">#B7A5C5</color>
+    <color name="dark_purple">#553071</color>
+    <color name="darker_purple">#3D1A58</color>
+    <color name="light_purple_transparent">#88C97AB1</color>
+
+    <color name="blue">#505090</color>
+    <color name="light_blue">#7777AC</color>
+    <color name="lighter_blue">#A7A7CD</color>
+    <color name="dark_blue">#303073</color>
+    <color name="darker_blue">#161653</color>
+
+    <color name="hint">@color/lighter_purple</color>
+
 
     <color name="accent">#333366</color>
     <color name="edit_text_color">@color/accent</color>

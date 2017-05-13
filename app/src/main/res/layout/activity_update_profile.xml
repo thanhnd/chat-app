@@ -345,7 +345,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/link_your_networks"
-                    android:textColor="@color/dark_purge"
+                    android:textColor="@color/dark_purple"
                     android:textSize="18sp" />
 
                 <TextView

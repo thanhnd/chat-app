@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textAllCaps="true"
-        android:textColor="@color/purge"
+        android:textColor="@color/purple"
         tools:text="Welcome to the appname" />
 
     <TextView

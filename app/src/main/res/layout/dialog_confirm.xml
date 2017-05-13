@@ -33,37 +33,5 @@
         android:textColor="#333"
         android:textSize="17sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/btnCancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingBottom="14dp"
-            android:paddingTop="14dp"
-            android:text="@string/dialog_confirm_cancel"
-            android:textAllCaps="true"
-            android:textColor="#fe9900"
-            android:textSize="17sp" />
-
-        <TextView
-            android:id="@+id/btnOk"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:paddingBottom="14dp"
-            android:paddingTop="14dp"
-            android:text="@string/dialog_confirm_ok"
-            android:textAllCaps="true"
-            android:textColor="#fe9900"
-            android:textSize="17sp" />
-    </LinearLayout>
+    <include layout="@layout/layout_confirm_dialog_footer" />
 </LinearLayout>
