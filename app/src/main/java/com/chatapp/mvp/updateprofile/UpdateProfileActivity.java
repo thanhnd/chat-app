@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.chatapp.R;
 import com.chatapp.chat.utils.chat.ChatHelper;
+import com.chatapp.mvp.album.AlbumActivity;
 import com.chatapp.mvp.base.BaseChatActivity;
 import com.chatapp.mvp.listcountries.ListCountriesActivity;
 import com.chatapp.service.models.response.CountryModel;
@@ -220,6 +221,8 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
 
                 Picasso.with(this)
                         .load(userModel.getAvatar())
+                        .fit()
+                        .centerCrop()
                         .transform(new RoundedCornerTransformation(20, 20))
                         .error(R.drawable.london_flat)
                         .placeholder(R.drawable.london_flat)
@@ -227,6 +230,8 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
 
                 Picasso.with(this)
                         .load(userModel.getAvatar())
+                        .fit()
+                        .centerCrop()
                         .transform(new RoundedCornerTransformation(20, 20))
                         .error(R.drawable.london_flat)
                         .placeholder(R.drawable.london_flat)
@@ -234,6 +239,8 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
 
                 Picasso.with(this)
                         .load(userModel.getAvatar())
+                        .fit()
+                        .centerCrop()
                         .transform(new RoundedCornerTransformation(20, 20))
                         .error(R.drawable.london_flat)
                         .placeholder(R.drawable.london_flat)
@@ -243,8 +250,8 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
             edtDisplayName.setText(userModel.getDisplayName());
             timestampDob = userModel.getBirthday();
             tvAge.setText(String.valueOf(userModel.getAge()));
-            height = (int)userModel.getHeight();
-            weight = (int)userModel.getWeight();
+            height = (int) userModel.getHeight();
+            weight = (int) userModel.getWeight();
             tvHeightAndWeight.setText(AccountUtils.getDisplayHeightAndWeight(height, weight, userModel.getUnitSystem()));
 
             ethnicityParam = new ParamModel(userModel.getEthinicityId());
@@ -262,7 +269,7 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
             edtCity.setText(userModel.getCity());
             edtState.setText(userModel.getState());
 
-            int countryId= userModel.getCountryId();
+            int countryId = userModel.getCountryId();
             if (countryId > 0) {
                 selectedCountry = presenter.getCountry(countryId);
                 if (selectedCountry != null) {
@@ -276,6 +283,12 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
             edtInstagram.setText(userModel.getInstagram());
             edtLinkedin.setText(userModel.getLinkin());
         }
+    }
+
+    @OnClick({R.id.iv_library1, R.id.iv_library2, R.id.iv_library3})
+    public void clickLibrary() {
+        Intent intent = new Intent(this, AlbumActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.fab_camera)
@@ -429,7 +442,7 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
             tvDobError.setText("Please enter your birthday.");
             tvDobError.setVisibility(View.VISIBLE);
             result = false;
-        } else if(DateUtils.getAge(timestampDob) < 18) {
+        } else if (DateUtils.getAge(timestampDob) < 18) {
             tvDobError.setText("Your age's at least 18 years old.");
             tvDobError.setVisibility(View.VISIBLE);
             result = false;
