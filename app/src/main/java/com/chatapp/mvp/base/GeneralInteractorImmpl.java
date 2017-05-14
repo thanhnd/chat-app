@@ -117,12 +117,12 @@ public class GeneralInteractorImmpl implements GeneralInteractor {
     }
 
     @Override
-    public void updateShowHideDistance(boolean isShowDistance,
+    public void updateShowHideDistance(boolean isHideDistance,
                                        ApiCallback<ResponseModel> callback)
             throws RequireLoginException {
         ApiService service = ApiServiceHelper.getInstance();
         Map<String, Integer> request = new HashMap<>();
-        request.put("is_show_distance", isShowDistance ? 1 : 0);
+        request.put("is_hide_distance", isHideDistance ? 1 : 0);
 
         Call<ResponseModel> call = service.updateShowHideDistance(AccountUtils.getAuthorization(), request);
         call.enqueue(callback);

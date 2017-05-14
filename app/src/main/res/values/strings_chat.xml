@@ -11,7 +11,7 @@
     <string name="menu_select_people_done">Done</string>
 
     <string name="dlg_loading">Loading</string>
-    <string name="dlg_restoring_chat_session">Restoring chat session…</string>
+    <string name="dlg_restoring_chat_session">Loading...</string>
     <string name="dlg_restoring_chat_session_logout">Restoring session and logout</string>
     <string name="create_chat">Creating chat…</string>
     <string name="dlg_login">Login…</string>

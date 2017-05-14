@@ -19,8 +19,9 @@ public class AlbumActivity extends BaseActivity implements AlbumMvp.View {
     @Bind(R.id.rv_list)
     RecyclerView rvList;
 
-    private AlbumMvp.Presenter presenter;
+    private AlbumAdapter adapter;
 
+    private AlbumMvp.Presenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +29,9 @@ public class AlbumActivity extends BaseActivity implements AlbumMvp.View {
 
         setContentView(R.layout.activity_album);
         ButterKnife.bind(this);
+
+        adapter = new AlbumAdapter(this);
+        rvList.setAdapter(adapter);
 
         presenter = new AlbumPresenterImpl(this);
 
