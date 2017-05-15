@@ -10,14 +10,13 @@
     <color name="semi_white">#77ffffff</color>
     <color name="gray">#b2b2b2</color>
     <color name="black">#0c0c0d</color>
-    <color name="navy">#00cccc</color>
     <color name="body">#7e6d4a</color>
 
-    <color name="purple">#6E4D88</color>
-    <color name="light_purge">#8E73A3</color>
-    <color name="lighter_purple">#B7A5C5</color>
-    <color name="dark_purple">#553071</color>
-    <color name="darker_purple">#3D1A58</color>
+    <color name="purple">#C35AAF</color>
+    <color name="light_purge">#DB85CA</color>
+    <color name="lighter_purple">#EFB9E5</color>
+    <color name="dark_purple">#AC3A96</color>
+    <color name="darker_purple">#9B1D83</color>
     <color name="light_purple_transparent">#88C97AB1</color>
 
     <color name="blue">#505090</color>
@@ -25,6 +24,18 @@
     <color name="lighter_blue">#A7A7CD</color>
     <color name="dark_blue">#303073</color>
     <color name="darker_blue">#161653</color>
+
+    <color name="navy">#00cccc</color>
+    <color name="light_navy">#29D1D1</color>
+    <color name="lighter_navy">#52D8D8</color>
+    <color name="dark_navy">#00A2A2</color>
+    <color name="darker_navy">#007979</color>
+
+
+    <color name="grey">#DEDEEB</color>
+    <color name="light_grey">#F7F7FA</color>
+    <color name="dark_grey">#555555</color>
+    <color name="darker_grey">#2D2D2D</color>
 
     <color name="hint">@color/lighter_purple</color>
 
