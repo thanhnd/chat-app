@@ -78,6 +78,7 @@
     <string name="profile_height_and_weight_label">HEIGHT AND WEIGHT</string>
     <string name="profile_height_and_weight_hint"><i><small>Input your height and weight</small></i></string>
     <string name="unit_system">UNIT SYSTEM</string>
+    <string name="update_profile">Update profile</string>
     <string name="update_profile_btn_complete">Complete</string>
     <string name="update_profile_unit_type_type_cm_kg">cm/kg</string>
     <string name="update_profile_unit_type_ft_lb">ft/lb</string>

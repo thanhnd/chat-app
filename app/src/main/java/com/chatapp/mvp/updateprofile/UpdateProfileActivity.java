@@ -129,6 +129,7 @@ public class UpdateProfileActivity extends BaseChatActivity implements UpdatePro
         presenter = new PresenterImpl(this);
         userModel = AccountUtils.getMyProfileModel();
 
+        setTitle(R.string.update_profile);
         initView();
 
         displayMyProfileInfo();

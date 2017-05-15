@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 
 import com.chatapp.R;
-import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.base.CustomActionBarActivity;
 import com.chatapp.mvp.base.FilterCountryActivity;
 import com.chatapp.mvp.base.MultiSelectValueActivity;
 import com.chatapp.mvp.filterresult.FilterResultActivity;
@@ -30,7 +30,7 @@ import butterknife.OnClick;
 /**
  * Created by thanhnguyen on 2/10/17.
  */
-public class FilterActivity extends BaseActivity implements FilterMvp.View {
+public class FilterActivity extends CustomActionBarActivity implements FilterMvp.View {
 
     private static final int MIN_AGE = 18;
     private static final int MAX_AGE = 80;
@@ -93,6 +93,8 @@ public class FilterActivity extends BaseActivity implements FilterMvp.View {
         ButterKnife.bind(this);
 
         presenter = new FilterPresenterImpl(this);
+
+        setTitle("Filter");
 
     }
 

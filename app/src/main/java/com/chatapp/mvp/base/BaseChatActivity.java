@@ -23,7 +23,7 @@ import com.quickblox.users.model.QBUser;
 
 import java.util.ArrayList;
 
-public abstract class BaseChatActivity extends BaseActivity implements QbSessionStateCallback {
+public abstract class BaseChatActivity extends CustomActionBarActivity implements QbSessionStateCallback {
 
     public static final int REQUEST_SELECT_PEOPLE = 174;
     public static final int REQUEST_DIALOG_ID_FOR_UPDATE = 165;

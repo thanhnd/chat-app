@@ -8,8 +8,8 @@ import android.widget.CheckBox;
 
 import com.chatapp.Config;
 import com.chatapp.R;
-import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.base.BrowserActivity;
+import com.chatapp.mvp.base.CustomActionBarActivity;
 import com.chatapp.mvp.changepassword.ChangePasswordActivity;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.service.models.response.MyProfileModel;
@@ -25,7 +25,7 @@ import butterknife.OnClick;
 /**
  * Created by thanhnguyen on 2/10/17.
  */
-public class SettingActivity extends BaseActivity implements SettingMvp.View {
+public class SettingActivity extends CustomActionBarActivity implements SettingMvp.View {
 
     @Bind(R.id.btn_hide_distance)
     Button btnShowDistance;
