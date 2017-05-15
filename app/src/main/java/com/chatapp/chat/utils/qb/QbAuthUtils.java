@@ -18,11 +18,8 @@ public class QbAuthUtils {
                 return false;
             }
 
-            if (System.currentTimeMillis() >= expirationDate.getTime()) {
-                return false;
-            }
+            return System.currentTimeMillis() < expirationDate.getTime();
 
-            return true;
         } catch (BaseServiceException ignored) {
         }
 

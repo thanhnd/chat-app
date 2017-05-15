@@ -73,7 +73,7 @@ public class ChatPingAlarmManager {
     }
 
     public void addPingListener(PingFailedListener pingFailedListener) {
-        this.pingFailedListener = pingFailedListener;
+        ChatPingAlarmManager.pingFailedListener = pingFailedListener;
     }
 
     public static synchronized ChatPingAlarmManager getInstanceFor() {

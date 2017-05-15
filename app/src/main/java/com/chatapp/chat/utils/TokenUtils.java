@@ -21,11 +21,8 @@ public class TokenUtils {
             return false;
         }
 
-        if (expirationDate != null && System.currentTimeMillis() >= expirationDate.getTime()) {
-            return false;
-        }
+        return !(expirationDate != null && System.currentTimeMillis() >= expirationDate.getTime());
 
-        return true;
     }
 
     private static String getCurrentToken(){

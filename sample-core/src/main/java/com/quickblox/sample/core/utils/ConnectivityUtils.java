@@ -31,10 +31,7 @@ public class ConnectivityUtils {
             return true;
         }
 
-        if (wimax != null && wimax.isConnected()) {
-            return true;
-        }
+        return wimax != null && wimax.isConnected();
 
-        return false;
     }
 }
