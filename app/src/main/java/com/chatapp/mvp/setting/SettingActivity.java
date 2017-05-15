@@ -49,6 +49,7 @@ public class SettingActivity extends BaseActivity implements SettingMvp.View {
         } catch (RequireLoginException e) {
             Log.e(e);
         }
+        setTitle(R.string.action_settings);
     }
 
     @OnClick(R.id.btn_choose_unit_system)

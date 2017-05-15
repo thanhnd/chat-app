@@ -2,6 +2,7 @@ package com.chatapp.mvp.base;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -33,6 +34,10 @@ public class BrowserActivity extends BaseActivity {
         Intent intent = getIntent();
 
         String title = intent.getStringExtra(TITLE);
+        if (!TextUtils.isEmpty(title)) {
+            setTitle(title);
+        }
+
         url = intent.getStringExtra(ARG_LOAD_WEB_URL);
         Log.d("url = " + url);
 

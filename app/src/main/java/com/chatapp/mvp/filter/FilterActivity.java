@@ -116,6 +116,8 @@ public class FilterActivity extends BaseActivity implements FilterMvp.View {
 
     private void saveFilter() {
         HashMap request = new HashMap();
+        request.put("is_photo", isFilterPhoto ? 1 : 0);
+
         request.put("age_from", filterAge != null && filterAge.length > 0 ? filterAge[0] : 0);
         request.put("age_to", filterAge != null && filterAge.length > 0 ? filterAge[1] : 0);
 
