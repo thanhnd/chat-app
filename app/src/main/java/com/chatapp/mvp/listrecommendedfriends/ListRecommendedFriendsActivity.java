@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.chatapp.R;
-import com.chatapp.mvp.base.BaseActivity;
+import com.chatapp.mvp.base.CustomActionBarActivity;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.mvp.userprofile.UserProfileActivity;
 import com.chatapp.service.models.response.UserModel;
@@ -29,7 +29,7 @@ import butterknife.OnClick;
  * Created by thanhnguyen on 1/3/17.
  */
 
-public class ListRecommendedFriendsActivity extends BaseActivity implements
+public class ListRecommendedFriendsActivity extends CustomActionBarActivity implements
         ListRecommendedFriendsMvp.View, ListRecommendedFriendsAdapter.OnSelectedChangedListener {
 
     @Bind(R.id.rv_list)
@@ -55,6 +55,8 @@ public class ListRecommendedFriendsActivity extends BaseActivity implements
 
         setContentView(R.layout.activity_list_recommended_friends);
         ButterKnife.bind(this);
+
+        setTitle(R.string.recommended_friends);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         btnDelete.setPaintFlags(btnDelete.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);

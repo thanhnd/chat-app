@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
@@ -50,7 +51,7 @@ public class CustomActionBarActivity extends BaseActivity {
 
     @Override
     public void setTitle(CharSequence title) {
-        if (actionBar != null) {
+        if (actionBar != null && !TextUtils.isEmpty(title)) {
             TextView tvTitle = (TextView) actionBar.getCustomView()
                     .findViewById(R.id.center_text);
             if (tvTitle != null) {

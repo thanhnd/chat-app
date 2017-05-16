@@ -162,5 +162,7 @@
     <string name="enter_new_password">Enter new password</string>
     <string name="settings_dialog_unit_system">Unit System</string>
     <string name="filter_age">Age</string>
+    <string name="search">Search</string>
+    <string name="recommended_friends">Recommented Friends</string>
 
 </resources>

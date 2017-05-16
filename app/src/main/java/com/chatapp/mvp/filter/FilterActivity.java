@@ -204,6 +204,7 @@ public class FilterActivity extends CustomActionBarActivity implements FilterMvp
             Intent intent = new Intent(this, MultiSelectValueActivity.class);
             intent.putExtra(MultiSelectValueActivity.EXTRA_INPUT_ARR, (ArrayList<ParamModel>) listModels);
             intent.putExtra(MultiSelectValueActivity.EXTRA_INPUT_SELECTED, filterEthnicities);
+            intent.putExtra(MultiSelectValueActivity.EXTRA_TITLE, "Ethnicities");
             startActivityForResult(intent, RC_FILTER_ETHNICITY);
         }
     }
@@ -214,6 +215,7 @@ public class FilterActivity extends CustomActionBarActivity implements FilterMvp
         List<ParamModel> listModels = CacheUtil.getListParamsModel().getListBodyType();
         Intent intent = new Intent(this, MultiSelectValueActivity.class);
         intent.putExtra(MultiSelectValueActivity.EXTRA_INPUT_ARR, (ArrayList<ParamModel>) listModels);
+        intent.putExtra(MultiSelectValueActivity.EXTRA_TITLE, "Body Type");
         startActivityForResult(intent, RC_FILTER_BODY_TYPE);
     }
 
@@ -223,6 +225,7 @@ public class FilterActivity extends CustomActionBarActivity implements FilterMvp
         List<ParamModel> listModels = CacheUtil.getListParamsModel().getListTribes();
         Intent intent = new Intent(this, MultiSelectValueActivity.class);
         intent.putExtra(MultiSelectValueActivity.EXTRA_INPUT_ARR, (ArrayList<ParamModel>) listModels);
+        intent.putExtra(MultiSelectValueActivity.EXTRA_TITLE, "Tribes");
         startActivityForResult(intent, RC_FILTER_TRIBES);
     }
 
@@ -232,6 +235,7 @@ public class FilterActivity extends CustomActionBarActivity implements FilterMvp
         List<ParamModel> listModels = CacheUtil.getListParamsModel().getListRelationship();
         Intent intent = new Intent(this, MultiSelectValueActivity.class);
         intent.putExtra(MultiSelectValueActivity.EXTRA_INPUT_ARR, (ArrayList<ParamModel>) listModels);
+        intent.putExtra(MultiSelectValueActivity.EXTRA_TITLE, "Relationship Status");
         startActivityForResult(intent, RC_FILTER_RELATIONSHIP_STATUS);
     }
 
@@ -243,6 +247,7 @@ public class FilterActivity extends CustomActionBarActivity implements FilterMvp
     private void showChooseCountry(List<CountryModel> listCountries) {
         Intent intent = new Intent(this, FilterCountryActivity.class);
         intent.putExtra(FilterCountryActivity.EXTRA_INPUT_ARR, (ArrayList<CountryModel>) listCountries);
+        intent.putExtra(MultiSelectValueActivity.EXTRA_TITLE, "Location");
         startActivityForResult(intent, RC_FILTER_LOCATION);
     }
 

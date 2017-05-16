@@ -2,7 +2,6 @@ package com.chatapp.mvp.base;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,15 +21,17 @@ import butterknife.ButterKnife;
  * Created by thanhnguyen on 4/1/17.
  */
 
-public class MultiSelectValueActivity extends AppCompatActivity {
+public class MultiSelectValueActivity extends CustomActionBarActivity {
     public static final String KEY_OUTPUT_ARR = "selectedItems";
     public static final String EXTRA_INPUT_ARR = "inputItems";
     public static final String EXTRA_INPUT_SELECTED = "inputSelectedItems";
+    public static final String EXTRA_TITLE = "title";
     @Bind(R.id.list)
     ListView listView;
 
     ArrayAdapter<ParamModel> adapter;
     private int[] selectedArr;
+    private String title;
 
     /**
      * Called when the activity is first created.
@@ -44,6 +45,8 @@ public class MultiSelectValueActivity extends AppCompatActivity {
         Intent intent = getIntent();
         List<ParamModel> inputItems = (List<ParamModel>) intent.getSerializableExtra(EXTRA_INPUT_ARR);
         selectedArr = intent.getIntArrayExtra(EXTRA_INPUT_SELECTED);
+        title = intent.getStringExtra(EXTRA_TITLE);
+        setTitle(title);
 
         adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_multiple_choice, inputItems);

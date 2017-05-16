@@ -14,8 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.chatapp.R;
-import com.chatapp.mvp.base.BaseActivity;
 import com.chatapp.mvp.base.BaseListUserAdapter;
+import com.chatapp.mvp.base.CustomActionBarActivity;
 import com.chatapp.mvp.updateprofile.RequireLoginException;
 import com.chatapp.mvp.userprofile.UserProfileActivity;
 import com.chatapp.service.models.response.UserModel;
@@ -25,7 +25,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class SearchActivity extends BaseActivity implements SearchUserMvp.View {
+public class SearchActivity extends CustomActionBarActivity implements SearchUserMvp.View {
 
     private SearchUserMvp.Presenter presenter;
 
@@ -43,6 +43,7 @@ public class SearchActivity extends BaseActivity implements SearchUserMvp.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seach_users);
         ButterKnife.bind(this);
+        setTitle(R.string.search);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvListUsers.setLayoutManager(layoutManager);

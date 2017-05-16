@@ -10,6 +10,8 @@
         <item name="imageButtonStyle">@style/App_ImageButton</item>
         <item name="android:windowBackground">@drawable/bg</item>
         <item name="actionBarStyle">@style/App_ActionBar</item>
+        <item name="android:textAppearanceListItemSmall">@style/TextAppearance.ListItem</item>
+        <item name="android:listChoiceIndicatorMultiple">@drawable/check_bg</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -92,6 +94,15 @@
         <item name="android:windowIsFloating">false</item>
         <item name="android:textColorPrimary">@android:color/black</item>
 
+    </style>
+
+    <style name="TextAppearance.ListItem">
+        <item name="android:textColor">@color/white</item>
+
+    </style>
+
+    <style name="ListItemCheckbox">
+        <item name="android:background">@drawable/check_bg</item>
     </style>
 
     <style name="CollapsingTextAppearance" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title" />
